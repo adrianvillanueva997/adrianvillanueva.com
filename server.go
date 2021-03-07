@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+
 	"adrian-villanueva.com/src/routes"
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
@@ -26,5 +28,6 @@ func initRoutes(engine *gin.Engine) {
 func main() {
 	r := initServer()
 	initRoutes(r)
-	_ = r.Run()
+	log.Println("Server running!")
+	_ = r.Run("0.0.0.0:3000")
 }
