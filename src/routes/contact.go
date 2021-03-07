@@ -8,13 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type CreatedPosts struct {
-	FileName string
-}
-
-const DIRNAME = "./src/markdown/"
-
-func IndexHandler() gin.HandlerFunc {
+func ContactHandler() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		var posts []string
 		files, err := ioutil.ReadDir(DIRNAME)

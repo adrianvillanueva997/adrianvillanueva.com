@@ -8,13 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type CreatedPosts struct {
-	FileName string
-}
-
-const DIRNAME = "./src/markdown/"
-
-func IndexHandler() gin.HandlerFunc {
+func ResumeHandler() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		var posts []string
 		files, err := ioutil.ReadDir(DIRNAME)
@@ -24,8 +18,8 @@ func IndexHandler() gin.HandlerFunc {
 		for _, file := range files {
 			posts = append(posts, file.Name())
 		}
-		context.HTML(http.StatusOK, "index.tmpl.html", gin.H{
-			"title": "Adrián Villanueva",
+		context.HTML(http.StatusOK, "resume.tmpl.html", gin.H{
+			"title": "Resume",
 		})
 	}
 }

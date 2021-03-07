@@ -13,6 +13,7 @@ func initServer() *gin.Engine {
 	r.Use(gin.Logger())
 	r.Delims("{{", "}}")
 	r.Use(static.Serve("/blog/assets", static.LocalFile("./assets", false)))
+	r.Use(static.Serve("/assets", static.LocalFile("./assets", false)))
 	r.LoadHTMLGlob("./templates/*.tmpl.html")
 	return r
 
@@ -22,7 +23,9 @@ func initRoutes(engine *gin.Engine) {
 	engine.GET("/", routes.IndexHandler())
 	engine.GET("/blog/:postName", routes.PostHandler())
 	engine.GET("/blog", routes.BlogHandler())
-
+	engine.GET("/contact", routes.ContactHandler())
+	engine.GET("/feed", routes.FeedHandler())
+	engine.GET("/resume", routes.ResumeHandler())
 }
 
 func main() {

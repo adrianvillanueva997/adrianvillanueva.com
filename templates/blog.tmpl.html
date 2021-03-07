@@ -1,21 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Blog: Index</title>
-</head>
+{{ template "head.tmpl.html" .}}
+{{ template "navbar.tmpl.html" .}}
 <body>
 <div class="container">
+    If you have a compatible reader, be sure to check out my RSS Feed for automatic updates.
     <ul>
         {{ range .posts }}
         <li>
-            <div class="blogEntry">
-                <div class="postDate">{{ .Date }} </div> <a href="/blog/{{ .File }}"> {{ .Title }}</a>
-            </div>
+            {{ .Date }} - <a href="/blog/{{ .File }}">{{ .Title }}</a>
         </li>
         {{ end }}
     </ul>
 </div>
+{{ template "footer.tmpl.html" }}
 </body>
-</html>
