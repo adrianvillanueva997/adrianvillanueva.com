@@ -1,3 +1,3 @@
 # Portfolio
 
-This is my personal website, more details will be added in the future
+My personal website developed in Golang (Gin-Gonic) that makes use of Markdown renderer for blog posts.
