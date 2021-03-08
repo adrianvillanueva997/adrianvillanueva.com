@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"adrian-villanueva.com/src/routes"
+	"adrian-villanueva.com/src/routes/feedGenerator"
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 )
@@ -26,6 +27,10 @@ func initRoutes(engine *gin.Engine) {
 	engine.GET("/contact", routes.ContactHandler())
 	engine.GET("/feed", routes.FeedHandler())
 	engine.GET("/resume", routes.ResumeHandler())
+	engine.GET("/feed/json", feedgenerator.JSONFeedHandler())
+	engine.GET("/feed/atom", feedgenerator.ATOMFeedHandler())
+	engine.GET("/feed/rss", feedgenerator.RSSFeedHandler())
+
 }
 
 func main() {

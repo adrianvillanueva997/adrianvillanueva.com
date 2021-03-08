@@ -1,0 +1,22 @@
+{{ template "head.tmpl.html" .}}
+<body>
+{{ template "navbar.tmpl.html" .}}
+
+<div class="container">
+    <h2>Choose your feed</h2>
+    <ul>
+        <li>
+            <a href="/feed/json">Json</a>
+        </li>
+        <li>
+            <a href="/feed/rss">RSS</a>
+        </li>
+        <li>
+            <a href="/feed/atom">Atom</a>
+        </li>
+    </ul>
+</div>
+
+
+{{ template "footer.tmpl.html" }}
+</body>
