@@ -7,7 +7,7 @@ services:
     container_name: adrian-villanueva.com
     restart: unless-stopped
     labels:
-      - - "com.centurylinklabs.watchtower.enable=true"
+      - "com.centurylinklabs.watchtower.enable=true"
       - "traefik.enable=true"
       - "traefik.http.middlewares.avm-redirect-websecure.redirectscheme.scheme=https"
       - "traefik.http.middlewares.avm-redirect-websecure.redirectscheme.permanent=true"
