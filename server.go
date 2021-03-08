@@ -30,7 +30,7 @@ func initRoutes(engine *gin.Engine) {
 	engine.GET("/feed/json", feedgenerator.JSONFeedHandler())
 	engine.GET("/feed/atom", feedgenerator.ATOMFeedHandler())
 	engine.GET("/feed/rss", feedgenerator.RSSFeedHandler())
-
+	engine.GET("/about", routes.AboutHandler())
 }
 
 func main() {

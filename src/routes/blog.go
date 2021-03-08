@@ -40,6 +40,7 @@ func BlogHandler() func(context *gin.Context) {
 		}
 		context.HTML(http.StatusOK, "blog.tmpl.html", gin.H{
 			"posts": posts,
+			"title": "blog",
 		})
 	}
 }

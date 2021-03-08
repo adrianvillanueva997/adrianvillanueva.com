@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{{.Title}}</title>
-</head>
+{{ template "head.tmpl.html" .}}
 <body>
+{{ template "navbar.tmpl.html" .}}
 <div class="container">
     {{.Content}}
 </div>
+{{ template "footer.tmpl.html" .}}
 </body>
-</html>
