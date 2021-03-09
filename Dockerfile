@@ -19,6 +19,6 @@ COPY --from=build-env /build/src/markdown ./src/markdown
 COPY --from=build-env /build/assets ./assets
 COPY --from=build-env /build/public ./public
 EXPOSE 3000
-RUN adduser -D appuser
+RUN adduser -D appuser && chown -R appuser:appuser /app && chmod 755 /app
 USER appuser
 ENTRYPOINT ./app

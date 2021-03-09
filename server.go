@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"adrian-villanueva.com/src/routes"
 	"adrian-villanueva.com/src/routes/feedGenerator"
@@ -14,7 +15,7 @@ func initServer() *gin.Engine {
 	r := gin.Default()
 	r.Use(gin.Logger())
 	r.StaticFile("/robots.txt", "./public/robots.txt")
-	r.StaticFile("/sitemap.xml", "./public/sitemap.xml")
+	r.StaticFile("/sitemap.xml", "./public/sitemap1.xml")
 	r.Delims("{{", "}}")
 	r.Use(static.Serve("/blog/assets", static.LocalFile("./assets", false)))
 	r.Use(static.Serve("/assets", static.LocalFile("./assets", false)))
@@ -39,8 +40,11 @@ func initRoutes(engine *gin.Engine) {
 func main() {
 	r := initServer()
 	initRoutes(r)
+	if os.Getenv("ENV") == "BUILD" {
+
+	}
 	log.Println("Generating sitemap.xml")
-	go sitemap.GenerateSiteMap()
+	sitemap.GenerateSiteMap()
 	log.Println("Server running!")
 	_ = r.Run("0.0.0.0:3000")
 }

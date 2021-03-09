@@ -47,7 +47,6 @@ func GenerateSiteMap() {
 	sm.SetCompress(false)
 	sm.SetVerbose(false)
 	sm.Create()
-
 	sm.Add(stm.URL{{"loc", "/"}, {"mobile", true}})
 	sm.Add(stm.URL{{"loc", "/about"}, {"mobile", true}})
 	sm.Add(stm.URL{{"loc", "/resume"}, {"mobile", true}})
@@ -63,5 +62,5 @@ func GenerateSiteMap() {
 			{{"loc", "http://www.example.com/image1.png"}, {"title", "Image1"}},
 		}},
 	})
-	sm.Finalize().PingSearchEngines()
+	sm.Finalize()
 }
