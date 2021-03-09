@@ -12,12 +12,13 @@ import (
 func initServer() *gin.Engine {
 	r := gin.Default()
 	r.Use(gin.Logger())
+	r.StaticFile("./static/robots.txt", "./static/sitemap.xml")
+	r.StaticFile("/sitemap.xml", "./static/sitemap.xml")
 	r.Delims("{{", "}}")
 	r.Use(static.Serve("/blog/assets", static.LocalFile("./assets", false)))
 	r.Use(static.Serve("/assets", static.LocalFile("./assets", false)))
 	r.LoadHTMLGlob("./templates/*.tmpl.html")
 	return r
-
 }
 
 func initRoutes(engine *gin.Engine) {
