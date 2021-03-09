@@ -17,7 +17,7 @@ COPY --from=build-env /build/app .
 COPY --from=build-env /build/templates ./templates
 COPY --from=build-env /build/src/markdown ./src/markdown
 COPY --from=build-env /build/assets ./assets
-COPY --from=build-env /build/static ./static
+COPY --from=build-env /build/static ./public
 EXPOSE 3000
 RUN adduser -D appuser
 USER appuser

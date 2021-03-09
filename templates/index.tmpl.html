@@ -1,8 +1,16 @@
 <!--index.html-->
+<!doctype html>
+<html lang="en">
+<head>
+    {{ template "scripts.tmpl.html" .}}
+    <title>{{ .title }}</title>
+    <meta name="description" content="Skills, blog and portfolio of Adrian Villanueva, Software engineer from Spain">
+    <meta name="keywords"
+          content="Go, docker, cpp, c, programming, coding, devops, linux, goland, pycharm, resume, mariadb, docker, big data, python">
+    <meta name="author" content="Adrian Villanueva">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 
-<!--header.html and navbar go here-->
-
-{{ template "head.tmpl.html" .}}
 {{ template "navbar.tmpl.html" .}}
 <div class="container" id="index">
     <div class="container">
@@ -11,8 +19,8 @@
                 <img height="150" src="./assets/me.png">
             </div>
             <div class="col-6">
+                <h1>Software Engineer</h1>
                 <h2>Adrián Villanueva</h2>
-                <h3>Software Engineer</h3>
                 <hr>
                 <h4>Skills</h4>
                 <ul>
@@ -96,3 +104,5 @@
 
 <!-- Footer template goes here -->
 {{ template "footer.tmpl.html" .}}
+
+</html>

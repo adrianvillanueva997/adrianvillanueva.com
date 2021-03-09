@@ -1,4 +1,14 @@
-{{ template "head.tmpl.html" .}}
+<!doctype html>
+<html lang="en">
+<head>
+    {{ template "scripts.tmpl.html" .}}
+    <title>{{ .title }}</title>
+    <meta name="description" content="Contact me">
+    <meta name="keywords"
+          content="Git, Github, Linkedin, email">
+    <meta name="author" content="Adrian Villanueva">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 <body>
 {{ template "navbar.tmpl.html" .}}
 <div class="container">
@@ -8,7 +18,7 @@
             <a href="https://linkedin.com/in/adrian-villanueva-martinez">Linkedin</a>
         </li>
         <li>
-            <a href="mailto:adrian.villanueva.martinez@outlook.com">Email</a>
+            adrian.villanueva.martinez |[AT]| outlook.com
         </li>
         <li>
             <a href="https://github.com/adrianvillanueva997">Github</a>
@@ -18,3 +28,4 @@
 </div>
 {{ template "footer.tmpl.html" .}}
 </body>
+</html>

@@ -1,4 +1,15 @@
-{{ template "head.tmpl.html" .}}
+<!doctype html>
+<html lang="en">
+<head>
+    {{ template "scripts.tmpl.html" .}}
+    <title>{{ .title }}</title>
+    <meta name="description"
+          content="About me">
+    <meta name="keywords"
+          content="programming, dota, warhammer, music, motorhead, amon amarth">
+    <meta name="author" content="Adrian Villanueva">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 <body>
 {{ template "navbar.tmpl.html" .}}
 <div class="container">
@@ -26,3 +37,4 @@
 </div>
 {{ template "footer.tmpl.html" .}}
 </body>
+</html>

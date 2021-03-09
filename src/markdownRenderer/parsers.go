@@ -32,6 +32,14 @@ type PostFinal struct {
 	Date  string
 	File  string
 }
+type PostSiteMap struct {
+	Title       string
+	Date        string
+	File        string
+	Tags        string
+	Description string
+	Category    string
+}
 
 func InitBlogParser() (goldmark.Markdown, bytes.Buffer, parser.Context) {
 	md := goldmark.New(goldmark.WithExtensions(meta.Meta))
@@ -57,7 +65,6 @@ func InitPostParser() (goldmark.Markdown, bytes.Buffer, parser.Context) {
 }
 
 func ParseBlogEntries(file fs.FileInfo, md goldmark.Markdown, buffer bytes.Buffer, mdContext parser.Context) PostIndex {
-	log.Println(file.Name())
 	markdownFile, err := ioutil.ReadFile("./src/markdown/" + file.Name())
 	if err != nil {
 		log.Println(err)
@@ -75,5 +82,27 @@ func ParseBlogEntries(file fs.FileInfo, md goldmark.Markdown, buffer bytes.Buffe
 		Title: fmt.Sprintf("%v", metadata["Title"]),
 		Date:  convertedDate,
 		File:  file.Name(),
+	}
+}
+func ParseSiteMapEntries(file fs.FileInfo, md goldmark.Markdown, buffer bytes.Buffer, mdContext parser.Context) PostSiteMap {
+	markdownFile, err := ioutil.ReadFile("./src/markdown/" + file.Name())
+	if err != nil {
+		log.Println(err)
+	}
+	err = md.Convert(markdownFile, &buffer, parser.WithContext(mdContext))
+	if err != nil {
+		log.Println(err)
+	}
+	metadata := meta.Get(mdContext)
+	if err != nil {
+		log.Println(err)
+	}
+	return PostSiteMap{
+		Title:    fmt.Sprintf("%v", metadata["Title"]),
+		Date:     fmt.Sprintf("%v", metadata["Date"]),
+		File:     file.Name(),
+		Category: fmt.Sprintf("%v", metadata["Category"]),
+		Tags:     fmt.Sprintf("%v", metadata["Tags"]),
+		Description: fmt.Sprintf("%v", metadata["Description"]),
 	}
 }

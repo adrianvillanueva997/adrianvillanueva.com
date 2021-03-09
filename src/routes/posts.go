@@ -14,8 +14,10 @@ import (
 )
 
 type Post struct {
-	Title   string
-	Content template.HTML
+	Title       string
+	Content     template.HTML
+	Description string
+	Tags        string
 }
 
 func PostHandler() gin.HandlerFunc {
@@ -37,11 +39,18 @@ func PostHandler() gin.HandlerFunc {
 			return
 		}
 		metadata := meta.Get(mdContext)
-		postHTML := template.HTML(buf.String())
+		postHTML := template.HTML(buf.String()) //nolint:gosec
 		title := metadata["Title"]
-		post := Post{Title: fmt.Sprintf("%v", title), Content: postHTML}
+		tags := metadata["Tags"]
+		description := metadata["Description"]
+		post := Post{
+			Title:       fmt.Sprintf("%v", title),
+			Content:     postHTML,
+			Tags:        fmt.Sprintf("%v", tags),
+			Description: fmt.Sprintf("%v", description),
+		}
 		context.HTML(http.StatusOK, "post.tmpl.html", gin.H{
-			"Title": post.Title, "Content": post.Content,
+			"title": post.Title, "content": post.Content, "tags": post.Tags, "description": post.Description,
 		})
 	}
 }
