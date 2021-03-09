@@ -2,7 +2,6 @@ package main
 
 import (
 	"log"
-	"os"
 
 	"adrian-villanueva.com/src/routes"
 	"adrian-villanueva.com/src/routes/feedGenerator"
@@ -40,9 +39,6 @@ func initRoutes(engine *gin.Engine) {
 func main() {
 	r := initServer()
 	initRoutes(r)
-	if os.Getenv("ENV") == "BUILD" {
-
-	}
 	log.Println("Generating sitemap.xml")
 	sitemap.GenerateSiteMap()
 	log.Println("Server running!")
