@@ -18,6 +18,7 @@ COPY --from=build-env /build/templates ./templates
 COPY --from=build-env /build/src/markdown ./src/markdown
 COPY --from=build-env /build/assets ./assets
 COPY --from=build-env /build/public ./public
+COPY --from=build-env /build/styles ./styles 
 EXPOSE 3000
 RUN adduser -D appuser && chown -R appuser:appuser /app && chmod 755 /app
 USER appuser
