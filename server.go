@@ -35,7 +35,6 @@ func initRoutes(engine *gin.Engine) {
 	engine.GET("/", routes.IndexHandler())
 	engine.GET("/blog/:postName", routes.PostHandler())
 	engine.GET("/blog", cache.CachePage(store, time.Hour, routes.BlogHandler()))
-	engine.GET("/contact", cache.CachePage(store, time.Hour, routes.ContactHandler()))
 	engine.GET("/feed", cache.CachePage(store, time.Hour, routes.FeedHandler()))
 	engine.GET("/resume", cache.CachePage(store, time.Hour, routes.ResumeHandler()))
 	engine.GET("/feed/json", cache.CachePage(store, time.Hour, feedgenerator.JSONFeedHandler()))
