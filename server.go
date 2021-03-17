@@ -23,6 +23,8 @@ func initServer() *gin.Engine {
 	r.Delims("{{", "}}")
 	r.Use(static.Serve("/blog/assets", static.LocalFile("./assets", false)))
 	r.Use(static.Serve("/assets", static.LocalFile("./assets", false)))
+	r.Use(static.Serve("/styles", static.LocalFile("./styles", false)))
+	r.Use(static.Serve("/scripts", static.LocalFile("./scripts", false)))
 	r.LoadHTMLGlob("./templates/*.tmpl.html")
 	r.NoRoute(routes.NotFoundHandler())
 	return r

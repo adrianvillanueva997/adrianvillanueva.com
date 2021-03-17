@@ -12,98 +12,24 @@
           content="Adrian Villanueva">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/index.css">
+    <script>
+        AOS.init();
+    </script>
 </head>
 
 {{ template "navbar.tmpl.html" .}}
-<div class="container" id="index">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm">
-
-            </div>
-            <div class="col-6">
-                <h1>Software Engineer</h1>
-                <h2>Adrián Villanueva</h2>
-                <hr>
-                <h4>Skills</h4>
-                <ul>
-                    <li>
-                        Go, Python, Typescript and other languages.
-                    </li>
-                    <li>
-                        MariaDB, MongoDB, PostgreSQL.
-                    </li>
-                    <li>
-                        Docker (Deployment & Development).
-                    </li>
-                    <li>
-                        Devops.
-                    </li>
-                    <li>
-                        Likes big data.
-                    </li>
-                </ul>
-                <hr>
-                <h4>Tools</h4>
-                <ul>
-                    <li>Software development on GNU/Linux (Currently on <a
-                            href="https://endeavouros.com/">EndeavourOS</a>)
-                    </li>
-                    <li>
-                        Ubuntu Server, DietPi, CentOS
-                    </li>
-                    <li>
-                        Goland, Pycharm, Webstorm, VSCode, Vim (Currently learning)
-                    </li>
-                    <li>
-                        Jenkins, Github Actions
-                    </li>
-                    <li>
-                        Git
-                    </li>
-                </ul>
-                <hr>
-                <h4>Highlighted Projects</h4>
-                <ul>
-                    <li>
-                        <a href="#">Open Security Hub</a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/adrianvillanueva997/telegrambot-ukranian">Telegram Ukranian Bot.</a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/adrianvillanueva997/Simple-Ada-Compiler">Ada compiler.</a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/adrianvillanueva997/DeficienteBot_Telegram">Retarded Telegram
-                            bot.</a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/adrianvillanueva997/discordbot-hazzikostas">Hazzikostas Discord
-                            bot.</a>
-                    </li>
-                </ul>
-                <hr>
-                <h4>Currently learning / Planning to learn</h4>
-                <ul>
-                    <li>Rust</li>
-                    <li>Kubernetes</li>
-                </ul>
-                <h4>Quick links</h4>
-                <ul>
-                    <li>
-                        <a href="https://linkedin.com/in/adrian-villanueva-martinez">Linkedin</a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/adrianvillanueva997">Github</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-sm">
-            </div>
+<section id="hero" class="d-flex flex-column justify-content-center">
+    <div class="container" data-aos="zoom-in" data-aos-delay="100">
+        <h1>Adrián Villanueva Martínez</h1>
+        <p>Software Engineer, GNU/Linux, Self-hosting enthusiast</p>
+        <div class="social-links">
+            <a href="https://github.com/adrianvillanueva997" class="Github"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/adrian-villanueva-martinez" class="Linkedin"><i class="fab fa-linkedin"></i></a>
+            <a href="https://twitter.com/adrianv5x" class="Twitter"><i class="fab fa-twitter"></i></a>
         </div>
     </div>
-</div>
+</section><!-- End Hero -->
 
 <!-- Footer template goes here -->
 {{ template "footer.tmpl.html" .}}
