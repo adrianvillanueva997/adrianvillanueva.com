@@ -7,7 +7,7 @@ COPY . .
 RUN go mod download
 RUN go build -o app .
 # Executable stage
-FROM alpine:3.13.3 as production
+FROM alpine:3.13.4 as production
 WORKDIR /app
 ENV GO111MODULE=on \
     CGO_ENABLED=0 \
