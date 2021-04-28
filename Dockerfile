@@ -2,10 +2,11 @@
 # Builder -> executable
 # Builder stage
 FROM golang:1.16-alpine as build-env
+RUN apk add --no-cache make
 WORKDIR /build
 COPY . .
-RUN go mod download
-RUN go build -o app .
+RUN make init
+RUN make build
 # Executable stage
 FROM alpine:3.13.2 as production
 WORKDIR /app
@@ -14,11 +15,11 @@ ENV GO111MODULE=on \
     GOOS=linux \
     GIN_MODE=release
 COPY --from=build-env /build/app .
-COPY --from=build-env /build/templates ./templates
 COPY --from=build-env /build/src/markdown ./src/markdown
 COPY --from=build-env /build/assets ./assets
+COPY --from=build-env /build/styles ./styles
+COPY --from=build-env /build/scripts ./scripts
 COPY --from=build-env /build/public ./public
-COPY --from=build-env /build/styles ./styles 
 EXPOSE 3000
 RUN adduser -D appuser && chown -R appuser:appuser /app && chmod 755 /app
 USER appuser

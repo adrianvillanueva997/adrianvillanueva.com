@@ -10,7 +10,7 @@ type CreatedPosts struct {
 	FileName string
 }
 
-const DIRNAME = "./src/markdown/"
+const DIRNAME = "src/markdown/"
 
 func IndexHandler() gin.HandlerFunc {
 	return func(context *gin.Context) {

@@ -1,296 +1,454 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     {{ template "scripts.tmpl.html" .}}
     <title>{{ .title }}</title>
-    <meta name="description"
-          content="Resume / CV">
-    <meta name="keywords"
-          content="Go, docker, cpp, c, programming, coding, devops, linux, goland, pycharm, resume, mariadb, docker, big data, python, job, employment">
-    <meta name="author"
-          content="Adrian Villanueva">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-{{ template "navbar.tmpl.html" .}}
-<div class="container">
-    <div class="main-wrapper">
+    <meta name="description" content="Resume / CV" />
+    <meta
+      name="keywords"
+      content="Go, docker, cpp, c, programming, coding, devops, linux, goland, pycharm, resume, mariadb, docker, big data, python, job, employment"
+    />
+    <meta name="author" content="Adrian Villanueva" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    {{ template "navbar.tmpl.html" .}}
+    <div class="container">
+      <div class="main-wrapper">
         <div class="container px-3 px-lg-5">
-            <article class="resume-wrapper mx-auto theme-bg-light p-5 mb-5 my-5 shadow-lg">
-
-                <div class="resume-header">
-                    <div class="row align-items-center">
-                        <div class="resume-title col-12 col-md-6 col-lg-8 col-xl-9">
-                            <h2 class="resume-name mb-0 text-uppercase">Adrián Villanueva Martínez</h2>
-                            <div class="resume-tagline mb-3 mb-md-0">Software Engineer</div>
-                        </div><!--//resume-title-->
-                        <div class="resume-contact col-12 col-md-6 col-lg-4 col-xl-3">
-                            <ul class="list-unstyled mb-0">
-                                <li class="mb-2"><i class="fas fa-envelope-square fa-fw fa-lg mr-2"></i><a
-                                        class="resume-link" href="mail:#">adrian.villanueva.martinez [at]
-                                    outlook.com</a></li>
-                                <li class="mb-0"><i class="fas fa-map-marker-alt fa-fw fa-lg mr-2"></i>Spain</li>
-                            </ul>
-                        </div><!--//resume-contact-->
-                    </div><!--//row-->
-                </div><!--//resume-header-->
-                <hr>
-                <div class="resume-intro py-3">
-                    <div class="media flex-column flex-md-row align-items-center">
-                        <img class="resume-profile-image mb-3 mb-md-0 mr-md-5 ml-md-0 rounded mx-auto"
-                             src="./assets/me.png" height="150" alt="image">
-                        <div class="media-body text-left">
-                            <p class="mb-0">Interested in technology, programming, free software and self-hosting. I
-                                like to read and learn about new technologies and develop personal projects and make use
-                                of my skills to build useful services that can help people to make their life easier</p>
-                        </div><!--//media-body-->
+          <article
+            class="resume-wrapper mx-auto theme-bg-light p-5 mb-5 my-5 shadow-lg"
+          >
+            <div class="resume-header">
+              <div class="row align-items-center">
+                <div class="resume-title col-12 col-md-6 col-lg-8 col-xl-9">
+                  <h2 class="resume-name mb-0 text-uppercase">
+                    Adrián Villanueva Martínez
+                  </h2>
+                  <div class="resume-tagline mb-3 mb-md-0">
+                    Software Engineer
+                  </div>
+                </div>
+                <!--//resume-title-->
+                <div class="resume-contact col-12 col-md-6 col-lg-4 col-xl-3">
+                  <ul class="list-unstyled mb-0">
+                    <li class="mb-2">
+                      <i class="fas fa-envelope-square fa-fw fa-lg mr-2"></i
+                      ><a class="resume-link" href="mail:#"
+                        >adrian.villanueva.martinez [at] outlook.com</a
+                      >
+                    </li>
+                    <li class="mb-0">
+                      <i class="fas fa-map-marker-alt fa-fw fa-lg mr-2"></i
+                      >Spain
+                    </li>
+                  </ul>
+                </div>
+                <!--//resume-contact-->
+              </div>
+              <!--//row-->
+            </div>
+            <!--//resume-header-->
+            <hr />
+            <div class="resume-intro py-3">
+              <div class="media flex-column flex-md-row align-items-center">
+                <img
+                  class="resume-profile-image mb-3 mb-md-0 mr-md-5 ml-md-0 rounded mx-auto"
+                  src="/assets/me.png"
+                  height="150"
+                  alt="image"
+                />
+                <div class="media-body text-left">
+                  <p class="mb-0">
+                    Interested in technology, programming, free software and
+                    self-hosting. I like to read and learn about new
+                    technologies and develop personal projects and make use of
+                    my skills to build useful services that can help people to
+                    make their life easier
+                  </p>
+                </div>
+                <!--//media-body-->
+              </div>
+            </div>
+            <!--//resume-intro-->
+            <hr />
+            <div class="resume-body">
+              <div class="row">
+                <div class="resume-main col-12 col-lg-8 col-xl-9 pr-0 pr-lg-5">
+                  <section class="work-section py-3">
+                    <h3 class="text-uppercase resume-section-heading mb-4">
+                      Work Experiences
+                    </h3>
+                    <div class="item mb-3">
+                      <div class="item-heading row align-items-center mb-2">
+                        <h4
+                          class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0"
+                        >
+                          Intern Software developer
+                        </h4>
+                        <div
+                          class="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right"
+                        >
+                          EY | 2019 - 2020
+                        </div>
+                      </div>
+                      <div class="item-content">
+                        <p>
+                          My main role was to support higher roles into
+                          different projects with international clients. My main
+                          tasks was to develop Business Intelligence projects
+                          using Python or Talend for ETL tasks and data mining,
+                          building SQL based dashboards on Sage x3,
+                          administration of different servers like Ubuntu,
+                          CentOS or Windows server, automating processes with
+                          batch, bash or python, prototyping of web applications
+                          with frontend technologies and Machine Learning for
+                          financial operations classification.
+                        </p>
+                        <ul class="resume-list">
+                          <li>
+                            Python, Talend, SQL Server, MySQL, Java, Bash,
+                            Batch.
+                          </li>
+                          <li>Windows and Linux sysadmin.</li>
+                          <li>Machine Learning.</li>
+                          <li>Web development.</li>
+                        </ul>
+                      </div>
                     </div>
-                </div><!--//resume-intro-->
-                <hr>
-                <div class="resume-body">
-                    <div class="row">
-                        <div class="resume-main col-12 col-lg-8 col-xl-9 pr-0 pr-lg-5">
-                            <section class="work-section py-3">
-                                <h3 class="text-uppercase resume-section-heading mb-4">Work Experiences</h3>
-                                <div class="item mb-3">
-                                    <div class="item-heading row align-items-center mb-2">
-                                        <h4 class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">Intern Software
-                                            developer </h4>
-                                        <div class="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right">
-                                            EY | 2019 - 2020
-                                        </div>
-                                    </div>
-                                    <div class="item-content">
-                                        <p>My main role was to support higher roles into different
-                                            projects with international clients. My main tasks was to develop Business
-                                            Intelligence projects using Python or Talend for ETL tasks and data mining,
-                                            building SQL based dashboards on Sage x3, administration of different
-                                            servers like Ubuntu, CentOS or Windows server, automating processes with
-                                            batch, bash or python, prototyping of web applications with frontend
-                                            technologies and Machine Learning for financial operations
-                                            classification.</p>
-                                        <ul class="resume-list">
-                                            <li>Python, Talend, SQL Server, MySQL, Java, Bash, Batch.</li>
-                                            <li>Windows and Linux sysadmin.</li>
-                                            <li>Machine Learning.</li>
-                                            <li>Web development.</li>
-                                        </ul>
-                                    </div>
-                                </div><!--//item-->
-                                <div class="item mb-3">
-                                    <div class="item-heading row align-items-center mb-2">
-                                        <h4 class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">Data Engineer in
-                                            research project</h4>
-                                        <div class="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right">
-                                            UEM | 2019
-                                        </div>
-                                    </div>
-                                    <div class="item-content">
-                                        <p>Monitoring and analysis of the discursive characterization of migratory
-                                            stories on Twitter, my main tasks were mostly data mining making use of
-                                            Twitter API, sentiment analysis API, text cleaning and perform a small
-                                            Machine Learning classification model for processing automation.</p>
-                                        <ul class="resume-list">
-                                            <li>Python.</li>
-                                            <li>Machine Learning.</li>
-                                            <li>Natural Language Processing</li>
-                                        </ul>
-                                    </div>
-                                </div><!--//item-->
-                                <div class="item mb-3">
-                                    <div class="item-heading row align-items-center mb-2">
-                                        <h4 class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">Data scientist
-                                            researcher</h4>
-                                        <div class="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right">
-                                            UEM - DSLAB | 2019 - 2019
-                                        </div>
-                                    </div>
-                                    <div class="item-content">
-                                        <p>Data Science theoretical research and challenges prototyping such as Spotify
-                                            song classifier.</p>
-                                    </div>
-                                </div><!--//item-->
-                                <div class="item">
-                                    <div class="item-heading row align-items-center mb-2">
-                                        <h4 class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">IT Seminar workshop
-                                            instructor</h4>
-                                        <div class="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right">
-                                            UEM (ES), HES-SO (CH), Haaga-Helia (FI) | 2016 - 2019
-                                        </div>
-                                    </div>
-                                    <div class="item-content">
-                                        <p>The IT Seminars are international seminars organised by different european
-                                            universities where students from such institutions go for 1 week to discuss
-                                            about Software Development, robotics or 3D Printing. In my case, I
-                                            instructed 3 different workshops, 2 about Game Development and 1 about
-                                            Virtual Reality development.</p>
-                                    </div>
-                                </div><!--//item-->
-                                <div class="item">
-                                    <div class="item-heading row align-items-center mb-2">
-                                        <h4 class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">Educational content
-                                            producer</h4>
-                                        <div class="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right">
-                                            UEM 2016-2019
-                                        </div>
+                    <!--//item-->
+                    <div class="item mb-3">
+                      <div class="item-heading row align-items-center mb-2">
+                        <h4
+                          class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0"
+                        >
+                          Data Engineer in research project
+                        </h4>
+                        <div
+                          class="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right"
+                        >
+                          UEM | 2019
+                        </div>
+                      </div>
+                      <div class="item-content">
+                        <p>
+                          Monitoring and analysis of the discursive
+                          characterization of migratory stories on Twitter, my
+                          main tasks were mostly data mining making use of
+                          Twitter API, sentiment analysis API, text cleaning and
+                          perform a small Machine Learning classification model
+                          for processing automation.
+                        </p>
+                        <ul class="resume-list">
+                          <li>Python.</li>
+                          <li>Machine Learning.</li>
+                          <li>Natural Language Processing</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <!--//item-->
+                    <div class="item mb-3">
+                      <div class="item-heading row align-items-center mb-2">
+                        <h4
+                          class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0"
+                        >
+                          Data scientist researcher
+                        </h4>
+                        <div
+                          class="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right"
+                        >
+                          UEM - DSLAB | 2019 - 2019
+                        </div>
+                      </div>
+                      <div class="item-content">
+                        <p>
+                          Data Science theoretical research and challenges
+                          prototyping such as Spotify song classifier.
+                        </p>
+                      </div>
+                    </div>
+                    <!--//item-->
+                    <div class="item">
+                      <div class="item-heading row align-items-center mb-2">
+                        <h4
+                          class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0"
+                        >
+                          IT Seminar workshop instructor
+                        </h4>
+                        <div
+                          class="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right"
+                        >
+                          UEM (ES), HES-SO (CH), Haaga-Helia (FI) | 2016 - 2019
+                        </div>
+                      </div>
+                      <div class="item-content">
+                        <p>
+                          The IT Seminars are international seminars organised
+                          by different european universities where students from
+                          such institutions go for 1 week to discuss about
+                          Software Development, robotics or 3D Printing. In my
+                          case, I instructed 3 different workshops, 2 about Game
+                          Development and 1 about Virtual Reality development.
+                        </p>
+                      </div>
+                    </div>
+                    <!--//item-->
+                    <div class="item">
+                      <div class="item-heading row align-items-center mb-2">
+                        <h4
+                          class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0"
+                        >
+                          Educational content producer
+                        </h4>
+                        <div
+                          class="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right"
+                        >
+                          UEM 2016-2019
+                        </div>
+                      </div>
+                      <div class="item-content">
+                        <p>
+                          A teacher from college thought that it would be a good
+                          idea if I could learn about live chroma video editing
+                          because he needed someone to record him for
+                          educational videos.
+                        </p>
+                      </div>
+                    </div>
+                    <!--//item-->
+                  </section>
+                  <!--//work-section-->
 
-                                    </div>
-                                    <div class="item-content">
-                                        <p>A teacher from college thought that it would be a good idea if I could learn
-                                            about live chroma video editing because he needed someone to record him for
-                                            educational videos.</p>
-                                    </div>
-                                </div><!--//item-->
-                            </section><!--//work-section-->
-
-
-                            <section class="project-section py-3">
-                                <h3 class="text-uppercase resume-section-heading mb-4">Projects</h3>
-                                <div class="item mb-3">
-                                    <div class="item-heading row align-items-center mb-2">
-                                        <h4 class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">Open Security
-                                            Hub</h4>
-                                        <div class="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right">
-                                            Thesis
-                                        </div>
-
-                                    </div>
-                                    <div class="item-content">
-                                        <p>Research about the use of edge computing as a replacement for professional
-                                            security cameras by developing a semi-professional system powered by
-                                            Raspberry Pi 4 and USB accelerator Google Coral to perform live object
-                                            detection making use of OpenCV and TensorflowLite. The system made use of
-                                            notification services like email and Gotify for push notifications.</p>
-                                    </div>
-                                </div><!--//item-->
-                                <div class="item">
-                                    <div class="item-heading row align-items-center mb-2">
-                                        <h4 class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">Telegram and
-                                            Discord Bots</h4>
-                                        <div class="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right">
-                                            Open Source
-                                        </div>
-
-                                    </div>
-                                    <div class="item-content">
-                                        <p>In my free time I like to develop fun bots that make me and my friends or
-                                            provide something useful to group chats. Currently I am maintaining 3 bots,
-                                            2 on Telegram and 1 on Discord. The Telegram bots provide useful commands
-                                            like meme search or live text analysis when a message contains a bad
-                                            word. The Discord bot is a public bot being used in 3 servers that helps to
-                                            track World of Warcraft characters and help their users to track how
-                                            much they are progressing.</p>
-
-                                    </div>
-                                </div><!--//item-->
-                                <div class="item">
-                                    <div class="item-heading row align-items-center mb-2">
-                                        <h4 class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">Computation
-                                            Lab </h4>
-                                        <div class="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right">
-                                            Open Source - University Project
-                                        </div>
-
-                                    </div>
-                                    <div class="item-content">
-                                        <p>Desktop application that makes use of different data mining techniques such
-                                            as web scrapping. The main objective of this application is to develop a
-                                            platform that allows users to perform product reviews classification by
-                                            using its own data, labels and find out the sentiment analysis of given
-                                            reviews.</p>
-
-                                    </div>
-                                </div><!--//item-->
-                            </section><!--//project-section-->
-                        </div><!--//resume-main-->
-                        <aside class="resume-aside col-12 col-lg-4 col-xl-3 px-lg-4 pb-lg-4">
-                            <section class="skills-section py-3">
-                                <h3 class="text-uppercase resume-section-heading mb-4">Skills</h3>
-                                <hr>
-                                <div class="item">
-                                    <h4 class="item-title">Technical</h4>
-                                    <ul class="list-unstyled resume-skills-list">
-                                        <li class="mb-2">Python, Golang, C, Java</li>
-                                        <li class="mb-2">Node.JS,Typescript, GraphQL, Machine Learning, Data Mining,
-                                            Natural Language Processing
-                                        <li>
-                                        <li class="mb-2">MySQL, PostreSQL, SQLite, SQL Server, MongoDB, Cassandra</li>
-                                        <li class="mb-2">GNU/Linux, Ubuntu, CentOS, Arch Linux</li>
-                                        <li class="mb-2">Devops, Docker, CI/CD, Github Actions, RabbitMQ</li>
-                                        <li class="mb-2">Vue.js</li>
-                                        <li>Microservices</li>
-                                    </ul>
-                                    <hr>
-                                </div><!--//item-->
-                                <div class="item">
-                                    <h4 class="item-title">Professional</h4>
-                                    <ul class="list-unstyled resume-skills-list">
-                                        <li class="mb-2">Effective communication</li>
-                                        <li class="mb-2">Team player
-                                        <li>
-                                        <li class="mb-2">Strong problem solver</li>
-                                        <li>Good time management</li>
-                                    </ul>
-                                </div><!--//item-->
-                                <hr>
-                            </section><!--//skills-section-->
-                            <section class="education-section py-3">
-                                <h3 class="text-uppercase resume-section-heading mb-4">Education</h3>
-                                <ul class="list-unstyled resume-education-list">
-                                    <li>
-                                        <div class="resume-degree font-weight-bold">Computers Software engineering</div>
-                                        <div class="resume-degree-org text-muted">Universidad Europea de Madrid</div>
-                                        <div class="resume-degree-time text-muted">2015 - 2020</div>
-                                    </li>
-                                </ul>
-                            </section><!--//education-section-->
-                            <hr>
-                            <section class="skills-section py-3">
-                                <h3 class="text-uppercase resume-section-heading mb-4">Languages</h3>
-                                <ul class="list-unstyled resume-lang-list">
-                                    <li class="mb-2">English <span class="text-muted">(Professional)</span></li>
-                                    <li>Spanish <span class="text-muted">(Native)</span></li>
-                                </ul>
-                                <hr>
-                            </section><!--//certificates-section-->
-                            <section class="skills-section py-3">
-                                <h3 class="text-uppercase resume-section-heading mb-4">Interests</h3>
-                                <ul class="list-unstyled resume-interests-list mb-0">
-                                    <li class="mb-2">Videogames</li>
-                                    <li class="mb-2">Music</li>
-                                    <li class="mb-2">Miniatures</li>
-                                    <li>Travelling</li>
-                                </ul>
-                            </section><!--//certificates-section-->
-                            <hr>
-
-                        </aside><!--//resume-aside-->
-                    </div><!--//row-->
-                </div><!--//resume-body-->
-                <hr>
-                <div class="resume-footer text-center">
-                    <ul class="resume-social-list list-inline mx-auto mb-0 d-inline-block text-muted">
-                        <li class="list-inline-item mb-lg-0 mr-3"><a class="resume-link"
-                                                                     href="https://github.com/adrianvillanueva997"><i
-                                class="fab fa-github-square fa-2x mr-2" data-fa-transform="down-4"></i><span
-                                class="d-none d-lg-inline-block text-muted"></span></a>
+                  <section class="project-section py-3">
+                    <h3 class="text-uppercase resume-section-heading mb-4">
+                      Projects
+                    </h3>
+                    <div class="item mb-3">
+                      <div class="item-heading row align-items-center mb-2">
+                        <h4
+                          class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0"
+                        >
+                          Open Security Hub
+                        </h4>
+                        <div
+                          class="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right"
+                        >
+                          Thesis
+                        </div>
+                      </div>
+                      <div class="item-content">
+                        <p>
+                          Research about the use of edge computing as a
+                          replacement for professional security cameras by
+                          developing a semi-professional system powered by
+                          Raspberry Pi 4 and USB accelerator Google Coral to
+                          perform live object detection making use of OpenCV and
+                          TensorflowLite. The system made use of notification
+                          services like email and Gotify for push notifications.
+                        </p>
+                      </div>
+                    </div>
+                    <!--//item-->
+                    <div class="item">
+                      <div class="item-heading row align-items-center mb-2">
+                        <h4
+                          class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0"
+                        >
+                          Telegram and Discord Bots
+                        </h4>
+                        <div
+                          class="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right"
+                        >
+                          Open Source
+                        </div>
+                      </div>
+                      <div class="item-content">
+                        <p>
+                          In my free time I like to develop fun bots that make
+                          me and my friends or provide something useful to group
+                          chats. Currently I am maintaining 3 bots, 2 on
+                          Telegram and 1 on Discord. The Telegram bots provide
+                          useful commands like meme search or live text analysis
+                          when a message contains a bad word. The Discord bot is
+                          a public bot being used in 3 servers that helps to
+                          track World of Warcraft characters and help their
+                          users to track how much they are progressing.
+                        </p>
+                      </div>
+                    </div>
+                    <!--//item-->
+                    <div class="item">
+                      <div class="item-heading row align-items-center mb-2">
+                        <h4
+                          class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0"
+                        >
+                          Computation Lab
+                        </h4>
+                        <div
+                          class="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right"
+                        >
+                          Open Source - University Project
+                        </div>
+                      </div>
+                      <div class="item-content">
+                        <p>
+                          Desktop application that makes use of different data
+                          mining techniques such as web scrapping. The main
+                          objective of this application is to develop a platform
+                          that allows users to perform product reviews
+                          classification by using its own data, labels and find
+                          out the sentiment analysis of given reviews.
+                        </p>
+                      </div>
+                    </div>
+                    <!--//item-->
+                  </section>
+                  <!--//project-section-->
+                </div>
+                <!--//resume-main-->
+                <aside
+                  class="resume-aside col-12 col-lg-4 col-xl-3 px-lg-4 pb-lg-4"
+                >
+                  <section class="skills-section py-3">
+                    <h3 class="text-uppercase resume-section-heading mb-4">
+                      Skills
+                    </h3>
+                    <hr />
+                    <div class="item">
+                      <h4 class="item-title">Technical</h4>
+                      <ul class="list-unstyled resume-skills-list">
+                        <li class="mb-2">Python, Golang, C, Java</li>
+                        <li class="mb-2">
+                          Node.JS,Typescript, GraphQL, Machine Learning, Data
+                          Mining, Natural Language Processing
                         </li>
-                        <li class="list-inline-item mb-lg-0 mr-3"><a class="resume-link"
-                                                                     href="https://linkedin.com/in/adrian-villanueva-martinez"><i
-                                class="fab fa-linkedin fa-2x mr-2" data-fa-transform="down-4"></i><span
-                                class="d-none d-lg-inline-block text-muted"></span></a>
+
+                        <li></li>
+                        <li class="mb-2">
+                          MySQL, PostreSQL, SQLite, SQL Server, MongoDB,
+                          Cassandra
                         </li>
-                        <li class="list-inline-item mb-lg-0 mr-lg-3"><a class="resume-link"
-                                                                        href="https://twitter.com/adrian_vm97"><i
-                                class="fab fa-twitter-square fa-2x mr-2" data-fa-transform="down-4"></i><span
-                                class="d-none d-lg-inline-block text-muted"></span></a></li>
+                        <li class="mb-2">
+                          GNU/Linux, Ubuntu, CentOS, Arch Linux
+                        </li>
+                        <li class="mb-2">
+                          Devops, Docker, CI/CD, Github Actions, RabbitMQ
+                        </li>
+                        <li class="mb-2">Vue.js</li>
+                        <li>Microservices</li>
+                      </ul>
+                      <hr />
+                    </div>
+                    <!--//item-->
+                    <div class="item">
+                      <h4 class="item-title">Professional</h4>
+                      <ul class="list-unstyled resume-skills-list">
+                        <li class="mb-2">Effective communication</li>
+                        <li class="mb-2">Team player</li>
+                        <li></li>
+                        <li class="mb-2">Strong problem solver</li>
+                        <li>Good time management</li>
+                      </ul>
+                    </div>
+                    <!--//item-->
+                    <hr />
+                  </section>
+                  <!--//skills-section-->
+                  <section class="education-section py-3">
+                    <h3 class="text-uppercase resume-section-heading mb-4">
+                      Education
+                    </h3>
+                    <ul class="list-unstyled resume-education-list">
+                      <li>
+                        <div class="resume-degree font-weight-bold">
+                          Computers Software engineering
+                        </div>
+                        <div class="resume-degree-org text-muted">
+                          Universidad Europea de Madrid
+                        </div>
+                        <div class="resume-degree-time text-muted">
+                          2015 - 2020
+                        </div>
+                      </li>
                     </ul>
-                </div><!--//resume-footer-->
-            </article>
+                  </section>
+                  <!--//education-section-->
+                  <hr />
+                  <section class="skills-section py-3">
+                    <h3 class="text-uppercase resume-section-heading mb-4">
+                      Languages
+                    </h3>
+                    <ul class="list-unstyled resume-lang-list">
+                      <li class="mb-2">
+                        English <span class="text-muted">(Professional)</span>
+                      </li>
+                      <li>Spanish <span class="text-muted">(Native)</span></li>
+                    </ul>
+                    <hr />
+                  </section>
+                  <!--//certificates-section-->
+                  <section class="skills-section py-3">
+                    <h3 class="text-uppercase resume-section-heading mb-4">
+                      Interests
+                    </h3>
+                    <ul class="list-unstyled resume-interests-list mb-0">
+                      <li class="mb-2">Videogames</li>
+                      <li class="mb-2">Music</li>
+                      <li class="mb-2">Miniatures</li>
+                      <li>Travelling</li>
+                    </ul>
+                  </section>
+                  <!--//certificates-section-->
+                  <hr />
+                </aside>
+                <!--//resume-aside-->
+              </div>
+              <!--//row-->
+            </div>
+            <!--//resume-body-->
+            <hr />
+            <div class="resume-footer text-center">
+              <ul
+                class="resume-social-list list-inline mx-auto mb-0 d-inline-block text-muted"
+              >
+                <li class="list-inline-item mb-lg-0 mr-3">
+                  <a
+                    class="resume-link"
+                    href="https://github.com/adrianvillanueva997"
+                    ><i
+                      class="fab fa-github-square fa-2x mr-2"
+                      data-fa-transform="down-4"
+                    ></i
+                    ><span class="d-none d-lg-inline-block text-muted"></span
+                  ></a>
+                </li>
+                <li class="list-inline-item mb-lg-0 mr-3">
+                  <a
+                    class="resume-link"
+                    href="https://linkedin.com/in/adrian-villanueva-martinez"
+                    ><i
+                      class="fab fa-linkedin fa-2x mr-2"
+                      data-fa-transform="down-4"
+                    ></i
+                    ><span class="d-none d-lg-inline-block text-muted"></span
+                  ></a>
+                </li>
+                <li class="list-inline-item mb-lg-0 mr-lg-3">
+                  <a class="resume-link" href="https://twitter.com/adrian_vm97"
+                    ><i
+                      class="fab fa-twitter-square fa-2x mr-2"
+                      data-fa-transform="down-4"
+                    ></i
+                    ><span class="d-none d-lg-inline-block text-muted"></span
+                  ></a>
+                </li>
+              </ul>
+            </div>
+            <!--//resume-footer-->
+          </article>
         </div>
+      </div>
     </div>
-</div>
-{{ template "footer.tmpl.html" .}}
-</body>
+    {{ template "footer.tmpl.html" .}}
+  </body>
 </html>

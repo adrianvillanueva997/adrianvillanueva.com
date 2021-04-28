@@ -1,11 +1,13 @@
 package main
 
 import (
+	"embed"
+	"html/template"
 	"log"
 	"time"
 
 	"adrian-villanueva.com/src/routes"
-	"adrian-villanueva.com/src/routes/feedGenerator"
+	feedgenerator "adrian-villanueva.com/src/routes/feedGenerator"
 	"adrian-villanueva.com/src/routes/sitemap"
 	"github.com/gin-contrib/cache"
 	"github.com/gin-contrib/cache/persistence"
@@ -14,20 +16,33 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+//go:embed templates/*
+var htmlTemplates embed.FS
+
 func initServer() *gin.Engine {
 	r := gin.Default()
 	r.Use(gin.Logger())
 	r.Use(gzip.Gzip(gzip.DefaultCompression))
-	r.StaticFile("/robots.txt", "./public/robots.txt")
-	r.StaticFile("/sitemap.xml", "./public/sitemap1.xml")
+
 	r.Delims("{{", "}}")
+
+	embedded(r)
+
 	r.Use(static.Serve("/blog/assets", static.LocalFile("./assets", false)))
 	r.Use(static.Serve("/assets", static.LocalFile("./assets", false)))
 	r.Use(static.Serve("/styles", static.LocalFile("./styles", false)))
 	r.Use(static.Serve("/scripts", static.LocalFile("./scripts", false)))
-	r.LoadHTMLGlob("./templates/*.tmpl.html")
+
+	r.StaticFile("/robots.txt", "./public/robots.txt")
+	r.StaticFile("/sitemap.xml", "./public/sitemap1.xml")
 	r.NoRoute(routes.NotFoundHandler())
 	return r
+}
+
+func embedded(r *gin.Engine) {
+	templ := template.Must(template.New("").ParseFS(htmlTemplates, "templates/*.html"))
+	r.SetHTMLTemplate(templ)
+
 }
 
 func initRoutes(engine *gin.Engine) {

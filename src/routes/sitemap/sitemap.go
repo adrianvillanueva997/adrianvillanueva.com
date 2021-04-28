@@ -50,7 +50,6 @@ func GenerateSiteMap() {
 	sm.Add(stm.URL{{"loc", "/"}, {"mobile", true}})
 	sm.Add(stm.URL{{"loc", "/about"}, {"mobile", true}})
 	sm.Add(stm.URL{{"loc", "/resume"}, {"mobile", true}})
-	sm.Add(stm.URL{{"loc", "/contact"}, {"mobile", true}})
 	sm.Add(stm.URL{{"loc", "/feed"}, {"mobile", true}})
 	posts := parsePosts()
 	sm.Add(stm.URL{{"loc", "/blog"}, {"mobile", true},
