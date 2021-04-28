@@ -98,11 +98,11 @@ func ParseSiteMapEntries(file fs.FileInfo, md goldmark.Markdown, buffer bytes.Bu
 		log.Println(err)
 	}
 	return PostSiteMap{
-		Title:    fmt.Sprintf("%v", metadata["Title"]),
-		Date:     fmt.Sprintf("%v", metadata["Date"]),
-		File:     file.Name(),
-		Category: fmt.Sprintf("%v", metadata["Category"]),
-		Tags:     fmt.Sprintf("%v", metadata["Tags"]),
+		Title:       fmt.Sprintf("%v", metadata["Title"]),
+		Date:        fmt.Sprintf("%v", metadata["Date"]),
+		File:        file.Name(),
+		Category:    fmt.Sprintf("%v", metadata["Category"]),
+		Tags:        fmt.Sprintf("%v", metadata["Tags"]),
 		Description: fmt.Sprintf("%v", metadata["Description"]),
 	}
 }

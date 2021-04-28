@@ -1,6 +1,6 @@
 init:
 	go mod download
-	
+
 lint:
 	golangci-lint run
 

@@ -23,7 +23,7 @@ type Post struct {
 func PostHandler() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		postName := context.Param("postName")
-		markdownFile, err := ioutil.ReadFile("./src/markdown/" + postName)
+		markdownFile, err := ioutil.ReadFile(fmt.Sprintf("./src/markdown/%s", postName))
 		if err != nil {
 			log.Println(err)
 			context.HTML(http.StatusNotFound, "error.tmpl.html", nil)
@@ -39,7 +39,7 @@ func PostHandler() gin.HandlerFunc {
 			return
 		}
 		metadata := meta.Get(mdContext)
-		postHTML := template.HTML(buf.String()) //nolint:gosec
+		postHTML := template.HTML(buf.String()) //nolint:golint
 		title := metadata["Title"]
 		tags := metadata["Tags"]
 		description := metadata["Description"]
