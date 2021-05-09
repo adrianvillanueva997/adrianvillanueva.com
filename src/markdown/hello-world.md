@@ -10,7 +10,6 @@ Description: First blog entry where I discuss the creation of this website and h
 Tags: test, hello world, blog, framework, golang, programming,
 
 Category: software
-
 ---
 
 # Hello there!

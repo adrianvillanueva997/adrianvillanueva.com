@@ -1,52 +1,68 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     {{ template "scripts.tmpl.html" .}}
     <title>{{ .title }}</title>
-    <meta name="description"
-          content="About me">
-    <meta name="keywords"
-          content="programming, dota, warhammer, music, motorhead, amon amarth">
-    <meta name="author"
-          content="Adrian Villanueva">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-{{ template "navbar.tmpl.html" .}}
-<div class="container">
-
-    <div class="section-title">
+    <meta name="description" content="About me" />
+    <meta
+      name="keywords"
+      content="programming, dota, warhammer, music, motorhead, amon amarth"
+    />
+    <meta name="author" content="Adrian Villanueva" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    {{ template "navbar.tmpl.html" .}}
+    <div class="container">
+      <div class="section-title">
         <h2>About</h2>
-        <p>Get to know me a bit more </p>
-    </div>
+        <p>Get to know me a bit more</p>
+      </div>
 
-    <div class="row">
+      <div class="row">
         <div class="col-lg-8 pt-4 pt-lg-0 content">
-            <h3>Hobbies and other things</h3>
-            <p class="font-italic">
-            </p>
-            <div class="row">
-                <div class="col-lg-6">
-                    <ul>
-                        <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>9 May 1997</span></li>
-                        <li><i class="bi bi-chevron-right"></i><strong>Videogames:</strong>Dota 2, Rust, Total War
-                            Warhammer<span></span></li>
-                        <li><i class="bi bi-chevron-right"></i><strong>Cat lover</strong><span></span></li>
-                    </ul>
-                </div>
-                <div class="col-lg-6">
-                    <ul>
-                        <li><i class="bi bi-chevron-right"></i><strong>Music:</strong><span>Motörhead, Amon Amarth, Black Sabbath</span>
-                        </li>
-                        <li><i class="bi bi-chevron-right"></i> <strong>Reading</strong><span></span>
-                    </ul>
-                </div>
+          <h3>Hobbies and other things</h3>
+          <p class="font-italic"></p>
+          <div class="row">
+            <div class="col-lg-6">
+              <ul>
+                <li>
+                  <i class="bi bi-chevron-right"></i>
+                  <strong>Birthday:</strong> <span>9 May 1997</span>
+                </li>
+                <li>
+                  <i class="bi bi-chevron-right"></i
+                  ><strong>Videogames:</strong>Dota 2, Rust, Total War
+                  Warhammer<span></span>
+                </li>
+                <li>
+                  <i class="bi bi-chevron-right"></i><strong>Cat lover</strong
+                  ><span></span>
+                </li>
+              </ul>
             </div>
+            <div class="col-lg-6">
+              <ul>
+                <li>
+                  <i class="bi bi-chevron-right"></i><strong>Music:</strong
+                  ><span>Motörhead, Amon Amarth, Black Sabbath</span>
+                </li>
+                <li>
+                  <i class="bi bi-chevron-right"></i> <strong>Reading</strong
+                  ><span></span>
+                </li>
+                <li>
+                  <i class="bi bi-chevron-right"></i>
+                  <strong>
+                    Currently learning: Rust among other technologies.</strong
+                  ><span> </span>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-
-</div>
-{{ template "footer.tmpl.html" .}}
-</body>
+    {{ template "footer.tmpl.html" .}}
+  </body>
 </html>
