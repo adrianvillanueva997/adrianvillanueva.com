@@ -14,11 +14,10 @@ docker-build:
 	docker build -t adrianvillanueva997 .
 
 run-dev:
-	gow run main.go
+	gow run server.go
 
 run:
-	go run main.go
-
+	go run server.go
 test:
 	go test -cover
 
