@@ -8,7 +8,7 @@ COPY . .
 RUN make init
 RUN make build
 # Executable stage
-FROM alpine:3.13.5 as production
+FROM alpine:3.14.0 as production
 WORKDIR /app
 ENV GO111MODULE=on \
     CGO_ENABLED=0 \
