@@ -1,7 +1,7 @@
 # Multistage builder image
 # Builder -> executable
 # Builder stage
-FROM golang:1.17.2-alpine as build-env
+FROM golang:1.17.3-alpine as build-env
 RUN apk add --no-cache make
 WORKDIR /build
 COPY . .
