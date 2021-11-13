@@ -37,7 +37,6 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/adrianvillanueva997/adrian-villanueva:${{ steps.meta.outputs.tags }}
             ${{ env.REGISTRY }}/adrianvillanueva997/adrian-villanueva:dev
           labels: ${{ steps.meta.outputs.labels }}
 
