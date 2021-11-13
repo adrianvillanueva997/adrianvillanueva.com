@@ -136,9 +136,9 @@
         "type": "Internship",
         "startDate": "2019-06-01",
         "endDate": "2020-06-01",
-        "city": "Amsterdam",
-        "state": "Nord Holland",
-        "country": "Netherlands",
+        "city": "Madrid",
+        "state": "Madrid",
+        "country": "Spain",
         "url": "https://linkedin.com/company/ernstandyoung",
         "thumbnail": "/ey.png",
         "highlights": "At EY I developed internal client ETL tools to manage multiple data pipelines into a single reliable source. Built and prototyped a Machine Learning tool to predict treasury movements. Built another ETL tool to scrape information from a third party API to complement data from internal treasury sources and later on display this information in fancy dashboards. Developed and deployed different internal web tools and developed SQL dashboards on Sage X3"
@@ -146,7 +146,7 @@
     ]
   },
   "about": {
-    "description": "I am a full-stack cross-platform app developer, pursuing my B.E in Computer Engineering from Pune Institute of Computer Technology. I strive to make meaningful applications with the best UI practices.",
+    "description": "I am a Software Engineer with interests in different Computer Science areas such as Devops, Development or Data. I like to build high quality software following the best security and development practices.",
     "picture": "/profile.png",
     "social": [
       {
