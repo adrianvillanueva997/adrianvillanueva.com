@@ -1,26 +1,29 @@
-# Multistage builder image
-# Builder -> executable
-# Builder stage
-FROM golang:1.17.2-alpine as build-env
-RUN apk add --no-cache make
+FROM node:16.13.0-alpine as base
+
+FROM base as builder
+# Building container
 WORKDIR /build
+COPY package.json .
+COPY package-lock.json .
+RUN npm install -g npm && npm i --force
 COPY . .
-RUN make init
-RUN make build
-# Executable stage
-FROM alpine:3.14.2 as production
+RUN npm run build
+
+FROM base AS runner
 WORKDIR /app
-ENV GO111MODULE=on \
-    CGO_ENABLED=0 \
-    GOOS=linux \
-    GIN_MODE=release
-COPY --from=build-env /build/app .
-COPY --from=build-env /build/src/markdown ./src/markdown
-COPY --from=build-env /build/assets ./assets
-COPY --from=build-env /build/styles ./styles
-COPY --from=build-env /build/scripts ./scripts
-COPY --from=build-env /build/public ./public
+
+ENV NODE_ENV production
+
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S nextjs -u 1001
+
+COPY --from=builder /build/public ./public
+COPY --from=builder --chown=nextjs:nodejs /build/.next ./.next
+COPY --from=builder /build/node_modules ./node_modules
+COPY --from=builder /build/package.json ./package.json
+
+USER nextjs
+
 EXPOSE 3000
-RUN adduser -D appuser && chown -R appuser:appuser /app && chmod 755 /app
-USER appuser
-ENTRYPOINT ./app
+
+CMD ["npm", "start"]
