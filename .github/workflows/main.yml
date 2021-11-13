@@ -4,67 +4,74 @@ on:
   push:
     branches:
       - master
-
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
 jobs:
-  ci:
+  security-check:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         # Override automatic language detection by changing the below list
         # Supported options are ['csharp', 'cpp', 'go', 'java', 'javascript', 'python']
-        language: [ 'go' ]
+        language: ['javascript']
         # Learn more...
     container:
-      image: golang
+      image: node:16.13.0-alpine
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v2.4.0
       - name: Install & Tests
         run: |
-          go mod download
+          npm install
       - name: Checkout repository
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2.4.0
         with:
-          # Must fetch at least the immediate parents so that if this is
-          # a pull request then we can checkout the head of the pull request.
-          # Only include this option if you are running this workflow on pull requests.
+          # We must fetch at least the immediate parents so that if this is
+          # a pull request then we can checkout the head.
           fetch-depth: 2
-
-      # If this run was triggered by a pull request event then checkout
+      # If this run was triggered by a pull request event, then checkout
       # the head of the pull request instead of the merge commit.
-      # Only include this step if you are running this workflow on pull requests.
       - run: git checkout HEAD^2
         if: ${{ github.event_name == 'pull_request' }}
+      # Initializes the CodeQL tools for scanning.
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v1
         with:
           languages: ${{ matrix.language }}
+
       - name: Autobuild
         uses: github/codeql-action/autobuild@v1
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v1
-  cd:
+  build:
     runs-on: ubuntu-latest
-    needs: ci
+    needs: security-check
     steps:
       - name: Set up CD
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2.4.0
       - name: Set up Docker Qemu
-        uses: docker/setup-qemu-action@v1
+        uses: docker/setup-qemu-action@v1.2.0
       - name: Setup Docker Buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v1.5.1
       - name: Docker login
-        uses: docker/login-action@v1
+        uses: docker/login-action@v1.10.0
         with:
-          username: ${{ secrets.DOCKER_USER }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.PACKAGES_TOKEN }}
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@548e2346a9987b56d8a4104fe776321ff8e23440
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
       - name: Build and push
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v2.7.0
         with:
           context: .
           file: ./Dockerfile
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          platforms: linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7
           push: true
           tags: |
-            adrianvillanueva997/adrian-villanueva.com:${{ github.sha }}
-            adrianvillanueva997/adrian-villanueva.com:latest
+            ${{ env.REGISTRY }}/adrianvillanueva997/adrian-villanueva:latest
+          labels: ${{ steps.meta.outputs.labels }}
