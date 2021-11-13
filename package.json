@@ -19,6 +19,6 @@
     "start": "next start"
   },
   "devDependencies": {
-    "@types/simple-icons": "^4.10.0"
+    "@types/simple-icons": "^5.21.1"
   }
 }
