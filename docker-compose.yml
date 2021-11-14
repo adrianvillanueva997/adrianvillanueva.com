@@ -12,9 +12,9 @@ services:
       - "traefik.http.middlewares.avm-redirect-websecure.redirectscheme.scheme=https"
       - "traefik.http.middlewares.avm-redirect-websecure.redirectscheme.permanent=true"
       - "traefik.http.routers.avm-web.middlewares=avm-redirect-websecure"
-      - traefik.http.routers.avm-web.rule=Host(`adrian-villanueva.com`)
+      - traefik.http.routers.avm-web.rule=Host(`adrianvillanueva.com`)
       - traefik.http.routers.avm-web.entrypoints=http
-      - traefik.http.routers.avm-websecure.rule=Host(`adrian-villanueva.com`)
+      - traefik.http.routers.avm-websecure.rule=Host(`adrianvillanueva.com`)
       - traefik.http.routers.avm-websecure.tls.certresolver=le
       - traefik.http.routers.avm-websecure.tls=true
       - traefik.http.routers.avm-websecure.entrypoints=https
