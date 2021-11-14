@@ -1,7 +1,7 @@
 version: "3.0"
 services:
   api:
-    image: ghcr.io/adrianvillanueva997/adrian-villanueva:dev
+    image: ghcr.io/adrianvillanueva997/adrian-villanueva:latest
     networks:
       - proxy
     container_name: adrian-villanueva.com
