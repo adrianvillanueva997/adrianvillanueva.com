@@ -11,7 +11,7 @@
     "react-typed": "^1.2.0",
     "sharp": "^0.29.3",
     "simple-icons": "^5.23.0",
-    "webpack": "^5.58.1"
+    "webpack": "^5.64.1"
   },
   "scripts": {
     "dev": "next",
