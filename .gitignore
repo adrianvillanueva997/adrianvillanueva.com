@@ -2,9 +2,6 @@
 
 # dependencies
 /node_modules
-<<<<<<< HEAD
-.idea
-=======
 /.pnp
 .pnp.js
 
@@ -18,7 +15,6 @@
 # production
 /build
 
->>>>>>> develop
 # misc
 .DS_Store
 *.pem
@@ -34,8 +30,5 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
-<<<<<<< HEAD
-=======
 # vercel
->>>>>>> develop
 .vercel
