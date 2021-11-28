@@ -11,7 +11,7 @@ export default function Home({ repositories }) {
   return (
     <ContainerBlock
       title="Adrián Villanueva - Software Engineer"
-      description="This is a template built specifically for my blog - Creating a developer portfolio that gets you a job."
+      description="Portfolio of Adrian Villanueva - Software engineer from Amsterdam"
     >
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"
