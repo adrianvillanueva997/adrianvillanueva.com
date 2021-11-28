@@ -1,24 +1,24 @@
 {
-  "version": "1.0.0",
-  "dependencies": {
-    "@material-ui/core": "^4.12.3",
-    "@material-ui/icons": "^4.11.2",
-    "@primer/octicons-react": "^16.0.0",
-    "clsx": "^1.1.1",
-    "next": "^11.1.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-typed": "^1.2.0",
-    "sharp": "^0.29.1",
-    "simple-icons": "^5.18.0",
-    "webpack": "^5.58.1"
-  },
+  "name": "nextjs",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "dev": "next",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start"
   },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "next": "^12.0.4",
+    "next-themes": "0.0.15",
+    "react": "17.x",
+    "react-dom": "17.x",
+    "react-rough-notation": "^1.0.1"
+  },
   "devDependencies": {
-    "@types/simple-icons": "^4.10.0"
+    "@iconify/react": "^3.1.0",
+    "autoprefixer": "^10.3.1",
+    "postcss": "^8.3.6",
+    "tailwindcss": "^2.2.7"
   }
 }

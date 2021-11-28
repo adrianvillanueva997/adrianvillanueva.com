@@ -1,90 +1,45 @@
-import React, {useContext} from 'react';
-import {
-    AppBar,
-    Container,
-    IconButton,
-    makeStyles,
-    Toolbar,
-    Typography,
-    useScrollTrigger,
-} from '@material-ui/core';
-import {ThemeContext} from '../src/theme';
-import Landing from '../src/Landing';
-import Skills from '../src/Skills';
-import Experience from '../src/Experience';
-import About from '../src/About';
-import {name, projects} from '../data.json';
+import ContainerBlock from '../components/ContainerBlock';
+import Script from 'next/script';
+import Hero from '../components/Hero';
+import getLatestRepos from '@lib/getLatestRepos';
+import userData from '@constants/data';
+import AboutMe from '@components/AboutMe';
+import Experience from '@components/Experience';
+import Head from 'next/head';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-    },
-    appBar: {
-        boxShadow: 'none',
-    },
-}));
+export default function Home({ repositories }) {
+  return (
+    <ContainerBlock
+      title="Adrián Villanueva - Software Engineer"
+      description="This is a template built specifically for my blog - Creating a developer portfolio that gets you a job."
+    >
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window.dataLayer.push(arguments);}
+          gtag('js', new Date());
 
-export async function getStaticProps() {
-    const baseURI = projects.baseURI;
-    const repos = projects.repositories;
-    const reqInit = {
-        headers: {
-            Authorization: `token ${process.env.PAT}`,
-        },
-    };
-    const fullRepoData = await Promise.allSettled(
-        repos.map(async (name) => {
-            const repo = await fetch(baseURI + name, reqInit).then((res) =>
-                res.json()
-            );
-            const langs = await fetch(baseURI + name + '/languages', reqInit).then(
-                (res) => res.json()
-            );
-            return {
-                ...repo,
-                languages: Object.getOwnPropertyNames(langs),
-            };
-        })
-    );
-
-    return {
-        props: {
-            projects: fullRepoData,
-        },
-        revalidate: 60,
-    };
+          gtag('config', 'GA_MEASUREMENT_ID');
+        `}
+      </Script>
+      <Hero />
+      <AboutMe />
+      <Experience />
+    </ContainerBlock>
+  );
 }
 
-export default function Index({projects}) {
-    const classes = useStyles();
+export const getServerSideProps = async () => {
+  let token = process.env.GITHUB_AUTH_TOKEN;
+  const repositories = await getLatestRepos(userData, token);
 
-    const {theme, toggleTheme} = useContext(ThemeContext);
-
-    const trigger = useScrollTrigger({disableHysteresis: true});
-
-    return (
-        <div className={classes.root}>
-            <AppBar
-                color={!trigger ? 'transparent' : 'inherit'}
-                className={classes.appBar}
-                position="fixed"
-            >
-                <Toolbar>
-                    <Typography variant="h6" className={classes.root}>
-                        {name}
-                    </Typography>
-                    <IconButton edge="end" color="inherit" onClick={toggleTheme}>
-                        {theme.palette.type === 'dark' ? '☀️' : '🌑'}
-                    </IconButton>
-                </Toolbar>
-            </AppBar>
-            <Toolbar className={classes.toolbar}/>
-            <Container>
-                <Landing/>
-                <Skills/>
-                <Experience/>
-                <About/>
-            </Container>
-        </div>
-    );
-}
+  return {
+    props: {
+      repositories,
+    },
+  };
+};
