@@ -1,4 +1,4 @@
-FROM node:17.2.0-alpine as base
+FROM node:17.3.0-alpine as base
 
 FROM base as builder
 # Building container
