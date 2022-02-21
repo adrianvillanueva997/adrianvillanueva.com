@@ -445,9 +445,9 @@ nanoid@^3.1.30, nanoid@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.2.0.tgz#62667522da6673971cca916a6d3eff3f415ff80c"
 
-next-themes@0.0.15:
-  version "0.0.15"
-  resolved "https://registry.npmjs.org/next-themes/-/next-themes-0.0.15.tgz"
+next-themes@0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/next-themes/-/next-themes-0.1.1.tgz#122113a458bf1d1be5ffed66778ab924c106f82a"
 
 next@^12.1.0:
   version "12.1.0"
