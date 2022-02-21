@@ -591,9 +591,9 @@ react-dom@17.x:
     object-assign "^4.1.1"
     scheduler "^0.20.2"
 
-react-rough-notation@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/react-rough-notation/-/react-rough-notation-1.0.1.tgz"
+react-rough-notation@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-rough-notation/-/react-rough-notation-1.0.2.tgz#c558c710ffcc09c01d4ec9d35e68883f8908304d"
   dependencies:
     rough-notation "^0.4.0"
 
