@@ -16,17 +16,24 @@ const userData = {
       I consider myself a curious person, I like to research and try new tools, right now I am very interested in learning more about DevOps and developing more software making use of Go and Rust. I am very excited for the future and eager to 
       learn and get more experience!`,
     ],
-    currentProject: 'Dashmote',
-    currentProjectUrl: 'https://dashmote.com',
+    currentProject: 'Xccelerated',
+    currentProjectUrl: 'https://xccelerated.io',
   },
 
   experience: [
     {
       title: 'Data Engineer',
+      company: 'Xccelerated - NL',
+      year: 'Feb 2022',
+      companyLink: 'https://xccelerated.io',
+      desc: '',
+    },
+    {
+      title: 'Data Engineer',
       company: 'Dashmote - NL',
-      year: 'Sept 2021',
+      year: 'Sept 2021 - Feb 2022',
       companyLink: 'https://dashmote.com',
-      desc: 'At dashmote I am creating IaC scripts on terraform to deploy different services on AWS. Designed and deployed a full datalake on Athena. Redesigning the whole CI/CD strategy at the company\n. Maintaining old legacy Airflow components on Python. Deploying, optimising and developing production ready docker images.      ',
+      desc: 'At dashmote I created IaC scripts on terraform to deploy different services on AWS. Designed and deployed a full datalake on Athena. Redesigned the whole CI/CD strategy at the company\n. Maintaining old legacy Airflow components on Python. Deploying, optimising and developing production ready docker images.      ',
     },
     {
       title: 'IT Support',
