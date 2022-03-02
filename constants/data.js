@@ -16,7 +16,7 @@ const userData = {
       I consider myself a curious person, I like to research and try new tools, right now I am very interested in learning more about DevOps and developing more software making use of Go and Rust. I am very excited for the future and eager to 
       learn and get more experience!`,
     ],
-    currentProject: 'Xccelerated, part of Xebia',
+    currentProject: 'Xccelerated',
     currentProjectUrl: 'https://xccelerated.io',
   },
 
@@ -26,7 +26,7 @@ const userData = {
       company: 'Xccelerated, part of Xebia - NL',
       year: 'Feb 2022',
       companyLink: 'https://xccelerated.io',
-      desc: '',
+      desc: 'As a Data Engineer at Xccelerated, I will follow an intensive one-month bootcamp, to polish my knowledge on data engineering techniques and expand my engineering skills. Some topics I will focus on during the bootcamp and training days throughout the year include writing unit tests, writing APIs and diving into Flask, PySpark, Deep Learning, Kafka, Azure as well as writing production-quality Python code and building experience in deploying data pipelines and ML models, as well as their maintenance.',
     },
     {
       title: 'Data Engineer',
