@@ -16,14 +16,14 @@ const userData = {
       I consider myself a curious person, I like to research and try new tools, right now I am very interested in learning more about DevOps and developing more software making use of Go and Rust. I am very excited for the future and eager to 
       learn and get more experience!`,
     ],
-    currentProject: 'Xccelerated',
+    currentProject: 'Xccelerated, part of Xebia',
     currentProjectUrl: 'https://xccelerated.io',
   },
 
   experience: [
     {
       title: 'Data Engineer',
-      company: 'Xccelerated - NL',
+      company: 'Xccelerated, part of Xebia - NL',
       year: 'Feb 2022',
       companyLink: 'https://xccelerated.io',
       desc: '',
