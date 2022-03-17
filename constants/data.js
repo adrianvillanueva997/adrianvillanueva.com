@@ -21,12 +21,12 @@ const userData = {
   },
 
   experience: [
-  {
+    {
       title: 'Data Engineer',
-      company:  "Albert Hejn - NL',
+      company: 'Albert Hejn - NL',
       year: 'March 2022',
       companyLink: 'https://www.ah.nl/',
-      desc: '',
+      desc: 'To be updated.',
     },
 
     {
