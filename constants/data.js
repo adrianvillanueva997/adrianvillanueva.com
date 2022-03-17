@@ -21,10 +21,18 @@ const userData = {
   },
 
   experience: [
+  {
+      title: 'Data Engineer',
+      company:  "Albert Hejn - NL',
+      year: 'March 2022',
+      companyLink: 'https://www.ah.nl/',
+      desc: '',
+    },
+
     {
       title: 'Data Engineer',
       company: 'Xccelerated, part of Xebia - NL',
-      year: 'Feb 2022',
+      year: 'March 2022',
       companyLink: 'https://xccelerated.io',
       desc: 'As a Data Engineer at Xccelerated, I will follow an intensive one-month bootcamp, to polish my knowledge on data engineering techniques and expand my engineering skills. Some topics I will focus on during the bootcamp and training days throughout the year include writing unit tests, writing APIs and diving into Flask, PySpark, Deep Learning, Kafka, Azure as well as writing production-quality Python code and building experience in deploying data pipelines and ML models, as well as their maintenance.',
     },
