@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@iconify/react@^3.2.1":
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/@iconify/react/-/react-3.2.1.tgz#d18da31cec58c1aa8fdf4def451cc7e3196d88de"
+"@iconify/react@^3.2.2":
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/@iconify/react/-/react-3.2.2.tgz#ab5241dc01562076bae3b0c22238aff7e5f029cc"
 
 "@next/env@12.1.6":
   version "12.1.6"
