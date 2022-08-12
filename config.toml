@@ -1,7 +1,7 @@
 baseurl = "/"
 enableEmoji = true
 footnotereturnlinkcontents = "↩"
-googleAnalytics = "G-Q1WHKR2FB3"
+googleAnalytics = "G-56R4LZ0KZD"
 ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
 languageCode = "en-us"
 theme = ""
@@ -42,6 +42,6 @@ url = "/index.xml"
 
 [params]
 custom_css = ["css/theme-override.css"]
-description = "A simple, minimal blog for those who love text."
+description = "Adrian Villanueva Martinez - Software Engineer."
 footer = " | Adrian Villanueva | Any and all opinions listed here are my own."
 

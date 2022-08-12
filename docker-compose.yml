@@ -14,7 +14,7 @@ services:
       - "traefik.http.routers.avm-web.middlewares=avm-redirect-websecure"
       - traefik.http.routers.avm-web.rule=Host(`adrianvillanueva.com`)
       - traefik.http.routers.avm-web.entrypoints=http
-      - traefik.http.routers.avm-websecure.rule=Host(`blog.adrianvillanueva.com`)
+      - traefik.http.routers.avm-websecure.rule=Host(`adrianvillanueva.com`)
       - traefik.http.routers.avm-websecure.tls.certresolver=le
       - traefik.http.routers.avm-websecure.tls=true
       - traefik.http.routers.avm-websecure.entrypoints=https
