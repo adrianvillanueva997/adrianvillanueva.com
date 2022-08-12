@@ -1,6 +1,6 @@
 ---
 title: "Sphinx for automated python documentation"
-date: 2021-06-09
+date: 2022-06-09
 categories:
   - Code
 tags:
