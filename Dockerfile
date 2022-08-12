@@ -1,29 +1,9 @@
-FROM node:18.4.0-alpine as base
-
-FROM base as builder
-# Building container
+FROM golang:1.18.3-alpine3.16 as build
 WORKDIR /build
-COPY package.json .
-COPY package-lock.json .
-RUN npm install -g npm && npm i --force
+RUN apk add --no-cache hugo
 COPY . .
-RUN npm run build
+RUN hugo --minify
 
-FROM base AS runner
-WORKDIR /app
-
-ENV NODE_ENV production
-
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nextjs -u 1001
-
-COPY --from=builder /build/public ./public
-COPY --from=builder --chown=nextjs:nodejs /build/.next ./.next
-COPY --from=builder /build/node_modules ./node_modules
-COPY --from=builder /build/package.json ./package.json
-
-USER nextjs
-
-EXPOSE 3000
-
-CMD ["npm", "start"]
+FROM nginx:1.21.6-alpine as prod
+COPY --from=build /build/public/ /usr/share/nginx/html/
+EXPOSE 80

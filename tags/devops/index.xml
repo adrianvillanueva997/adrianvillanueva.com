@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Devops on Avm</title>
+    <link>/tags/devops/</link>
+    <description>Recent content in Devops on Avm</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 27 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/devops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Secrets in docker &amp; Buildkit</title>
+      <link>/post/2021/11/27/docker-secrets/</link>
+      <pubDate>Sat, 27 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2021/11/27/docker-secrets/</guid>
+      <description>Some of the risks of using Docker is that sometimes you may share secret keys such as SSH or another internal keys into one of your container layers. Even if you build everything in your own selfhosted CI/CD pipeline or export the image to a private registry, the security risk is still there.
+How can you avoid this? One of my initial solutions to avoid this problem is by using build-args and pass the SSH key from a local environment variable to a multistage docker building process.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A simple, minimal blog for those who love text.">
+    <title>Secrets in docker &amp; Buildkit | Avm</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="/">~/avm</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/resume/">~/resume</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/tags/">~/tags</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/categories/">~/categories</a>
+      </li>
+      
+
+      
+      
+      <li class="pull-right">
+        <a href="/index.xml">~/subscribe</a>
+      </li>
+      
+
+    </ul>
+  </nav>
+</header>
+
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">Secrets in docker &amp; Buildkit</span></h1>
+
+<h2 class="date">2021/11/27</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="/categories/code">Code</a> 
+  
+  
+  
+  Tags: <a href="/tags/devops">Devops</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <p>Some of the risks of using Docker is that sometimes you may share secret keys such as SSH or another internal keys into one of your container layers.
+Even if you build everything in your own selfhosted CI/CD pipeline or export the image to a private registry, the security risk is still there.</p>
+<p>How can you avoid this? One of my initial solutions to avoid this problem is by using build-args and pass the SSH key from a local environment variable to a multistage docker
+building process. On paper it sounds good right? The building container gets destroyed after finishing the production one and we don&rsquo;t see anything from it. The security risk is
+still there because we are passing the key in plain text.</p>
+<p>how can we build it in a safer way without exposing anything?</p>
+<p>Buildkit! It is a feature not well known for many developers that use docker in their daily work, I heard about it before but I never realised how powerful
+it is until I started to use it.</p>
+<p>For example, when using multistage building, by default Docker will build one container first and later on the rest 1 by 1. In the end it may sound &ldquo;okayish&rdquo; but it is slow. With
+buildkit it reads the dependencies between containers and they are built asynchronously until a dependency is met, for example it is needed to copy a bunch of files between containers.</p>
+<p>But, how can we enable it? First make sure that the latest version of Docker is installed, after it you can just build everything by using the same commands as you are used to, but
+enabling buildkit!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">DOCKER_BUILDKIT</span><span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span> docker build .
+</span></span></code></pre></div><p>It may be tedious to have to write the buildkit part, but according to the official documentation, it is possible to enable it by default by editing the daemon like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{ <span style="color:#ff79c6">&#34;features&#34;</span>: { <span style="color:#ff79c6">&#34;buildkit&#34;</span>: <span style="color:#ff79c6">true</span> } }
+</span></span></code></pre></div><p>But what about sharing secrets? For now, sharing secrets in docker requires to enable docker swarm, however, if you are making use of docker-compose you can pass any local
+file as a secret. For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span><span style="color:#f1fa8c"> alpine</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># shows secret from default secret location:</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">RUN</span> --mount<span style="color:#ff79c6">=</span><span style="color:#8be9fd;font-style:italic">type</span><span style="color:#ff79c6">=</span>secret,id<span style="color:#ff79c6">=</span>mysecret cat /run/secrets/mysecret
+</span></span></code></pre></div><p>The docker-compose file would look like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#ff79c6">version</span>: <span style="color:#f1fa8c">&#34;3&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">services</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">app</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">image</span>: example-app:latest
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">secrets</span>:
+</span></span><span style="display:flex;"><span>      - db_password
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">secrets</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">db_password</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">file</span>: ./db_password.txt
+</span></span></code></pre></div><p>In the RUN statement, we are using our secret, after using it, that layer is completly and safely removed from the image build.</p>
+<p>It is also possible to pass SSH keys, for example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#6272a4"># syntax=docker/dockerfile:1</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span><span style="color:#f1fa8c"> alpine</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Install ssh client and git</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">RUN</span> apk add --no-cache openssh-client git
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Download public key for github.com</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">RUN</span> mkdir -p -m <span style="color:#bd93f9">0600</span> ~/.ssh <span style="color:#ff79c6">&amp;&amp;</span> ssh-keyscan github.com &gt;&gt; ~/.ssh/known_hosts
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4"># Clone private repository</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">RUN</span> --mount<span style="color:#ff79c6">=</span><span style="color:#8be9fd;font-style:italic">type</span><span style="color:#ff79c6">=</span>ssh git clone git@github.com:myorg/myproject.git myproject
+</span></span></code></pre></div><p>It combined with a good CICD system can make all the difference in how fast you can actually ship your code, in my current position, switching to Buildkit made it possible to
+build and push our images in around 5 minutes! It may still be a lot, but compared to the previous timing, which was around 10 minutes, it is a big improvement.</p>
+<p>What do you think about it? I think the future of buildkit looks incredibly interesting!</p>
+
+    <a href="/"> >> Home</a>
+  </main>
+</div>
+    <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      | Adrian Villanueva | Any and all opinions listed here are my own.
+      
+    </footer>
+  </body>
+</html>
+
