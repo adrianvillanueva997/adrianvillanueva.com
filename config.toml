@@ -59,7 +59,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     # LoveIt NEW | 0.2.0 Header title config
     [params.header.title]
       # URL of the LOGO
-      logo =  "https://raw.githubusercontent.com/adrianvillanueva997/adrianvillanueva.com/main/assets/images/tzeentch.png"
+      logo =  "https://raw.githubusercontent.com/adrianvillanueva997/adrianvillanueva.com/master/assets/images/tzeentch.png"
       # title name
       name = ""
       # you can add extra information before the name (HTML format is supported), such as icons
