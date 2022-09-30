@@ -1,0 +1,37 @@
+{{- define "content" -}}
+    {{- $params := .Scratch.Get "params" -}}
+    {{- $profile := .Site.Params.home.profile -}}
+    {{- $posts := .Site.Params.home.posts -}}
+
+    <div class="page home"{{ if ne $posts.enable false }} data-home="posts"{{ end }}>
+        {{- /* Profile */ -}}
+        {{- if ne $profile.enable false -}}
+            {{- partial "home/profile.html" . -}}
+        {{- end -}}
+
+        {{- /* Content */ -}}
+        {{- if .Content -}}
+            <div class="single">
+                <div class="content" id="content">
+                    {{- dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
+                </div>
+            </div>
+        {{- end -}}
+        <div class="content">
+            <h1>Archmage of engineering</h1>
+            <hr>
+            <div class="summary">
+                <h2>Skills </h2>
+                <ul>
+                    <li>Software Engineering, Python, Go, Rust, Java and other languages</li>
+                    <li>Cloud</li>
+                    <li>Bots and automation</li>
+                    <li>Infra (Docker, Kubernetes, Terraform)</li>
+                    <li>Devops</li>
+                </ul>
+            <hr>
+            </div>
+        </div>
+
+    </div>
+{{- end -}}
