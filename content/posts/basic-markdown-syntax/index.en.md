@@ -3,8 +3,8 @@ weight: 4
 title: "Basic Markdown Syntax"
 date: 2019-12-01T21:57:40+08:00
 lastmod: 2020-01-01T16:45:40+08:00
-draft: false
-author: "Dillon"
+draft: true 
+author: ""
 authorLink: "https://dillonzq.com"
 description: "This article shows the basic Markdown syntax and format."
 images: []
@@ -91,6 +91,7 @@ The HTML looks like this:
 ```html
 <h3 id="custom-id">A Great Heading</h3>
 ```
+
 {{< /admonition >}}
 
 ## 2 Comments
@@ -229,7 +230,7 @@ The rendered output looks like this:
 
 ~~**strikethrough and bold**~~
 
-~~*strikethrough and italics*~~
+~~_strikethrough and italics_~~
 
 ~~***bold, italics and strikethrough***~~
 
@@ -429,9 +430,9 @@ Task lists allow you to create a list of items with checkboxes. To create a task
 
 The rendered output looks like this:
 
-- [x] Write the press release
-- [ ] Update the website
-- [ ] Contact the media
+* [x] Write the press release
+* [ ] Update the website
+* [ ] Contact the media
 
 ## 9 Code
 
@@ -491,9 +492,11 @@ The HTML looks like this:
 Use "fences" <code>```</code> to block in multiple lines of code with a language attribute.
 
 {{< highlight markdown >}}
+
 ```markdown
 Sample text here...
 ```
+
 {{< / highlight >}}
 
 The HTML looks like this:
@@ -514,6 +517,7 @@ To activate it, simply add the file extension of the language you want to use di
 For example, to apply syntax highlighting to JavaScript code:
 
 {{< highlight markdown >}}
+
 ```js
 grunt.initConfig({
   assemble: {
@@ -534,6 +538,7 @@ grunt.initConfig({
   }
 };
 ```
+
 {{< / highlight >}}
 
 The rendered output looks like this:

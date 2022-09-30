@@ -1,10 +1,10 @@
-baseURL = "http://example.org/"
+baseURL = "https://adrianvillanueva.com/"
 
 # Change the default theme to be use when building the site with Hugo
 theme = "LoveIt"
 
 # website title
-title = "My New Hugo Site"
+title = "Adrian Villanueva - Software Engineer"
 
 # language code ["en", "zh-CN", "fr", "pl", ...]
 languageCode = "en"
@@ -16,7 +16,7 @@ hasCJKLanguage = false
 # default amount of posts in each pages
 paginate = 12
 # google analytics code [UA-XXXXXXXX-X]
-googleAnalytics = ""
+googleAnalytics = "G-56R4LZ0KZD"
 # copyright description used only for seo schema
 copyright = ""
 
@@ -30,7 +30,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 # Author config
 [author]
   name = "Adrian Villanueva"
-  email = "adrian.villanueva"
+  email = "adrian.villanueva.martinez@outlook.com"
   link = ""
 
 [params]
@@ -59,7 +59,7 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
     # LoveIt NEW | 0.2.0 Header title config
     [params.header.title]
       # URL of the LOGO
-      logo =  ""
+      logo =  "https://raw.githubusercontent.com/adrianvillanueva997/adrianvillanueva.com/main/assets/images/tzeentch.png"
       # title name
       name = ""
       # you can add extra information before the name (HTML format is supported), such as icons
@@ -225,6 +225,31 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
       keepStatic = false
       # whether to make the table of the contents in the sidebar automatically collapsed
       auto = true
+    # LoveIt CHANGED | 0.2.0 social share links in post page
+    [params.page.share]
+      enable = true
+      Twitter = true
+      Facebook = false
+      Linkedin = true
+      Whatsapp = false
+      Pinterest = false
+      Tumblr = false
+      HackerNews = true
+      Reddit = true
+      VK = true
+      Xing = false
+      Line = false 
+      Instapaper = false
+      Pocket = false
+      Flipboard = false
+      Weibo = true
+      Blogger = false
+      Baidu = false
+      Odnoklassniki = false
+      Evernote = false
+      Skype = false
+      Trello = false
+      Mix = false
 
 # Markup related configuration in Hugo
 [markup]
