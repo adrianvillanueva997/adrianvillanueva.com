@@ -260,3 +260,14 @@ ignoreErrors = ["error-remote-getjson", "error-missing-instagram-accesstoken"]
 
 [outputs]
   home = ["HTML", "RSS", "JSON"]
+
+[params.seo]
+    # image URL
+    image = "https://raw.githubusercontent.com/adrianvillanueva997/adrianvillanueva.com/master/assets/images/avatar.png"
+    # thumbnail URL
+    thumbnailUrl = "https://raw.githubusercontent.com/adrianvillanueva997/adrianvillanueva.com/master/assets/images/tzeentch.png"
+
+  # LoveIt NEW | 0.2.0 Analytics config
+  [params.analytics]
+    enable = true
+
