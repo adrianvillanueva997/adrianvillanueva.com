@@ -1,4 +1,4 @@
-FROM golang:1.20.1-alpine3.16 as build
+FROM golang:1.20.2-alpine3.16 as build
 WORKDIR /build
 RUN apk add --no-cache hugo git
 COPY . .
