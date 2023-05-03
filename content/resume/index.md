@@ -2,7 +2,7 @@
 weight: 1
 title: "Resume"
 date: 2020-03-06T21:29:01+08:00
-lastmod: 2020-03-06T21:29:01+08:00
+lastmod: 2023-05-09T21:29:01+08:00
 draft: false
 author: "Adrian Villanueva"
 authorLink: "https://adrianvillanueva.com"
@@ -19,11 +19,13 @@ description: "Resume of Adrian Villanueva."
 
 ## Experience
 
-### Ahold Delhaize - Data Engineer (2021-current)
+### Ahold Delhaize
+
+#### Data Engineer (2022-2023)
 
 Ahold Delhaize is a Dutch multinational retail company whose business format includes supermarkets, convenience stores, hypermarkets, online grocery, online non-food, drugstores, and liquor stores.
 
-#### Highlights
+##### Highlights
 
 * Building CICD pipelines on GitHub Actions
 * Maintain and develop internal Python frameworks
@@ -31,9 +33,15 @@ Ahold Delhaize is a Dutch multinational retail company whose business format inc
 * Databricks
 * Azure
 
+#### Data Platform Enginer (2023-current)
+
+##### Highlights
+
+* Terraform stuff
+
 ---
 
-### Xccelerated, Proudly part of Xebia - Data Engineer (2021-current)
+### Xccelerated, Proudly part of Xebia - Data Engineer (2022-2023)
 
 Xccelerated is an initiative within the Xebia Group, on its mission to eliminate the shortage of highly skilled Data & AI professionals. It is a 13-month program in  MLOPs, Data, Cloud and Devops Engineering.
 
@@ -48,7 +56,7 @@ Xccelerated is an initiative within the Xebia Group, on its mission to eliminate
 
 ---
 
-### Dashmote - Data Engineer (2020-2021)
+### Dashmote - Data Engineer (2021-2022)
 
 Dashmote is a Dutch big data startup industry leaders on leveraging data democratization platform to source, transform, and analyze publicly available data.
 
