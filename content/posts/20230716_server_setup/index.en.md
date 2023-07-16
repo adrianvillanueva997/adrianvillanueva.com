@@ -1,5 +1,5 @@
 ---
-title: "My setup"
+title: "My server setup"
 date: 2023-07-16
 draft: false
 description: "How my server is setup and how I use it"
