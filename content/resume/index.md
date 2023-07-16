@@ -2,7 +2,7 @@
 weight: 1
 title: "Resume"
 date: 2020-03-06T21:29:01+08:00
-lastmod: 2023-05-09T21:29:01+08:00
+lastmod: 2023-07-16T21:29:01+08:00
 draft: false
 author: "Adrian Villanueva"
 authorLink: "https://adrianvillanueva.com"
@@ -14,16 +14,28 @@ description: "Resume of Adrian Villanueva."
 
 ## Software Engineer | Amsterdam / Madrid
 
-`Docker`, `Git`, `Python`, `Go`, `C`, `Rust`, `DevOps`, `Kubernetes`, `Continuous Integration/Delivery`,
-`Linux`, `Ubuntu`, `yaml`, `SQL`, `Tech Writing`, `Command Line Apps`, `GCP`, `Azure`, `AWS`, `Pyspark`, `Databricks`, `Java`
+`Docker`, `Git`, `Python`, `Go`, `C`, `Rust`, `Terraform`,`DevOps`, `Kubernetes`, `Continuous Integration/Delivery`,
+`Linux`, `SQL`, `Tech Writing`, `GCP`, `Azure`, `AWS`, `PySpark`, `Databricks`, `Java`
 
 ## Experience
 
 ### Ahold Delhaize
 
-#### Data Engineer (2022-2023)
+#### Data Platform Enginer (2023-current)
 
 Ahold Delhaize is a Dutch multinational retail company whose business format includes supermarkets, convenience stores, hypermarkets, online grocery, online non-food, drugstores, and liquor stores.
+
+##### Highlights
+
+* Build and maintain terraform modules.
+* Build and maintain CI/CD pipelines.
+* Build python scripts for tasks automation and audit purposes.
+* Support other teams on their deployments.
+* Build applications in Python and other languages.
+
+---
+
+#### Data Engineer (2022-2023)
 
 ##### Highlights
 
@@ -32,14 +44,6 @@ Ahold Delhaize is a Dutch multinational retail company whose business format inc
 * Terraform
 * Databricks
 * Azure
-
-#### Data Platform Enginer (2023-current)
-
-##### Highlights
-
-* Terraform stuff
-
----
 
 ### Xccelerated, Proudly part of Xebia - Data Engineer (2022-2023)
 
