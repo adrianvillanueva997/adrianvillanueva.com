@@ -1,7 +1,7 @@
 ---
 title: "Testcontainers"
 date: 2023-09-11
-draft: true
+draft: false
 description: "Playing around with testcontainers"
 tags: ["testing", "rust", "software"]
 categories: ["programming", "rust", "development"]
