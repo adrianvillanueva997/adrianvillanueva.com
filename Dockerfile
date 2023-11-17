@@ -1,7 +1,7 @@
 FROM node:19.7.0-bullseye as base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable
+RUN corepack enable && pnpm run astro telemetry disable
 COPY . /app
 WORKDIR /app
 
