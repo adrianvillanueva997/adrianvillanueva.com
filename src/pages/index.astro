@@ -1,5 +1,41 @@
 ---
-
+// import { Icon } from 'astro-icon';
+import { Image } from 'astro:assets';
+import me from '../../assets/me.jpg';
 ---
 
-<h1>Adrian</h1>
+<head>
+  <meta charset="utf-8" />
+</head>
+<body class="bg-gradient-to-b from-indigo-600 md:container md:mx-auto">
+  <div class="container mx-auto">
+    <h1
+      class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white"
+    >
+      Adrian Villanueva Martinez
+    </h1>
+  </div>
+  <div class="container mx-auto">
+    <h2 class="text-4xl font-extrabold dark:text-white">Software engineer</h2>
+  </div>
+  <!-- <Icon pack="mdi" name="account" /> -->
+  <div class="container mx-auto">
+    <p>
+      Hello! I am Adrian Villanueva Martinez, a software engineer from Spain 🇪🇸,
+      currently living in The Netherlands 🇳🇱
+    </p>
+  </div>
+  <div class="container mx-auto">
+    <p>
+      I am passionate about technology in general, but I am specially interested
+      into data engineering, distributed systems, cloud computing, backend
+      development and machine learning.
+    </p>
+
+    <Image
+      class="rounded-full border-2 border-slate-50"
+      src={me}
+      alt="That's me!"
+    />
+  </div>
+</body>
