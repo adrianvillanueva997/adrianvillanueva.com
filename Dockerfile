@@ -3,8 +3,8 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 COPY . /app
-RUN pnpm run astro telemetry disable
 WORKDIR /app
+RUN pnpm run astro telemetry disable
 
 
 FROM base AS prod-deps
