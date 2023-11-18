@@ -4,7 +4,6 @@ ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 COPY . /app
 WORKDIR /app
-RUN pnpm run astro telemetry disable
 
 
 FROM base AS prod-deps
@@ -12,7 +11,8 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-l
 
 FROM base AS build
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
-RUN pnpm run build
+RUN pnpm run astro telemetry disable && \
+    pnpm run astro build
 
 FROM base
 COPY --from=prod-deps /app/node_modules /app/node_modules
