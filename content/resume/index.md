@@ -10,97 +10,183 @@ description: "Resume of Adrian Villanueva."
 
 ---
 
-# Adrián Villanueva Martínez
+# Adrián Villanueva Martínez - Software Engineer | Amsterdam / Madrid 🌐
 
-## Software Engineer | Amsterdam / Madrid
+Experienced Software Engineer with expertise in a diverse tech stack, seeking opportunities in Madrid, Amsterdam, and open to relocation or remote work.
 
-`Docker`, `Git`, `Python`, `Go`, `C`, `Rust`, `Terraform`,`DevOps`, `Kubernetes`, `Continuous Integration/Delivery`,
-`Linux`, `SQL`, `Tech Writing`, `GCP`, `Azure`, `AWS`, `PySpark`, `Databricks`, `Java`
+## Tech Stack 🚀
+
+- `Docker`, `Git`, `Python`, `Go`, `C`, `Rust`: Expertise in a variety of programming languages and tools.
+- `Terraform`, `DevOps`, `Kubernetes`: Skilled in infrastructure as code, DevOps practices, and container orchestration.
+- `Continuous Integration/Delivery`: Proven track record in implementing and optimizing CI/CD pipelines.
+- `Linux`, `SQL`, `Tech Writing`: Strong foundation in Linux, SQL, and technical writing.
+- `GCP`, `Azure`, `AWS`: Proficient in leading cloud platforms, contributing to scalable and reliable solutions.
+- `PySpark`, `Databricks`, `Java`: Specialized in big data technologies and Java development.
 
 ## Experience
 
 ### Ahold Delhaize
 
-#### Data Platform Enginer (2023-current)
+### 🚀 Data Platform Engineer | Ahold Delhaize (2023-current) 🌐
 
-Ahold Delhaize is a Dutch multinational retail company whose business format includes supermarkets, convenience stores, hypermarkets, online grocery, online non-food, drugstores, and liquor stores.
+Joining the innovative team at Ahold Delhaize, a leading Dutch multinational retail giant, transforming the landscape of supermarkets, convenience stores, hypermarkets, and more.
+
+#### 🌟 Highlights
+
+- 🏗️ **Terraform Module Architect and Maintainer**
+  - Architected and maintained Terraform modules, ensuring scalable and efficient infrastructure provisioning.
+
+- 🔄 **CI/CD Pipeline Architect and Maintainer**
+  - Developed and maintained CI/CD pipelines, streamlining the deployment process for enhanced efficiency.
+
+- 🐍 **Python Software Development**
+  - Spearheaded the development of full-fledged Python software solutions for task automation and audit purposes.
+  - Featured Kusto integration and other advanced functionalities, adhering to best practices and industry standards.
+
+- 🤝 **Cross-Team Deployment Support**
+  - Provided crucial support to other teams during their deployments, fostering collaboration and ensuring successful project rollouts.
+
+- 🌐 **Multi-language Application Development**
+  - Designed and developed comprehensive applications in Python and other languages, showcasing versatility and adaptability in diverse tech stacks.
+
+##### Additional Achievements 🌟
+
+- 🌟 **Python Project Leadership**
+  - Led the creation of Python software solutions from scratch, implementing proper design practices, and conducting thorough code reviews.
+
+---
+
+#### 🚀 Data Engineer | 2022-2023 📅
 
 ##### Highlights
 
-* Build and maintain terraform modules.
-* Build and maintain CI/CD pipelines.
-* Build python scripts for tasks automation and audit purposes.
-* Support other teams on their deployments.
-* Build applications in Python and other languages.
+- 💻 **Built and Maintained Robust CI/CD Pipelines on GitHub Actions**
+  - Ensured the development and maintenance of resilient CI/CD pipelines for efficient and automated workflows.
+
+##### Databricks ETL Specialist | Kafka Integration 💻
+
+- 💻 **Developed and Managed Databricks ETL Processes**
+  - Ensured seamless data transmission to Kafka clusters, optimizing data processing and transmission.
+
+##### Pyspark Monitoring Architect | Prometheus & Grafana 📊
+
+- 📊 **Designed Pyspark Monitoring Solutions**
+  - Architected monitoring solutions using Pyspark, integrated with Prometheus and Grafana for effective performance tracking.
+
+##### Technical Skills 🛠️
+
+- 🛠️ **Terraform**
+  - Proficient in using Terraform for infrastructure as code.
+
+- 📈 **Databricks**
+  - Extensive experience leveraging Databricks for efficient big data processing.
+
+- ☁️ **Azure**
+  - Proficient in utilizing Azure for scalable and reliable cloud solutions.
+
+- ☸️ **Kubernetes**
+  - Skilled in container orchestration for streamlined deployment.
+
+### 🚀 **Xccelerated, Proudly part of Xebia - Data Engineer (2022-2023)** 🌐
+
+Xccelerated, an initiative within the Xebia Group, is on a mission to eliminate the shortage of highly skilled Data & AI professionals. As a Data Engineer in the 13-month program focusing on MLOps, Data, Cloud, and DevOps Engineering, I played a pivotal role in shaping transformative solutions.
+
+#### 🌟 **Highlights**
+
+- 🏗️ **Design, Deploy, and Implement Data Platform:**
+  - Spearheaded the design, deployment, and implementation of a comprehensive data platform from scratch.
+
+- 🛠️ **Terraform Mastery:**
+  - Utilized Terraform for efficient infrastructure as code, ensuring scalability and reliability.
+
+- ☁️ **Google Cloud Platform (GCP):**
+  - Applied extensive knowledge and hands-on experience in GCP to drive data-centric solutions.
+
+- 📊 **Kafka Integration:**
+  - Implemented and managed Kafka for seamless data streaming and integration.
+
+- 🐍 **Pyspark Expertise:**
+  - Leveraged Pyspark for efficient data processing and analytics within the platform.
+
+- 🚀 **Microservices Architecture:**
+  - Contributed to the design and implementation of a microservices architecture for enhanced modularity.
 
 ---
 
-#### Data Engineer (2022-2023)
+### Dashmote - Data Engineer (2021-2022) 🚀
 
-##### Highlights
+Dashmote, a cutting-edge Dutch big data startup, leads the industry in leveraging a data democratization platform to source, transform, and analyze publicly available data.
 
-* Building CICD pipelines on GitHub Actions
-* Maintain and develop internal Python frameworks
-* Terraform
-* Databricks
-* Azure
+#### Highlights 🌟
 
-### Xccelerated, Proudly part of Xebia - Data Engineer (2022-2023)
+- **Onboard, Support, and Supervise New Engineers 🤝:**
+  - Facilitated seamless onboarding, providing continuous support, supervision, and mentorship to new engineers.
 
-Xccelerated is an initiative within the Xebia Group, on its mission to eliminate the shortage of highly skilled Data & AI professionals. It is a 13-month program in  MLOPs, Data, Cloud and Devops Engineering.
+- **Datalake Deployment on Athena (AWS) 🛠️:**
+  - Designed and deployed a robust production-ready datalake on Athena (AWS), optimizing data storage and retrieval.
 
-#### Highlights
+- **CI/CD Strategy Redesign 🔄:**
+  - Spearheaded the redesign of the entire company's CI/CD strategy, achieving up to 75% faster deployment with Jenkins/GitHub Actions CI/CD pipelines.
 
-* Design, deploy and implement a data platform from scratch.
-* Terraform
-* GCP
-* Kafka
-* Pyspark
-* Microservices
+- **Maintain and Deploy Full Stack Applications 💻:**
+  - Ensured the smooth maintenance and deployment of full-stack applications, enhancing the overall user experience.
+
+- **Maintain and Develop ETL Pipeline Components 🛠️:**
+  - Played a pivotal role in maintaining and developing ETL pipeline components, boosting data processing and transformation capabilities.
 
 ---
 
-### Dashmote - Data Engineer (2021-2022)
+### Indra - IT Support (2021) 🌐
 
-Dashmote is a Dutch big data startup industry leaders on leveraging data democratization platform to source, transform, and analyze publicly available data.
+Indra, a prominent Spanish information technology and defense systems company, is listed on the Bolsa de Madrid and is a constituent of the IBEX 35 index.
 
-#### Highlights
+#### Highlights 🚀
 
-* Onboard, support and supervise new engineers.
-* Designed and deployed a full production ready datalake on Athena (AWS).
-* Redesigned the whole company CI/CD strategy and deploying Jenkins/GitHub Actions CI/CD pipelines (up to 75% faster than before).
-* Maintaining and deploying full stack applications.
-* Maintaining and developing ETL pipeline components.
+- **Debugging and Fixing Apache Catalina Instances 🐞:**
+  - Applied expertise in debugging and resolving issues related to Apache Catalina instances, ensuring seamless server operations.
 
----
+- **Architecting and Maintaining Java-based Server Management Tool 🛠️:**
+  - Designed and maintained an internal tool in Java, facilitating simultaneous management of different servers, enhancing operational efficiency.
 
-### Indra - IT Support (2021)
+- **Scripting for Automation in Python/Java 🐍:**
+  - Developed scripts in Python and Java for task automation, streamlining routine processes and optimizing workflow.
 
-Indra is a Spanish information technology and defense systems company. Indra is listed on the Bolsa de Madrid and is a constituent of the IBEX 35 index.
+- **Maintaining Linux Servers 🐧:**
+  - Played a crucial role in the upkeep and maintenance of Linux servers, ensuring their stability and reliability.
 
-#### Highlights
-
-* Debugging and fixing Apache Catalina instances.
-* Creating, architecturing and maintaning an internal tool to manage different servers at the same time in Java.
-* Creating scripts in Python/Java for tasks automation.
-* Maintaining Linux servers
-* Maintaining VMWare based Virtual Machines for internal use.
+- **Maintaining VMWare-based Virtual Machines 🖥️:**
+  - Managed and maintained VMWare-based virtual machines for internal use, contributing to the efficiency of internal IT infrastructure.
 
 ---
 
-### EY - Software Developer (Faas Tech) (2019-2020)
+### EY - Software Developer (Faas Tech) (2019-2020) 🌐
 
-EY is one of the largest professional services networks in the world. It primarily provides assurance (which includes financial audit), tax, consulting and advisory services to its clients.
+EY, one of the largest professional services networks globally, provides assurance, tax, consulting, and advisory services to its clients.
 
-#### Highlights
+#### Highlights 🚀
 
-* Software development in automatization and ETL tasks using SQL, Python, Java and Talend.
-* Linux sysadmin. (Ubuntu, Centos)
-* Windows server sysadmin
-* Bash and cmd scripting.
-* Sage X3 ERP development.
-* Full stack web development.
-* Machine learning and data engineering developments
-* Business Intelligence development with SQL and Python
+- **Software Development in Automatization and ETL Tasks:**
+  - Utilized SQL, Python, Java, and Talend for software development in automation and ETL tasks, contributing to streamlined processes.
+
+- **Linux Sysadmin (Ubuntu, CentOS) 🐧:**
+  - Managed Linux systems, including Ubuntu and CentOS, ensuring their optimal performance as a system administrator.
+
+- **Windows Server Sysadmin 🪟:**
+  - Administered Windows servers, maintaining their stability and functionality.
+
+- **Bash and Cmd Scripting 🛠️:**
+  - Developed Bash and cmd scripts to automate tasks, improving operational efficiency.
+
+- **Sage X3 ERP Development 📊:**
+  - Contributed to the development of Sage X3 ERP, enhancing enterprise resource planning capabilities.
+
+- **Full Stack Web Development 💻:**
+  - Engaged in full-stack web development, creating comprehensive and efficient web applications.
+
+- **Machine Learning and Data Engineering Developments 🤖:**
+  - Worked on projects involving machine learning and data engineering, advancing technological capabilities.
+
+- **Business Intelligence Development with SQL and Python 📈:**
+  - Developed Business Intelligence solutions using SQL and Python, providing valuable insights to support decision-making.
 
 ---
