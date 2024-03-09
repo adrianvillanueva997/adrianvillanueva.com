@@ -12,6 +12,7 @@
   "kubernetes": {
     "fileMatch": ["^infra/.*\\.yaml$"]
   },
+  "dependencyDashboard": true,
   "assignees": ["adrianvillanueva997"],
   "recreateWhen": "always",
   "labels": ["dependencies", "renovate"]
