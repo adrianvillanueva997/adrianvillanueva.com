@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adrianvillanueva
+  namespace: adrianvillanueva
+spec:
+  selector:
+    matchLabels:
+      app: adrianvillanueva
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: adrianvillanueva
+    spec:
+      containers:
+        - name: adrianvillanueva
+          image: ghcr.io/adrianvillanueva997/adrianvillanueva.com:v1.0.0@sha256:61a5eaabe98d8eeef855ea4fc307bdd2d044d5b9f2ab91695e129f5ea33b8d7f
+          ports:
+            - containerPort: 8080
+
+      restartPolicy: Always
