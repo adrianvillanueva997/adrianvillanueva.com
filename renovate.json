@@ -10,7 +10,7 @@
     "enabled": true
   },
   "kubernetes": {
-    "fileMatch": ["//.yaml$"]
+    "fileMatch": ["^infra/.*\\.yaml$"]
   },
   "assignees": ["adrianvillanueva997"],
   "recreateWhen": "always",
