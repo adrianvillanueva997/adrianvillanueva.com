@@ -6,6 +6,15 @@ on:
       - closed
     branches:
       - master
+    paths:
+      - Dockerfile
+      - static/*
+      - assets/*
+      - content/*
+      - layouts/*
+      - themes/*
+      - config.toml
+      - public/*
 
 jobs:
   build:
