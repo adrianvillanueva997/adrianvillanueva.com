@@ -1,7 +1,7 @@
 version: "3.0"
 services:
   web:
-    image: ghcr.io/adrianvillanueva997/blog-adrian-villanueva:latest
+    image: ghcr.io/adrianvillanueva997/blog-adrian-villanueva:latest@sha256:ece0c7182e55ba93624bd221a71c8bc8bbe58db3488a1145c4d9201fe53ddac4
     networks:
       - proxy
     container_name: blog-adrian-villanueva.com
