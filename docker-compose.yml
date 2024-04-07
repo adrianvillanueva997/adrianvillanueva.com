@@ -1,24 +1,26 @@
-version: "3.0"
+---
+name: adrianvilllanueva
 services:
-  web:
-    image: ghcr.io/adrianvillanueva997/blog-adrian-villanueva:latest@sha256:ece0c7182e55ba93624bd221a71c8bc8bbe58db3488a1145c4d9201fe53ddac4
+  adrianvillanueva:
+    image: ghcr.io/adrianvillanueva997/adrianvillanueva.com:v2.1.0
     networks:
       - proxy
-    container_name: blog-adrian-villanueva.com
+    container_name: adrianvillanueva.com
     restart: unless-stopped
     labels:
-      - com.ouroboros.enable=true
-      - "traefik.enable=true"
-      - "traefik.http.middlewares.avm-redirect-websecure.redirectscheme.scheme=https"
-      - "traefik.http.middlewares.avm-redirect-websecure.redirectscheme.permanent=true"
-      - "traefik.http.routers.avm-web.middlewares=avm-redirect-websecure"
-      - traefik.http.routers.avm-web.rule=Host(`adrianvillanueva.com`)
-      - traefik.http.routers.avm-web.entrypoints=http
-      - traefik.http.routers.avm-websecure.rule=Host(`adrianvillanueva.com`)
-      - traefik.http.routers.avm-websecure.tls.certresolver=le
-      - traefik.http.routers.avm-websecure.tls=true
-      - traefik.http.routers.avm-websecure.entrypoints=https
-      - "traefik.docker.network=proxy"
+      - traefik.enable=true
+      - traefik.http.middlewares.adrianvillanueva-redirect-https.redirectscheme.scheme=https
+      - traefik.http.middlewares.adrianvillanueva-redirect-https.redirectscheme.permanent=true
+      - traefik.http.routers.adrianvillanueva-http.middlewares=adrianvillanueva-redirect-https
+      - traefik.http.routers.adrianvillanueva-http.rule=Host(`adrianvillanueva.com`)
+      - traefik.http.routers.adrianvillanueva-http.entrypoints=http
+      - traefik.http.routers.adrianvillanueva-https.rule=Host(`adrianvillanueva.com`)
+      - traefik.http.routers.adrianvillanueva-https.tls.certresolver=le
+      - traefik.http.routers.adrianvillanueva-https.tls=true
+      - traefik.http.routers.adrianvillanueva-https.entrypoints=https
+      - traefik.docker.network=proxy
+    # env_file:
+      # - stack.env
 networks:
   proxy:
     external: true
