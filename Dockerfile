@@ -4,6 +4,6 @@ RUN apk add --no-cache hugo git
 COPY . .
 RUN hugo --minify
 
-FROM nginx:1.25.5-alpine@sha256:7bd88800d8c18d4f73feeee25e04fcdbeecfc5e0a2b7254a90f4816bb67beadd as prod
+FROM nginx:1.26.0-alpine@sha256:ef587d1eb99e991291c582bfb74f27db27f7ca2c095d4ba06cc3f7c910a0c7b3 as prod
 COPY --from=build /build/public/ /usr/share/nginx/html/
 EXPOSE 80
