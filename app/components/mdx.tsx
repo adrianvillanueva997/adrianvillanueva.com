@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { highlight } from "sugar-high";
+import { Mermaid } from "./Mermaid"; // Import the Mermaid component
 
 function Table({ data }) {
 	const headers = data.headers.map((header) => (
@@ -51,11 +52,18 @@ function RoundedImage(props) {
 	return <Image alt={props.alt} className="rounded-lg" {...props} />;
 }
 
-function Code({ children, ...props }) {
-	const codeHTML = highlight(children);
+function Code({ children, className, ...props }) {
+	const language = className ? className.replace("language-", "") : "";
+
+	// Handle Mermaid code blocks
+	if (language === "mermaid") {
+		return <Mermaid code={children} />;
+	}
+
+	// Default code block highlighting
 	return (
 		<pre {...props}>
-			<code>{children}</code>
+			<code>{highlight(children)}</code>
 		</pre>
 	);
 }
@@ -102,10 +110,11 @@ const components = {
 	h6: createHeading(6),
 	Image: RoundedImage,
 	a: CustomLink,
-	code: Code,
+	code: Code, // Updated code handler
 	Table,
 };
 
+// Export the CustomMDX component
 export function CustomMDX(props) {
 	return (
 		<MDXRemote
