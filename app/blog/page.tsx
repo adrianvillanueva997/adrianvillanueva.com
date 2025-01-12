@@ -1,9 +1,20 @@
-import { BlogPosts } from 'app/components/posts'
+import { BlogPosts } from "app/components/posts";
 
 export const metadata = {
-  title: 'Blog',
-  description: 'Read my blog.',
-}
+	title: "Adrian Villanueva | Blog - Software Engineering & Web Development",
+	description:
+		"Explore articles about software engineering, web development, JavaScript, React, and cloud technologies. Deep dives into technical concepts, best practices, and industry insights.",
+	alternates: {
+		canonical: "https://adrianvillanueva.com/blog",
+	},
+	openGraph: {
+		title: "Adrian Villanueva | Blog - Software Engineering & Web Development",
+		description:
+			"Explore articles about software engineering, web development, JavaScript, React, and cloud technologies.",
+		type: "website",
+		locale: "en_US",
+	},
+};
 
 export default function Page() {
   return (
