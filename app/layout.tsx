@@ -16,22 +16,27 @@ export const metadata: Metadata = {
 	metadataBase: new URL(baseUrl),
 	title: {
 		default: "Adrian Villanueva | Software Engineer",
-		template: "%s | Adrian Villanueva - Engineering Portfolio",
+		template: "%s | Adrian Villanueva",
 	},
 	description:
 		"Software Engineer specializing in web development, cloud architecture, and system design. Discover technical articles, engineering projects, and professional insights.",
 	keywords: [
 		"software engineer",
-		"web development",
-		"cloud architecture",
+		"full stack developer",
+		"rust",
+		"python",
+		"data engineer",
+		"traveling",
+		"cloud architect",
+		"node.js",
+		"aws",
 		"system design",
 		"technical blog",
-		"engineering portfolio",
 	],
 	openGraph: {
-		title: "Adrian Villanueva | Software Engineering Portfolio",
+		title: "Adrian Villanueva | Software Engineer",
 		description:
-			"Software Engineer specializing in web development, cloud architecture, and system design. Discover technical articles and engineering projects.",
+			"Software Engineer specializing in web development, cloud architecture, and system design. Discover technical articles, engineering projects, and professional insights.",
 		url: baseUrl,
 		siteName: "Adrian Villanueva",
 		locale: "en_US",
