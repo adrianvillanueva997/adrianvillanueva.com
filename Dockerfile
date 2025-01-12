@@ -1,5 +1,5 @@
 # Base stage for shared settings
-FROM node:20-alpine AS base
+FROM node:20.18.1-alpine AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ENV NEXT_TELEMETRY_DISABLED=1
@@ -22,7 +22,7 @@ COPY . .
 RUN pnpm run build
 
 # Runner stage - create the final image
-FROM node:20-alpine AS runner
+FROM node:20.18.1-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
