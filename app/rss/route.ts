@@ -17,26 +17,29 @@ export async function GET() {
           <title>${post.metadata.title}</title>
           <link>${baseUrl}/blog/${post.slug}</link>
           <description>${post.metadata.summary || ""}</description>
-          <pubDate>${new Date(
-						post.metadata.publishedAt,
-					).toUTCString()}</pubDate>
+          <pubDate>${new Date(post.metadata.publishedAt).toUTCString()}</pubDate>
+          <guid>${baseUrl}/blog/${post.slug}</guid>
         </item>`,
 		)
 		.join("\n");
 
-	const rssFeed = `<?xml version="1.0" encoding="UTF-8" ?>
-  <rss version="2.0">
-    <channel>
-        <title>My Portfolio</title>
-        <link>${baseUrl}</link>
-        <description>This is my portfolio RSS feed</description>
-        ${itemsXml}
-    </channel>
-  </rss>`;
+	const rssFeed = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Adrian Villanueva | Software Engineering Blog</title>
+    <link>${baseUrl}</link>
+    <description>Articles and insights about software engineering, web development, cloud technologies and system design by Adrian Villanueva. Exploring technical concepts, best practices, and industry insights.</description>
+    <language>en-US</language>
+    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+    <atom:link href="${baseUrl}/rss" rel="self" type="application/rss+xml"/>
+    ${itemsXml}
+  </channel>
+</rss>`;
 
 	return new Response(rssFeed, {
 		headers: {
-			"Content-Type": "text/xml",
+			"Content-Type": "application/xml",
+			"Cache-Control": "s-maxage=3600, stale-while-revalidate",
 		},
 	});
 }
