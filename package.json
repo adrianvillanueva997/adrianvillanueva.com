@@ -7,9 +7,9 @@
   },
   "dependencies": {
     "@tailwindcss/postcss": "4.0.0-alpha.13",
-    "@types/node": "20.11.17",
-    "@types/react": "18.2.55",
-    "@types/react-dom": "18.2.19",
+    "@types/node": "20.11.30",
+    "@types/react": "18.2.79",
+    "@types/react-dom": "18.2.25",
     "@vercel/analytics": "1.4.1",
     "@vercel/speed-insights": "1.1.0",
     "mermaid": "11.4.1",
