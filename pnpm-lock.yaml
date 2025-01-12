@@ -21,25 +21,25 @@ importers:
         specifier: 18.2.19
         version: 18.2.19
       '@vercel/analytics':
-        specifier: ^1.4.1
+        specifier: 1.4.1
         version: 1.4.1(next@14.2.23(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
       '@vercel/speed-insights':
-        specifier: ^1.1.0
+        specifier: 1.1.0
         version: 1.1.0(next@14.2.23(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
       mermaid:
-        specifier: ^11.4.1
+        specifier: 11.4.1
         version: 11.4.1
       next:
         specifier: ^14.2.22
         version: 14.2.23(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       next-mdx-remote:
-        specifier: ^4.4.1
+        specifier: 4.4.1
         version: 4.4.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       next-seo:
-        specifier: ^6.6.0
+        specifier: 6.6.0
         version: 6.6.0(next@14.2.23(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       postcss:
-        specifier: ^8.4.49
+        specifier: 8.4.49
         version: 8.4.49
       react:
         specifier: 18.2.0
@@ -48,10 +48,10 @@ importers:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
       simple-icons:
-        specifier: ^14.2.0
+        specifier: 14.2.0
         version: 14.2.0
       sugar-high:
-        specifier: ^0.6.1
+        specifier: 0.6.1
         version: 0.6.1
       tailwindcss:
         specifier: 4.0.0-alpha.13
