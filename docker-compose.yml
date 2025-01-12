@@ -2,11 +2,13 @@
 name: adrianvilllanueva
 services:
   adrianvillanueva:
-    image: ghcr.io/adrianvillanueva997/adrianvillanueva.com:v2.1.1
+    image: ghcr.io/adrianvillanueva997/adrianvillanueva.com:v3.0.0
     networks:
       - proxy
     container_name: adrianvillanueva.com
     restart: unless-stopped
+    ports:
+      - 3000
     labels:
       - traefik.enable=true
       - traefik.http.middlewares.adrianvillanueva-redirect-https.redirectscheme.scheme=https

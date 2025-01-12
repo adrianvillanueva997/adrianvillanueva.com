@@ -1,3 +1,3 @@
-# blog.adrian-villanueva.com
+# adrianvillanueva.com
 
-my personal website
+This is my personal site
