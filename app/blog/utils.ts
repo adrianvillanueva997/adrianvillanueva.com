@@ -13,7 +13,6 @@ function parseFrontmatter(fileContent: string) {
 	const frontmatterRegex = /---\s*([\s\S]*?)\s*---/;
 	const match = frontmatterRegex.exec(fileContent);
 	const frontMatterBlock = match?.[1];
-	console.log("Frontmatter block:", frontMatterBlock); // Debug log
 
 	const content = fileContent.replace(frontmatterRegex, "").trim();
 	const frontMatterLines = (frontMatterBlock ?? "").trim().split("\n");
@@ -27,10 +26,7 @@ function parseFrontmatter(fileContent: string) {
 
 		if (trimmedKey === "categories") {
 			const categoriesValue = value.replace(/[\[\]'"`]/g, "");
-			metadata[trimmedKey] = categoriesValue
-				.split(",")
-				.map((cat) => cat.trim());
-			console.log("Categories found:", metadata[trimmedKey]); // Debug log
+			metadata[trimmedKey] = categoriesValue.split(",").map((cat) => cat.trim());
 		} else {
 			metadata[trimmedKey] = value;
 		}
@@ -52,7 +48,6 @@ function getMDXData(dir) {
 	const mdxFiles = getMDXFiles(dir);
 	return mdxFiles.map((file) => {
 		const { metadata, content } = readMDXFile(path.join(dir, file));
-		console.log(`Processing ${file}:`, metadata); // Debug log
 		const slug = path.basename(file, path.extname(file));
 
 		return {
