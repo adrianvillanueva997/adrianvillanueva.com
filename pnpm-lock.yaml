@@ -47,6 +47,9 @@ importers:
       react-dom:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
+      simple-icons:
+        specifier: ^14.2.0
+        version: 14.2.0
       sugar-high:
         specifier: ^0.6.1
         version: 0.6.1
@@ -1154,6 +1157,10 @@ packages:
 
   scheduler@0.23.2:
     resolution: {integrity: sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==}
+
+  simple-icons@14.2.0:
+    resolution: {integrity: sha512-89TddGlUh9Ent3ochwjRKzyb4BpaLnfVUYLcY3K0g7Rt91++c7kDAZU1lH15NH2g9WTlmja9Pr3w6+Tjsoyxug==}
+    engines: {node: '>=0.12.18'}
 
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
@@ -2609,6 +2616,8 @@ snapshots:
   scheduler@0.23.2:
     dependencies:
       loose-envify: 1.4.0
+
+  simple-icons@14.2.0: {}
 
   source-map-js@1.2.1: {}
 
