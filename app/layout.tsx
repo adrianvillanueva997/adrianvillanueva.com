@@ -1,4 +1,3 @@
-import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -16,15 +15,25 @@ const inter = Inter({
 export const metadata: Metadata = {
 	metadataBase: new URL(baseUrl),
 	title: {
-		default: "Next.js Portfolio Starter",
-		template: "%s | Next.js Portfolio Starter",
+		default: "Adrian Villanueva | Software Engineer",
+		template: "%s | Adrian Villanueva - Engineering Portfolio",
 	},
-	description: "This is my portfolio.",
+	description:
+		"Software Engineer specializing in web development, cloud architecture, and system design. Discover technical articles, engineering projects, and professional insights.",
+	keywords: [
+		"software engineer",
+		"web development",
+		"cloud architecture",
+		"system design",
+		"technical blog",
+		"engineering portfolio",
+	],
 	openGraph: {
-		title: "My Portfolio",
-		description: "This is my portfolio.",
+		title: "Adrian Villanueva | Software Engineering Portfolio",
+		description:
+			"Software Engineer specializing in web development, cloud architecture, and system design. Discover technical articles and engineering projects.",
 		url: baseUrl,
-		siteName: "My Portfolio",
+		siteName: "Adrian Villanueva",
 		locale: "en_US",
 		type: "website",
 	},
@@ -39,6 +48,19 @@ export const metadata: Metadata = {
 			"max-snippet": -1,
 		},
 	},
+	alternates: {
+		canonical: baseUrl,
+	},
+	icons: {
+		icon: [
+			{ url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+			{ url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+		],
+		apple: [
+			{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+		],
+	},
+	manifest: "/site.webmanifest",
 };
 
 const cx = (...classes) => classes.filter(Boolean).join(" ");
@@ -61,7 +83,6 @@ export default function RootLayout({
 					<Navbar />
 					{children}
 					<Footer />
-					<Analytics />
 					<SpeedInsights />
 				</main>
 			</body>
