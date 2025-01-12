@@ -7,7 +7,7 @@
 		":enableVulnerabilityAlerts",
 		":separatePatchReleases"
 	],
-	"schedule": ["every mnonday"],
+	"schedule": ["every weekend"],
 	"timezone": "Europe/Madrid",
 	"packageRules": [
 		{
