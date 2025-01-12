@@ -1,5 +1,6 @@
 import { formatDate, getBlogPosts } from "app/blog/utils";
 import { CustomMDX } from "app/components/mdx";
+import { Categories } from "app/components/post/Categories";
 import { baseUrl } from "app/sitemap";
 import { notFound } from "next/navigation";
 import Script from "next/script";
@@ -124,6 +125,14 @@ export default async function BlogPostPage({ params }: PageParams) {
 			<article className="prose">
 				<CustomMDX source={post.content} />
 			</article>
+			{post.metadata.categories && (
+				<div className="mt-8 pt-8 border-t border-neutral-200 dark:border-neutral-800">
+					<h3 className="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+						Posted in
+					</h3>
+					<Categories categories={post.metadata.categories} />
+				</div>
+			)}
 		</section>
 	);
 }

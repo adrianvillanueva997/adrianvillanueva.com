@@ -1,4 +1,5 @@
 import { BlogPosts } from "app/components/posts";
+import Skills from "./components/skills";
 
 export default function Page() {
   return (
@@ -21,6 +22,7 @@ export default function Page() {
 				<div className="my-8">
 					<BlogPosts limit={5} />
 				</div>
+				<Skills />
 			</section>
 		);
 }

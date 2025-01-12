@@ -3,7 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { highlight } from "sugar-high";
-import { Mermaid } from "./Mermaid"; // Import the Mermaid component
+import { Categories } from "./post/Categories";
+import { Mermaid } from "./post/Mermaid"; // Import the Mermaid component
 
 function Table({ data }) {
 	const headers = data.headers.map((header) => (
@@ -112,14 +113,17 @@ const components = {
 	a: CustomLink,
 	code: Code, // Updated code handler
 	Table,
+	Categories,
 };
 
 // Export the CustomMDX component
-export function CustomMDX(props) {
+export function CustomMDX({ source, ...props }) {
 	return (
-		<MDXRemote
-			{...props}
-			components={{ ...components, ...(props.components || {}) }}
-		/>
+		<>
+			<MDXRemote
+				source={source}
+				components={{ ...components, ...(props.components || {}) }}
+			/>
+		</>
 	);
 }

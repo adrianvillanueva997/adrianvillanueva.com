@@ -6,12 +6,15 @@ type Metadata = {
 	publishedAt: string;
 	summary: string;
 	image?: string;
+	categories?: string[]; // Optional categories array
 };
 
 function parseFrontmatter(fileContent: string) {
 	const frontmatterRegex = /---\s*([\s\S]*?)\s*---/;
 	const match = frontmatterRegex.exec(fileContent);
 	const frontMatterBlock = match?.[1];
+	console.log("Frontmatter block:", frontMatterBlock); // Debug log
+
 	const content = fileContent.replace(frontmatterRegex, "").trim();
 	const frontMatterLines = (frontMatterBlock ?? "").trim().split("\n");
 	const metadata: Partial<Metadata> = {};
@@ -20,8 +23,17 @@ function parseFrontmatter(fileContent: string) {
 		const [key, ...valueArr] = line.split(": ");
 		const trimmedKey = key.trim() as keyof Metadata;
 		let value = valueArr.join(": ").trim();
-		value = value.replace(/^['"](.*)['"]$/, "$1"); // Remove quotes
-		metadata[trimmedKey] = value;
+		value = value.replace(/^['"](.*)['"]$/, "$1");
+
+		if (trimmedKey === "categories") {
+			const categoriesValue = value.replace(/[\[\]'"`]/g, "");
+			metadata[trimmedKey] = categoriesValue
+				.split(",")
+				.map((cat) => cat.trim());
+			console.log("Categories found:", metadata[trimmedKey]); // Debug log
+		} else {
+			metadata[trimmedKey] = value;
+		}
 	}
 
 	return { metadata: metadata as Metadata, content };
@@ -40,6 +52,7 @@ function getMDXData(dir) {
 	const mdxFiles = getMDXFiles(dir);
 	return mdxFiles.map((file) => {
 		const { metadata, content } = readMDXFile(path.join(dir, file));
+		console.log(`Processing ${file}:`, metadata); // Debug log
 		const slug = path.basename(file, path.extname(file));
 
 		return {
