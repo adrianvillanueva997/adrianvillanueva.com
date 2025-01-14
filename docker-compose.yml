@@ -2,7 +2,7 @@
 name: adrianvilllanueva
 services:
   adrianvillanueva:
-    image: ghcr.io/adrianvillanueva997/adrianvillanueva.com:v3.0.2
+    image: ghcr.io/adrianvillanueva997/adrianvillanueva.com:v3.1.0
     networks:
       - proxy
     container_name: adrianvillanueva.com
