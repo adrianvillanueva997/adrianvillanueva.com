@@ -81,53 +81,73 @@ export async function generateMetadata({
 }
 
 export default async function BlogPostPage({ params }: BlogParams) {
-	const { slug } = await params;
-	const posts = await getBlogPosts();
-	const post = posts.find((p) => p.slug === slug);
+  const { slug } = await params;
+		const posts = await getBlogPosts();
+		const post = posts.find((p) => p.slug === slug);
 
-	if (!post) {
-		notFound();
-	}
+		if (!post) {
+			notFound();
+		}
 
-	return (
-		<section>
-			<JsonLd
-				data={{
-					"@context": "https://schema.org",
-					"@type": "BlogPosting",
-					headline: post.metadata.title,
-					datePublished: post.metadata.publishedAt,
-					dateModified: post.metadata.publishedAt,
-					description: post.metadata.summary,
-					image: post.metadata.image
-						? `${baseUrl}${post.metadata.image}`
-						: `/og?title=${encodeURIComponent(post.metadata.title)}`,
-					url: `${baseUrl}/blog/${slug}`,
-					author: {
-						"@type": "Person",
-						name: "Adrian Villanueva",
-					},
-				}}
-			/>
-			<h1 className="title font-semibold text-2xl tracking-tighter">
-				{post.metadata.title}
-			</h1>
-			<div className="flex justify-between items-center mt-2 mb-8 text-sm">
-				<p className="text-sm text-neutral-600 dark:text-neutral-400">
-					{formatDate(post.metadata.publishedAt)}
-				</p>
-			</div>
-			<article className="prose">
-				<CustomMDX source={post.content} />
-			</article>
-			{post.metadata.categories && (
-				<div className="mt-8 pt-8 border-t border-neutral-200 dark:border-neutral-800">
-					<h3 className="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
-						Posted in
-					</h3>
-					<Categories categories={post.metadata.categories} />
-				</div>
-			)}
-		</section>
-	);
+		return (
+			<section className="animate-fade-in space-y-8">
+				<JsonLd
+					data={{
+						"@context": "https://schema.org",
+						"@type": "BlogPosting",
+						headline: post.metadata.title,
+						datePublished: post.metadata.publishedAt,
+						dateModified: post.metadata.publishedAt,
+						description: post.metadata.summary,
+						image: post.metadata.image
+							? `${baseUrl}${post.metadata.image}`
+							: `/og?title=${encodeURIComponent(post.metadata.title)}`,
+						url: `${baseUrl}/blog/${slug}`,
+						author: {
+							"@type": "Person",
+							name: "Adrian Villanueva",
+						},
+					}}
+				/>
+
+				<header className="space-y-4">
+					<h1
+						className="text-3xl font-bold tracking-tight bg-clip-text text-transparent
+          bg-gradient-to-r from-neutral-900 via-neutral-700 to-neutral-600
+          dark:from-neutral-100 dark:via-neutral-300 dark:to-neutral-400"
+					>
+						{post.metadata.title}
+					</h1>
+					<div className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400">
+						<time dateTime={post.metadata.publishedAt}>
+							{formatDate(post.metadata.publishedAt)}
+						</time>
+						{post.metadata.readingTime && (
+							<>
+								<span>·</span>
+								<span>{post.metadata.readingTime} min read</span>
+							</>
+						)}
+					</div>
+				</header>
+
+				<article
+					className="prose prose-neutral dark:prose-invert max-w-none
+        prose-headings:font-semibold prose-h2:text-2xl prose-h3:text-xl
+        prose-p:text-neutral-700 dark:prose-p:text-neutral-300
+        prose-a:text-neutral-900 dark:prose-a:text-neutral-100
+        prose-strong:text-neutral-900 dark:prose-strong:text-neutral-100"
+				>
+					<CustomMDX source={post.content} />
+				</article>
+
+				{post.metadata.categories && (
+					<footer className="pt-8 border-t border-neutral-200 dark:border-neutral-800">
+						<div className="flex items-center gap-4">
+							<Categories categories={post.metadata.categories} />
+						</div>
+					</footer>
+				)}
+			</section>
+		);
 }

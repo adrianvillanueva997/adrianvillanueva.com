@@ -7,9 +7,11 @@ import "./global.css";
 import { baseUrl } from "./sitemap";
 
 const inter = Inter({
-	weight: ["400", "700"],
 	subsets: ["latin"],
 	variable: "--font-inter",
+	display: "swap",
+	preload: true,
+	weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -79,17 +81,27 @@ export default function RootLayout({
 		<html
 			lang="en"
 			className={cx(
+				"scroll-smooth",
+				"selection:bg-neutral-200 selection:dark:bg-neutral-800",
 				"text-black bg-white dark:text-white dark:bg-black",
 				inter.variable,
 			)}
 		>
-			<body className="antialiased max-w-xl mx-4 mt-8 lg:mx-auto">
-				<main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0">
-					<Navbar />
-					{children}
-					<Footer />
-					<SpeedInsights />
-				</main>
+			<body className="antialiased min-h-screen flex flex-col">
+				<div className="fixed inset-0 grid grid-cols-[1fr,min(640px,100%),1fr] pointer-events-none">
+					<div className="border-r border-neutral-100 dark:border-neutral-900" />
+					<div className="border-x border-neutral-100 dark:border-neutral-900" />
+					<div className="border-l border-neutral-100 dark:border-neutral-900" />
+				</div>
+
+				<div className="px-4 flex-grow max-w-2xl mx-auto w-full relative">
+					<main className="flex-auto min-w-0 mt-6 flex flex-col gap-16 px-2 md:px-0">
+						<Navbar />
+						<div className="animate-fade-in">{children}</div>
+						<Footer />
+					</main>
+				</div>
+				<SpeedInsights />
 			</body>
 		</html>
 	);
