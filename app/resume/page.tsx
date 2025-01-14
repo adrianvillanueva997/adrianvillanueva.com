@@ -27,6 +27,9 @@ async function getResumeData(): Promise<Resume> {
 	return yaml.load(resumeYaml) as Resume;
 }
 
+const pillStyle =
+	"px-3 py-1 text-sm bg-neutral-100 dark:bg-neutral-800 rounded-full text-neutral-600 dark:text-neutral-400";
+
 export default async function ResumePage() {
 	const resume = await getResumeData();
 
@@ -118,63 +121,40 @@ export default async function ResumePage() {
 
 				<section>
 					<h2 className="text-xl font-semibold mb-4">Skills</h2>
-					{Object.entries(resume.skills).map(([category, skills]) => (
-						<div key={category} className="mb-4">
-							<h3 className="text-lg font-medium mb-2 capitalize">
-								{category}
-							</h3>
-							<div className="flex flex-wrap gap-2">
-								{skills.map((skill) => (
-									<span
-										key={skill}
-										className="px-3 py-1 text-sm bg-neutral-100
-                    dark:bg-neutral-800 rounded-full text-neutral-700
-                    dark:text-neutral-200"
-									>
-										{skill}
-									</span>
-								))}
-							</div>
-						</div>
-					))}
+					<div className="flex flex-wrap gap-2">
+						{Object.values(resume.skills)
+							.flat()
+							.map((skill) => (
+								<span key={skill} className={pillStyle}>
+									{skill}
+								</span>
+							))}
+					</div>
 				</section>
 
 				<section>
 					<h2 className="text-xl font-semibold mb-4">Languages</h2>
 					<div className="flex flex-wrap gap-2">
 						{resume.languages.map((lang) => (
-							<span
-								key={lang.name}
-								className="px-3 py-1 text-sm bg-neutral-100 dark:bg-neutral-800
-									rounded-full text-neutral-700 dark:text-neutral-200"
-							>
+							<span key={lang.name} className={pillStyle}>
 								{lang.name} ({lang.level})
 							</span>
 						))}
 					</div>
 				</section>
 
-				<section>
-					<h2 className="text-xl font-semibold mb-4">Certifications</h2>
-					<div className="space-y-2">
-						{resume.certifications.map((cert) => (
-							<div
-								key={cert.name}
-								className="flex justify-between items-center"
-							>
-								<div>
-									<h3 className="font-medium">{cert.name}</h3>
-									<p className="text-sm text-neutral-600 dark:text-neutral-400">
-										{cert.issuer}
-									</p>
-								</div>
-								<span className="text-neutral-600 dark:text-neutral-400">
-									{cert.date}
+				{resume.certifications && resume.certifications.length > 0 && (
+					<section>
+						<h2 className="text-xl font-semibold mb-4">Certifications</h2>
+						<div className="flex flex-wrap gap-2">
+							{resume.certifications.map((cert) => (
+								<span key={cert.name} className={pillStyle}>
+									{cert.name}
 								</span>
-							</div>
-						))}
-					</div>
-				</section>
+							))}
+						</div>
+					</section>
+				)}
 			</div>
 		</section>
 	);
