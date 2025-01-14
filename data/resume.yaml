@@ -1,0 +1,44 @@
+personal:
+  name: "Adrian Villanueva Martinez"
+  title: "Senior Software Engineer"
+  nationality: "Spain (EU)"
+  location: "Tokyo, Japan"
+  summary: "Experienced Software Engineer specialized in cloud architecture and data engineering. Currently based in Tokyo, Japan, bringing Spanish innovation and European engineering practices to the Japanese tech industry."
+
+experience:
+  - company: "Company Name"
+    position: "Senior Software Engineer"
+    location: "Tokyo, Japan"
+    startDate: "2022-01"
+    endDate: "Present"
+    highlights:
+      - "Led development of cloud-native applications using AWS"
+      - "Implemented data pipelines processing TB of data daily"
+
+education:
+  - institution: "University Name"
+    degree: "Bachelor's in Computer Science"
+    location: "Madrid, Spain"
+    startDate: "2016"
+    endDate: "2020"
+
+skills:
+  languages: ["Python", "TypeScript", "Rust"]
+  frameworks: ["Next.js", "React", "FastAPI"]
+  cloud: ["AWS", "GCP", "Azure"]
+
+languages:
+  - name: "Spanish"
+    level: "Native"
+  - name: "English"
+    level: "Professional"
+  - name: "Japanese"
+    level: "Basic"
+  - name: "Dutch"
+    level: "Basic"
+
+certifications:
+  - name: "AWS Solutions Architect Professional"
+    issuer: "Amazon Web Services"
+    date: "2023"
+

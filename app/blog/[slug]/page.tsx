@@ -2,8 +2,13 @@ import { formatDate, getBlogPosts } from "app/blog/utils";
 import { CustomMDX } from "app/components/mdx";
 import { Categories } from "app/components/post/Categories";
 import { baseUrl } from "app/sitemap";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Script from "next/script";
+
+type BlogParams = {
+	params: Promise<{ slug: string }>;
+};
 
 type JsonLdProps = {
 	data: {
@@ -23,25 +28,26 @@ type JsonLdProps = {
 };
 
 function JsonLd({ data }: JsonLdProps) {
-	return (
-		<Script type="application/ld+json" id="json-ld">
-			{JSON.stringify(data)}
-		</Script>
-	);
+  return (
+			<Script type="application/ld+json" id="json-ld">
+				{JSON.stringify(data)}
+			</Script>
+		);
 }
 
 export async function generateStaticParams() {
-	const posts = await getBlogPosts();
-	return posts.map((post) => ({ slug: post.slug }));
+  const posts = await getBlogPosts();
+		return posts.map((post) => ({ slug: post.slug }));
 }
 
-export async function generateMetadata(context: { params: { slug: string } }) {
-	const { slug } = context.params; // Access params directly without awaiting
+export async function generateMetadata({
+	params,
+}: BlogParams): Promise<Metadata> {
+	const { slug } = await params;
 	const posts = await getBlogPosts();
 	const post = posts.find((post) => post.slug === slug);
-	if (!post) {
-		return;
-	}
+
+	if (!post) return {};
 
 	const {
 		title,
@@ -49,6 +55,7 @@ export async function generateMetadata(context: { params: { slug: string } }) {
 		summary: description,
 		image,
 	} = post.metadata;
+
 	const ogImage = image
 		? image
 		: `${baseUrl}/og?title=${encodeURIComponent(title)}`;
@@ -61,12 +68,8 @@ export async function generateMetadata(context: { params: { slug: string } }) {
 			description,
 			type: "article",
 			publishedTime,
-			url: `${baseUrl}/blog/${post.slug}`,
-			images: [
-				{
-					url: ogImage,
-				},
-			],
+			url: `${baseUrl}/blog/${slug}`,
+			images: [{ url: ogImage }],
 		},
 		twitter: {
 			card: "summary_large_image",
@@ -77,62 +80,74 @@ export async function generateMetadata(context: { params: { slug: string } }) {
 	};
 }
 
-interface PageParams {
-	params: {
-		slug: string;
-	};
-}
+export default async function BlogPostPage({ params }: BlogParams) {
+  const { slug } = await params;
+		const posts = await getBlogPosts();
+		const post = posts.find((p) => p.slug === slug);
 
-// Default export for the page component
-export default async function BlogPostPage({ params }: PageParams) {
-	const posts = await getBlogPosts();
-	const { slug } = params; // Access params directly without awaiting
-	// Find the specific post by slug
-	const post = posts.find((post) => post.slug === slug);
+		if (!post) {
+			notFound();
+		}
 
-	if (!post) {
-		notFound(); // Redirect to 404 if the post is not found
-	}
+		return (
+			<section className="animate-fade-in space-y-8">
+				<JsonLd
+					data={{
+						"@context": "https://schema.org",
+						"@type": "BlogPosting",
+						headline: post.metadata.title,
+						datePublished: post.metadata.publishedAt,
+						dateModified: post.metadata.publishedAt,
+						description: post.metadata.summary,
+						image: post.metadata.image
+							? `${baseUrl}${post.metadata.image}`
+							: `/og?title=${encodeURIComponent(post.metadata.title)}`,
+						url: `${baseUrl}/blog/${slug}`,
+						author: {
+							"@type": "Person",
+							name: "Adrian Villanueva",
+						},
+					}}
+				/>
 
-	return (
-		<section>
-			<JsonLd
-				data={{
-					"@context": "https://schema.org",
-					"@type": "BlogPosting",
-					headline: post.metadata.title,
-					datePublished: post.metadata.publishedAt,
-					dateModified: post.metadata.publishedAt,
-					description: post.metadata.summary,
-					image: post.metadata.image
-						? `${baseUrl}${post.metadata.image}`
-						: `/og?title=${encodeURIComponent(post.metadata.title)}`,
-					url: `${baseUrl}/blog/${post.slug}`,
-					author: {
-						"@type": "Person",
-						name: "My Portfolio",
-					},
-				}}
-			/>
-			<h1 className="title font-semibold text-2xl tracking-tighter">
-				{post.metadata.title}
-			</h1>
-			<div className="flex justify-between items-center mt-2 mb-8 text-sm">
-				<p className="text-sm text-neutral-600 dark:text-neutral-400">
-					{formatDate(post.metadata.publishedAt)}
-				</p>
-			</div>
-			<article className="prose">
-				<CustomMDX source={post.content} />
-			</article>
-			{post.metadata.categories && (
-				<div className="mt-8 pt-8 border-t border-neutral-200 dark:border-neutral-800">
-					<h3 className="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
-						Posted in
-					</h3>
-					<Categories categories={post.metadata.categories} />
-				</div>
-			)}
-		</section>
-	);
+				<header className="space-y-4">
+					<h1
+						className="text-3xl font-bold tracking-tight bg-clip-text text-transparent
+          bg-gradient-to-r from-neutral-900 via-neutral-700 to-neutral-600
+          dark:from-neutral-100 dark:via-neutral-300 dark:to-neutral-400"
+					>
+						{post.metadata.title}
+					</h1>
+					<div className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400">
+						<time dateTime={post.metadata.publishedAt}>
+							{formatDate(post.metadata.publishedAt)}
+						</time>
+						{post.metadata.readingTime && (
+							<>
+								<span>·</span>
+								<span>{post.metadata.readingTime} min read</span>
+							</>
+						)}
+					</div>
+				</header>
+
+				<article
+					className="prose prose-neutral dark:prose-invert max-w-none
+        prose-headings:font-semibold prose-h2:text-2xl prose-h3:text-xl
+        prose-p:text-neutral-700 dark:prose-p:text-neutral-300
+        prose-a:text-neutral-900 dark:prose-a:text-neutral-100
+        prose-strong:text-neutral-900 dark:prose-strong:text-neutral-100"
+				>
+					<CustomMDX source={post.content} />
+				</article>
+
+				{post.metadata.categories && (
+					<footer className="pt-8 border-t border-neutral-200 dark:border-neutral-800">
+						<div className="flex items-center gap-4">
+							<Categories categories={post.metadata.categories} />
+						</div>
+					</footer>
+				)}
+			</section>
+		);
 }
