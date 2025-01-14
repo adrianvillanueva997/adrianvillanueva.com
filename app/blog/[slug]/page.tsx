@@ -2,8 +2,13 @@ import { formatDate, getBlogPosts } from "app/blog/utils";
 import { CustomMDX } from "app/components/mdx";
 import { Categories } from "app/components/post/Categories";
 import { baseUrl } from "app/sitemap";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Script from "next/script";
+
+type BlogParams = {
+	params: Promise<{ slug: string }>;
+};
 
 type JsonLdProps = {
 	data: {
@@ -23,25 +28,26 @@ type JsonLdProps = {
 };
 
 function JsonLd({ data }: JsonLdProps) {
-	return (
-		<Script type="application/ld+json" id="json-ld">
-			{JSON.stringify(data)}
-		</Script>
-	);
+  return (
+			<Script type="application/ld+json" id="json-ld">
+				{JSON.stringify(data)}
+			</Script>
+		);
 }
 
 export async function generateStaticParams() {
-	const posts = await getBlogPosts();
-	return posts.map((post) => ({ slug: post.slug }));
+  const posts = await getBlogPosts();
+		return posts.map((post) => ({ slug: post.slug }));
 }
 
-export async function generateMetadata(context: { params: { slug: string } }) {
-	const { slug } = context.params; // Access params directly without awaiting
+export async function generateMetadata({
+	params,
+}: BlogParams): Promise<Metadata> {
+	const { slug } = await params;
 	const posts = await getBlogPosts();
 	const post = posts.find((post) => post.slug === slug);
-	if (!post) {
-		return;
-	}
+
+	if (!post) return {};
 
 	const {
 		title,
@@ -49,6 +55,7 @@ export async function generateMetadata(context: { params: { slug: string } }) {
 		summary: description,
 		image,
 	} = post.metadata;
+
 	const ogImage = image
 		? image
 		: `${baseUrl}/og?title=${encodeURIComponent(title)}`;
@@ -61,12 +68,8 @@ export async function generateMetadata(context: { params: { slug: string } }) {
 			description,
 			type: "article",
 			publishedTime,
-			url: `${baseUrl}/blog/${post.slug}`,
-			images: [
-				{
-					url: ogImage,
-				},
-			],
+			url: `${baseUrl}/blog/${slug}`,
+			images: [{ url: ogImage }],
 		},
 		twitter: {
 			card: "summary_large_image",
@@ -77,21 +80,13 @@ export async function generateMetadata(context: { params: { slug: string } }) {
 	};
 }
 
-interface PageParams {
-	params: {
-		slug: string;
-	};
-}
-
-// Default export for the page component
-export default async function BlogPostPage({ params }: PageParams) {
+export default async function BlogPostPage({ params }: BlogParams) {
+	const { slug } = await params;
 	const posts = await getBlogPosts();
-	const { slug } = params; // Access params directly without awaiting
-	// Find the specific post by slug
-	const post = posts.find((post) => post.slug === slug);
+	const post = posts.find((p) => p.slug === slug);
 
 	if (!post) {
-		notFound(); // Redirect to 404 if the post is not found
+		notFound();
 	}
 
 	return (
@@ -107,10 +102,10 @@ export default async function BlogPostPage({ params }: PageParams) {
 					image: post.metadata.image
 						? `${baseUrl}${post.metadata.image}`
 						: `/og?title=${encodeURIComponent(post.metadata.title)}`,
-					url: `${baseUrl}/blog/${post.slug}`,
+					url: `${baseUrl}/blog/${slug}`,
 					author: {
 						"@type": "Person",
-						name: "My Portfolio",
+						name: "Adrian Villanueva",
 					},
 				}}
 			/>
