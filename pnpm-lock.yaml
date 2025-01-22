@@ -63,8 +63,8 @@ importers:
         specifier: 19.0.0
         version: 19.0.0(react@19.0.0)
       simple-icons:
-        specifier: 14.2.0
-        version: 14.2.0
+        specifier: 14.3.0
+        version: 14.3.0
       sugar-high:
         specifier: 0.8.1
         version: 0.8.1
@@ -1355,8 +1355,8 @@ packages:
     resolution: {integrity: sha512-haPVm1EkS9pgvHrQ/F3Xy+hgcuMV0Wm9vfIBSiwZ05k+xgb0PkBQpGsAA/oWdDobNaZTH5ppvHtzCFbnSEwHVw==}
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
 
-  simple-icons@14.2.0:
-    resolution: {integrity: sha512-89TddGlUh9Ent3ochwjRKzyb4BpaLnfVUYLcY3K0g7Rt91++c7kDAZU1lH15NH2g9WTlmja9Pr3w6+Tjsoyxug==}
+  simple-icons@14.3.0:
+    resolution: {integrity: sha512-GXWVF/UBkR04Hg3qcoEOHzI9ZNedXPhcphWraWRCJAenkG6Vsf5ycmVFDX90OK+5oeg86M5tYqBNS4npgG7/5g==}
     engines: {node: '>=0.12.18'}
 
   simple-swizzle@0.2.2:
@@ -3073,7 +3073,7 @@ snapshots:
       '@img/sharp-win32-x64': 0.33.5
     optional: true
 
-  simple-icons@14.2.0: {}
+  simple-icons@14.3.0: {}
 
   simple-swizzle@0.2.2:
     dependencies:
