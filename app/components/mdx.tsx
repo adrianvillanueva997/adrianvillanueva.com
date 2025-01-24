@@ -3,9 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { highlight } from "sugar-high";
-import { CodeBlock } from "./SyntaxHighlighter";
 import { Categories } from "./post/Categories";
 import { Mermaid } from "./post/Mermaid"; // Import the Mermaid component
+import { CodeBlock } from "./post/SyntaxHighlighter";
 
 function Table({ data }) {
 	const headers = data.headers.map((header) => (
