@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { highlight } from "sugar-high";
+import { CodeBlock } from "./SyntaxHighlighter";
 import { Categories } from "./post/Categories";
 import { Mermaid } from "./post/Mermaid"; // Import the Mermaid component
 
@@ -111,7 +112,14 @@ const components = {
 	h6: createHeading(6),
 	Image: RoundedImage,
 	a: CustomLink,
-	code: Code, // Updated code handler
+	pre: (props: React.HTMLAttributes<HTMLDivElement>) => <div {...props} />,
+	code: ({ children, className }: { children: string; className?: string }) => {
+		if (className === "language-mermaid") {
+			return <Mermaid code={children} />;
+		}
+		const language = className?.replace("language-", "");
+		return <CodeBlock language={language}>{children}</CodeBlock>;
+	},
 	Table,
 	Categories,
 };
