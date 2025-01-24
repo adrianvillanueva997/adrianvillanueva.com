@@ -36,7 +36,7 @@ export default async function CategoriesPage() {
 					className="text-3xl font-bold tracking-tighter bg-clip-text text-transparent
           bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600"
 				>
-					Neural Network Categories
+					Mind map Categories
 				</h1>
 				<p className="text-cyan-300/70">
 					Exploring interconnected knowledge nodes

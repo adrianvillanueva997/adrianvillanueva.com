@@ -99,14 +99,11 @@ export function CategoryGraph({ categoryPosts }: CategoryGraphProps) {
 							{node.type === "post" ? (
 								<Link
 									href={`/blog/${node.slug}`} // Use slug instead of id
-									className={`
-                    block rounded-full
-                    ${hoveredNode === node.id ? "bg-cyan-400/80" : "bg-cyan-900/50"}
-                    border border-cyan-700
-                    transition-all duration-300
-                    hover:bg-cyan-400/80
-                    cursor-pointer
-                  `}
+									className={`block rounded-full border border-cyan-700 transition-all duration-300 cursor-pointer ${
+										hoveredNode === node.id
+											? "bg-cyan-400/80"
+											: "bg-cyan-900/50"
+									} hover:bg-cyan-400/80`}
 									style={{
 										width: node.radius * 2,
 										height: node.radius * 2,
