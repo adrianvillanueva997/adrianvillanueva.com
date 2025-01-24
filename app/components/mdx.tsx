@@ -5,6 +5,7 @@ import React from "react";
 import { highlight } from "sugar-high";
 import { Categories } from "./post/Categories";
 import { Mermaid } from "./post/Mermaid"; // Import the Mermaid component
+import { CodeBlock } from "./post/SyntaxHighlighter";
 
 function Table({ data }) {
 	const headers = data.headers.map((header) => (
@@ -111,7 +112,14 @@ const components = {
 	h6: createHeading(6),
 	Image: RoundedImage,
 	a: CustomLink,
-	code: Code, // Updated code handler
+	pre: (props: React.HTMLAttributes<HTMLDivElement>) => <div {...props} />,
+	code: ({ children, className }: { children: string; className?: string }) => {
+		if (className === "language-mermaid") {
+			return <Mermaid code={children} />;
+		}
+		const language = className?.replace("language-", "");
+		return <CodeBlock language={language}>{children}</CodeBlock>;
+	},
 	Table,
 	Categories,
 };

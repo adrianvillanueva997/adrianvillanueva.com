@@ -1,9 +1,7 @@
+import { Skills } from "app/components/Skills";
 import { baseUrl } from "app/sitemap";
-import yaml from "js-yaml";
+import { getResumeData } from "app/utils/resume";
 import type { Metadata } from "next";
-import { promises as fs } from "node:fs";
-import path from "node:path";
-import type { Resume } from "./types/resume";
 
 export const metadata: Metadata = {
 	title: "Resume | Adrian Villanueva",
@@ -21,17 +19,14 @@ export const metadata: Metadata = {
 	},
 };
 
-async function getResumeData(): Promise<Resume> {
-	const resumeFile = path.join(process.cwd(), "data", "resume.yaml");
-	const resumeYaml = await fs.readFile(resumeFile, "utf8");
-	return yaml.load(resumeYaml) as Resume;
-}
+
 
 const pillStyle =
 	"px-3 py-1 text-sm bg-neutral-100 dark:bg-neutral-800 rounded-full text-neutral-600 dark:text-neutral-400";
 
 export default async function ResumePage() {
 	const resume = await getResumeData();
+	const flattenedSkills = Object.values(resume.skills).flat();
 
 	return (
 		<section className="space-y-8 animate-fade-in">
@@ -72,19 +67,10 @@ export default async function ResumePage() {
 						{resume.personal.summary}
 					</p>
 				</section>
+				<h2 className="text-xl font-semibold mb-4">Skills</h2>
 
-				<section>
-					<h2 className="text-xl font-semibold mb-4">Skills</h2>
-					<div className="flex flex-wrap gap-2">
-						{Object.values(resume.skills)
-							.flat()
-							.map((skill) => (
-								<span key={skill} className={pillStyle}>
-									{skill}
-								</span>
-							))}
-					</div>
-				</section>
+				<Skills skills={flattenedSkills} />
+
 				<h2 className="text-xl font-semibold mb-4">Experience</h2>
 
 				{resume.experience.map((exp) => (

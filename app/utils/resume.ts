@@ -1,16 +1,3 @@
----
-title: "First post"
-publishedAt: '2025-01-12'
-summary: 'First post.'
-categories: ['personal']
----
-
-# Hello there
-
-I moved out from Hugo to NextJS. Now I just need to start writing stuff
-
-
-```typescript
 import yaml from "js-yaml";
 import { promises as fs } from "node:fs";
 import path from "node:path";
@@ -58,11 +45,3 @@ export async function getResumeData(): Promise<Resume> {
 	const resumeYaml = await fs.readFile(resumeFile, "utf8");
 	return yaml.load(resumeYaml) as Resume;
 }
-```
-
-
-```mermaid
-graph TD
-    A[Start] --> B[Process]
-    B --> C[End]
-```

@@ -17,6 +17,9 @@ const navItems = {
 	"/resume": {
 		name: "resume",
 	},
+	"/categories": {
+		name: "categories",
+	},
 };
 
 export function Navbar() {
