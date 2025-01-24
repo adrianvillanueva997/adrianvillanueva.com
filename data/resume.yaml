@@ -3,7 +3,7 @@ personal:
   title: "Senior Software Engineer"
   nationality: "Spain (EU)"
   location: "Tokyo, Japan"
-  summary: "Experienced Software Engineer specialized in cloud architecture and data engineering. Currently based in Tokyo, Japan, bringing Spanish innovation and European engineering practices to the Japanese tech industry."
+  summary: "Experienced Software Engineer with expertise in cloud architecture, data engineering, and MLOps. Based in Tokyo, bringing Spanish innovation and European engineering practices to the Japanese tech industry. Skilled in designing scalable data platforms and delivering high-quality engineering solutions."
 
 experience:
   - company: "Woven by Toyota"
@@ -12,53 +12,45 @@ experience:
     startDate: "2024-08"
     endDate: "Present"
     highlights:
-    - "Developed ETL pipelines on Databricks, ensuring data quality and efficiency"
-    - "Implemented data reconciliation strategies and monitoring"
-    - "Collaborated on data-mesh architecture within cross-functional teams"
-    - "Led the development of a Kafka-based data ingestion framework with Rust bindings for Python, Java, Typescript, and Go"
-    - "Implemented Open Telemetry for monitoring and tracing within the data ingestion SDK"
-    - "Built and maintained a scalable AWS data platform using OpenTofu, Terragrunt, Terramate, and Databricks"
-    - "Established CI/CD pipelines for continuous deployment of data services on GitHub Actions"
-    - "Machine learning engineering for model deployment and monitoring through MLflow applying MLOps best practices"
+      - "Developed ETL pipelines on Databricks, ensuring high data quality and efficiency"
+      - "Designed and implemented a Kafka-based data ingestion framework with Rust bindings for Python, Java, TypeScript, and Go"
+      - "Established Open Telemetry for monitoring and tracing within the data ingestion SDK"
+      - "Built and maintained a scalable AWS data platform using OpenTofu, Terragrunt, and Terramate"
+      - "Led the implementation of CI/CD pipelines for seamless deployment of data services on GitHub Actions"
+      - "Implemented MLOps best practices for model deployment and monitoring with MLflow"
+      - "Collaborated on data-mesh architecture within cross-functional teams"
   - company: "Albert Heijn"
-    position: "Data platform engineer"
+    position: "Data Platform Engineer"
     location: "Amsterdam, Netherlands"
     startDate: "2022-03"
     endDate: "2024-06"
     highlights:
-      - "Developed ETL data pipelines on Databricks"
-      - "Designed, developed, and released internal data-based tools for auditing and monitoring Databricks workspaces using Python and other languages"
-      - "Led Python code reviews within the team"
-      - "Maintained and developed Terraform modules"
-      - "Maintained and developed Continuous Integration/Deployment pipelines on GitHub Actions"
-      - "Deployed and maintained resources on Azure and Kubernetes with ArgoCD"
+      - "Built ETL pipelines and tools for auditing and monitoring Databricks workspaces"
+      - "Developed and maintained Terraform modules for Azure and Kubernetes deployments"
+      - "Led Python code reviews to improve code quality and consistency"
+      - "Deployed and managed Azure-based resources using ArgoCD and Kubernetes"
+      - "Streamlined CI/CD pipelines on GitHub Actions to enhance team productivity"
   - company: "Dashmote"
     position: "Data Engineer"
     location: "Amsterdam, Netherlands"
     startDate: "2021-09"
     endDate: "2022-03"
     highlights:
-      - "Implemented Infrastructure as Code scripts on Terraform for AWS service deployments"
-      - "Maintained and debugged legacy Apache Airflow components in Python for optimal performance"
-      - "Deployed, optimized, and developed Docker images using buildx for efficient build and caching processes"
-      - "Collaborated with and mentored new engineers to foster growth"
-      - "Designed and deployed a production-ready datalake on AWS Athena"
-      - "Spearheaded the redesign of the CI/CD strategy, resulting in faster workflows"
-      - "Successfully maintained and deployed full-stack applications"
-  - company: "Erns & Young (EY)"
+      - "Redesigned CI/CD strategy, reducing build times and improving workflows"
+      - "Developed and optimized Docker images with buildx, reducing build time by 60%"
+      - "Built a production-ready data lake on AWS Athena"
+      - "Maintained Apache Airflow components and deployed Infrastructure as Code with Terraform"
+      - "Mentored new engineers to accelerate onboarding and growth"
+  - company: "Ernst & Young (EY)"
     position: "Software Developer (Faas Tech)"
     location: "Madrid, Spain"
     startDate: "2019-06"
     endDate: "2020-06"
     highlights:
-      - "Contributed to the development of software solutions for automation and ETL tasks using SQL, Python, Java, and Talend"
-      - "Managed Linux systems, including Ubuntu and CentOS, ensuring their stability and security"
-      - "Administered Windows Server environments to maintain optimal performance and reliability"
-      - "Executed scripting tasks in Bash and CMD, automating processes for increased efficiency"
-      - "Actively involved in the development and enhancement of Sage X3 ERP systems"
-      - "Engaged in full-stack web development, contributing to both frontend and backend aspects of projects"
-      - "Worked on projects involving machine learning and data engineering"
-      - "Developed Business Intelligence solutions using SQL and Python for data analysis"
+      - "Developed ETL pipelines and automated processes with SQL, Python, and Talend"
+      - "Administered Linux and Windows Server systems to ensure stability"
+      - "Enhanced Sage X3 ERP systems and delivered Business Intelligence solutions"
+      - "Contributed to machine learning and data engineering projects"
 
 education:
   - institution: "Universidad Europea de Madrid"
@@ -69,15 +61,14 @@ education:
 
 skills:
   languages: ["Python", "TypeScript", "Rust", "Java", "SQL", "Go", "Bash", "C"]
-  frameworks: ["Next.js", "React", "FastAPI", "Apache Airflow", "Pyspark" ]
+  frameworks: ["Next.js", "React", "FastAPI", "Apache Airflow", "Pyspark"]
   cloud: ["AWS", "Azure", "GCP"]
-  tools: ["Databricks", "Docker", "Terraform", "Kubernetes",]
+  tools: ["Databricks", "Docker", "Terraform", "Kubernetes"]
   mlops: ["MLflow"]
   databases: ["AWS Athena", "SQL-based databases", "Redis"]
   monitoring: ["Open Telemetry", "Prometheus", "Grafana"]
   CI/CD: ["GitHub Actions", "Jenkins", "ArgoCD"]
   other: ["Linux (Ubuntu, CentOS)", "Windows Server"]
-
 
 languages:
   - name: "Spanish"
@@ -88,6 +79,3 @@ languages:
     level: "Basic"
   - name: "Dutch"
     level: "Basic"
-
-# r
-
