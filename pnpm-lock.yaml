@@ -33,7 +33,7 @@ importers:
         specifier: 19.0.3
         version: 19.0.3(@types/react@19.0.7)
       '@types/react-syntax-highlighter':
-        specifier: ^15.5.13
+        specifier: 15.5.13
         version: 15.5.13
       '@vercel/speed-insights':
         specifier: 1.1.0
