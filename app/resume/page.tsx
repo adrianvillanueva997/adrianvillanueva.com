@@ -73,6 +73,20 @@ export default async function ResumePage() {
 					</p>
 				</section>
 
+				<section>
+					<h2 className="text-xl font-semibold mb-4">Skills</h2>
+					<div className="flex flex-wrap gap-2">
+						{Object.values(resume.skills)
+							.flat()
+							.map((skill) => (
+								<span key={skill} className={pillStyle}>
+									{skill}
+								</span>
+							))}
+					</div>
+				</section>
+				<h2 className="text-xl font-semibold mb-4">Experience</h2>
+
 				{resume.experience.map((exp) => (
 					<section key={exp.company + exp.startDate} className="space-y-2">
 						<div className="flex justify-between">
@@ -117,19 +131,6 @@ export default async function ResumePage() {
 							</div>
 						</div>
 					))}
-				</section>
-
-				<section>
-					<h2 className="text-xl font-semibold mb-4">Skills</h2>
-					<div className="flex flex-wrap gap-2">
-						{Object.values(resume.skills)
-							.flat()
-							.map((skill) => (
-								<span key={skill} className={pillStyle}>
-									{skill}
-								</span>
-							))}
-					</div>
 				</section>
 
 				<section>
