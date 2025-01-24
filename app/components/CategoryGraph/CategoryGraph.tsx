@@ -27,10 +27,8 @@ export function CategoryGraph({ categoryPosts }: CategoryGraphProps) {
 	}, [categoryPosts]);
 
 	useEffect(() => {
-		const canvas = canvasRef.current;
-		if (!canvas) return;
-
-		const ctx = canvas.getContext("2d");
+		if (!canvasRef.current) return;
+		const ctx = canvasRef.current.getContext("2d");
 		if (!ctx) return;
 
 		ctx.clearRect(0, 0, dimensions.width, dimensions.height);
@@ -40,18 +38,19 @@ export function CategoryGraph({ categoryPosts }: CategoryGraphProps) {
 			const target = nodes.find((n) => n.id === edge.target);
 			if (!source || !target) continue;
 
-			// Draw glow effect
 			ctx.beginPath();
 			ctx.moveTo(source.x, source.y);
 			ctx.lineTo(target.x, target.y);
-			ctx.strokeStyle = edge.color;
-			ctx.lineWidth = 2;
+			ctx.strokeStyle = edge.color || "rgba(103, 232, 249, 0.1)";
+			ctx.lineWidth = 1;
+
+			// Add shadow effect
 			ctx.shadowColor = edge.color;
 			ctx.shadowBlur = 5;
-			ctx.setLineDash([4, 4]);
+			// Remove the setLineDash line
 			ctx.stroke();
 
-			// Reset shadow for next iteration
+			// Reset shadow
 			ctx.shadowColor = "transparent";
 			ctx.shadowBlur = 0;
 		}
@@ -68,6 +67,26 @@ export function CategoryGraph({ categoryPosts }: CategoryGraphProps) {
 				/>
 
 				<div className="relative w-full h-full">
+					{/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
+					<svg className="absolute inset-0 w-full h-full">
+						{edges.map((edge) => {
+							const source = nodes.find((n) => n.id === edge.source);
+							const target = nodes.find((n) => n.id === edge.target);
+							if (!source || !target) return null;
+
+							return (
+								<path
+									key={`${edge.source}-${edge.target}`}
+									d={`M ${source.x} ${source.y} L ${target.x} ${target.y}`}
+									stroke="rgba(103, 232, 249, 0.1)"
+									strokeWidth={1}
+									strokeDasharray="none"
+									shapeRendering="geometricPrecision"
+									fill="none"
+								/>
+							);
+						})}
+					</svg>
 					{nodes.map((node) => (
 						<div
 							key={node.id} // Using unique node.id that includes type prefix
@@ -108,30 +127,13 @@ export function CategoryGraph({ categoryPosts }: CategoryGraphProps) {
 										backgroundColor: node.color || "rgba(8, 25, 48, 0.9)",
 										boxShadow:
 											hoveredNode === node.id
-												? `0 0 15px ${node.color?.replace("0.9)", "0.3)")}`
+												? "0 0 15px rgba(34, 211, 238, 0.5)"
 												: "none",
-										opacity: hoveredNode === node.id ? 1 : 0.85,
 									}}
-									onMouseEnter={() => setHoveredNode(node.id)}
-									onMouseLeave={() => setHoveredNode(null)}
 								>
 									{node.label}
 								</div>
-							) : (
-								<div
-									className="rounded-full border border-cyan-700 flex items-center justify-center font-medium text-cyan-100 transition-all duration-300"
-									style={{
-										width: node.radius * 2,
-										height: node.radius * 2,
-										backgroundColor: node.color || "rgba(8, 145, 178, 0.5)",
-										opacity: hoveredNode === node.id ? 0.8 : 0.5,
-									}}
-									onMouseEnter={() => setHoveredNode(node.id)}
-									onMouseLeave={() => setHoveredNode(null)}
-								>
-									{node.label}
-								</div>
-							)}
+							) : null}
 						</div>
 					))}
 				</div>
