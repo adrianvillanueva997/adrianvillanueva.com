@@ -35,19 +35,26 @@ export function CategoryGraph({ categoryPosts }: CategoryGraphProps) {
 
 		ctx.clearRect(0, 0, dimensions.width, dimensions.height);
 
-		edges.forEach((edge) => {
+		for (const edge of edges) {
 			const source = nodes.find((n) => n.id === edge.source);
 			const target = nodes.find((n) => n.id === edge.target);
-			if (!source || !target) return;
+			if (!source || !target) continue;
 
+			// Draw glow effect
 			ctx.beginPath();
 			ctx.moveTo(source.x, source.y);
 			ctx.lineTo(target.x, target.y);
-			ctx.strokeStyle = "rgba(6, 182, 212, 0.2)";
-			ctx.lineWidth = 1.5;
+			ctx.strokeStyle = edge.color;
+			ctx.lineWidth = 2;
+			ctx.shadowColor = edge.color;
+			ctx.shadowBlur = 5;
 			ctx.setLineDash([4, 4]);
 			ctx.stroke();
-		});
+
+			// Reset shadow for next iteration
+			ctx.shadowColor = "transparent";
+			ctx.shadowBlur = 0;
+		}
 	}, [nodes, edges]);
 
 	return (
@@ -63,7 +70,7 @@ export function CategoryGraph({ categoryPosts }: CategoryGraphProps) {
 				<div className="relative w-full h-full">
 					{nodes.map((node) => (
 						<div
-							key={node.id}
+							key={node.id} // Using unique node.id that includes type prefix
 							className="absolute"
 							style={{
 								transform: `translate(${node.x}px, ${node.y}px) translate(-50%, -50%)`,
@@ -72,7 +79,7 @@ export function CategoryGraph({ categoryPosts }: CategoryGraphProps) {
 						>
 							{node.type === "post" ? (
 								<Link
-									href={`/blog/${node.id}`}
+									href={`/blog/${node.slug}`} // Use slug instead of id
 									className={`
                     block rounded-full
                     ${hoveredNode === node.id ? "bg-cyan-400/80" : "bg-cyan-900/50"}
@@ -92,18 +99,32 @@ export function CategoryGraph({ categoryPosts }: CategoryGraphProps) {
 										{node.label}
 									</span>
 								</Link>
-							) : (
+							) : node.type === "category" ? (
 								<div
-									className={`
-                    rounded-full
-                    ${hoveredNode === node.id ? "bg-cyan-400/80" : "bg-cyan-900/50"}
-                    border border-cyan-700
-                    flex items-center justify-center
-                    font-medium text-cyan-100
-                  `}
+									className="rounded-full border border-cyan-900 flex items-center justify-center font-medium text-cyan-100 transition-all duration-300"
 									style={{
 										width: node.radius * 2,
 										height: node.radius * 2,
+										backgroundColor: node.color || "rgba(8, 25, 48, 0.9)",
+										boxShadow:
+											hoveredNode === node.id
+												? `0 0 15px ${node.color?.replace("0.9)", "0.3)")}`
+												: "none",
+										opacity: hoveredNode === node.id ? 1 : 0.85,
+									}}
+									onMouseEnter={() => setHoveredNode(node.id)}
+									onMouseLeave={() => setHoveredNode(null)}
+								>
+									{node.label}
+								</div>
+							) : (
+								<div
+									className="rounded-full border border-cyan-700 flex items-center justify-center font-medium text-cyan-100 transition-all duration-300"
+									style={{
+										width: node.radius * 2,
+										height: node.radius * 2,
+										backgroundColor: node.color || "rgba(8, 145, 178, 0.5)",
+										opacity: hoveredNode === node.id ? 0.8 : 0.5,
 									}}
 									onMouseEnter={() => setHoveredNode(node.id)}
 									onMouseLeave={() => setHoveredNode(null)}
