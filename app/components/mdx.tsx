@@ -3,9 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { highlight } from "sugar-high";
+import { Callout } from "./post/Callout";
 import { Categories } from "./post/Categories";
+import { CodeSandbox } from "./post/CodeSandbox";
+import { Details } from "./post/Details";
 import { Mermaid } from "./post/Mermaid"; // Import the Mermaid component
+import { Steps } from "./post/Steps";
 import { CodeBlock } from "./post/SyntaxHighlighter";
+import { TechStack } from "./post/TechStack";
+import { Terminal } from "./post/Terminal";
 
 function Table({ data }) {
 	const headers = data.headers.map((header) => (
@@ -122,7 +128,15 @@ const components = {
 	},
 	Table,
 	Categories,
+	Callout,
+	Details,
+	CodeSandbox,
+	Terminal,
+	TechStack,
+	Steps,
 };
+
+
 
 // Export the CustomMDX component
 export function CustomMDX({ source, ...props }) {

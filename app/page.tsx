@@ -4,7 +4,7 @@ import { getResumeData } from "./utils/resume";
 
 export default async function Page() {
 	const resume = await getResumeData();
-	const flattenedSkills = Object.values(resume.skills).flat();
+	const flattenedSkills = Object.values(resume.skills).flat() as string[];
 
 	return (
 		<section className="space-y-12 animate-fade-in">

@@ -15,6 +15,7 @@ export default async function CategoriesPage() {
 					date: post.metadata.publishedAt,
 					categories: post.metadata.categories,
 					readingTime: post.metadata.readingTime,
+					draft: post.metadata.draft,
 				},
 			};
 			for (const category of mappedPost.metadata.categories ?? []) {

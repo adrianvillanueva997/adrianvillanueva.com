@@ -17,8 +17,8 @@ const navItems = {
 	"/resume": {
 		name: "resume",
 	},
-	"/categories": {
-		name: "categories",
+	"/knowledge-graph": {
+		name: "knowledge graph",
 	},
 };
 

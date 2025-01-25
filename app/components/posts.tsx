@@ -12,9 +12,14 @@ export async function BlogPosts({
 	sortBy = "date",
 	showSummary = true,
 }: BlogPostsProps = {}) {
-	const allBlogs = getBlogPosts();
+	let allBlogs = await getBlogPosts();
 
-	const postsToShow = (await allBlogs)
+	if (process.env.NODE_ENV === "production") {
+		// Filter out drafts in production
+		allBlogs = allBlogs.filter((post) => !post.metadata.draft);
+	}
+
+	const postsToShow = allBlogs
 		.sort((a, b) => {
 			if (sortBy === "title") {
 				return a.metadata.title.localeCompare(b.metadata.title);

@@ -1,6 +1,7 @@
 import { formatDate, getBlogPosts } from "app/blog/utils";
 import { CustomMDX } from "app/components/mdx";
 import { Categories } from "app/components/post/Categories";
+import { PostTitle } from "app/components/post/PostTitle";
 import { baseUrl } from "app/sitemap";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -131,13 +132,8 @@ export default async function BlogPostPage({ params }: BlogParams) {
 					</div>
 				</header>
 
-				<article
-					className="prose prose-neutral dark:prose-invert max-w-none
-        prose-headings:font-semibold prose-h2:text-2xl prose-h3:text-xl
-        prose-p:text-neutral-700 dark:prose-p:text-neutral-300
-        prose-a:text-neutral-900 dark:prose-a:text-neutral-100
-        prose-strong:text-neutral-900 dark:prose-strong:text-neutral-100"
-				>
+				<article className="prose dark:prose-invert max-w-none">
+					<PostTitle title={post.metadata.title} draft={post.metadata.draft} />
 					<CustomMDX source={post.content} />
 				</article>
 
