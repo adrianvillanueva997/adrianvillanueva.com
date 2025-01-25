@@ -224,6 +224,148 @@ function adjustCategoryPosition(
 	return adjustedPosition;
 }
 
+// Helper function to create a category node
+function createCategoryNode(
+	categoryId: string,
+	category: string,
+	position: { x: number; y: number },
+	categoryNodeSize: number,
+	categoryColors: Map<string, string>,
+) {
+	return {
+		id: categoryId,
+		label: category,
+		type: "category" as const,
+		x: position.x,
+		y: position.y,
+		radius: categoryNodeSize,
+		slug: "",
+		color: categoryColors.get(category) || "rgba(8, 25, 48, 0.9)",
+		glowColor:
+			categoryColors.get(`${category}-glow`) || "rgba(6, 182, 212, 0.4)",
+	};
+}
+
+// Helper function to group posts by their category combinations
+function groupPostsByCategories(
+	categoryPosts: Record<string, BlogPost[]>,
+): Map<string, Array<BlogPost>> {
+	const postsByCategories = new Map<string, Array<BlogPost>>();
+	for (const post of Object.values(categoryPosts).flat()) {
+		const categoriesKey = [...(post.metadata.categories ?? [])]
+			.sort()
+			.join("-");
+		if (!postsByCategories.has(categoriesKey)) {
+			postsByCategories.set(categoriesKey, []);
+		}
+		postsByCategories.get(categoriesKey)?.push(post);
+	}
+	return postsByCategories;
+}
+
+// Helper function to calculate centroid position for posts with multiple categories
+function calculateCentroidPosition(
+	postCategories: string[],
+	categoryPositions: Map<string, { x: number; y: number }>,
+) {
+	let totalX = 0;
+	let totalY = 0;
+	let validPositions = 0;
+
+	for (const category of postCategories) {
+		const pos = categoryPositions.get(category);
+		if (pos) {
+			totalX += pos.x;
+			totalY += pos.y;
+			validPositions += 1;
+		}
+	}
+
+	return validPositions > 0
+		? { x: totalX / validPositions, y: totalY / validPositions }
+		: { x: 0, y: 0 };
+}
+
+// Main function to process category nodes and posts
+function processCategoryGraph(
+	categoryPosts: Record<string, BlogPost[]>,
+	width: number,
+	height: number,
+	categoryNodeSize: number,
+	categoryColors: Map<string, string>,
+) {
+	const nodes: GraphNode[] = [];
+	const categoryPositions = new Map<string, { x: number; y: number }>();
+	const addedPosts = new Set<string>();
+
+	// Create category nodes
+	for (const [categoryId, posts] of Object.entries(categoryPosts)) {
+		const position = { x: Math.random() * width, y: Math.random() * height }; // Example position calculation
+		const node = createCategoryNode(
+			categoryId,
+			categoryId,
+			position,
+			categoryNodeSize,
+			categoryColors,
+		);
+		nodes.push(node);
+		categoryPositions.set(categoryId, position);
+	}
+
+	// Group posts by their category combinations
+	const postsByCategories = groupPostsByCategories(categoryPosts);
+
+	// Position posts based on their categories
+	const centerX = width / 2;
+	const centerY = height / 2;
+	for (const [categoriesKey, posts] of postsByCategories) {
+		const postCategories = categoriesKey.split("-");
+		for (const [index, post] of posts.entries()) {
+			// Skip if post already added
+			if (addedPosts.has(post.slug)) {
+				continue;
+			}
+			addedPosts.add(post.slug);
+
+			const uniquePostId = `post-${categoriesKey}-${index}-${post.slug}`;
+			let x = centerX;
+			let y = centerY;
+
+			if (postCategories.length > 1) {
+				// Multiple categories - calculate centroid position
+				const centroid = calculateCentroidPosition(
+					postCategories,
+					categoryPositions,
+				);
+				x = centroid.x;
+				y = centroid.y;
+			} else if (postCategories.length === 1) {
+				// Single category - use category position
+				const pos = categoryPositions.get(postCategories[0]);
+				if (pos) {
+					x = pos.x;
+					y = pos.y;
+				}
+			}
+
+			const node: GraphNode = {
+				id: uniquePostId,
+				label: post.metadata.title,
+				type: "post",
+				x,
+				y,
+				radius: 10, // Example radius
+				slug: post.slug,
+				color: "rgba(103, 232, 249, 0.8)",
+			};
+
+			nodes.push(node);
+		}
+	}
+
+	return nodes;
+}
+
 export function calculateGraphLayout(
 	categoryPosts: Record<string, BlogPost[]>,
 	width: number,
@@ -313,12 +455,12 @@ export function calculateGraphLayout(
 	// Position posts based on their categories
 	const centerX = width / 2;
 	const centerY = height / 2;
-	postsByCategories.forEach((posts, categoriesKey) => {
+	for (const [categoriesKey, posts] of postsByCategories) {
 		const postCategories = categoriesKey.split("-");
-		posts.forEach((post, index) => {
+		for (const [index, post] of posts.entries()) {
 			// Skip if post already added
 			if (addedPosts.has(post.slug)) {
-				return;
+				continue;
 			}
 			addedPosts.add(post.slug);
 
@@ -332,14 +474,14 @@ export function calculateGraphLayout(
 				let totalY = 0;
 				let validPositions = 0;
 
-				postCategories.forEach((category) => {
+				for (const category of postCategories) {
 					const pos = categoryPositions.get(category);
 					if (pos) {
 						totalX += pos.x;
 						totalY += pos.y;
 						validPositions++;
 					}
-				});
+				}
 
 				if (validPositions > 0) {
 					x = totalX / validPositions;
@@ -359,7 +501,7 @@ export function calculateGraphLayout(
 						categoryPos.y - centerY,
 						categoryPos.x - centerX,
 					);
-					let radius = nodeSize * 2; // Start further out
+					const radius = nodeSize * 2; // Start further out
 					const arcLength = Math.PI / Math.max(posts.length, 2);
 					const arcAngle = baseAngle + (index - posts.length / 2) * arcLength;
 
@@ -388,7 +530,7 @@ export function calculateGraphLayout(
 				glowIntensity: postCategories.length, // More categories = more glow
 			});
 
-			postCategories.forEach((category) => {
+			for (const category of postCategories) {
 				const categoryNode = nodes.find(
 					(n) => n.type === "category" && n.label === category,
 				);
@@ -403,16 +545,16 @@ export function calculateGraphLayout(
 						animate: true,
 					});
 				}
-			});
-		});
-	});
+			}
+		}
+	}
 
 	// After positioning nodes, adjust for overlaps
-	nodes.forEach((node) => {
+	for (const node of nodes) {
 		if (node.type === "post") {
 			adjustNodePosition(node, nodes, width, height);
 		}
-	});
+	}
 
 	return { nodes, edges };
 }
