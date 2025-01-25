@@ -43,7 +43,7 @@ export async function BlogPosts({
 					<div className="flex items-center justify-between">
 						<div className="flex items-center gap-4">
 							<span className="text-sm text-neutral-500 dark:text-neutral-400 w-20 shrink-0">
-								{formatDate(post.metadata.publishedAt, false)}
+								{formatDate(post.metadata.publishedAt, "short")}
 							</span>
 							<span className="text-neutral-800 dark:text-neutral-200">
 								{post.metadata.title}
