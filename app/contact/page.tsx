@@ -1,8 +1,7 @@
-import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { baseUrl } from "app/sitemap";
 import type { Metadata } from "next";
-import { siGithub, siGmail } from "simple-icons";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 
 export const metadata: Metadata = {
 	title: "Contact",
@@ -42,15 +41,7 @@ export default function ContactPage() {
 					className="flex items-center gap-2 text-neutral-700 dark:text-neutral-300
             hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
 				>
-					{/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
-					<svg
-						role="img"
-						viewBox="0 0 24 24"
-						className="h-4 w-4"
-						fill="currentColor"
-					>
-						<path d={siGmail.path} />
-					</svg>
+					<MdEmail className="h-4 w-4" />
 					<span>adrian.villanueva.martinez@outlook.com</span>
 				</a>
 				<a
@@ -60,15 +51,7 @@ export default function ContactPage() {
 					target="_blank"
 					rel="noopener noreferrer"
 				>
-					{/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
-					<svg
-						role="img"
-						viewBox="0 0 24 24"
-						className="h-4 w-4"
-						fill="currentColor"
-					>
-						<path d={siGithub.path} />
-					</svg>
+					<FaGithub className="h-4 w-4" />
 					<span>GitHub</span>
 				</a>
 				<a
@@ -78,7 +61,7 @@ export default function ContactPage() {
 					target="_blank"
 					rel="noopener noreferrer"
 				>
-					<FontAwesomeIcon icon={faLinkedin} className="h-4 w-4" />
+					<FaLinkedin className="h-4 w-4" />
 					<span>LinkedIn</span>
 				</a>
 			</div>
