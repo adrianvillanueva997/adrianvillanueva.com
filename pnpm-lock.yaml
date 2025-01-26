@@ -69,8 +69,8 @@ importers:
         specifier: 15.6.1
         version: 15.6.1(react@19.0.0)
       sugar-high:
-        specifier: 0.8.2
-        version: 0.8.2
+        specifier: 0.8.4
+        version: 0.8.4
       tailwindcss:
         specifier: 4.0.0-alpha.13
         version: 4.0.0-alpha.13
@@ -1460,8 +1460,8 @@ packages:
   stylis@4.3.5:
     resolution: {integrity: sha512-K7npNOKGRYuhAFFzkzMGfxFDpN6gDwf8hcMiE+uveTVbBgm93HrNP3ZDUpKqzZ4pG7TP6fmb+EMAQPjq9FqqvA==}
 
-  sugar-high@0.8.2:
-    resolution: {integrity: sha512-u/U1idCsHBMG9p5z88XYdEh9bxU19o5kueS0a3TKBYSFbTqtRqSyVqdbkFNXv/sDc9WYALCFT56EosyA0k1+3Q==}
+  sugar-high@0.8.4:
+    resolution: {integrity: sha512-A/oWx/LxaZHccNCasj+DdMJXy2Cqi/x8CZja8t+jYvTdSCp2fDG57zOPi/EnLYH05uGzdMprsHDGfyW3qf59sg==}
 
   supports-preserve-symlinks-flag@1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
@@ -3239,7 +3239,7 @@ snapshots:
 
   stylis@4.3.5: {}
 
-  sugar-high@0.8.2: {}
+  sugar-high@0.8.4: {}
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
