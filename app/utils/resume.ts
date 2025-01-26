@@ -1,6 +1,6 @@
-import yaml from "js-yaml";
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import yaml from "js-yaml";
 
 interface Resume {
 	personal: {

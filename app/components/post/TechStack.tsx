@@ -40,9 +40,11 @@ export function TechStack({ technologies }: { technologies: string[] }) {
 						key={tech}
 						className="group flex items-center gap-2 px-4 py-2
               rounded-full text-sm font-medium
-              bg-cyan-900/20 hover:bg-cyan-800/30
-              border border-cyan-800/30 hover:border-cyan-700/50
-              text-cyan-100/80 hover:text-cyan-100
+              bg-neutral-100 dark:bg-neutral-800/30
+              border border-neutral-200 dark:border-neutral-700
+              text-neutral-600 dark:text-neutral-300
+              hover:bg-neutral-200 dark:hover:bg-neutral-700/50
+              hover:border-neutral-300 dark:hover:border-neutral-600
               transition-all duration-300 ease-in-out
               hover:translate-y-[-2px]
               cursor-default"

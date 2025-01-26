@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
 import fs from "node:fs";
 import path from "node:path";
+import type { Metadata } from "next";
 
 interface BlogPost {
 	slug: string;

@@ -1,7 +1,7 @@
 ---
-title: 'First post'
+title: 'Example post'
 publishedAt: '2025-01-12'
-summary: 'First post.'
+summary: 'This is a test post with components example.'
 categories: ['personal']
 draft: true
 ---
@@ -9,6 +9,13 @@ draft: true
 # Hello there
 
 I moved out from Hugo to NextJS. Now I just need to start writing stuff
+
+<Image
+  src="/images/blog/example.png"
+  alt="Example image"
+  width={125}
+  height={630}
+/>
 
 ```typescript
 import yaml from 'js-yaml';
@@ -107,3 +114,21 @@ graph TD
   <div>Second step details</div>
   <div>Final step implementation</div>
 </Steps>
+
+
+
+<Details summary="Click to expand">
+  This content is hidden by default.
+  You can put any MDX content here:
+  - Lists
+  - Code blocks
+  - Other components
+</Details>
+
+<Details summary="Technical Details">
+  ```typescript
+  function example() {
+    console.log('Hello from Details!');
+  }
+  ```
+</Details>

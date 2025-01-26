@@ -1,7 +1,14 @@
+import { socialLinks } from "app/config/social";
 import { baseUrl } from "app/sitemap";
 import type { Metadata } from "next";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+
+const iconMap = {
+	MdEmail,
+	FaGithub,
+	FaLinkedin,
+} as const;
 
 export const metadata: Metadata = {
 	title: "Contact",
@@ -36,34 +43,26 @@ export default function ContactPage() {
 			</div>
 
 			<div className="space-y-4">
-				<a
-					href="mailto:adrian.villanueva.martinez@outlook.com"
-					className="flex items-center gap-2 text-neutral-700 dark:text-neutral-300
-            hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
-				>
-					<MdEmail className="h-4 w-4" />
-					<span>adrian.villanueva.martinez@outlook.com</span>
-				</a>
-				<a
-					href="https://github.com/adrianvillanueva997"
-					className="flex items-center gap-2 text-neutral-700 dark:text-neutral-300
-            hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<FaGithub className="h-4 w-4" />
-					<span>GitHub</span>
-				</a>
-				<a
-					href="https://www.linkedin.com/in/adrian-villanueva-martinez/"
-					className="flex items-center gap-2 text-neutral-700 dark:text-neutral-300
-            hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<FaLinkedin className="h-4 w-4" />
-					<span>LinkedIn</span>
-				</a>
+				{socialLinks
+					.filter(({ name }) => name !== "RSS")
+					.map(({ name, url, icon, external }) => {
+						const Icon = iconMap[icon as keyof typeof iconMap];
+						return (
+							<a
+								key={name}
+								href={url}
+								className="flex items-center gap-2 text-neutral-700 dark:text-neutral-300
+                hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+								target={external ? "_blank" : undefined}
+								rel={external ? "noopener noreferrer" : undefined}
+							>
+								<Icon className="h-4 w-4" />
+								<span>
+									{name === "Email" ? url.replace("mailto:", "") : name}
+								</span>
+							</a>
+						);
+					})}
 			</div>
 		</section>
 	);

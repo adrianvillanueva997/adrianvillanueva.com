@@ -5,7 +5,6 @@ import React from "react";
 import { highlight } from "sugar-high";
 import { Callout } from "./post/Callout";
 import { Categories } from "./post/Categories";
-import { CodeSandbox } from "./post/CodeSandbox";
 import { Details } from "./post/Details";
 import { Mermaid } from "./post/Mermaid"; // Import the Mermaid component
 import { Steps } from "./post/Steps";
@@ -116,7 +115,16 @@ const components = {
 	h4: createHeading(4),
 	h5: createHeading(5),
 	h6: createHeading(6),
-	Image: RoundedImage,
+	Image: (props) => (
+		<div className="flex justify-center items-center my-6">
+			<Image
+				{...props}
+				className="rounded-lg"
+				quality={100}
+				sizes="(min-width: 768px) 42rem, 100vw"
+			/>
+		</div>
+	),
 	a: CustomLink,
 	pre: (props: React.HTMLAttributes<HTMLDivElement>) => <div {...props} />,
 	code: ({ children, className }: { children: string; className?: string }) => {
@@ -130,13 +138,10 @@ const components = {
 	Categories,
 	Callout,
 	Details,
-	CodeSandbox,
 	Terminal,
 	TechStack,
 	Steps,
 };
-
-
 
 // Export the CustomMDX component
 export function CustomMDX({ source, ...props }) {
