@@ -12,9 +12,14 @@ export async function BlogPosts({
 	sortBy = "date",
 	showSummary = true,
 }: BlogPostsProps = {}) {
-	const allBlogs = getBlogPosts();
+	let allBlogs = await getBlogPosts();
 
-	const postsToShow = (await allBlogs)
+	if (process.env.NODE_ENV === "production") {
+		// Filter out drafts in production
+		allBlogs = allBlogs.filter((post) => !post.metadata.draft);
+	}
+
+	const postsToShow = allBlogs
 		.sort((a, b) => {
 			if (sortBy === "title") {
 				return a.metadata.title.localeCompare(b.metadata.title);
@@ -38,7 +43,7 @@ export async function BlogPosts({
 					<div className="flex items-center justify-between">
 						<div className="flex items-center gap-4">
 							<span className="text-sm text-neutral-500 dark:text-neutral-400 w-20 shrink-0">
-								{formatDate(post.metadata.publishedAt, false)}
+								{formatDate(post.metadata.publishedAt, "short")}
 							</span>
 							<span className="text-neutral-800 dark:text-neutral-200">
 								{post.metadata.title}

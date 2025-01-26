@@ -19,8 +19,6 @@ export const metadata: Metadata = {
 	},
 };
 
-
-
 const pillStyle =
 	"px-3 py-1 text-sm bg-neutral-100 dark:bg-neutral-800 rounded-full text-neutral-600 dark:text-neutral-400";
 

@@ -3,9 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { highlight } from "sugar-high";
+import { Callout } from "./post/Callout";
 import { Categories } from "./post/Categories";
+import { Details } from "./post/Details";
 import { Mermaid } from "./post/Mermaid"; // Import the Mermaid component
+import { Steps } from "./post/Steps";
 import { CodeBlock } from "./post/SyntaxHighlighter";
+import { TechStack } from "./post/TechStack";
+import { Terminal } from "./post/Terminal";
 
 function Table({ data }) {
 	const headers = data.headers.map((header) => (
@@ -110,7 +115,16 @@ const components = {
 	h4: createHeading(4),
 	h5: createHeading(5),
 	h6: createHeading(6),
-	Image: RoundedImage,
+	Image: (props) => (
+		<div className="flex justify-center items-center my-6">
+			<Image
+				{...props}
+				className="rounded-lg"
+				quality={100}
+				sizes="(min-width: 768px) 42rem, 100vw"
+			/>
+		</div>
+	),
 	a: CustomLink,
 	pre: (props: React.HTMLAttributes<HTMLDivElement>) => <div {...props} />,
 	code: ({ children, className }: { children: string; className?: string }) => {
@@ -122,6 +136,11 @@ const components = {
 	},
 	Table,
 	Categories,
+	Callout,
+	Details,
+	Terminal,
+	TechStack,
+	Steps,
 };
 
 // Export the CustomMDX component

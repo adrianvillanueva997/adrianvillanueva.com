@@ -5,6 +5,7 @@ export interface BlogPost {
 		description: string;
 		date: string;
 		categories?: string[];
-		readingTime?: number;
+		readingTime: number;
+		draft: boolean;
 	};
 }

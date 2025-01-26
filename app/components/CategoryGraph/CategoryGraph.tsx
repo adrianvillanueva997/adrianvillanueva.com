@@ -38,16 +38,32 @@ export function CategoryGraph({ categoryPosts }: CategoryGraphProps) {
 			const target = nodes.find((n) => n.id === edge.target);
 			if (!source || !target) continue;
 
-			ctx.beginPath();
-			ctx.moveTo(source.x, source.y);
-			ctx.lineTo(target.x, target.y);
-			ctx.strokeStyle = edge.color || "rgba(103, 232, 249, 0.1)";
-			ctx.lineWidth = 1;
+			// Calculate vector between nodes
+			const dx = target.x - source.x;
+			const dy = target.y - source.y;
+			const distance = Math.sqrt(dx * dx + dy * dy);
 
-			// Add shadow effect
-			ctx.shadowColor = edge.color;
-			ctx.shadowBlur = 5;
-			// Remove the setLineDash line
+			// Calculate unit vector
+			const ux = dx / distance;
+			const uy = dy / distance;
+
+			// Adjust start and end points to node boundaries
+			const startX = source.x + ux * source.radius;
+			const startY = source.y + uy * source.radius;
+			const endX = target.x - ux * target.radius;
+			const endY = target.y - uy * target.radius;
+
+			ctx.beginPath();
+			ctx.moveTo(startX, startY);
+			ctx.lineTo(endX, endY);
+
+			// Improve edge visibility
+			ctx.strokeStyle = edge.color || "rgba(103, 232, 249, 0.2)";
+			ctx.lineWidth = 1.5;
+
+			// Add glow effect
+			ctx.shadowColor = edge.color || "rgba(103, 232, 249, 0.4)";
+			ctx.shadowBlur = 3;
 			ctx.stroke();
 
 			// Reset shadow
