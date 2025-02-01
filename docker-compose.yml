@@ -1,26 +1,18 @@
 ---
-name: adrianvilllanueva
 services:
   adrianvillanueva:
     image: ghcr.io/adrianvillanueva997/adrianvillanueva.com:v3.3.2
     networks:
       - dokploy-network
-    container_name: adrianvillanueva.com
-    restart: unless-stopped
+    restart: always
     ports:
       - 3000
     labels:
-      - traefik.enable=true
-      - traefik.http.middlewares.adrianvillanueva-redirect-https.redirectscheme.scheme=https
-      - traefik.http.middlewares.adrianvillanueva-redirect-https.redirectscheme.permanent=true
-      - traefik.http.routers.adrianvillanueva-http.middlewares=adrianvillanueva-redirect-https
-      - traefik.http.routers.adrianvillanueva-http.rule=Host(`adrianvillanueva.com`)
-      - traefik.http.routers.adrianvillanueva-http.entrypoints=http
-      - traefik.http.routers.adrianvillanueva-https.rule=Host(`adrianvillanueva.com`)
-      - traefik.http.routers.adrianvillanueva-https.tls.certresolver=le
-      - traefik.http.routers.adrianvillanueva-https.tls=true
-      - traefik.http.routers.adrianvillanueva-https.entrypoints=https
-      - traefik.docker.network=dokploy-network
+      - "traefik.enable=true"
+      - "traefik.http.routers.adrianvillanuevacom.rule=Host(`adrianvillanueva.com`)"
+      - "traefik.http.routers.adrianvillanuevacom.entrypoints=websecure"
+      - "traefik.http.routers.adrianvillanuevacom.tls.certResolver=letsencrypt"
+      - "traefik.http.services.adrianvillanuevacom.loadbalancer.server.port=3000"
 networks:
   dokploy-network:
     external: true
