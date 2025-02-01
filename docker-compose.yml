@@ -20,7 +20,7 @@ services:
       - traefik.http.routers.adrianvillanueva-https.tls.certresolver=le
       - traefik.http.routers.adrianvillanueva-https.tls=true
       - traefik.http.routers.adrianvillanueva-https.entrypoints=https
-      - traefik.docker.network=proxy
+      - traefik.docker.network=dokploy-network
 networks:
-  proxy:
+  dokploy-network:
     external: true
