@@ -1,4 +1,3 @@
----
 services:
   adrianvillanueva:
     image: ghcr.io/adrianvillanueva997/adrianvillanueva.com:v3.3.2
