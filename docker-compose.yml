@@ -2,10 +2,16 @@ services:
   adrianvillanueva:
     image: ghcr.io/adrianvillanueva997/adrianvillanueva.com:v3.3.2
     networks:
-      - coolify
+      - proxy
     restart: always
     ports:
       - 3000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
     labels:
       - traefik.enable=true
       - traefik.http.middlewares.adrianvillanueva-redirect-https.redirectscheme.scheme=https
@@ -17,7 +23,8 @@ services:
       - traefik.http.routers.adrianvillanueva-https.tls.certresolver=letsencrypt
       - traefik.http.routers.adrianvillanueva-https.tls=true
       - traefik.http.routers.adrianvillanueva-https.entrypoints=https
-      - traefik.docker.network=coolify
+      - "traefik.http.services.adrianvillanueva.loadbalancer.server.port=3000"
+      - traefik.docker.network=proxy
 networks:
-  coolify:
+  proxy:
     external: true
