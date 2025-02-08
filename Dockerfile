@@ -1,9 +1,10 @@
 # Base stage for shared settings
 FROM node:23.4.0-alpine AS base_image
+ENV NEXT_TELEMETRY_DISABLED=1
 FROM base_image AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-ENV NEXT_TELEMETRY_DISABLED=1
+RUN npm install -g pnpm@latest
 
 # Dependencies stage - only install production dependencies
 FROM base AS deps
@@ -22,9 +23,7 @@ RUN pnpm run build
 # Runner stage - create the final image
 FROM base_image AS runner
 WORKDIR /app
-
 ENV NODE_ENV=production
-ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
