@@ -14,7 +14,7 @@ services:
       - traefik.http.routers.adrianvillanueva-http.rule=Host(`adrianvillanueva.com`)
       - traefik.http.routers.adrianvillanueva-http.entrypoints=http
       - traefik.http.routers.adrianvillanueva-https.rule=Host(`adrianvillanueva.com`)
-      - traefik.http.routers.adrianvillanueva-https.tls.certresolver=le
+      - traefik.http.routers.adrianvillanueva-https.tls.certresolver=letsencrypt
       - traefik.http.routers.adrianvillanueva-https.tls=true
       - traefik.http.routers.adrianvillanueva-https.entrypoints=https
       - "traefik.http.services.adrianvillanueva.loadbalancer.server.port=3000"
