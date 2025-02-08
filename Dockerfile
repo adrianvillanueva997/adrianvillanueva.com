@@ -9,13 +9,13 @@ RUN corepack enable
 FROM base AS deps
 WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile --prod
+RUN pnpm install
 
 # Builder stage - install all dependencies and build the application
 FROM base AS builder
 WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
+RUN pnpm install
 COPY . .
 RUN pnpm run build
 
