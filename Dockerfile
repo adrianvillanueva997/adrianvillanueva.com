@@ -1,41 +1,49 @@
 # Base stage for shared settings
-FROM node:23.4.0-alpine AS base_image
-ENV NEXT_TELEMETRY_DISABLED=1
-FROM base_image AS base
+FROM node:23.4.0-alpine AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN npm install -g pnpm@latest
+ENV NEXT_TELEMETRY_DISABLED=1
 
-# Dependencies stage - only install production dependencies
+# Install dependencies only when needed
 FROM base AS deps
 WORKDIR /app
+RUN apk add --no-cache libc6-compat
 COPY package.json pnpm-lock.yaml ./
-RUN pnpm install
+RUN npm install -g pnpm@latest && \
+    pnpm install --frozen-lockfile --prod
 
-# Builder stage - install all dependencies and build the application
+# Builder stage
 FROM base AS builder
 WORKDIR /app
-COPY package.json pnpm-lock.yaml ./
-RUN pnpm install
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN pnpm run build
+RUN npm install -g pnpm@latest && \
+    pnpm run build
 
-# Runner stage - create the final image
-FROM base_image AS runner
+# Production image, copy all the files and run next
+FROM node:23.4.0-alpine AS runner
 WORKDIR /app
+
 ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
+# Add non root user for security
 RUN addgroup --system --gid 1001 nodejs && \
-    adduser --system --uid 1001 nextjs
+    adduser --system --uid 1001 nextjs && \
+    chown -R nextjs:nodejs /app
 
+# Copy only necessary files
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
+# Use non-root user
 USER nextjs
 
+# Expose port
 EXPOSE 3000
 
+# Start the application
 CMD ["node", "server.js"]
