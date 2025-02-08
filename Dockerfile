@@ -4,7 +4,6 @@ FROM base_image AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN corepack enable
 
 # Dependencies stage - only install production dependencies
 FROM base AS deps
