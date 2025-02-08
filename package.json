@@ -42,8 +42,7 @@
 	},
 	"pnpm": {
 		"onlyBuiltDependencies": [
-			"@vercel/speed-insights",
-			"protobufjs"
+			"@vercel/speed-insights"
 		]
 	}
 }
