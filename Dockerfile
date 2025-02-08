@@ -1,5 +1,5 @@
 # Base stage for shared settings
-FROM node:22.13.1-alpine AS base
+FROM node:23.4.0-alpine AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ENV NEXT_TELEMETRY_DISABLED=1
