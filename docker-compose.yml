@@ -22,6 +22,13 @@ services:
       - traefik.docker.network=proxy
     environment:
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
+      - OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
+      - OTEL_SERVICE_NAME=adrianvillanueva-com
+      - OTEL_RESOURCE_ATTRIBUTES=deployment.environment=production,service.version=3.4.0
+      - OTEL_TRACES_SAMPLER=parentbased_always_on
+      - OTEL_TRACES_SAMPLER_ARG=1.0
+      - OTEL_EXPORTER_OTLP_TIMEOUT=10000
+      - OTEL_EXPORTER_OTLP_SPAN_TIMEOUT=3000
 networks:
   proxy:
     external: true
