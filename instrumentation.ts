@@ -5,7 +5,5 @@ export function register() {
     registerOTel({
 					serviceName: "adrianvillanueva-com",
 					traceExporter,
-					// metricExporter,
-					// logsExporter,
 				});
 }

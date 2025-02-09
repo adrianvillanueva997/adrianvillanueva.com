@@ -20,6 +20,8 @@ services:
       - traefik.http.routers.adrianvillanueva-https.entrypoints=https
       - "traefik.http.services.adrianvillanueva.loadbalancer.server.port=3000"
       - traefik.docker.network=proxy
+    environment:
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
 networks:
   proxy:
     external: true
