@@ -10,7 +10,7 @@ WORKDIR /app
 RUN apk add --no-cache libc6-compat
 COPY package.json pnpm-lock.yaml ./
 RUN npm install -g pnpm@latest && \
-    pnpm install --frozen-lockfile --prod
+    pnpm install --frozen-lockfile
 
 # Builder stage
 FROM base AS builder
