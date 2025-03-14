@@ -18,7 +18,7 @@
 		"@tailwindcss/postcss": "4.0.10",
 		"@vercel/otel": "1.10.1",
 		"@vercel/speed-insights": "1.2.0",
-		"framer-motion": "12.4.10",
+		"framer-motion": "12.4.13",
 		"js-yaml": "4.1.0",
 		"lodash": "4.17.21",
 		"mermaid": "11.4.1",
