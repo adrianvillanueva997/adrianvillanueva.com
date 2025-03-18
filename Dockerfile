@@ -1,5 +1,5 @@
 # Base stage for shared settings
-FROM node:23.9.0-alpine AS base
+FROM node:23.10.0-alpine AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ENV NEXT_TELEMETRY_DISABLED=1
@@ -21,7 +21,7 @@ RUN npm install -g pnpm@latest && \
     pnpm run build
 
 # Production image, copy all the files and run next
-FROM node:23.9.0-alpine AS runner
+FROM node:23.10.0-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
