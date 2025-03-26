@@ -35,6 +35,7 @@
 		"tailwindcss": "4.0.10"
 	},
 	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
 		"@types/js-yaml": "4.0.9",
 		"@types/node": "22.13.9",
 		"@types/react": "19.0.10",
@@ -45,6 +46,7 @@
 	},
 	"pnpm": {
 		"onlyBuiltDependencies": [
+			"@biomejs/biome",
 			"@vercel/speed-insights",
 			"protobufjs",
 			"sharp"

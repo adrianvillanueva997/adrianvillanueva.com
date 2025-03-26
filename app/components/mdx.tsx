@@ -1,4 +1,8 @@
-import { MDXRemote } from "next-mdx-remote/rsc";
+"use client";
+
+import { MDXRemote } from "next-mdx-remote";
+import { serialize } from 'next-mdx-remote/serialize';
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -6,11 +10,18 @@ import { highlight } from "sugar-high";
 import { Callout } from "./post/Callout";
 import { Categories } from "./post/Categories";
 import { Details } from "./post/Details";
-import { Mermaid } from "./post/Mermaid"; // Import the Mermaid component
 import { Steps } from "./post/Steps";
-import { CodeBlock } from "./post/SyntaxHighlighter";
 import { TechStack } from "./post/TechStack";
 import { Terminal } from "./post/Terminal";
+
+// Dynamic imports for client components
+const Mermaid = dynamic(() => import("./post/Mermaid").then(mod => mod.Mermaid), {
+	ssr: false
+});
+
+const CodeBlock = dynamic(() => import("./post/SyntaxHighlighter").then(mod => mod.CodeBlock), {
+	ssr: false
+});
 
 function Table({ data }) {
 	const headers = data.headers.map((header) => (
@@ -143,14 +154,29 @@ const components = {
 	Steps,
 };
 
-// Export the CustomMDX component
-export function CustomMDX({ source, ...props }) {
+// Move serialization outside the component
+async function serializeMDX(source: string) {
+	return await serialize(source, {
+		parseFrontmatter: true,
+		mdxOptions: {
+			development: process.env.NODE_ENV === 'development',
+		},
+	});
+}
+
+// Make this a client component that receives the serialized content
+function MDXComponent({ mdxSource }) {
 	return (
-		<>
-			<MDXRemote
-				source={source}
-				components={{ ...components, ...(props.components || {}) }}
-			/>
-		</>
-	);
+	  <MDXRemote
+		  {...mdxSource}
+		  components={components}
+	  />
+  );
+}
+
+// Split into two parts: serialization and rendering
+export async function CustomMDX({ source }: { source: string }) {
+	const mdxSource = await serializeMDX(source);
+
+	return <MDXComponent mdxSource={mdxSource} />;
 }
