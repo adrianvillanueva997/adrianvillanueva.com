@@ -8,7 +8,7 @@
 		":separatePatchReleases"
 	],
 	"schedule": [
-		"at any time"
+		"monthly"
 	],
 	"timezone": "Europe/Madrid",
 	"packageRules": [
