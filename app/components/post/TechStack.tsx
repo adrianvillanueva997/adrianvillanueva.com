@@ -3,24 +3,16 @@ import {
 	SiAew,
 	SiDocker,
 	SiGit,
-	SiGrafana,
-	SiGraphql,
 	SiJavascript,
-	SiMinio,
-	SiMlflow,
 	SiNextdotjs,
 	SiNodedotjs,
 	SiPostgresql,
 	SiPrisma,
-	SiPrometheus,
-	SiPython,
 	SiReact,
-	SiRust,
 	SiTailwindcss,
 	SiTypescript,
 	SiVercel,
 } from "react-icons/si";
-import { IconDeviconPlainGrpc } from "./customIcons/grpc";
 
 const techIcons: Record<string, IconType> = {
 	React: SiReact,
@@ -35,14 +27,6 @@ const techIcons: Record<string, IconType> = {
 	Docker: SiDocker,
 	AWS: SiAew,
 	Vercel: SiVercel,
-	Minio: SiMinio,
-	MlFlow: SiMlflow,
-	GraphQL: SiGraphql,
-	gRPC: IconDeviconPlainGrpc,
-	Prometheus: SiPrometheus,
-	Grafana: SiGrafana,
-	Rust: SiRust,
-	Python: SiPython,
 };
 
 export function TechStack({ technologies }: { technologies: string[] }) {
