@@ -1,108 +1,111 @@
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import Footer from "./components/footer";
-import { Navbar } from "./components/nav";
-import "./global.css";
-import { baseUrl } from "./sitemap";
+import 'css/tailwind.css'
+import 'pliny/search/algolia.css'
+import 'remark-github-blockquote-alert/alert.css'
 
-const inter = Inter({
-	subsets: ["latin"],
-	variable: "--font-inter",
-	display: "swap",
-	preload: true,
-	weight: ["400", "500", "600", "700"],
-});
+import { Space_Grotesk } from 'next/font/google'
+import { Analytics, AnalyticsConfig } from 'pliny/analytics'
+import { SearchProvider, SearchConfig } from 'pliny/search'
+import Header from '@/components/Header'
+import SectionContainer from '@/components/SectionContainer'
+import Footer from '@/components/Footer'
+import siteMetadata from '@/data/siteMetadata'
+import { ThemeProviders } from './theme-providers'
+import { Metadata } from 'next'
+
+const space_grotesk = Space_Grotesk({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-space-grotesk',
+})
 
 export const metadata: Metadata = {
-	metadataBase: new URL(baseUrl),
-	title: {
-		default: "Adrian Villanueva | Software Engineer",
-		template: "%s | Adrian Villanueva",
-	},
-	description:
-		"Software Engineer specializing in web development, cloud architecture, and system design. Discover technical articles, engineering projects, and professional insights.",
-	keywords: [
-		"software engineer",
-		"full stack developer",
-		"rust",
-		"python",
-		"data engineer",
-		"traveling",
-		"cloud architect",
-		"node.js",
-		"aws",
-		"system design",
-		"technical blog",
-	],
-	openGraph: {
-		title: "Adrian Villanueva | Software Engineer",
-		description:
-			"Software Engineer specializing in web development, cloud architecture, and system design. Discover technical articles, engineering projects, and professional insights.",
-		url: baseUrl,
-		siteName: "Adrian Villanueva",
-		locale: "en_US",
-		type: "website",
-	},
-	robots: {
-		index: true,
-		follow: true,
-		googleBot: {
-			index: true,
-			follow: true,
-			"max-video-preview": -1,
-			"max-image-preview": "large",
-			"max-snippet": -1,
-		},
-	},
-	alternates: {
-		canonical: baseUrl,
-	},
-	icons: {
-		icon: [
-			{ url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-			{ url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-		],
-		apple: [
-			{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
-		],
-	},
-	manifest: "/site.webmanifest",
-};
+  metadataBase: new URL(siteMetadata.siteUrl),
+  title: {
+    default: siteMetadata.title,
+    template: `%s | ${siteMetadata.title}`,
+  },
+  description: siteMetadata.description,
+  openGraph: {
+    title: siteMetadata.title,
+    description: siteMetadata.description,
+    url: './',
+    siteName: siteMetadata.title,
+    images: [siteMetadata.socialBanner],
+    locale: 'en_US',
+    type: 'website',
+  },
+  alternates: {
+    canonical: './',
+    types: {
+      'application/rss+xml': `${siteMetadata.siteUrl}/feed.xml`,
+    },
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  twitter: {
+    title: siteMetadata.title,
+    card: 'summary_large_image',
+    images: [siteMetadata.socialBanner],
+  },
+}
 
-const cx = (...classes) => classes.filter(Boolean).join(" ");
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const basePath = process.env.BASE_PATH || ''
 
-export default function RootLayout({
-	children,
-}: {
-	children: React.ReactNode;
-}) {
-	return (
-		<html
-			lang="en"
-			className={cx(
-				"scroll-smooth",
-				"selection:bg-neutral-200 selection:dark:bg-neutral-800",
-				"text-black bg-white dark:text-white dark:bg-black",
-				inter.variable,
-			)}
-		>
-			<body className="antialiased min-h-screen flex flex-col">
-				<div className="fixed inset-0 grid grid-cols-[1fr,min(640px,100%),1fr] pointer-events-none">
-					<div className="border-r border-neutral-100 dark:border-neutral-900" />
-					<div className="border-x border-neutral-100 dark:border-neutral-900" />
-					<div className="border-l border-neutral-100 dark:border-neutral-900" />
-				</div>
-
-				<div className="px-4 flex-grow max-w-2xl mx-auto w-full relative">
-					<main className="flex-auto min-w-0 mt-6 flex flex-col gap-16 px-2 md:px-0">
-						<Navbar />
-						<div className="animate-fade-in">{children}</div>
-						<Footer />
-					</main>
-				</div>
-				<SpeedInsights />
-			</body>
-		</html>
-	);
+  return (
+    <html
+      lang={siteMetadata.language}
+      className={`${space_grotesk.variable} scroll-smooth`}
+      suppressHydrationWarning
+    >
+      <link
+        rel="apple-touch-icon"
+        sizes="76x76"
+        href={`${basePath}/static/favicons/apple-touch-icon.png`}
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href={`${basePath}/static/favicons/favicon-32x32.png`}
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href={`${basePath}/static/favicons/favicon-16x16.png`}
+      />
+      <link rel="manifest" href={`${basePath}/static/favicons/site.webmanifest`} />
+      <link
+        rel="mask-icon"
+        href={`${basePath}/static/favicons/safari-pinned-tab.svg`}
+        color="#5bbad5"
+      />
+      <meta name="msapplication-TileColor" content="#000000" />
+      <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
+      <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
+      <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
+      <body className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white">
+        <ThemeProviders>
+          <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
+          <SectionContainer>
+            <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
+              <Header />
+              <main className="mb-auto">{children}</main>
+            </SearchProvider>
+            <Footer />
+          </SectionContainer>
+        </ThemeProviders>
+      </body>
+    </html>
+  )
 }

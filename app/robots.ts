@@ -1,24 +1,15 @@
-import { baseUrl } from "app/sitemap";
+import { MetadataRoute } from 'next'
+import siteMetadata from '@/data/siteMetadata'
 
-export default function robots() {
-	return {
-		rules: [
-			{
-				userAgent: "*",
-				allow: "/",
-				disallow: ["/private/", "/api/", "/*.json$", "/*.xml$"],
-				crawlDelay: 10,
-			},
-			{
-				userAgent: "GPTBot",
-				disallow: "/",
-			},
-			{
-				userAgent: "CCBot",
-				disallow: "/",
-			},
-		],
-		sitemap: `${baseUrl}/sitemap.xml`,
-		host: baseUrl,
-	};
+export const dynamic = 'force-static'
+
+export default function robots(): MetadataRoute.Robots {
+  return {
+    rules: {
+      userAgent: '*',
+      allow: '/',
+    },
+    sitemap: `${siteMetadata.siteUrl}/sitemap.xml`,
+    host: siteMetadata.siteUrl,
+  }
 }

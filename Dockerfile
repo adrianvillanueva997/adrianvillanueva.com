@@ -1,24 +1,24 @@
 # Base stage for shared settings
 FROM node:23.9.0-alpine AS base
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
 ENV NEXT_TELEMETRY_DISABLED=1
 
 # Install dependencies only when needed
 FROM base AS deps
 WORKDIR /app
 RUN apk add --no-cache libc6-compat
-COPY package.json pnpm-lock.yaml ./
-RUN npm install -g pnpm@latest && \
-    pnpm install --frozen-lockfile
+COPY package.json yarn.lock .yarnrc.yml ./
+COPY .yarn ./.yarn
+# Install dependencies
+RUN yarn install --frozen-lockfile
 
 # Builder stage
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/.yarn ./.yarn
+COPY --from=deps /app/.yarnrc.yml ./
 COPY . .
-RUN npm install -g pnpm@latest && \
-    pnpm run build
+RUN yarn build
 
 # Production image, copy all the files and run next
 FROM node:23.9.0-alpine AS runner

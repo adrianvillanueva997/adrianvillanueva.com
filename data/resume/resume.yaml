@@ -1,0 +1,82 @@
+personal:
+  name: "Adrian Villanueva Martinez"
+  title: "Senior Software Engineer"
+  nationality: "Spain 🇪🇸"
+  location: "Tokyo, Japan 🇯🇵"
+  summary: "Experienced Software Engineer with expertise in cloud architecture, data engineering, and MLOps. Based in Tokyo, bringing Spanish innovation and European engineering practices to the Japanese tech industry. Skilled in designing scalable data platforms and delivering high-quality engineering solutions."
+  email: adrian.villanueva.martinez@outlook.com
+
+experience:
+  - company: "Woven by Toyota"
+    position: "Data Engineer"
+    location: "Tokyo, Japan"
+    startDate: "2024-08"
+    endDate: "Present"
+    highlights:
+      - "Developed ETL pipelines on Databricks, ensuring high data quality and efficiency"
+      - "Designed and implemented a Kafka-based data ingestion framework with Rust bindings for Python, Java, TypeScript, and Go"
+      - "Established Open Telemetry for monitoring and tracing within the data ingestion SDK"
+      - "Built and maintained a scalable AWS data platform using OpenTofu, Terragrunt, and Terramate"
+      - "Led the implementation of CI/CD pipelines for seamless deployment of data services on GitHub Actions"
+      - "Implemented MLOps best practices for model deployment and monitoring with MLflow"
+      - "Collaborated on data-mesh architecture within cross-functional teams"
+  - company: "Albert Heijn"
+    position: "Data Platform Engineer"
+    location: "Amsterdam, Netherlands"
+    startDate: "2022-03"
+    endDate: "2024-06"
+    highlights:
+      - "Built ETL pipelines and tools for auditing and monitoring Databricks workspaces"
+      - "Developed and maintained Terraform modules for Azure and Kubernetes deployments"
+      - "Led Python code reviews to improve code quality and consistency"
+      - "Deployed and managed Azure-based resources using ArgoCD and Kubernetes"
+      - "Streamlined CI/CD pipelines on GitHub Actions to enhance team productivity"
+  - company: "Dashmote"
+    position: "Data Engineer"
+    location: "Amsterdam, Netherlands"
+    startDate: "2021-09"
+    endDate: "2022-03"
+    highlights:
+      - "Redesigned CI/CD strategy, reducing build times and improving workflows"
+      - "Developed and optimized Docker images with buildx, reducing build time by 60%"
+      - "Built a production-ready data lake on AWS Athena"
+      - "Maintained Apache Airflow components and deployed Infrastructure as Code with Terraform"
+      - "Mentored new engineers to accelerate onboarding and growth"
+  - company: "Ernst & Young (EY)"
+    position: "Software Developer (Faas Tech)"
+    location: "Madrid, Spain"
+    startDate: "2019-06"
+    endDate: "2020-06"
+    highlights:
+      - "Developed ETL pipelines and automated processes with SQL, Python, and Talend"
+      - "Administered Linux and Windows Server systems to ensure stability"
+      - "Enhanced Sage X3 ERP systems and delivered Business Intelligence solutions"
+      - "Contributed to machine learning and data engineering projects"
+
+education:
+  - institution: "Universidad Europea de Madrid"
+    degree: "Bachelor's in Computer Science"
+    location: "Madrid, Spain"
+    startDate: "2015"
+    endDate: "2020"
+
+skills:
+  languages: ["Python", "TypeScript", "Rust", "Java", "SQL", "Go", "Bash", "C"]
+  frameworks: ["Next.js", "React", "FastAPI", "Apache Airflow", "Pyspark"]
+  cloud: ["AWS", "Azure", "GCP"]
+  tools: ["Databricks", "Docker", "Terraform", "Kubernetes"]
+  mlops: ["MLflow"]
+  databases: ["AWS Athena", "SQL-based databases", "Redis"]
+  monitoring: ["Open Telemetry", "Prometheus", "Grafana"]
+  CI/CD: ["GitHub Actions", "Jenkins", "ArgoCD"]
+  other: ["Linux (Ubuntu, CentOS)", "Windows Server"]
+
+languages:
+  - name: "Spanish"
+    level: "Native"
+  - name: "English"
+    level: "Professional"
+  - name: "Japanese"
+    level: "Basic"
+  - name: "Dutch"
+    level: "Basic"
