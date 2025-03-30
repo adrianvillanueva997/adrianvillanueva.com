@@ -7,7 +7,7 @@ FROM base AS deps
 WORKDIR /app
 RUN apk add --no-cache libc6-compat
 COPY package.json yarn.lock .yarnrc.yml ./
-COPY .yarn ./.yarn
+COPY .yarnrc ./.yarnrc
 # Install dependencies
 RUN yarn install --frozen-lockfile
 
