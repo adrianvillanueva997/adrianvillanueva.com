@@ -1,17 +1,23 @@
-import { getBlogPosts } from "app/blog/utils";
+import { MetadataRoute } from 'next'
+import { allBlogs } from 'contentlayer/generated'
+import siteMetadata from '@/data/siteMetadata'
 
-export const baseUrl = "https://adrianvillanueva.com";
+export const dynamic = 'force-static'
 
-export default async function sitemap() {
-	const blogs = (await getBlogPosts()).map((post) => ({
-		url: `${baseUrl}/blog/${post.slug}`,
-		lastModified: post.metadata.publishedAt,
-	}));
+export default function sitemap(): MetadataRoute.Sitemap {
+  const siteUrl = siteMetadata.siteUrl
 
-	const routes = ["", "/blog"].map((route) => ({
-		url: `${baseUrl}${route}`,
-		lastModified: new Date().toISOString().split("T")[0],
-	}));
+  const blogRoutes = allBlogs
+    .filter((post) => !post.draft)
+    .map((post) => ({
+      url: `${siteUrl}/${post.path}`,
+      lastModified: post.lastmod || post.date,
+    }))
 
-	return [...routes, ...blogs];
+  const routes = ['', 'blog', 'projects', 'tags'].map((route) => ({
+    url: `${siteUrl}/${route}`,
+    lastModified: new Date().toISOString().split('T')[0],
+  }))
+
+  return [...routes, ...blogRoutes]
 }

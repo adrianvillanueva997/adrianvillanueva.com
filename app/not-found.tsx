@@ -1,27 +1,25 @@
-import Link from "next/link";
+import Link from '@/components/Link'
 
 export default function NotFound() {
-	return (
-		<section className="flex flex-col items-center justify-center min-h-[70vh] text-center">
-			<div className="animate-bounce mb-8 text-8xl">☠️</div>
-			<h1 className="text-7xl font-bold tracking-tighter mb-4 bg-gradient-to-r from-red-600 to-red-800 text-transparent bg-clip-text animate-fade-in">
-				YOU DIED
-			</h1>
-			<h2 className="text-3xl font-medium mb-8 text-neutral-800 dark:text-neutral-200 animate-fade-in [animation-delay:200ms]">
-				404 - PAGE NOT FOUND
-			</h2>
-			<p className="mb-8 text-neutral-600 dark:text-neutral-400 max-w-md animate-fade-in [animation-delay:400ms]">
-				Tarnished, it seems you've wandered into the Lands Between. This path
-				leads only to darkness.
-			</p>
-			<Link
-				href="/"
-				className="group relative px-8 py-4 rounded-full bg-gradient-to-r from-amber-500 to-amber-700
-                 text-white font-medium hover:scale-105 transition-all duration-200
-                 animate-fade-in [animation-delay:600ms] hover:shadow-lg"
-			>
-				<span className="relative z-10">← Return to Site of Grace</span>
-			</Link>
-		</section>
-	);
+  return (
+    <div className="flex flex-col items-start justify-start md:mt-24 md:flex-row md:items-center md:justify-center md:space-x-6">
+      <div className="space-x-2 pt-6 pb-8 md:space-y-5">
+        <h1 className="text-6xl leading-9 font-extrabold tracking-tight text-gray-900 md:border-r-2 md:px-6 md:text-8xl md:leading-14 dark:text-gray-100">
+          404
+        </h1>
+      </div>
+      <div className="max-w-md">
+        <p className="mb-4 text-xl leading-normal font-bold md:text-2xl">
+          Sorry we couldn't find this page.
+        </p>
+        <p className="mb-8">But dont worry, you can find plenty of other things on our homepage.</p>
+        <Link
+          href="/"
+          className="focus:shadow-outline-blue inline rounded-lg border border-transparent bg-blue-600 px-4 py-2 text-sm leading-5 font-medium text-white shadow-xs transition-colors duration-150 hover:bg-blue-700 focus:outline-hidden dark:hover:bg-blue-500"
+        >
+          Back to homepage
+        </Link>
+      </div>
+    </div>
+  )
 }
