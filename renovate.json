@@ -7,55 +7,35 @@
 		":enableVulnerabilityAlerts",
 		":separatePatchReleases"
 	],
-	"schedule": [
-		"* * 1 */3 *"
-	],
+	"schedule": ["* * 1 */3 *"],
 	"timezone": "Europe/Madrid",
 	"packageRules": [
 		{
-			"matchUpdateTypes": [
-				"minor",
-				"patch"
-			],
+			"matchUpdateTypes": ["minor", "patch"],
 			"matchCurrentVersion": "!/^0/",
 			"automerge": false
 		},
 		{
 			"groupName": "next.js monorepo",
-			"schedule": [
-				"* * 1 */3 *"
-			],
-			"matchSourceUrls": [
-				"https://github.com/vercel/next.js{/,}**"
-			]
+			"schedule": ["* * 1 */3 *"],
+			"matchSourceUrls": ["https://github.com/vercel/next.js{/,}**"]
 		},
 		{
 			"groupName": "TypeScript",
-			"matchPackageNames": [
-				"typescript",
-				"@types/*"
-			]
+			"matchPackageNames": ["typescript", "@types/*"]
 		},
 		{
 			"groupName": "Testing packages",
-			"matchPackageNames": [
-				"jest",
-				"@testing-library/*",
-				"vitest"
-			]
+			"matchPackageNames": ["jest", "@testing-library/*", "vitest"]
 		}
 	],
-	"labels": [
-		"dependencies"
-	],
+	"labels": ["dependencies"],
 	"prHourlyLimit": 2,
 	"prConcurrentLimit": 10,
 	"rangeStrategy": "pin",
 	"minimumReleaseAge": "3 days",
 	"vulnerabilityAlerts": {
-		"labels": [
-			"security"
-		],
+		"labels": ["security"],
 		"automerge": false
 	}
 }
