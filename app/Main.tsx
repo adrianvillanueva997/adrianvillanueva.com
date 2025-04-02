@@ -1,10 +1,10 @@
-import Image from "next/image";
-import NewsletterForm from "pliny/ui/NewsletterForm";
-import { formatDate } from "pliny/utils/formatDate";
 import Link from "@/components/Link";
 import Skills from "@/components/Skills";
 import siteMetadata from "@/data/siteMetadata";
 import { getResumeData } from "@/utils/resumeData";
+import Image from "next/image";
+import NewsletterForm from "pliny/ui/NewsletterForm";
+import { formatDate } from "pliny/utils/formatDate";
 
 const MAX_DISPLAY = 5;
 
@@ -55,12 +55,12 @@ export default function Home({ posts }) {
 					<div className="md:col-span-2 flex justify-center">
 						{/* Replace with your own profile image */}
 						<div className="w-48 h-48 md:w-64 md:h-64 relative bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-lg">
-							{/* Uncomment and update path when you have an image */}
 							<Image
 								src="/static/images/me/me.jpeg"
 								alt="Profile"
-								layout="fill"
-								objectFit="cover"
+								className="object-cover"
+								fill
+								sizes="(max-width: 768px) 192px, 256px"
 							/>
 						</div>
 					</div>
