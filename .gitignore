@@ -2,6 +2,8 @@
 app/tag-data.json
 # dependencies
 
+app/tag-data.json†
+
 /node_modules
 /.pnp
 .pnp.js
