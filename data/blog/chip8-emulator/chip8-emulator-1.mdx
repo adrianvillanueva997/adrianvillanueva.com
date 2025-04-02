@@ -3,10 +3,121 @@ title: 'Creating a Chip8 Emulator with Rust'
 date: '2025-04-01'
 lastmod: '2025-04-01'
 tags: ['rust', 'emulator', 'chip8']
-draft: true
+draft: false
 summary: 'First post in the series on creating a Chip8 emulator with Rust.'
-images: []
+# images: ['/static/images/chip8/chip8.png']
 authors: ['default']
 ---
 
+## Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Introduction](#introduction)
+- [Prerequisites](#prerequisites)
+- [Architecture](#architecture)
+- [Main logic](#main-logic)
+- [Project Goals](#project-goals)
+- [Resources used](#resources-used)
+
 ## Introduction
+
+I have been quite curious about emulators and how they work, so I decided to build my own one. Digging a bit on the internet I saw many candidates but there was one that looked simple enough to start building just for fun, Chip8.
+
+Chip8 is a simple programming language and virtual machine that was developed back in 1970, it was mostly used for videogame development.
+
+## Prerequisites
+
+Some basic programming language knowledge and being familiar with computer architecture concepts. It would be nice to have hexadecimal notation and if you want to follow along, a development environment ready to use (not covered).
+
+The following tech stack is going to be used to build the emulator:
+<TechStack technologies={["Rust", "SDL2"]} />
+
+<Callout type="note">
+Rust low level capacities and memory safety make it a great tool for building emulators,  its bindings support for SDL2 provides a great platform for graphics and sound handling.
+</Callout>
+
+- Make sure to install [Rustup](https://rustup.rs/)
+- Integrate [SDL2](https://www.libsdl.org/) in your system making use of [the rust bindings](https://github.com/Rust-SDL2/rust-sdl2?tab=readme-ov-file#linux)
+
+## Architecture
+
+The Chip8 system consists of several key components that work together:
+
+<Mermaid chart ={`
+graph TD
+    CPU[CPU] --> Memory[Memory 4KB]
+    CPU --> Registers[16 Registers]
+    CPU --> Stack[Stack]
+    CPU --> Timers[Timers]
+
+    subgraph IO[Input/Output]
+        Display[Display 64x32]
+        Keyboard[Keyboard 16 keys]
+        Sound[Sound]
+    end
+
+    CPU --> IO
+    Memory --> ROM[ROM Programs]
+    Memory --> FontSet[Font Set]
+
+    Timers --> Delay[Delay Timer]
+    Timers --> Sound_Timer[Sound Timer]
+`}
+
+/>
+
+Each component has a specific role:
+
+- **Memory**: 4KB of RAM for storing programs and data
+- **Registers**: 16 8-bit general purpose registers (V0 to VF)
+- **Stack**: For storing return addresses in subroutines
+- **Timers**: Two timers for delay and sound
+- **Display**: Monochrome display of 64x32 pixels
+- **Keyboard**: Hex keyboard with 16 keys (0-F)
+
+## Main logic
+
+The main logic of the emulator is the following:
+<Steps>
+  <div>
+    ### Initialize Memory and Load Fontset
+    The Chip8 has 4KB of RAM:
+    - First 512 bytes (0x000-0x1FF): Reserved for interpreter
+    - Remaining 3584 bytes: Available for ROM and RAM
+    - Font set: Stored in interpreter space
+  </div>
+
+  <div>
+    ### Load ROM Program
+    - Read ROM file into memory
+    - Validate size (must fit in available RAM)
+    - Load starting at address 0x200
+  </div>
+
+  <div>
+    ### Execute CPU Cycle
+    - Fetch opcode (2 bytes)
+    - Decode instruction
+    - Execute operation
+    - Update timers
+    - Refresh display
+  </div>
+</Steps>
+
+## Project Goals
+
+This series will cover:
+
+- Building a functional Chip8 emulator in Rust
+- Understanding emulator architecture principles
+- Implementing CPU instructions and memory management
+- Adding graphics and sound support
+- Testing and debugging emulator behavior
+
+## Resources used
+
+Thanks to the following specifications I was able to start the process:
+
+- [Cowgod's Chip-8 Technical Reference](http://devernay.free.fr/hacks/chip8/C8TECH10.HTM#3.1)
+- [Guide: How to write a CHIP-8 emulator](https://tobiasvl.github.io/blog/write-a-chip-8-emulator/#stack)
+- [CHIP-8 Reference Implementation](https://chip8.gulrak.net/)
