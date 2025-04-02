@@ -24,6 +24,7 @@ import {
 	SiTypescript,
 	SiVercel,
 } from "react-icons/si";
+import { SdlIcon } from "../icons/SdlIcon";
 
 const techIcons: Record<string, IconType> = {
 	// Frontend
@@ -38,6 +39,7 @@ const techIcons: Record<string, IconType> = {
 	"Node.js": SiNodedotjs,
 	Python: SiPython,
 	Rust: SiRust,
+	SDL2: SdlIcon,
 	Go: SiGo,
 	Django: SiDjango,
 	FastAPI: SiFastapi,
