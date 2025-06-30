@@ -1,5 +1,5 @@
 import { Inter } from "next/font/google";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 import SectionContainer from "./SectionContainer";

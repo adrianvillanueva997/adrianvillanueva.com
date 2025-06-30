@@ -1,10 +1,10 @@
+import Image from "next/image";
+import NewsletterForm from "pliny/ui/NewsletterForm";
+import { formatDate } from "pliny/utils/formatDate";
 import Link from "@/components/Link";
 import Skills from "@/components/Skills";
 import siteMetadata from "@/data/siteMetadata";
 import { getResumeData } from "@/utils/resumeData";
-import Image from "next/image";
-import NewsletterForm from "pliny/ui/NewsletterForm";
-import { formatDate } from "pliny/utils/formatDate";
 
 const MAX_DISPLAY = 5;
 
@@ -20,40 +20,45 @@ export default function Home({ posts }) {
 	return (
 		<>
 			{/* Hero Section */}
-			<section className="relative overflow-hidden bg-gradient-to-br from-primary-100 to-white dark:from-gray-800 dark:to-gray-900 rounded-xl mb-8 p-8">
-				<div className="grid md:grid-cols-5 gap-8 items-center">
-					<div className="md:col-span-3 space-y-4">
-						<h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white">
+			<section className="relative overflow-hidden rounded-2xl mb-12 p-10 border border-primary-300 dark:border-primary-800 bg-white dark:bg-gray-950 shadow-[0_0_20px_rgba(0,0,0,0.05)] dark:shadow-[0_0_20px_rgba(255,255,255,0.05)]">
+				<div className="grid md:grid-cols-5 gap-10 items-center">
+					<div className="md:col-span-3 space-y-6">
+						<h1 className="text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white leading-tight">
 							<span className="text-primary-600 dark:text-primary-400">
-								Hello,
-							</span>{" "}
-							I'm {resumeData.personal.name}
+								{resumeData.personal.name}
+							</span>
 						</h1>
-						<p className="text-xl text-gray-700 dark:text-gray-300">
-							Software Engineer specializing in data engineering, cloud
-							architecture, and systems design. I love solving interesting
-							problems and playing with technology and music.
-							<br></br>
-							Originally from {resumeData.personal.nationality} but currently
-							based in {resumeData.personal.location}
+						<p className="text-lg sm:text-xl text-gray-800 dark:text-gray-300 leading-relaxed max-w-xl">
+							Engineer. Artist.
+							<br />
+							Crafting systems in code, sound, and silence.
+							<br />
+							Originally from{" "}
+							<span className="font-medium">
+								{resumeData.personal.nationality}
+							</span>
+							, currently based in{" "}
+							<span className="font-medium">
+								{resumeData.personal.location}
+							</span>
+							.
 						</p>
-						<div className="flex space-x-4">
+						<div className="flex space-x-4 pt-2">
 							<Link
 								href="/about"
-								className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 dark:hover:bg-primary-500 transition-colors duration-200"
+								className="inline-flex items-center px-5 py-2.5 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 dark:hover:bg-primary-500 transition-colors duration-200"
 							>
 								About Me
 							</Link>
 							<Link
 								href="/projects"
-								className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-primary-700 bg-primary-100 hover:bg-primary-200 dark:text-primary-100 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors duration-200"
+								className="inline-flex items-center px-5 py-2.5 border border-transparent text-base font-medium rounded-md text-primary-700 bg-primary-100 hover:bg-primary-200 dark:text-primary-100 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors duration-200"
 							>
 								My Projects
 							</Link>
 						</div>
 					</div>
 					<div className="md:col-span-2 flex justify-center">
-						{/* Replace with your own profile image */}
 						<div className="w-48 h-48 md:w-64 md:h-64 relative bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-lg">
 							<Image
 								src="/static/images/me/me.jpeg"

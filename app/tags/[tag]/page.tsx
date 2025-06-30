@@ -2,7 +2,7 @@ import { genPageMetadata } from "app/seo";
 import tagData from "app/tag-data.json";
 import { allBlogs } from "contentlayer/generated";
 import { slug } from "github-slugger";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { allCoreContent, sortPosts } from "pliny/utils/contentlayer";
 import siteMetadata from "@/data/siteMetadata";
 import ListLayout from "@/layouts/ListLayoutWithTags";
@@ -42,9 +42,7 @@ export default async function TagPage(props: {
 	const title = tag[0].toUpperCase() + tag.split(" ").join("-").slice(1);
 	const filteredPosts = allCoreContent(
 		sortPosts(
-			allBlogs.filter(
-				(post) => post.tags && post.tags.map((t) => slug(t)).includes(tag),
-			),
+			allBlogs.filter((post) => post.tags?.map((t) => slug(t)).includes(tag)),
 		),
 	);
 	const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);

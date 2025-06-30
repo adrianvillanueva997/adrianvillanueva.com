@@ -2,20 +2,34 @@ import "css/tailwind.css";
 import "pliny/search/algolia.css";
 import "remark-github-blockquote-alert/alert.css";
 
-import { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google";
-import { Analytics, AnalyticsConfig } from "pliny/analytics";
-import { SearchConfig, SearchProvider } from "pliny/search";
+import type { Metadata } from "next";
+import { IBM_Plex_Sans, JetBrains_Mono, Unica_One } from "next/font/google";
+import { Analytics, type AnalyticsConfig } from "pliny/analytics";
+import { type SearchConfig, SearchProvider } from "pliny/search";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import SectionContainer from "@/components/SectionContainer";
 import siteMetadata from "@/data/siteMetadata";
 import { ThemeProviders } from "./theme-providers";
 
-const space_grotesk = Space_Grotesk({
+const ibm_plex_sans = IBM_Plex_Sans({
 	subsets: ["latin"],
 	display: "swap",
-	variable: "--font-space-grotesk",
+	variable: "--font-sans",
+	weight: ["400", "600"],
+});
+
+const jetbrains_mono = JetBrains_Mono({
+	subsets: ["latin"],
+	display: "swap",
+	variable: "--font-mono",
+});
+
+const unica_one = Unica_One({
+	subsets: ["latin"],
+	display: "swap",
+	variable: "--font-heading",
+	weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -68,7 +82,7 @@ export default function RootLayout({
 	return (
 		<html
 			lang={siteMetadata.language}
-			className={`${space_grotesk.variable} scroll-smooth`}
+			className={`${ibm_plex_sans.variable} ${jetbrains_mono.variable} ${unica_one.variable} scroll-smooth`}
 			suppressHydrationWarning
 		>
 			<link
