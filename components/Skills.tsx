@@ -43,8 +43,10 @@ export default function Skills() {
 			<div className="flex flex-wrap gap-2">
 				{allSkills.map((skill, index) => (
 					<span
-						key={`${skill}-${// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-							index}`}
+						key={`${skill}-${
+							// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+							index
+						}`}
 						className="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 rounded-full text-sm"
 					>
 						{skill}

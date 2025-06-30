@@ -1,5 +1,5 @@
+import Image from "next/image"; // ✅ Add this
 import headerNavLinks from "@/data/headerNavLinks";
-import Logo from "@/data/logo.svg";
 import siteMetadata from "@/data/siteMetadata";
 import Link from "./Link";
 import MobileNav from "./MobileNav";
@@ -7,14 +7,21 @@ import SearchButton from "./SearchButton";
 import ThemeSwitch from "./ThemeSwitch";
 
 const Header = () => {
-	const headerClass = "sticky top-0 z-50 flex items-center w-full bg-white dark:bg-gray-950 justify-between py-10 border-b border-gray-200 dark:border-gray-800";
+	const headerClass =
+		"sticky top-0 z-50 flex items-center w-full bg-white dark:bg-gray-950 justify-between py-10 border-b border-gray-200 dark:border-gray-800";
 
 	return (
 		<header className={headerClass}>
 			<Link href="/" aria-label={siteMetadata.headerTitle}>
 				<div className="flex items-center justify-between">
 					<div className="mr-3">
-						<Logo />
+						<Image
+							src="/logo.png" // ✅ PNG path from public folder
+							alt="Logo"
+							width={40} // ✅ Adjust size as needed
+							height={40}
+							priority
+						/>
 					</div>
 					{typeof siteMetadata.headerTitle === "string" ? (
 						<div className="hidden sm:block text-xl sm:text-2xl font-semibold tracking-tight text-primary-700 dark:text-primary-300">

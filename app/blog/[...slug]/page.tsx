@@ -3,7 +3,7 @@ import "katex/dist/katex.css";
 
 import type { Authors, Blog } from "contentlayer/generated";
 import { allAuthors, allBlogs } from "contentlayer/generated";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MDXLayoutRenderer } from "pliny/mdx-components";
 import {
@@ -12,7 +12,6 @@ import {
 	sortPosts,
 } from "pliny/utils/contentlayer";
 import { components } from "@/components/MDXComponents";
-import PageTitle from "@/components/PageTitle";
 import siteMetadata from "@/data/siteMetadata";
 import PostBanner from "@/layouts/PostBanner";
 import PostLayout from "@/layouts/PostLayout";
@@ -105,7 +104,7 @@ export default async function Page(props: {
 	});
 	const mainContent = coreContent(post);
 	const jsonLd = post.structuredData;
-	jsonLd["author"] = authorDetails.map((author) => {
+	jsonLd.author = authorDetails.map((author) => {
 		return {
 			"@type": "Person",
 			name: author.name,

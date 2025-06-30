@@ -1,6 +1,6 @@
-import { mkdirSync, writeFileSync } from "fs";
+import { mkdirSync, writeFileSync } from "node:fs";
+import path from "node:path";
 import { slug } from "github-slugger";
-import path from "path";
 import { sortPosts } from "pliny/utils/contentlayer.js";
 import { escape } from "pliny/utils/htmlEscaper.js";
 import { allBlogs } from "../.contentlayer/generated/index.mjs";
@@ -17,7 +17,7 @@ const generateRssItem = (config, post) => `
     ${post.summary && `<description>${escape(post.summary)}</description>`}
     <pubDate>${new Date(post.date).toUTCString()}</pubDate>
     <author>${config.email} (${config.author})</author>
-    ${post.tags && post.tags.map((t) => `<category>${t}</category>`).join("")}
+    ${post.tags?.map((t) => `<category>${t}</category>`).join("")}
   </item>
 `;
 

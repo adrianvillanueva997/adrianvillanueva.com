@@ -12,7 +12,7 @@
 	@apply rounded-xs bg-gray-900 px-5 py-3 font-mono text-sm font-bold text-primary-300 dark:bg-gray-900;
 }
 
-.remark-code-title+div>pre {
+.remark-code-title + div > pre {
 	@apply mt-0 rounded-t-none;
 }
 
@@ -35,11 +35,13 @@
 
 .highlight-line {
 	@apply relative z-0;
-	background: linear-gradient(90deg,
-			transparent 0%,
-			#B00020 2%,
-			#3D000F 10%,
-			#1A1A1A 100%);
+	background: linear-gradient(
+		90deg,
+		transparent 0%,
+		#b00020 2%,
+		#3d000f 10%,
+		#1a1a1a 100%
+	);
 }
 
 .line-number::before {

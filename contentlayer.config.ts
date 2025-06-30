@@ -1,12 +1,12 @@
+import { writeFileSync } from "node:fs";
+import path from "node:path";
 import {
-	ComputedFields,
+	type ComputedFields,
 	defineDocumentType,
 	makeSource,
 } from "contentlayer2/source-files";
-import { writeFileSync } from "fs";
 import { slug } from "github-slugger";
 import { fromHtmlIsomorphic } from "hast-util-from-html-isomorphic";
-import path from "path";
 // Remark packages
 import {
 	extractTocHeadings,

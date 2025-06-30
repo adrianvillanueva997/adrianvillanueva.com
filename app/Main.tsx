@@ -1,10 +1,10 @@
+import Image from "next/image";
+import NewsletterForm from "pliny/ui/NewsletterForm";
+import { formatDate } from "pliny/utils/formatDate";
 import Link from "@/components/Link";
 import Skills from "@/components/Skills";
 import siteMetadata from "@/data/siteMetadata";
 import { getResumeData } from "@/utils/resumeData";
-import Image from "next/image";
-import NewsletterForm from "pliny/ui/NewsletterForm";
-import { formatDate } from "pliny/utils/formatDate";
 
 const MAX_DISPLAY = 5;
 
@@ -24,13 +24,24 @@ export default function Home({ posts }) {
 				<div className="grid md:grid-cols-5 gap-10 items-center">
 					<div className="md:col-span-3 space-y-6">
 						<h1 className="text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white leading-tight">
-							<span className="text-primary-600 dark:text-primary-400">{resumeData.personal.name}</span>
+							<span className="text-primary-600 dark:text-primary-400">
+								{resumeData.personal.name}
+							</span>
 						</h1>
 						<p className="text-lg sm:text-xl text-gray-800 dark:text-gray-300 leading-relaxed max-w-xl">
-							Engineer. Artist. Ritualist.<br />
+							Engineer. Artist.
+							<br />
 							Crafting systems in code, sound, and silence.
 							<br />
-							Originally from <span className="font-medium">{resumeData.personal.nationality}</span>, currently based in <span className="font-medium">{resumeData.personal.location}</span>.
+							Originally from{" "}
+							<span className="font-medium">
+								{resumeData.personal.nationality}
+							</span>
+							, currently based in{" "}
+							<span className="font-medium">
+								{resumeData.personal.location}
+							</span>
+							.
 						</p>
 						<div className="flex space-x-4 pt-2">
 							<Link

@@ -4,16 +4,16 @@ import { genPageMetadata } from "app/seo";
 import { useState } from "react";
 import siteMetadata from "@/data/siteMetadata";
 
-const metadata = genPageMetadata({ title: "Contact" });
+const _metadata = genPageMetadata({ title: "Contact" });
 
 export default function ContactPage() {
-	const [name, setName] = useState("");
-	const [email, setEmail] = useState("");
-	const [subject, setSubject] = useState("");
-	const [message, setMessage] = useState("");
-	const [submitted, setSubmitted] = useState(false);
-	const [submitting, setSubmitting] = useState(false);
-	const [error, setError] = useState("");
+	const [_name, _setName] = useState("");
+	const [_email, _setEmail] = useState("");
+	const [_subject, _setSubject] = useState("");
+	const [_message, _setMessage] = useState("");
+	const [_submitted, _setSubmitted] = useState(false);
+	const [_submitting, _setSubmitting] = useState(false);
+	const [_error, _setError] = useState("");
 
 	return (
 		<>
