@@ -1,27 +1,32 @@
-import Link from "@/components/Link";
+import Link from "@/components/Link"
 
 export default function NotFound() {
 	return (
-		<div className="flex flex-col items-start justify-start md:mt-24 md:flex-row md:items-center md:justify-center md:space-x-6">
-			<div className="space-x-2 pt-6 pb-8 md:space-y-5">
-				<h1 className="text-6xl leading-9 font-extrabold tracking-tight text-gray-900 md:border-r-2 md:px-6 md:text-8xl md:leading-14 dark:text-gray-100">
+		<div className="relative min-h-[60vh] flex flex-col md:flex-row items-center justify-center gap-10 px-6 py-16 text-center md:text-left overflow-hidden bg-gray-50 dark:bg-gray-950">
+			{/* Animated void background */}
+			<div className="absolute inset-0 z-0 bg-gradient-to-br from-black via-gray-900 to-black opacity-70 animate-voidPulse blur-3xl" />
+
+			<div className="relative z-10 md:border-r-2 md:pr-8 border-gray-200 dark:border-gray-700">
+				<h1 className="text-7xl md:text-9xl font-extrabold tracking-tight text-primary-600 dark:text-primary-500 animate-pulse drop-shadow-lg">
 					404
 				</h1>
 			</div>
-			<div className="max-w-md">
-				<p className="mb-4 text-xl leading-normal font-bold md:text-2xl">
-					Sorry we couldn't find this page.
+
+			<div className="relative z-10 max-w-lg space-y-4">
+				<p className="text-2xl font-semibold text-gray-800 dark:text-gray-200">
+					The void has consumed this page.
 				</p>
-				<p className="mb-8">
-					But dont worry, you can find plenty of other things on our homepage.
+				<p className="text-gray-600 dark:text-gray-400">
+					Either it never existed, or it’s been sacrificed to the code gods.
 				</p>
+
 				<Link
 					href="/"
-					className="focus:shadow-outline-blue inline rounded-lg border border-transparent bg-blue-600 px-4 py-2 text-sm leading-5 font-medium text-white shadow-xs transition-colors duration-150 hover:bg-blue-700 focus:outline-hidden dark:hover:bg-blue-500"
+					className="inline-block mt-4 px-6 py-2 rounded-md bg-primary-600 hover:bg-primary-700 dark:hover:bg-primary-500 text-white font-medium transition-all duration-200 shadow-md"
 				>
-					Back to homepage
+					Return to the realm
 				</Link>
 			</div>
 		</div>
-	);
+	)
 }
