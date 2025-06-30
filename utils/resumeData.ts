@@ -1,6 +1,6 @@
-import fs from "fs";
 import yaml from "js-yaml";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 
 // Define TypeScript interfaces for your resume data structure
 export interface ResumeData {
@@ -24,8 +24,11 @@ export interface ResumeData {
 		other?: string[];
 		[key: string]: string[] | undefined;
 	};
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	experience?: any[];
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	education?: any[];
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	languages?: any[];
 }
 

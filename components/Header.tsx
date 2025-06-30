@@ -7,11 +7,7 @@ import SearchButton from "./SearchButton";
 import ThemeSwitch from "./ThemeSwitch";
 
 const Header = () => {
-	let headerClass =
-		"flex items-center w-full bg-white dark:bg-gray-950 justify-between py-10";
-	if (siteMetadata.stickyNav) {
-		headerClass += " sticky top-0 z-50";
-	}
+	const headerClass = "sticky top-0 z-50 flex items-center w-full bg-white dark:bg-gray-950 justify-between py-10 border-b border-gray-200 dark:border-gray-800";
 
 	return (
 		<header className={headerClass}>
@@ -21,7 +17,7 @@ const Header = () => {
 						<Logo />
 					</div>
 					{typeof siteMetadata.headerTitle === "string" ? (
-						<div className="hidden h-6 text-2xl font-semibold sm:block">
+						<div className="hidden sm:block text-xl sm:text-2xl font-semibold tracking-tight text-primary-700 dark:text-primary-300">
 							{siteMetadata.headerTitle}
 						</div>
 					) : (
@@ -37,7 +33,7 @@ const Header = () => {
 							<Link
 								key={link.title}
 								href={link.href}
-								className="hover:text-primary-500 dark:hover:text-primary-400 m-1 font-medium text-gray-900 dark:text-gray-100"
+								className="m-1 font-medium text-gray-900 dark:text-gray-100 hover:text-primary-600 dark:hover:text-primary-400 hover:underline hover:tracking-wide transition-all duration-150"
 							>
 								{link.title}
 							</Link>
