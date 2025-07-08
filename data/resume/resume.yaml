@@ -3,8 +3,8 @@ personal:
   title: "Senior Software Engineer"
   nationality: "Spain 🇪🇸"
   location: "Tokyo, Japan 🇯🇵"
-  summary: "Experienced Software Engineer with expertise in cloud architecture, data engineering, and MLOps. Based in Tokyo, bringing Spanish innovation and European engineering practices to the Japanese tech industry. Skilled in designing scalable data platforms and delivering high-quality engineering solutions."
-  email: adrian.villanueva.martinez@outlook.com
+  summary: "Experienced Software Engineer with deep expertise in cloud-native data platforms, data engineering, and MLOps. Based in Tokyo, delivering European engineering excellence and driving large-scale adoption of high-impact systems across organizations. Skilled in designing resilient infrastructure, building powerful SDKs, and enabling company-wide platform usability."
+  email: "adrian.villanueva.martinez@outlook.com"
 
 experience:
   - company: "Woven by Toyota"
@@ -13,45 +13,46 @@ experience:
     startDate: "2024-08"
     endDate: "Present"
     highlights:
-      - "Developed ETL pipelines on Databricks, ensuring high data quality and efficiency"
-      - "Designed and implemented a Kafka-based data ingestion framework with Rust bindings for Python, Java, TypeScript, and Go"
-      - "Established Open Telemetry for monitoring and tracing within the data ingestion SDK"
-      - "Built and maintained a scalable AWS data platform using OpenTofu, Terragrunt, and Terramate"
-      - "Led the implementation of CI/CD pipelines for seamless deployment of data services on GitHub Actions"
-      - "Implemented MLOps best practices for model deployment and monitoring with MLflow"
-      - "Collaborated on data-mesh architecture within cross-functional teams"
+      - "Built a scalable, cloud-native data mesh platform on AWS and Databricks, adopted company-wide to enable governed, high-quality data sharing across domains"
+      - "Developed a multi-language Kafka ingestion SDK (Rust core with Python, Java, TypeScript, and Go bindings), deployed org-wide for real-time ingestion across heterogeneous systems"
+      - "Designed and implemented CI/CD pipelines for ML and data workflows in Databricks, integrating deployment and lifecycle tracking with MLflow"
+      - "Improved platform resilience through automated data reconciliation, OpenTelemetry instrumentation, and enforcement of data contracts"
+      - "Led development of self-service capabilities, including automated provisioning of Kafka topics, access control groups, and data product registration, reducing onboarding friction across the org"
+      - "Created platform documentation, naming conventions, and onboarding guides to support self-serve adoption by engineers, analysts, and ML practitioners"
+
   - company: "Albert Heijn"
     position: "Data Platform Engineer"
     location: "Amsterdam, Netherlands"
     startDate: "2022-03"
     endDate: "2024-06"
     highlights:
-      - "Built ETL pipelines and tools for auditing and monitoring Databricks workspaces"
-      - "Developed and maintained Terraform modules for Azure and Kubernetes deployments"
-      - "Led Python code reviews to improve code quality and consistency"
-      - "Deployed and managed Azure-based resources using ArgoCD and Kubernetes"
-      - "Streamlined CI/CD pipelines on GitHub Actions to enhance team productivity"
+      - "Managed a company-wide data platform built on Azure and Databricks, supporting large-scale batch and real-time pipelines"
+      - "Built reusable Terraform modules and automated infrastructure provisioning to reduce deployment time and enforce compliance"
+      - "Created observability tooling using Python and Kusto to ensure data quality and regulatory compliance across data products"
+      - "Implemented CI/CD with GitHub Actions and ArgoCD, automating deployment of services and pipelines to Kubernetes clusters"
+      - "Worked closely with analysts and data scientists to productionize ML pipelines and deploy feature engineering workflows"
+
   - company: "Dashmote"
     position: "Data Engineer"
     location: "Amsterdam, Netherlands"
     startDate: "2021-09"
     endDate: "2022-03"
     highlights:
-      - "Redesigned CI/CD strategy, reducing build times and improving workflows"
-      - "Developed and optimized Docker images with buildx, reducing build time by 60%"
-      - "Built a production-ready data lake on AWS Athena"
-      - "Maintained Apache Airflow components and deployed Infrastructure as Code with Terraform"
-      - "Mentored new engineers to accelerate onboarding and growth"
+      - "Migrated legacy Airflow pipelines to PySpark for scalable data processing and analytics workflows"
+      - "Optimized Docker builds and CI pipelines to cut build time and reduce cloud costs by applying multi-stage techniques"
+      - "Designed and deployed a governed data lake on S3 with robust schema management and access controls"
+      - "Collaborated with data scientists to automate training data pipelines and streamline model experimentation"
+
   - company: "Ernst & Young (EY)"
     position: "Software Developer (Faas Tech)"
     location: "Madrid, Spain"
     startDate: "2019-06"
     endDate: "2020-06"
     highlights:
-      - "Developed ETL pipelines and automated processes with SQL, Python, and Talend"
-      - "Administered Linux and Windows Server systems to ensure stability"
-      - "Enhanced Sage X3 ERP systems and delivered Business Intelligence solutions"
-      - "Contributed to machine learning and data engineering projects"
+      - "Built ETL pipelines in Python, SQL, and Java to automate financial reporting workflows across global client accounts"
+      - "Trained and deployed ML models for forecasting and risk scoring in regulated environments"
+      - "Built and deployed full-stack data visualization tools on Linux for internal analytics teams"
+      - "Participated in project planning with clients, translating business goals into deliverable data products"
 
 education:
   - institution: "Universidad Europea de Madrid"
@@ -67,7 +68,7 @@ skills:
   tools: ["Databricks", "Docker", "Terraform", "Kubernetes"]
   mlops: ["MLflow"]
   databases: ["AWS Athena", "SQL-based databases", "Redis"]
-  monitoring: ["Open Telemetry", "Prometheus", "Grafana"]
+  monitoring: ["OpenTelemetry", "Prometheus", "Grafana"]
   CI/CD: ["GitHub Actions", "Jenkins", "ArgoCD"]
   other: ["Linux (Ubuntu, CentOS)", "Windows Server"]
 
