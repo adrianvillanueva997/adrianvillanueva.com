@@ -37,11 +37,11 @@ const siteMetadata = {
 			// src: 'https://us.umami.is/script.js'
 			// Remember to add 'us.umami.is' in `next.config.js` as a permitted domain for the CSP
 		},
-		// plausibleAnalytics: {
-		//   plausibleDataDomain: '', // e.g. tailwind-nextjs-starter-blog.vercel.app
-		// If you are hosting your own Plausible.
-		//   src: '', // e.g. https://plausible.my-domain.com/js/script.js
-		// },
+		plausibleAnalytics: {
+			plausibleDataDomain: 'adrianvillanueva.com', // e.g. tailwind-nextjs-starter-blog.vercel.app
+			// If you are hosting your own Plausible.
+			src: 'https://analytics.thexiao77.com/js/script.js',
+		},
 		// simpleAnalytics: {},
 		// posthogAnalytics: {
 		//   posthogProjectApiKey: '', // e.g. 123e4567-e89b-12d3-a456-426614174000
