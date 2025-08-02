@@ -1,13 +1,49 @@
 ---
-title: Zenthos - architecture
+title: Why I’m Building a Real IoT System
 date: '2025-08-02'
 tags: ['rust', 'esp32', 'system design']
 draft: true
-summary: What is zenthos?
+summary: Esp32, rust, observability and some MLOps system in action.
 ---
 
-<Mermaid
-  chart={`
+## 🌱 The Motivation
+
+Hydroponics, growing plants without soil, opens the door to fully automated, self-sustaining agricultural systems. But most “smart garden” setups today are just toys.
+
+I wanted more:
+
+- Real-time observability
+- Robust data pipelines
+- Scalable backend
+- OTA updates
+- Embedded ML on the edge
+- Automation
+
+Enter the **ESP32** family.
+
+### 🔍 The Discovery
+
+I had previously worked with Raspberry Pi and Arduino before, but the ESP32 ecosystem felt different: cheaper, more powerful, and purpose-built for IoT. After testing several variants:
+
+- `ESP32-S3`: with vector instructions and AI acceleration.
+- `ESP32-CAM`:for image capture and edge CV.
+- `ESP32 with OLED`: for simple UX/display at the edge.
+
+I saw the potential for a **clean, modular system**, that can be powered by Rust, traced with OTEL, monitored end-to-end and with the option to integrate some MLOPS / FirmwareOps.
+
+### 🏆 The goal
+
+The end goal is to build a full hydroponics system, but for now, we will start with something simpler.
+
+- Exploring Rust for embedded devices.
+- Integration of OTA server and full control of FirmwareOps.
+- Platform monitoring.
+- Integration with a data and analytics platform.
+- Monetization.
+
+## 🧠 Zenthos Architecture (Core Sensor Flow)
+
+<Mermaid chart={`
 flowchart LR
   ESP32["ESP32 Temp Sensor"]
   MQTT["MQTT Broker"]
@@ -27,6 +63,30 @@ flowchart LR
   Consumer --> OTEL
   OTEL --> Grafana
   TSDB --> Grafana
+`} />
+
+## 🧱 Full System Overview
+
+<Mermaid
+  chart={`
+flowchart LR
+  ESP32["ESP32 Temp Sensor"]
+  MQTT["MQTT Broker"]
+  Middleware["Middleware (Enrichment + Validation + Data Ingestion)"]
+  RabbitMQ["RabbitMQ Queue"]
+  Consumer["Consumer (Analytics, Alerting, Workflows)"]
+  OTEL["OpenTelemetry Collector"]
+  TSDB["TimescaleDB"]
+  Grafana["Grafana"]
+  ESP32 --> MQTT
+  MQTT --> Middleware
+  Middleware --> RabbitMQ
+  Middleware --> TSDB
+  Middleware --> OTEL
+  RabbitMQ --> Consumer
+  Consumer --> OTEL
+  OTEL --> Grafana
+  TSDB --> Grafana
 `}
 />
 <Mermaid
@@ -35,22 +95,18 @@ flowchart TD
   subgraph Devices
     A1["ESP32 Devices (S3, OLED, CAM)"]
   end
-
   subgraph "Ingestion Layer"
     A2["MQTT Broker"]
     A3["Middleware Service (Redis + OTEL export)"]
   end
-
   subgraph "Message Bus"
     A4["RabbitMQ"]
   end
-
   subgraph Services
     A5["OTA Server (Axum) + Redis"]
     A6["Model Server (MLflow REST API or custom)"]
     A7["Consumers / Workers"]
   end
-
   subgraph Observability
     A8["OTEL Collector"]
     A9["Prometheus"]
@@ -58,25 +114,19 @@ flowchart TD
     A11["Loki"]
     A12["Grafana"]
   end
-
   subgraph Storage
     A13["TimescaleDB or PostgreSQL"]
   end
-
   A1 --> A2
   A2 --> A3
   A3 --> A4
   A3 --> A8
-
   A1 --> A5
   A5 --> A13
-
   A6 --> A5
-
   A4 --> A7
   A7 --> A13
   A7 --> A8
-
   A8 --> A9
   A8 --> A10
   A8 --> A11
