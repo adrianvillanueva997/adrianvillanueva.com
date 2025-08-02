@@ -6,31 +6,39 @@ interface Project {
 	categories?: string[];
 	featured?: boolean;
 	isOpenSource?: boolean;
-	repoUrl?: string; // URL to the source code repository
+	repoUrl?: string;
 }
 
 const projectsData: Project[] = [
-	// {
-	// 	title: "Your Featured Project",
-	// 	description:
-	// 		"This is your featured project that will be showcased at the top of the page.",
-	// 	imgSrc: "/static/images/featured-project.jpg",
-	// 	href: "/blog/featured-project",
-	// 	categories: ["Web", "Frontend"],
-	// 	featured: true,
-	// 	isOpenSource: true,
-	// 	repoUrl: "https://github.com/yourusername/featured-project",
-	// },
-	// {
-	// 	title: "A Web Development Project",
-	// 	description:
-	// 		"This project demonstrates my skills in modern web development technologies.",
-	// 	imgSrc: "/static/images/web-project.jpg",
-	// 	href: "/blog/web-project",
-	// 	categories: ["Web", "React"],
-	// 	isOpenSource: true,
-	// 	repoUrl: "https://github.com/yourusername/web-project",
-	// },
+	{
+		title: "adrianvillanueva.com",
+		description: "This website.",
+		imgSrc: "/static/images/logo.png",
+		// href: "/blog/featured-project",
+		categories: ["Web"],
+		featured: true,
+		isOpenSource: true,
+		repoUrl: "https://github.com/adrianvillanueva997/adrianvillanueva.com",
+	},
+	{
+		title: "Zenthos",
+		description: "A work in progress IOT, mlops, firmware and data platform.",
+		imgSrc: "/static/images/avatar.png",
+		// href: "/blog/featured-project",
+		categories: ["iot", "rust", "mlops"],
+		featured: true,
+		isOpenSource: true,
+		repoUrl: "https://github.com/adrianvillanueva997/zenthos",
+	},
+	{
+		title: "Shinigami",
+		featured: false,
+		description:
+			"Closed-source Telegram bot that automatically converts shared links into referral links. Tracks link performance in a database and visualizes real-time metrics via Grafana dashboards. Supports Amazon, Aliexpress, and other major stores",
+		imgSrc: "/static/images/projects/shinigami.png",
+		categories: ["Telegram", "Python", "Postgres", "Freelancing"],
+		isOpenSource: false,
+	},
 	// {
 	// 	title: "Machine Learning Implementation",
 	// 	description:
