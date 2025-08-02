@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
-import { useEffect, useState } from "react";
 import Card from "@/components/Card";
 import projectsData from "@/data/projectsData";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
 // Get all unique categories from projects
 const allCategories = [
@@ -103,11 +103,10 @@ export default function Projects() {
 										key={category}
 										onClick={() => setSelectedCategory(category)}
 										className={`px-3 py-1 text-sm font-medium rounded-md transition-colors
-                        ${
-													selectedCategory === category
-														? "bg-primary-500 text-white"
-														: "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
-												}`}
+                        ${selectedCategory === category
+												? "bg-primary-500 text-white"
+												: "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
+											}`}
 									>
 										{category}
 									</button>
@@ -126,11 +125,10 @@ export default function Projects() {
 										key={type}
 										onClick={() => setSourceFilter(type)}
 										className={`px-3 py-1 text-sm font-medium rounded-md transition-colors
-                        ${
-													sourceFilter === type
-														? "bg-primary-500 text-white"
-														: "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
-												}`}
+                        ${sourceFilter === type
+												? "bg-primary-500 text-white"
+												: "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
+											}`}
 									>
 										{type}
 									</button>
@@ -165,11 +163,10 @@ export default function Projects() {
 									{/* Source badge positioned over the image */}
 									<div className="absolute top-4 right-4">
 										<span
-											className={`flex items-center px-3 py-1.5 rounded-full text-sm font-medium shadow-md ${
-												featuredProject.isOpenSource
-													? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
-													: "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200"
-											}`}
+											className={`flex items-center px-3 py-1.5 rounded-full text-sm font-medium shadow-md ${featuredProject.isOpenSource
+												? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+												: "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200"
+												}`}
 										>
 											{featuredProject.isOpenSource ? (
 												<>
@@ -262,16 +259,6 @@ export default function Projects() {
 												View Project
 											</a>
 										)}
-
-										{/* If it's open source but we want a demo link too */}
-										{featuredProject.isOpenSource && featuredProject.href && (
-											<a
-												href={featuredProject.href}
-												className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md shadow-sm text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
-											>
-												View Demo
-											</a>
-										)}
 									</div>
 								</div>
 							</div>
@@ -286,11 +273,10 @@ export default function Projects() {
 						{visibleProjects.map((project, index) => (
 							<div
 								key={project.title}
-								className={`transform transition-all duration-500 ${
-									isLoaded
-										? "translate-y-0 opacity-100"
-										: "translate-y-4 opacity-0"
-								}`}
+								className={`transform transition-all duration-500 ${isLoaded
+									? "translate-y-0 opacity-100"
+									: "translate-y-4 opacity-0"
+									}`}
 								style={{ transitionDelay: `${index * 100}ms` }}
 							>
 								<Card
@@ -317,11 +303,10 @@ export default function Projects() {
 										)}
 
 										<span
-											className={`text-xs px-2 py-1 rounded-full flex items-center ${
-												project.isOpenSource
-													? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
-													: "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200"
-											}`}
+											className={`text-xs px-2 py-1 rounded-full flex items-center ${project.isOpenSource
+												? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+												: "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200"
+												}`}
 										>
 											{project.isOpenSource ? (
 												<>
