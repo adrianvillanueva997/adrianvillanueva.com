@@ -21,6 +21,16 @@ const projectsData: Project[] = [
 		repoUrl: "https://github.com/adrianvillanueva997/adrianvillanueva.com",
 	},
 	{
+		title: "Zenthos",
+		description: "A work in progress IOT, mlops, firmware and data platform.",
+		imgSrc: "/static/images/avatar.png",
+		// href: "/blog/featured-project",
+		categories: ["iot", "rust", "mlops"],
+		featured: true,
+		isOpenSource: true,
+		repoUrl: "https://github.com/adrianvillanueva997/zenthos",
+	},
+	{
 		title: "Shinigami",
 		featured: false,
 		description:

@@ -3,7 +3,7 @@ title: Why I’m Building a Real IoT System
 date: '2025-08-02'
 tags: ['rust', 'esp32', 'system design']
 draft: true
-summary: Esp32, rust, observability and some MLOps system in action.
+summary: Esp32, rust, observability, plants and some MLOps system design.
 ---
 
 ## 🌱 The Motivation
@@ -29,7 +29,9 @@ I had previously worked with Raspberry Pi and Arduino before, but the ESP32 ecos
 - `ESP32-CAM`:for image capture and edge CV.
 - `ESP32 with OLED`: for simple UX/display at the edge.
 
+<Callout type="note">
 I saw the potential for a **clean, modular system**, that can be powered by Rust, traced with OTEL, monitored end-to-end and with the option to integrate some MLOPS / FirmwareOps.
+</Callout>
 
 ### 🏆 The goal
 
@@ -40,6 +42,19 @@ The end goal is to build a full hydroponics system, but for now, we will start w
 - Platform monitoring.
 - Integration with a data and analytics platform.
 - Monetization.
+
+## 🚧 What’s Next
+
+Over the next few weeks I’ll be expanding this system:
+
+<TechStack technologies={["Rust", "ESP32", "MQTT", "RabbitMQ", "PostgreSQL", "OpenTelemetry", "Grafana", "Prometheus", "MLflow", "Redis", "Axum"]} />
+
+- Add OTA server in Axum + Redis.
+- Full MLOps pipeline with edge inferencing.
+- Monitor power, water, and nutrient sensors.
+- Weather station.
+- Automatic adjustments (fan, light, water pump).
+- Real-world testing with real plants.
 
 ## 🧠 Zenthos Architecture (Core Sensor Flow)
 
@@ -135,3 +150,10 @@ flowchart TD
   A11 --> A12
   `}
 />
+
+## 🔚 Final Thought
+
+Zenthos is my commitment to full-stack, edge intelligence.
+If you're building in this space, let's talk! I want to hear your thoughts.
+
+I will expand about the architecture in the next post.
