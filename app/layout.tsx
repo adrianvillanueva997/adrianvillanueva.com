@@ -8,6 +8,7 @@ import SectionContainer from "@/components/SectionContainer";
 import siteMetadata from "@/data/siteMetadata";
 import type { Metadata } from "next";
 import { IBM_Plex_Sans, JetBrains_Mono, Unica_One } from "next/font/google";
+import Script from "next/script";
 import { Plausible } from "pliny/analytics";
 import { type SearchConfig, SearchProvider } from "pliny/search";
 import { ThemeProviders } from "./theme-providers";
@@ -78,7 +79,17 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	const basePath = process.env.BASE_PATH || "";
-
+	const websiteSchema = {
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		name: siteMetadata.title,
+		url: siteMetadata.siteUrl,
+		potentialAction: {
+			"@type": "SearchAction",
+			target: `${siteMetadata.siteUrl}/search?q={search_term_string}`,
+			"query-input": "required name=search_term_string",
+		},
+	};
 	return (
 		<html
 			lang={siteMetadata.language}
@@ -111,6 +122,9 @@ export default function RootLayout({
 				href={`${basePath}/static/favicons/safari-pinned-tab.svg`}
 				color="#5bbad5"
 			/>
+			<Script id="website-jsonld" type="application/ld+json" strategy="afterInteractive">
+				{JSON.stringify(websiteSchema)}
+			</Script>
 			<meta name="msapplication-TileColor" content="#000000" />
 			<meta
 				name="theme-color"

@@ -1,8 +1,9 @@
-import type { Authors } from "contentlayer/generated";
-import type { ReactNode } from "react";
 import Image from "@/components/Image";
 import SocialIcon from "@/components/social-icons";
-
+import siteMetadata from '@/data/siteMetadata';
+import type { Authors } from "contentlayer/generated";
+import Script from "next/script";
+import type { ReactNode } from "react";
 interface Props {
 	children: ReactNode;
 	content: Omit<Authors, "_id" | "_raw" | "body">;
@@ -21,8 +22,23 @@ export default function AuthorLayout({ children, content }: Props) {
 		github,
 	} = content;
 
+	const personSchema = {
+		"@context": "https://schema.org",
+		"@type": "Person",
+		name: name,
+		image: avatar,
+		jobTitle: occupation,
+		worksFor: company ? { "@type": "Organization", name: company } : undefined,
+		email: email ? `mailto:${email}` : undefined,
+		sameAs: [twitter, linkedin, github, bluesky].filter(Boolean),
+		url: `${siteMetadata.siteUrl}/about`,
+	};
+
 	return (
 		<div className="divide-y divide-gray-200 dark:divide-gray-700">
+			<Script id="author-jsonld" type="application/ld+json" strategy="afterInteractive">
+				{JSON.stringify(personSchema)}
+			</Script>
 			<div className="space-y-2 pt-6 pb-8 md:space-y-5">
 				<h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 dark:text-gray-100">
 					About
