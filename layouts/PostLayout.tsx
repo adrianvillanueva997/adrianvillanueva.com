@@ -1,6 +1,3 @@
-import type { Authors, Blog } from "contentlayer/generated";
-import type { CoreContent } from "pliny/utils/contentlayer";
-import type { ReactNode } from "react";
 import Image from "@/components/Image";
 import Link from "@/components/Link";
 import PageTitle from "@/components/PageTitle";
@@ -8,6 +5,10 @@ import ScrollTopAndComment from "@/components/ScrollTopAndComment";
 import SectionContainer from "@/components/SectionContainer";
 import Tag from "@/components/Tag";
 import siteMetadata from "@/data/siteMetadata";
+import type { Authors, Blog } from "contentlayer/generated";
+import Script from "next/script";
+import type { CoreContent } from "pliny/utils/contentlayer";
+import type { ReactNode } from "react";
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`;
 const postDateTemplate: Intl.DateTimeFormatOptions = {
@@ -34,9 +35,39 @@ export default function PostLayout({
 }: LayoutProps) {
 	const { filePath, path, slug, date, title, tags } = content;
 	const basePath = path.split("/")[0];
+	const jsonLd = {
+		"@context": "https://schema.org",
+		"@type": "BlogPosting",
+		headline: title,
+		datePublished: date,
+		dateModified: date,
+		author: authorDetails.map((author) => ({
+			"@type": "Person",
+			name: author.name,
+			url: author.twitter || undefined,
+		})),
+		url: `${siteMetadata.siteUrl}/${path}`,
+		mainEntityOfPage: {
+			"@type": "WebPage",
+			"@id": `${siteMetadata.siteUrl}/${path}`,
+		},
+		publisher: {
+			"@type": "Organization",
+			name: siteMetadata.title,
+			logo: {
+				"@type": "ImageObject",
+				url: `${siteMetadata.siteUrl}/static/images/avatar.png`,
+			},
+		},
+	};
 
 	return (
 		<SectionContainer>
+			<head>
+				<Script id="blog-jsonld" type="application/ld+json" strategy="afterInteractive">
+					{JSON.stringify(jsonLd)}
+				</Script>
+			</head>
 			<ScrollTopAndComment />
 			<article>
 				<div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
@@ -108,7 +139,7 @@ export default function PostLayout({
 								{children}
 							</div>
 							<div className="pt-6 pb-6 text-sm text-gray-700 dark:text-gray-300">
-								{` • `}
+								{" • "}
 								<Link href={editUrl(filePath)}>View on GitHub</Link>
 							</div>
 						</div>

@@ -1,21 +1,22 @@
 import "css/prism.css";
 import "katex/dist/katex.css";
 
+import { components } from "@/components/MDXComponents";
+import siteMetadata from "@/data/siteMetadata";
+import PostBanner from "@/layouts/PostBanner";
+import PostLayout from "@/layouts/PostLayout";
+import PostSimple from "@/layouts/PostSimple";
 import type { Authors, Blog } from "contentlayer/generated";
 import { allAuthors, allBlogs } from "contentlayer/generated";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 import { MDXLayoutRenderer } from "pliny/mdx-components";
 import {
 	allCoreContent,
 	coreContent,
 	sortPosts,
 } from "pliny/utils/contentlayer";
-import { components } from "@/components/MDXComponents";
-import siteMetadata from "@/data/siteMetadata";
-import PostBanner from "@/layouts/PostBanner";
-import PostLayout from "@/layouts/PostLayout";
-import PostSimple from "@/layouts/PostSimple";
 
 const defaultLayout = "PostLayout";
 const layouts = {
@@ -115,10 +116,9 @@ export default async function Page(props: {
 
 	return (
 		<>
-			<script
-				type="application/ld+json"
-				dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-			/>
+			<Script id="blog-jsonld" type="application/ld+json" strategy="afterInteractive">
+				{JSON.stringify(jsonLd)}
+			</Script>
 			<Layout
 				content={mainContent}
 				authorDetails={authorDetails}
