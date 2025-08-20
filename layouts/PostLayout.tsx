@@ -6,7 +6,6 @@ import SectionContainer from "@/components/SectionContainer";
 import Tag from "@/components/Tag";
 import siteMetadata from "@/data/siteMetadata";
 import type { Authors, Blog } from "contentlayer/generated";
-import Script from "next/script";
 import type { CoreContent } from "pliny/utils/contentlayer";
 import type { ReactNode } from "react";
 
@@ -63,11 +62,6 @@ export default function PostLayout({
 
 	return (
 		<SectionContainer>
-			<head>
-				<Script id="blog-jsonld" type="application/ld+json" strategy="afterInteractive">
-					{JSON.stringify(jsonLd)}
-				</Script>
-			</head>
 			<ScrollTopAndComment />
 			<article>
 				<div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">

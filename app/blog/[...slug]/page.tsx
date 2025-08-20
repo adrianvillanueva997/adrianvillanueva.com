@@ -10,7 +10,6 @@ import type { Authors, Blog } from "contentlayer/generated";
 import { allAuthors, allBlogs } from "contentlayer/generated";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Script from "next/script";
 import { MDXLayoutRenderer } from "pliny/mdx-components";
 import {
 	allCoreContent,
@@ -116,9 +115,6 @@ export default async function Page(props: {
 
 	return (
 		<>
-			<Script id="blog-jsonld" type="application/ld+json" strategy="afterInteractive">
-				{JSON.stringify(jsonLd)}
-			</Script>
 			<Layout
 				content={mainContent}
 				authorDetails={authorDetails}

@@ -5,7 +5,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 # Install dependencies only when needed
 FROM base AS deps
 WORKDIR /app
-RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache libc6-compat curl bash make
 COPY package.json yarn.lock .yarnrc.yml ./
 # Install dependencies
 RUN yarn install --frozen-lockfile
@@ -13,8 +13,22 @@ RUN yarn install --frozen-lockfile
 # Builder stage
 FROM base AS builder
 WORKDIR /app
+
+RUN apk add --no-cache curl bash make
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/.yarnrc.yml ./
+
+RUN  curl -fsSL https://d2lang.com/install.sh -o /tmp/d2install.sh \
+    && sh /tmp/d2install.sh \
+    && rm /tmp/d2install.sh
+
+COPY data/diagrams ./data/diagrams
+RUN mkdir -p public/static/diagrams \
+    && for f in data/diagrams/*.d2; do \
+    d2 "$f" "public/static/diagrams/$(basename "${f%.d2}").svg"; \
+    done
+
 COPY . .
 RUN yarn build
 
