@@ -5,7 +5,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 # Install dependencies only when needed
 FROM base AS deps
 WORKDIR /app
-RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache libc6-compat curl bash make
 COPY package.json yarn.lock .yarnrc.yml ./
 # Install dependencies
 RUN yarn install --frozen-lockfile
@@ -15,8 +15,7 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/.yarnrc.yml ./
-RUN apk add --no-cache curl bash make \
-    && curl -fsSL https://d2lang.com/install.sh -o /tmp/d2install.sh \
+RUN  curl -fsSL https://d2lang.com/install.sh -o /tmp/d2install.sh \
     && sh /tmp/d2install.sh \
     && rm /tmp/d2install.sh
 
