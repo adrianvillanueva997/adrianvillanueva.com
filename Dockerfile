@@ -13,6 +13,7 @@ RUN yarn install --frozen-lockfile
 # Builder stage
 FROM base AS builder
 WORKDIR /app
+RUN apk add --no-cache curl bash make
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/.yarnrc.yml ./
 RUN  curl -fsSL https://d2lang.com/install.sh -o /tmp/d2install.sh \
