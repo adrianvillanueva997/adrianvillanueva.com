@@ -16,7 +16,8 @@ SHELL [ "/bin/ash" ]
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/.yarnrc.yml ./
-RUN curl -fsSL https://d2lang.com/install.sh | sh -s --
+RUN apk add --no-cache curl bash \
+    && curl -fsSL https://d2lang.com/install.sh | sh
 
 COPY data/diagrams ./data/diagrams
 RUN mkdir -p public/static/diagrams \
