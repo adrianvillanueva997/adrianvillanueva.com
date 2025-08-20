@@ -17,7 +17,9 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/.yarnrc.yml ./
 RUN apk add --no-cache curl bash \
-    && curl -fsSL https://d2lang.com/install.sh | sh
+    && curl -fsSL https://d2lang.com/install.sh -o /tmp/d2install.sh \
+    && sh /tmp/d2install.sh \
+    && rm /tmp/d2install.sh
 
 COPY data/diagrams ./data/diagrams
 RUN mkdir -p public/static/diagrams \
