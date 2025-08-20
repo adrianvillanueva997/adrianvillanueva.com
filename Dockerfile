@@ -13,9 +13,12 @@ RUN yarn install --frozen-lockfile
 # Builder stage
 FROM base AS builder
 WORKDIR /app
+
 RUN apk add --no-cache curl bash make
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/.yarnrc.yml ./
+
 RUN  curl -fsSL https://d2lang.com/install.sh -o /tmp/d2install.sh \
     && sh /tmp/d2install.sh \
     && rm /tmp/d2install.sh
@@ -25,8 +28,8 @@ RUN mkdir -p public/static/diagrams \
     && for f in data/diagrams/*.d2; do \
     d2 "$f" "public/static/diagrams/$(basename "${f%.d2}").svg"; \
     done
-COPY . .
 
+COPY . .
 RUN yarn build
 
 # Production image, copy all the files and run next
