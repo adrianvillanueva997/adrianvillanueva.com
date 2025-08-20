@@ -12,7 +12,6 @@ RUN yarn install --frozen-lockfile
 
 # Builder stage
 FROM base AS builder
-SHELL [ "/bin/ash" ]
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/.yarnrc.yml ./
