@@ -27,8 +27,7 @@ COPY data/diagrams ./data/diagrams
 RUN mkdir -p public/static/diagrams \
     && for f in data/diagrams/*.d2; do \
     name=$(basename "${f%.d2}"); \
-    d2 "$f" "public/static/diagrams/${name}-light.svg"; \
-    d2 --dark "$f" "public/static/diagrams/${name}-dark.svg"; \
+    d2 --theme 0 --dark-theme 200 "$f" "public/static/diagrams/${name}.svg"; \
     done
 
 
