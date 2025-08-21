@@ -26,8 +26,11 @@ RUN  curl -fsSL https://d2lang.com/install.sh -o /tmp/d2install.sh \
 COPY data/diagrams ./data/diagrams
 RUN mkdir -p public/static/diagrams \
     && for f in data/diagrams/*.d2; do \
-    d2 "$f" "public/static/diagrams/$(basename "${f%.d2}").svg"; \
+    name=$(basename "${f%.d2}"); \
+    d2 "$f" "public/static/diagrams/${name}-light.svg"; \
+    d2 --dark "$f" "public/static/diagrams/${name}-dark.svg"; \
     done
+
 
 COPY . .
 RUN yarn build
