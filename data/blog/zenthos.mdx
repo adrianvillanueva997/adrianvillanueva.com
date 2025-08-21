@@ -58,98 +58,11 @@ Over the next few weeks I’ll be expanding this system:
 
 ## 🧠 Zenthos Architecture (Core Sensor Flow)
 
-<Mermaid chart={`
-flowchart LR
-  ESP32["ESP32 Temp Sensor"]
-  MQTT["MQTT Broker"]
-  Middleware["Middleware (Enrichment + Validation + Data Ingestion)"]
-  RabbitMQ["RabbitMQ Queue"]
-  Consumer["Consumer (Analytics, Alerting, Workflows)"]
-  OTEL["OpenTelemetry Collector"]
-  TSDB["TimescaleDB"]
-  Grafana["Grafana"]
-
-  ESP32 --> MQTT
-  MQTT --> Middleware
-  Middleware --> RabbitMQ
-  Middleware --> TSDB
-  Middleware --> OTEL
-  RabbitMQ --> Consumer
-  Consumer --> OTEL
-  OTEL --> Grafana
-  TSDB --> Grafana
-`} />
+<Diagram name="zenthos_1" />
 
 ## 🧱 Full System Overview
 
-<Mermaid
-  chart={`
-flowchart LR
-  ESP32["ESP32 Temp Sensor"]
-  MQTT["MQTT Broker"]
-  Middleware["Middleware (Enrichment + Validation + Data Ingestion)"]
-  RabbitMQ["RabbitMQ Queue"]
-  Consumer["Consumer (Analytics, Alerting, Workflows)"]
-  OTEL["OpenTelemetry Collector"]
-  TSDB["TimescaleDB"]
-  Grafana["Grafana"]
-  ESP32 --> MQTT
-  MQTT --> Middleware
-  Middleware --> RabbitMQ
-  Middleware --> TSDB
-  Middleware --> OTEL
-  RabbitMQ --> Consumer
-  Consumer --> OTEL
-  OTEL --> Grafana
-  TSDB --> Grafana
-`}
-/>
-<Mermaid
-  chart={`
-flowchart TD
-  subgraph Devices
-    A1["ESP32 Devices (S3, OLED, CAM)"]
-  end
-  subgraph "Ingestion Layer"
-    A2["MQTT Broker"]
-    A3["Middleware Service (Redis + OTEL export)"]
-  end
-  subgraph "Message Bus"
-    A4["RabbitMQ"]
-  end
-  subgraph Services
-    A5["OTA Server (Axum) + Redis"]
-    A6["Model Server (MLflow REST API or custom)"]
-    A7["Consumers / Workers"]
-  end
-  subgraph Observability
-    A8["OTEL Collector"]
-    A9["Prometheus"]
-    A10["Tempo"]
-    A11["Loki"]
-    A12["Grafana"]
-  end
-  subgraph Storage
-    A13["TimescaleDB or PostgreSQL"]
-  end
-  A1 --> A2
-  A2 --> A3
-  A3 --> A4
-  A3 --> A8
-  A1 --> A5
-  A5 --> A13
-  A6 --> A5
-  A4 --> A7
-  A7 --> A13
-  A7 --> A8
-  A8 --> A9
-  A8 --> A10
-  A8 --> A11
-  A9 --> A12
-  A10 --> A12
-  A11 --> A12
-  `}
-/>
+<Diagram name="zenthos_2" />
 
 ## 🔚 Final Thought
 
