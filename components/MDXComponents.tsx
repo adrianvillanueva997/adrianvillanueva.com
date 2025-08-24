@@ -1,4 +1,3 @@
-import Mermaid from "@/components/Mermaid";
 import { Callout } from "@/components/markdown/Callout";
 import { Details } from "@/components/markdown/Details";
 import { Steps } from "@/components/markdown/Steps";
@@ -23,7 +22,6 @@ export const components: MDXComponents = {
 	// Custom MDX components
 	Callout,
 	Details,
-	Mermaid,
 	Steps,
 	TechStack,
 	Terminal,
