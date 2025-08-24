@@ -173,35 +173,6 @@ patata
 
 </Details>
 
-<Mermaid
-  chart={`
-flowchart TB
-    Client[Client] --> Load[Load Balancer]
-    Load --> API1[API Server 1]
-    Load --> API2[API Server 2]
-    API1 --> Cache[Redis Cache]
-    API2 --> Cache
-    API1 --> DB[(Database)]
-    API2 --> DB
-    Cache --> DB
-  `}
-/>
-
-## User Authentication Flow
-
-<Mermaid
-  chart={`
-sequenceDiagram
-    User->>+Frontend: Login Request
-    Frontend->>+API: Authentication Request
-    API->>+Database: Validate Credentials
-    Database-->>-API: User Data
-    API->>API: Generate JWT
-    API-->>-Frontend: Return JWT Token
-    Frontend-->>-User: Login Success
-  `}
-/>
-
 ```tex
 \mathbf{Y} = \left[\begin{array}
   {c}
