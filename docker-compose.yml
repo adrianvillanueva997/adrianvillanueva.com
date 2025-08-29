@@ -53,8 +53,7 @@ services:
       - traefik.http.services.anubis.loadbalancer.server.port=8080
       - traefik.http.routers.anubis.service=anubis
       - traefik.http.routers.anubis.tls.certresolver=letsencrypt
-    depends_on:
-      - adrianvillanueva
+
 
 networks:
   proxy:
