@@ -9,6 +9,7 @@ services:
       - 3000
     labels:
       - traefik.enable=true
+      - traefik.http.routers.target.middlewares=anubis@docker
       - traefik.http.middlewares.adrianvillanueva-redirect-https.redirectscheme.scheme=https
       - traefik.http.middlewares.adrianvillanueva-redirect-https.redirectscheme.permanent=true
       - traefik.http.routers.adrianvillanueva-http.middlewares=adrianvillanueva-redirect-https
@@ -19,7 +20,6 @@ services:
       - traefik.http.routers.adrianvillanueva-https.tls=true
       - traefik.http.routers.adrianvillanueva-https.entrypoints=https
       - "traefik.http.services.adrianvillanueva.loadbalancer.server.port=3000"
-      - traefik.http.routers.target.middlewares=anubis@docker
       - traefik.docker.network=proxy
     environment:
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
@@ -30,6 +30,32 @@ services:
       - OTEL_TRACES_SAMPLER_ARG=1.0
       - OTEL_EXPORTER_OTLP_TIMEOUT=10000
       - OTEL_EXPORTER_OTLP_SPAN_TIMEOUT=3000
+  anubis:
+    image: ghcr.io/techarohq/anubis:v1.21.3
+    environment:
+      # Telling Anubis, where to listen for Traefik
+      - BIND=:8080
+      # Telling Anubis to do redirect — ensure there is a space after '='
+      - 'TARGET= http://adrianvillanueva:3000'
+      # Specifies which domains Anubis is allowed to redirect to.
+      - REDIRECT_DOMAINS=adrianvillanueva.com
+      # Should be the full external URL for Anubis (including scheme)
+      - PUBLIC_URL=https://anubis.thexiao77.com
+      # Should match your domain for proper cookie scoping
+      - COOKIE_DOMAIN=thexiao77.com
+    networks:
+      - proxy
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=proxy
+      - traefik.http.routers.anubis.rule=Host(`anubis.thexiao77.com`)
+      - traefik.http.routers.anubis.entrypoints=https
+      - traefik.http.services.anubis.loadbalancer.server.port=8080
+      - traefik.http.routers.anubis.service=anubis
+      - traefik.http.routers.anubis.tls.certresolver=letsencrypt
+    depends_on:
+      - adrianvillanueva
+
 networks:
   proxy:
     external: true
