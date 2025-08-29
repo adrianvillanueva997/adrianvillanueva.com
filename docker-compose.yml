@@ -40,7 +40,7 @@ services:
       # Specifies which domains Anubis is allowed to redirect to.
       - REDIRECT_DOMAINS=adrianvillanueva.com
       # Should be the full external URL for Anubis (including scheme)
-      - PUBLIC_URL=https://anubis.thexiao77.com
+      - PUBLIC_URL=https://anubis.adrianvillanueva.com
       # Should match your domain for proper cookie scoping
       - COOKIE_DOMAIN=thexiao77.com
     networks:
@@ -48,7 +48,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.docker.network=proxy
-      - traefik.http.routers.anubis.rule=Host(`anubis.thexiao77.com`)
+      - traefik.http.routers.anubis.rule=Host(`anubis.adrianvillanueva.com`)
       - traefik.http.routers.anubis.entrypoints=https
       - traefik.http.services.anubis.loadbalancer.server.port=8080
       - traefik.http.routers.anubis.service=anubis
