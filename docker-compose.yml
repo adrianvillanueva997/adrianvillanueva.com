@@ -30,29 +30,6 @@ services:
       - OTEL_TRACES_SAMPLER_ARG=1.0
       - OTEL_EXPORTER_OTLP_TIMEOUT=10000
       - OTEL_EXPORTER_OTLP_SPAN_TIMEOUT=3000
-  anubis:
-    image: ghcr.io/techarohq/anubis:v1.21.3
-    environment:
-      # Telling Anubis, where to listen for Traefik
-      - BIND=:8080
-      # Telling Anubis to do redirect — ensure there is a space after '='
-      - 'TARGET=https://adrianvillanueva'
-      # Specifies which domains Anubis is allowed to redirect to.
-      - REDIRECT_DOMAINS=adrianvillanueva.com
-      # Should be the full external URL for Anubis (including scheme)
-      - PUBLIC_URL=https://anubis.adrianvillanueva.com
-      # Should match your domain for proper cookie scoping
-      - COOKIE_DOMAIN=thexiao77.com
-    networks:
-      - proxy
-    labels:
-      - traefik.enable=true
-      - traefik.docker.network=proxy
-      - traefik.http.routers.anubis.rule=Host(`anubis.adrianvillanueva.com`)
-      - traefik.http.routers.anubis.entrypoints=https
-      - traefik.http.services.anubis.loadbalancer.server.port=8080
-      - traefik.http.routers.anubis.service=anubis
-      - traefik.http.routers.anubis.tls.certresolver=letsencrypt
 
 
 networks:
