@@ -1,33 +1,29 @@
 ---
-title: Why I’m Building a Real IoT System
-date: '2025-08-02'
-tags: ['rust', 'esp32', 'system design',"selfhost"]
+title: Why I got rid of Mermaid and used D2 instead
+date: '2025-08-31'
+tags: ['nextjs', 'selfhost',"d2"]
 draft: false
-summary: Esp32, rust, observability, plants and some MLOps system design.
+summary: Explaining how diagrams on my website work
 ---
 
-## 🌱 The Motivation
+## Why?
 
-Hydroponics, growing plants without soil, opens the door to fully automated, self-sustaining agricultural systems. But most “smart garden” setups today are just toys.
+[Mermaid](https://mermaid.js.org/) is a javascript based diagraming tool that allows you to embed diagrams inside your markdown content, its syntax is simple, but I am not entirely satisfied with it.
 
-I wanted more:
+This library is useful for these kind of contents:
 
-- Real-time observability
-- Robust data pipelines
-- Scalable backend
-- OTA updates
-- Embedded ML on the edge
-- Automation
+- Great range of different diagrams
+- Easy to use
+- Lots of available integrations
+- Easy to intergrate within NextJS
 
-Enter the **ESP32** family.
+However, when building large diagrams the syntax becomes hard to follow, specially if it is embedded inside markdown documents and since most of the diagrams are going to be in my website, i want to be able to share them more easily.
 
-### 🔍 The Discovery
+Enter the **[D2](https://d2lang.com/)** language.
 
-I had previously worked with Raspberry Pi and Arduino before, but the ESP32 ecosystem felt different: cheaper, more powerful, and purpose-built for IoT. After testing several variants:
+### D2
 
-- `ESP32-S3`: with vector instructions and AI acceleration.
-- `ESP32-CAM`:for image capture and edge CV.
-- `ESP32 with OLED`: for simple UX/display at the edge.
+D2 is a language built on top of golang whose only purpose is to build diagrams. Okay, now it sounds exactly the same as Mermaid, right? Kind of. However, it has some interesting features that made me switch over it.
 
 <Callout type="note">
 I saw the potential for a **clean, modular system**, that can be powered by Rust, traced with OTEL, monitored end-to-end and with the option to integrate some MLOPS / FirmwareOps.
