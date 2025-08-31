@@ -32,6 +32,7 @@ RUN mkdir -p public/static/diagrams \
 
 
 COPY . .
+RUN yarn optimize_svgs
 RUN yarn build
 
 # Production image, copy all the files and run next
