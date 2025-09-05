@@ -1,6 +1,6 @@
 services:
   adrianvillanueva:
-    image: ghcr.io/adrianvillanueva997/adrianvillanueva.com:v4.4.1
+    image: ghcr.io/adrianvillanueva997/adrianvillanueva.com:v4.4.4
     networks:
       - proxy
       - otlp
