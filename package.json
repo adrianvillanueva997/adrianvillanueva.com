@@ -5,6 +5,7 @@
 	"scripts": {
 		"start": "next dev",
 		"dev": "cross-env INIT_CWD=$PWD next dev",
+		"optimize_svgs": "svgo -f public/static/diagrams",
 		"build": "cross-env INIT_CWD=$PWD next build && cross-env NODE_OPTIONS='--experimental-json-modules' node ./scripts/postbuild.mjs",
 		"serve": "next start",
 		"analyze": "cross-env ANALYZE=true next build",
@@ -69,6 +70,7 @@
 		"lint-staged": "15.5.2",
 		"prettier": "3.5.3",
 		"prettier-plugin-tailwindcss": "0.6.13",
+		"svgo": "^4.0.0",
 		"typescript": "5.8.3"
 	},
 	"lint-staged": {
