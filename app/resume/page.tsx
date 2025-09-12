@@ -1,7 +1,7 @@
-import { genPageMetadata } from "app/seo";
 import Link from "@/components/Link";
 import Skills from "@/components/Skills";
 import { getResumeData } from "@/utils/resumeData";
+import { genPageMetadata } from "app/seo";
 
 export const metadata = genPageMetadata({ title: "Resume" });
 
@@ -10,16 +10,19 @@ export default function ResumePage() {
 
 	return (
 		<>
-			{/* Header Section */}
-			<div className="divide-y divide-gray-200 dark:divide-gray-700">
-				<div className="space-y-2 pb-8 pt-6 md:space-y-5">
-					<h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-						Resume
-					</h1>
-					<p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-						My professional background and qualifications
-					</p>
-				</div>
+			{/* Header Section - Doom Style */}
+			<div className="divide-y divide-gray-700">
+				<section className="relative overflow-hidden pb-8 pt-6 md:space-y-5">
+					<div className="absolute inset-0 synthwave-grid opacity-10" />
+					<div className="relative z-10 space-y-2">
+						<h1 className="text-3xl font-gothic font-extrabold leading-9 tracking-tight text-[#ff3860] sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+							RESUME_DATA
+						</h1>
+						<p className="text-lg leading-7 text-gray-300 font-mono">
+							<span className="text-[#00ff99]">[SYSTEM]</span> Professional background and qualifications archive
+						</p>
+					</div>
+				</section>
 			</div>
 
 			{/* Personal Info Section */}
@@ -27,7 +30,7 @@ export default function ResumePage() {
 				<h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">
 					{resumeData.personal?.name || "Your Name"}
 				</h2>
-				<p className="text-xl text-primary-600 dark:text-primary-400 mb-4">
+				<p className="text-xl text-[#00ff99] mb-4 font-mono">
 					{resumeData.personal?.title || "Your Title"}
 				</p>
 				<div className="prose dark:prose-dark max-w-none mb-4">
@@ -87,12 +90,12 @@ export default function ResumePage() {
 			<div className="mb-8 flex">
 				<Link
 					href="/static/files/resume.pdf"
-					className="px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+					className="px-4 py-2 text-sm font-mono font-medium text-gray-900 bg-[#00ff99] rounded-md hover:bg-[#ff3860] hover:text-white transition-all duration-300 shadow-lg shadow-[#00ff99]/20 hover:shadow-[#ff3860]/20"
 					aria-label="View PDF Resume"
 					target="_blank"
 					rel="noopener noreferrer"
 				>
-					View Resume PDF
+					DOWNLOAD_RESUME.PDF
 				</Link>
 			</div>
 
@@ -117,9 +120,9 @@ export default function ResumePage() {
 								className="border-l-2 border-gray-200 dark:border-gray-700 pl-4 ml-2"
 							>
 								<div className="flex flex-col sm:flex-row sm:justify-between">
-									<h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
+									<h3 className="text-lg font-medium text-gray-100">
 										{exp.position} •{" "}
-										<span className="text-primary-600 dark:text-primary-400">
+										<span className="text-[#00ff99] font-mono">
 											{exp.company}
 										</span>
 									</h3>
@@ -154,9 +157,9 @@ export default function ResumePage() {
 								className="border-l-2 border-gray-200 dark:border-gray-700 pl-4 ml-2"
 							>
 								<div className="flex flex-col sm:flex-row sm:justify-between">
-									<h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
+									<h3 className="text-lg font-medium text-gray-100">
 										{edu.degree} •{" "}
-										<span className="text-primary-600 dark:text-primary-400">
+										<span className="text-[#00ff99] font-mono">
 											{edu.institution}
 										</span>
 									</h3>
@@ -177,8 +180,8 @@ export default function ResumePage() {
 
 			{/* Languages Section */}
 			{resumeData.languages &&
-			Array.isArray(resumeData.languages) &&
-			resumeData.languages.length > 0 ? (
+				Array.isArray(resumeData.languages) &&
+				resumeData.languages.length > 0 ? (
 				<div className="mb-8">
 					<h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-gray-100">
 						Languages

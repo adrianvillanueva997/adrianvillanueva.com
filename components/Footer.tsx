@@ -11,46 +11,54 @@ export default function Footer() {
 	};
 
 	return (
-		<footer className="py-8 px-4 flex flex-col items-center text-center">
+		<footer className="py-6 md:py-8 px-4 flex flex-col items-center text-center border-t border-gray-800 bg-gray-950/30">
 			{/* Social Icons */}
-			<div className="flex space-x-5 mb-6">
+			<div className="flex space-x-4 md:space-x-5 mb-4 md:mb-6">
 				<SocialIcon
 					kind="mail"
 					href={`mailto:${siteMetadata.email}`}
-					size={5}
+					size={4}
 				/>
-				<SocialIcon kind="github" href={siteMetadata.github} size={5} />
-				<SocialIcon kind="linkedin" href={siteMetadata.linkedin} size={5} />
+				<SocialIcon
+					kind="github"
+					href={siteMetadata.github}
+					size={4}
+				/>
+				<SocialIcon
+					kind="linkedin"
+					href={siteMetadata.linkedin}
+					size={4}
+				/>
 				<SocialIcon
 					kind="rss"
 					href={siteMetadata.rss}
-					size={5}
+					size={4}
 					aria-label="RSS Feed"
 				/>
 			</div>
 
 			{/* Legal Text */}
-			<div className="text-sm text-gray-500 dark:text-gray-400 mb-4 max-w-2xl">
+			<div className="text-xs md:text-sm text-gray-400 mb-3 md:mb-4 max-w-2xl px-2 font-mono leading-relaxed">
 				Any and all opinions listed here are my own and not representative of
 				any of my employers, past, future, and/or present.
 			</div>
 
 			{/* Copyright and Links */}
-			<div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-4">
-				<div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
+			<div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-4 text-xs md:text-sm">
+				<div className="flex items-center text-gray-300 font-mono font-medium">
 					<span>© {new Date().getFullYear()}</span>
-					<span className="mx-2">•</span>
+					<span className="mx-2 text-[#ff3860] animate-pulse">•</span>
 					<span>{siteMetadata.author}</span>
 				</div>
 
 				<Link
 					href={siteMetadata.siteRepo}
-					className="inline-flex items-center text-sm text-gray-500 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400 transition duration-150 ease-in-out"
+					className="inline-flex items-center text-gray-400 hover:text-[#00ff99] transition duration-150 ease-in-out font-mono"
 					target="_blank"
 					rel="noopener noreferrer"
 				>
 					<svg
-						className="h-4 w-4 mr-1"
+						className="h-3 w-3 md:h-4 md:w-4 mr-1"
 						fill="currentColor"
 						viewBox="0 0 24 24"
 						aria-hidden="true"
@@ -65,15 +73,17 @@ export default function Footer() {
 				</Link>
 
 				<button
+					type="button"
 					onClick={handleScrollToTop}
-					className="inline-flex items-center text-sm text-gray-500 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400 transition duration-150 ease-in-out bg-transparent border-none cursor-pointer"
+					className="inline-flex items-center text-gray-400 hover:text-[#ff3860] transition duration-150 ease-in-out bg-transparent border-none cursor-pointer font-mono"
 				>
 					Back to top
 					<svg
-						className="ml-1 h-4 w-4"
+						className="ml-1 h-3 w-3 md:h-4 md:w-4"
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke="currentColor"
+						aria-hidden="true"
 					>
 						<path
 							strokeLinecap="round"

@@ -1,5 +1,6 @@
 "use client";
 
+import headerNavLinks from "@/data/headerNavLinks";
 import {
 	Dialog,
 	DialogPanel,
@@ -12,7 +13,6 @@ import {
 	enableBodyScroll,
 } from "body-scroll-lock";
 import { Fragment, useEffect, useRef, useState } from "react";
-import headerNavLinks from "@/data/headerNavLinks";
 import Link from "./Link";
 
 const MobileNav = () => {
@@ -38,15 +38,17 @@ const MobileNav = () => {
 	return (
 		<>
 			<button
+				type="button"
 				aria-label="Toggle Menu"
 				onClick={onToggleNav}
-				className="sm:hidden"
+				className="sm:hidden p-1 hover:bg-gray-800/50 rounded transition-colors"
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 20 20"
 					fill="currentColor"
-					className="hover:text-primary-500 dark:hover:text-primary-400 h-8 w-8 text-gray-900 dark:text-gray-100"
+					className="h-6 w-6 text-gray-100 hover:text-[#00ff99] transition-colors"
+					aria-hidden="true"
 				>
 					<path
 						fillRule="evenodd"
@@ -67,7 +69,7 @@ const MobileNav = () => {
 						leaveTo="opacity-0"
 						unmount={false}
 					>
-						<div className="fixed inset-0 z-60 bg-black/25" />
+						<div className="fixed inset-0 z-60 bg-black/80" />
 					</TransitionChild>
 
 					<TransitionChild
@@ -80,32 +82,40 @@ const MobileNav = () => {
 						leaveTo="translate-x-full opacity-0"
 						unmount={false}
 					>
-						<DialogPanel className="fixed top-0 left-0 z-70 h-full w-full bg-white/95 duration-300 dark:bg-gray-950/98">
+						<DialogPanel className="fixed top-0 left-0 z-70 h-full w-full bg-gray-950/98 backdrop-blur-sm duration-300 border-r border-[#ff3860]/30">
 							<nav
 								ref={navRef}
-								className="mt-8 flex h-full basis-0 flex-col items-start overflow-y-auto pt-2 pl-12 text-left"
+								className="mt-16 flex h-full basis-0 flex-col items-start overflow-y-auto pt-4 pl-8 pr-4 text-left"
 							>
 								{headerNavLinks.map((link) => (
 									<Link
 										key={link.title}
 										href={link.href}
-										className="hover:text-primary-500 dark:hover:text-primary-400 mb-4 py-2 pr-4 text-2xl font-bold tracking-widest text-gray-900 outline outline-0 dark:text-gray-100"
+										className="mb-6 py-3 pr-4 text-xl md:text-2xl font-mono font-bold tracking-wide text-gray-100 hover:text-[#00ff99] transition-colors border-b border-gray-800 hover:border-[#00ff99] w-full"
 										onClick={onToggleNav}
 									>
 										{link.title}
 									</Link>
 								))}
+
+								{/* Doom aesthetic elements */}
+								<div className="mt-8 w-full">
+									<div className="text-[#ff3860] font-mono text-xs tracking-wider mb-2">VOID_MODE</div>
+									<div className="text-gray-500 font-mono text-xs">SYSTEM_ONLINE</div>
+								</div>
 							</nav>
 
 							<button
-								className="hover:text-primary-500 dark:hover:text-primary-400 fixed top-7 right-4 z-80 h-16 w-16 p-4 text-gray-900 dark:text-gray-100"
-								aria-label="Toggle Menu"
+								type="button"
+								className="fixed top-4 right-4 z-80 h-12 w-12 p-2 text-gray-100 hover:text-[#ff3860] bg-gray-800/80 hover:bg-gray-700/80 rounded-lg transition-colors"
+								aria-label="Close Menu"
 								onClick={onToggleNav}
 							>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 20 20"
 									fill="currentColor"
+									aria-hidden="true"
 								>
 									<path
 										fillRule="evenodd"

@@ -1,6 +1,6 @@
+import siteMetadata from "@/data/siteMetadata";
 import { AlgoliaButton } from "pliny/search/AlgoliaButton";
 import { KBarButton } from "pliny/search/KBarButton";
-import siteMetadata from "@/data/siteMetadata";
 
 const SearchButton = () => {
 	if (
@@ -19,7 +19,7 @@ const SearchButton = () => {
 					viewBox="0 0 24 24"
 					strokeWidth={1.5}
 					stroke="currentColor"
-					className="hover:text-primary-500 dark:hover:text-primary-400 h-6 w-6 text-gray-900 dark:text-gray-100"
+					className="hover:text-[#00ff99] h-6 w-6 text-gray-100 transition-colors duration-200"
 				>
 					<path
 						strokeLinecap="round"

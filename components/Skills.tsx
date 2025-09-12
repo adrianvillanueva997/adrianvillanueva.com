@@ -36,13 +36,13 @@ export default function Skills() {
 	];
 
 	return (
-		<div className="p-4 border border-gray-700 rounded-xl">
-			<div className="flex flex-wrap gap-2">
+		<div className="p-3 md:p-4 border border-gray-700 rounded-xl bg-gray-950/50">
+			<div className="flex flex-wrap gap-1.5 md:gap-2">
 				{allSkills.map((skill, index) => (
 					<span
 						key={`${skill}-${// biome-ignore lint/suspicious/noArrayIndexKey:
 							index}`}
-						className="px-3 py-1 bg-gray-800 text-gray-100 rounded-full text-sm border border-gray-600"
+						className="px-2 md:px-3 py-1 bg-gray-800 text-gray-100 rounded-full text-xs md:text-sm border border-gray-600 hover:border-[#00ff99] hover:text-[#00ff99] transition-colors duration-200"
 					>
 						{skill}
 					</span>

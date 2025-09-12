@@ -7,28 +7,28 @@ const styles: Record<
 	{ bg: string; border: string; icon: string; title: string }
 > = {
 	info: {
-		bg: "bg-blue-50 dark:bg-blue-900/20",
-		border: "border-blue-500/50",
+		bg: "bg-gray-950/50",
+		border: "border-[#00ff99]/50",
 		icon: "💡",
-		title: "Information",
+		title: "SYSTEM_INFO",
 	},
 	warning: {
-		bg: "bg-yellow-50 dark:bg-yellow-900/20",
-		border: "border-yellow-500/50",
+		bg: "bg-gray-950/50",
+		border: "border-[#ff3860]/50",
 		icon: "⚠️",
-		title: "Warning",
+		title: "CRITICAL_WARNING",
 	},
 	note: {
-		bg: "bg-purple-50 dark:bg-purple-900/20",
-		border: "border-purple-500/50",
+		bg: "bg-gray-950/50",
+		border: "border-gray-600/50",
 		icon: "📝",
-		title: "Note",
+		title: "DATA_NOTE",
 	},
 	tip: {
-		bg: "bg-green-50 dark:bg-green-900/20",
-		border: "border-green-500/50",
+		bg: "bg-gray-950/50",
+		border: "border-[#00ff99]/50",
 		icon: "💪",
-		title: "Tip",
+		title: "OPTIMIZATION_TIP",
 	},
 };
 
@@ -49,11 +49,11 @@ export function Callout({ type, title, children }: CalloutProps) {
 				</div>
 				<div className="w-full">
 					{title ? (
-						<h5 className="font-medium text-lg mb-1">{title}</h5>
+						<h5 className="font-mono font-medium text-lg mb-1 text-[#00ff99] uppercase tracking-wider">{title}</h5>
 					) : (
-						<h5 className="font-medium text-lg mb-1">{styles[type].title}</h5>
+						<h5 className="font-mono font-medium text-lg mb-1 text-[#00ff99] uppercase tracking-wider">{styles[type].title}</h5>
 					)}
-					<div className="prose dark:prose-dark max-w-none">{children}</div>
+					<div className="prose dark:prose-dark max-w-none text-gray-300">{children}</div>
 				</div>
 			</div>
 		</div>

@@ -1,8 +1,8 @@
 "use client";
 
+import siteMetadata from "@/data/siteMetadata";
 import { genPageMetadata } from "app/seo";
 import { useState } from "react";
-import siteMetadata from "@/data/siteMetadata";
 
 const _metadata = genPageMetadata({ title: "Contact" });
 
@@ -17,28 +17,31 @@ export default function ContactPage() {
 
 	return (
 		<>
-			<div className="divide-y divide-gray-200 dark:divide-gray-700">
-				<div className="space-y-2 pb-8 pt-6 md:space-y-5">
-					<h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-						Contact
-					</h1>
-					<p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-						I'd love to hear from you!
-					</p>
-				</div>
+			<div className="divide-y divide-gray-700">
+				<section className="relative overflow-hidden pb-8 pt-6 md:space-y-5">
+					<div className="absolute inset-0 synthwave-grid opacity-10" />
+					<div className="relative z-10 space-y-2">
+						<h1 className="text-3xl font-gothic font-extrabold leading-9 tracking-tight text-[#ff3860] sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+							CONTACT_PROTOCOL
+						</h1>
+						<p className="text-lg leading-7 text-gray-300 font-mono">
+							<span className="text-[#00ff99]">[SYSTEM]</span> Establishing communication link...
+						</p>
+					</div>
+				</section>
 			</div>
 
-			<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+			<div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
 				{/* Contact Information */}
-				<div>
-					<h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-gray-100">
-						Get in Touch
+				<div className="bg-gray-950 border border-gray-700 p-6 rounded-lg hover:border-[#00ff99] transition-colors duration-300">
+					<h2 className="text-xl font-gothic font-bold mb-4 text-[#ff3860] uppercase tracking-wider">
+						[COMMUNICATION_CHANNELS]
 					</h2>
 
 					<div className="space-y-4 mb-6">
 						{siteMetadata.email && (
 							<div className="flex items-start">
-								<div className="text-primary-500 mt-1 mr-3">
+								<div className="text-[#00ff99] mt-1 mr-3">
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
 										className="h-6 w-6"
@@ -58,10 +61,10 @@ export default function ContactPage() {
 									<h3 className="text-md font-medium text-gray-900 dark:text-gray-100">
 										Email
 									</h3>
-									<p className="text-gray-600 dark:text-gray-400">
+									<p className="text-gray-400 font-mono">
 										<a
 											href={`mailto:${siteMetadata.email}`}
-											className="hover:text-primary-500"
+											className="hover:text-[#ff3860] transition-colors duration-200"
 										>
 											{siteMetadata.email}
 										</a>
@@ -72,7 +75,7 @@ export default function ContactPage() {
 
 						{siteMetadata.github && (
 							<div className="flex items-start">
-								<div className="text-primary-500 mt-1 mr-3">
+								<div className="text-[#00ff99] mt-1 mr-3">
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
 										className="h-6 w-6"
@@ -86,12 +89,12 @@ export default function ContactPage() {
 									<h3 className="text-md font-medium text-gray-900 dark:text-gray-100">
 										GitHub
 									</h3>
-									<p className="text-gray-600 dark:text-gray-400">
+									<p className="text-gray-400 font-mono">
 										<a
 											href={siteMetadata.github}
 											target="_blank"
 											rel="noopener noreferrer"
-											className="hover:text-primary-500"
+											className="hover:text-[#ff3860] transition-colors duration-200"
 										>
 											{siteMetadata.github.replace("https://github.com/", "@")}
 										</a>
@@ -102,7 +105,7 @@ export default function ContactPage() {
 
 						{siteMetadata.linkedin && (
 							<div className="flex items-start">
-								<div className="text-primary-500 mt-1 mr-3">
+								<div className="text-[#00ff99] mt-1 mr-3">
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
 										className="h-6 w-6"
@@ -116,12 +119,12 @@ export default function ContactPage() {
 									<h3 className="text-md font-medium text-gray-900 dark:text-gray-100">
 										LinkedIn
 									</h3>
-									<p className="text-gray-600 dark:text-gray-400">
+									<p className="text-gray-400 font-mono">
 										<a
 											href={siteMetadata.linkedin}
 											target="_blank"
 											rel="noopener noreferrer"
-											className="hover:text-primary-500"
+											className="hover:text-[#ff3860] transition-colors duration-200"
 										>
 											Connect on LinkedIn
 										</a>
@@ -132,7 +135,7 @@ export default function ContactPage() {
 
 						{siteMetadata.twitter && (
 							<div className="flex items-start">
-								<div className="text-primary-500 mt-1 mr-3">
+								<div className="text-[#00ff99] mt-1 mr-3">
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
 										className="h-6 w-6"
@@ -146,12 +149,12 @@ export default function ContactPage() {
 									<h3 className="text-md font-medium text-gray-900 dark:text-gray-100">
 										Twitter
 									</h3>
-									<p className="text-gray-600 dark:text-gray-400">
+									<p className="text-gray-400 font-mono">
 										<a
 											href={siteMetadata.twitter}
 											target="_blank"
 											rel="noopener noreferrer"
-											className="hover:text-primary-500"
+											className="hover:text-[#ff3860] transition-colors duration-200"
 										>
 											{siteMetadata.twitter.replace(
 												"https://twitter.com/",

@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "@/components/Link";
+import Image from "next/image";
 
 interface CardProps {
 	title: string;
@@ -47,10 +47,10 @@ export default function Card({
 					{href && (
 						<Link
 							href={href}
-							className="inline-flex items-center text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 mt-2"
+							className="inline-flex items-center text-[#00ff99] hover:text-[#ff3860] mt-2 font-mono text-sm transition-colors duration-200"
 							aria-label={`Link to ${title}`}
 						>
-							Learn more
+							EXPLORE_DATA →
 							<svg
 								className="ml-1 w-5 h-5"
 								xmlns="http://www.w3.org/2000/svg"

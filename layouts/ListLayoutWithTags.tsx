@@ -1,14 +1,14 @@
 "use client";
 
+import Link from "@/components/Link";
+import Tag from "@/components/Tag";
+import siteMetadata from "@/data/siteMetadata";
 import tagData from "app/tag-data.json";
 import type { Blog } from "contentlayer/generated";
 import { slug } from "github-slugger";
 import { usePathname } from "next/navigation";
 import type { CoreContent } from "pliny/utils/contentlayer";
 import { formatDate } from "pliny/utils/formatDate";
-import Link from "@/components/Link";
-import Tag from "@/components/Tag";
-import siteMetadata from "@/data/siteMetadata";
 
 interface PaginationProps {
 	totalPages: number;
@@ -97,41 +97,45 @@ export default function ListLayoutWithTags({
 
 	return (
 		<div>
-			<div className="space-y-2 pb-8 pt-6 md:space-y-5">
-				<h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-					{title}
-				</h1>
-				{description && (
-					<p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-						{description}
-					</p>
-				)}
-
-				{/* RSS Feed Notice */}
-				<div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mt-2 border-t border-gray-200 dark:border-gray-700 pt-4">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 24 24"
-						fill="currentColor"
-						className="h-4 w-4 mr-2 text-orange-500"
-					>
-						<path d="M19 20.001C19 11.729 12.271 5 4 5v2c7.168 0 13 5.832 13 13.001h2z" />
-						<path d="M12 20.001h2C14 14.486 9.514 10 4 10v2c4.411 0 8 3.589 8 8.001z" />
-						<circle cx="6" cy="18" r="2" />
-					</svg>
-					<span>
-						Subscribe via{" "}
-						<a
-							href="/feed.xml"
-							target="_blank"
-							rel="noopener noreferrer"
-							className="font-medium text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-						>
-							RSS feed
-						</a>{" "}
-						to get updates delivered directly to your favorite feed reader.
-					</span>
+			<section className="relative overflow-hidden pb-8 pt-6 md:space-y-5">
+				<div className="absolute inset-0 synthwave-grid opacity-10" />
+				<div className="relative z-10 space-y-2">
+					<h1 className="text-3xl font-doom font-extrabold leading-9 tracking-tight text-primary-400 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 glow-text-subtle animate-doom-pulse">
+						{title.toUpperCase().replace(/\s/g, '_')}
+					</h1>
+					{description && (
+						<p className="text-lg leading-7 text-gray-300 font-mono">
+							<span className="text-primary-400">[SYSTEM]</span> {description}
+						</p>
+					)}
 				</div>
+			</section>
+
+			{/* RSS Feed Notice - Doom Style */}
+			<div className="flex items-center text-sm text-gray-300 mt-4 border-t border-primary-700 pt-4 font-mono">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 24 24"
+					fill="currentColor"
+					className="h-4 w-4 mr-2 text-primary-400"
+				>
+					<title>RSS Feed</title>
+					<path d="M19 20.001C19 11.729 12.271 5 4 5v2c7.168 0 13 5.832 13 13.001h2z" />
+					<path d="M12 20.001h2C14 14.486 9.514 10 4 10v2c4.411 0 8 3.589 8 8.001z" />
+					<circle cx="6" cy="18" r="2" />
+				</svg>
+				<span>
+					<span className="text-primary-400">[FEED]</span> Subscribe via{" "}
+					<a
+						href="/feed.xml"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="font-medium text-primary-400 hover:text-primary-300 hover-glow"
+					>
+						RSS
+					</a>{" "}
+					for real-time updates
+				</span>
 			</div>
 			<div className="flex sm:space-x-24">
 				<div className="hidden h-full max-h-screen max-w-[280px] min-w-[280px] flex-wrap overflow-auto rounded-sm bg-gray-50 pt-5 shadow-md sm:flex dark:bg-gray-900/70 dark:shadow-gray-800/40">

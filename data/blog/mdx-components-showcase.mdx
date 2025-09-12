@@ -1,38 +1,15 @@
 ---
-title: Sample .md file
-date: '2016-03-08'
-tags: ['markdown', 'code', 'features']
+title: 'MDX Components Showcase: Doom Metal Aesthetic Guide'
+date: '2025-09-12'
+tags: ['mdx', 'components', 'design-system', 'doom-metal', 'synthwave']
 draft: true
-summary: Example of a markdown file with code blocks and syntax highlighting
+summary: 'A comprehensive showcase of all available MDX components with doom metal/synthwave aesthetic styling. This post demonstrates every component in action with practical examples.'
+
 ---
 
 # MDX Components Showcase
 
 Welcome to the complete showcase of our doom metal/synthwave themed MDX components! This post demonstrates every available component with real-world examples.
-
-<Alert type="info" title="Component Showcase">
-This is a comprehensive guide to all available MDX components. Each component follows our doom metal aesthetic with consistent theming.
-</Alert>
-
-## Alerts & Notifications
-
-Alerts come in four different types to convey different levels of importance:
-
-<Alert type="success" title="Success Alert">
-Operation completed successfully! Your doom aesthetic is now fully operational.
-</Alert>
-
-<Alert type="warning" title="Performance Warning">
-This configuration might impact performance. Consider optimizing your setup.
-</Alert>
-
-<Alert type="error" title="Critical Error" dismissible>
-A critical error occurred in the matrix. This alert can be dismissed by clicking the X.
-</Alert>
-
-<Alert type="info">
-This is a simple info alert without a title. Perfect for general information.
-</Alert>
 
 ## Badges & Tags
 
@@ -55,6 +32,38 @@ Individual badges work too: <Badge variant="error">Critical</Badge> <Badge varia
 ## Code Examples
 
 Our enhanced code blocks support syntax highlighting, copy functionality, and file headers:
+
+```javascript
+console.log("Hello World!");
+const x = 42;
+function test() {
+  return "doom aesthetic";
+}
+```
+
+```typescript
+
+const applyDoomTheme = (config: DoomTheme): void => {
+  document.documentElement.style.setProperty('--primary', config.colors.primary);
+  document.documentElement.style.setProperty('--secondary', config.colors.secondary);
+  document.documentElement.style.setProperty('--bg', config.colors.background);
+};
+
+// Initialize the doom aesthetic
+applyDoomTheme({
+  colors: {
+    primary: '#ff3860',
+    secondary: '#00ff99',
+    background: '#0a0a0a'
+  }
+});`}
+```
+
+```bash
+npm install doom-aesthetic-components
+npm run build:doom
+echo "The matrix has you..."`
+```
 
 ## Image Comparisons
 
@@ -375,4 +384,332 @@ The matrix has you now. Welcome to the doom aesthetic revolution.
 
 ---
 
-*This post showcases all available MDX components. Each component supports extensive customization and follows our doom metal design system principles.*
+## How to Use These Components
+
+Below you'll find the exact code for each component demonstrated above. Copy and paste these examples into your own MDX files:
+
+### Alert Components
+
+<CodeBlock language="mdx" filename="alerts.mdx">
+{`<!-- Success Alert -->
+<Alert type="success" title="Success Alert">
+Operation completed successfully! Your doom aesthetic is now fully operational.
+</Alert>
+
+<!-- Warning Alert -->
+<Alert type="warning" title="Performance Warning">
+This configuration might impact performance. Consider optimizing your setup.
+</Alert>
+
+<!-- Error Alert with dismiss button -->
+<Alert type="error" title="Critical Error" dismissible>
+A critical error occurred in the matrix. This alert can be dismissed by clicking the X.
+</Alert>
+
+<!-- Info Alert without title -->
+<Alert type="info">
+This is a simple info alert without a title. Perfect for general information.
+</Alert>`}
+</CodeBlock>
+
+### Badge System
+
+<CodeBlock language="mdx" filename="badges.mdx">
+{`<!-- Badge Group with title -->
+<BadgeGroup
+  title="Technology Stack"
+  badges={["React", "TypeScript", "Next.js", "Tailwind CSS", "MDX"]}
+  variant="success"
+/>
+
+<!-- Simple Badge Group -->
+<BadgeGroup
+  badges={["JavaScript", "CSS", "Design Systems"]}
+  variant="default"
+/>
+
+<!-- Individual Badges -->
+<Badge variant="error">Critical</Badge>
+<Badge variant="warning">Beta</Badge>
+<Badge variant="success">Stable</Badge>`}
+</CodeBlock>
+
+### Code Blocks
+
+<CodeBlock language="mdx" filename="code-examples.mdx">
+{`<!-- TypeScript Code Block -->
+<CodeBlock
+  language="typescript"
+  filename="doom-theme.ts"
+  copyable={true}
+>
+interface DoomTheme {
+  colors: {
+    primary: '#ff3860';
+    secondary: '#00ff99';
+  };
+}
+</CodeBlock>
+
+<!-- Bash Command Block -->
+<CodeBlock language="bash" filename="terminal">
+npm install doom-components
+npm run dev
+</CodeBlock>`}
+</CodeBlock>
+
+### Image Comparisons
+
+<CodeBlock language="mdx" filename="image-comparison.mdx">
+{`<ImageComparison
+  title="Before vs After Transformation"
+  beforeSrc="/images/github-traffic.png"
+  afterSrc="/images/logo.png"
+  beforeAlt="Before optimization"
+  afterAlt="After optimization"
+/>`}
+</CodeBlock>
+
+### Progress Bars
+
+<CodeBlock language="mdx" filename="progress.mdx">
+{`<!-- Animated Progress Bar -->
+<ProgressBar
+  value={85}
+  max={100}
+  label="Project Completion"
+  color="green"
+  animated={true}
+  showPercentage={true}
+/>
+
+<!-- Simple Progress Bar -->
+<ProgressBar
+  value={42}
+  label="Loading"
+  color="red"
+/>
+
+<!-- Progress without percentage -->
+<ProgressBar
+  value={99}
+  label="Almost Done"
+  color="blue"
+  showPercentage={false}
+/>`}
+</CodeBlock>
+
+### Quotes
+
+<CodeBlock language="mdx" filename="quotes.mdx">
+{`<!-- Quote with author -->
+<Quote
+  author="Neo"
+  source="The Matrix"
+  type="success"
+>
+There is no spoon. Only code.
+</Quote>
+
+<!-- Simple quote -->
+<Quote type="warning">
+With great power comes great responsibility.
+</Quote>
+
+<!-- Error-styled quote -->
+<Quote
+  author="Anonymous Developer"
+  type="error"
+>
+It works on my machine.
+</Quote>`}
+</CodeBlock>
+
+### Statistics Grids
+
+<CodeBlock language="mdx" filename="stats.mdx">
+{`<StatsGrid
+  title="Project Metrics"
+  columns={3}
+  stats={[
+    {
+      title: "Users",
+      value: "1,337",
+      subtitle: "Active monthly users",
+      color: "green",
+      trend: { direction: "up", value: "+12%" }
+    },
+    {
+      title: "Performance",
+      value: "99ms",
+      subtitle: "Average response time",
+      color: "blue",
+      trend: { direction: "down", value: "-15ms" }
+    },
+    {
+      title: "Uptime",
+      value: "99.9%",
+      color: "green"
+    }
+  ]}
+/>`}
+</CodeBlock>
+
+### Tabs
+
+<CodeBlock language="mdx" filename="tabs.mdx">
+{`<Tabs
+  defaultTab="overview"
+  items={[
+    {
+      id: "overview",
+      title: "Overview",
+      content: (
+        <div>
+          <h3>Project Overview</h3>
+          <p>This is the overview content...</p>
+        </div>
+      )
+    },
+    {
+      id: "details",
+      title: "Details",
+      content: (
+        <div>
+          <h3>Detailed Information</h3>
+          <p>More detailed content here...</p>
+        </div>
+      )
+    }
+  ]}
+/>`}
+</CodeBlock>
+
+### Timelines
+
+<CodeBlock language="mdx" filename="timeline.mdx">
+{`<Timeline
+  title="Project Roadmap"
+  items={[
+    {
+      title: "Planning Phase",
+      date: "Q1 2025",
+      description: "Initial planning and requirements gathering",
+      status: "completed"
+    },
+    {
+      title: "Development",
+      date: "Q2 2025",
+      description: "Core development and feature implementation",
+      status: "current"
+    },
+    {
+      title: "Launch",
+      date: "Q3 2025",
+      description: "Public release and deployment",
+      status: "upcoming"
+    }
+  ]}
+/>`}
+</CodeBlock>
+
+### Complex Nested Examples
+
+<CodeBlock language="mdx" filename="nested-components.mdx">
+{`<!-- Tabs containing other components -->
+<Tabs
+  items={[
+    {
+      id: "metrics",
+      title: "Metrics",
+      content: (
+        <div>
+          <StatsGrid
+            stats={[
+              { title: "Speed", value: "Fast", color: "green" },
+              { title: "Quality", value: "High", color: "blue" }
+            ]}
+          />
+          <ProgressBar value={95} label="Overall Score" />
+        </div>
+      )
+    },
+    {
+      id: "alerts",
+      title: "Status",
+      content: (
+        <div>
+          <Alert type="success" title="All Systems Operational">
+            Everything is running smoothly.
+          </Alert>
+          <BadgeGroup badges={["Online", "Secure", "Fast"]} variant="success" />
+        </div>
+      )
+    }
+  ]}
+/>`}
+</CodeBlock>
+
+## Component Properties Reference
+
+### Alert Props
+
+- `type`: `"info" | "success" | "warning" | "error"`
+- `title?`: Optional title string
+- `dismissible?`: Boolean for dismiss functionality (default: false)
+
+### BadgeGroup Props
+
+- `title?`: Optional group title
+- `badges`: Array of strings
+- `variant?`: `"default" | "success" | "error" | "warning" | "info"`
+
+### CodeBlock Props
+
+- `language?`: Programming language for syntax highlighting (default: "bash")
+- `filename?`: Optional filename display
+- `copyable?`: Enable copy button (default: true)
+- `showLineNumbers?`: Show line numbers (default: true)
+
+### ImageComparison Props
+
+- `title?`: Optional comparison title
+- `beforeSrc`: Path to before image
+- `afterSrc`: Path to after image
+- `beforeAlt`: Alt text for before image
+- `afterAlt`: Alt text for after image
+
+### ProgressBar Props
+
+- `value`: Current progress value
+- `max?`: Maximum value (default: 100)
+- `label?`: Progress label
+- `color?`: `"red" | "green" | "blue" | "yellow"` (default: "green")
+- `showPercentage?`: Show percentage (default: true)
+- `animated?`: Enable animations (default: true)
+
+### Quote Props
+
+- `author?`: Quote author
+- `source?`: Quote source/context
+- `type?`: `"default" | "warning" | "success" | "error"`
+
+### StatsGrid Props
+
+- `title?`: Grid title
+- `columns?`: `1 | 2 | 3 | 4` (default: 3)
+- `stats`: Array of stat objects with title, value, subtitle?, color?, trend?
+
+### Timeline Props
+
+- `title?`: Timeline title
+- `items`: Array with title, date, description?, status? ("completed" | "current" | "upcoming")
+
+### Tabs Props
+
+- `defaultTab?`: ID of default active tab
+- `items`: Array with id, title, and content (React.ReactNode)
+
+---
+
+*This post showcases all available MDX components with complete usage examples. Each component supports extensive customization and follows our doom metal design system principles.*

@@ -1,0 +1,363 @@
+---
+title: 'CodeBlock Test - Line Numbers Demo'
+date: '2025-09-12'
+tags: ['test', 'codeblock', 'demo']
+draft: false
+summary: 'Testing CodeBlock component with line numbers and various programming languages'
+---
+
+# CodeBlock Component Test
+
+This post demonstrates various code block examples to test line numbers and syntax highlighting.
+
+## Standard Markdown Code Blocks
+
+### JavaScript Example
+
+```javascript
+// This is a JavaScript example
+function greetUser(name) {
+  console.log(`Hello, ${name}!`);
+  return `Welcome to the doom aesthetic, ${name}`;
+}
+
+const user = "Developer";
+const message = greetUser(user);
+console.log(message);
+
+// Arrow function example
+const calculateSum = (a, b) => a + b;
+const result = calculateSum(10, 20);
+```
+
+### Python Example
+
+```python
+# Python example with multiple lines
+def fibonacci(n):
+    if n <= 1:
+        return n
+    return fibonacci(n-1) + fibonacci(n-2)
+
+# Generate first 10 fibonacci numbers
+for i in range(10):
+    print(f"F({i}) = {fibonacci(i)}")
+
+# List comprehension
+squares = [x**2 for x in range(1, 6)]
+print("Squares:", squares)
+```
+
+### TypeScript Example
+
+```typescript
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  isActive: boolean;
+}
+
+class UserManager {
+  private users: User[] = [];
+
+  addUser(user: User): void {
+    this.users.push(user);
+    console.log(`Added user: ${user.name}`);
+  }
+
+  getActiveUsers(): User[] {
+    return this.users.filter(user => user.isActive);
+  }
+
+  getUserById(id: number): User | undefined {
+    return this.users.find(user => user.id === id);
+  }
+}
+
+const manager = new UserManager();
+manager.addUser({
+  id: 1,
+  name: "John Doe",
+  email: "john@example.com",
+  isActive: true
+});
+```
+
+### Bash/Shell Example
+
+```bash
+#!/bin/bash
+# Deploy script for doom aesthetic website
+
+echo "Starting deployment..."
+
+# Build the project
+npm run build
+if [ $? -ne 0 ]; then
+  echo "Build failed!"
+  exit 1
+fi
+
+# Deploy to server
+rsync -avz dist/ user@server:/var/www/html/
+
+# Restart services
+systemctl reload nginx
+systemctl status nginx
+
+echo "Deployment completed successfully!"
+```
+
+## CSS Example
+
+```css
+/* Doom aesthetic button styles */
+.doom-button {
+  background: linear-gradient(135deg, #ff3860, #8b5cf6);
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.doom-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 56, 96, 0.4);
+}
+
+.doom-button:active {
+  transform: translateY(0);
+}
+```
+
+## Go Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "net/http"
+    "log"
+)
+
+type Server struct {
+    port string
+}
+
+func (s *Server) handleRoot(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintf(w, "Welcome to the Doom Aesthetic API!")
+}
+
+func (s *Server) handleHealth(w http.ResponseWriter, r *http.Request) {
+    w.Header().Set("Content-Type", "application/json")
+    fmt.Fprintf(w, `{"status": "healthy", "theme": "doom"}`)
+}
+
+func main() {
+    server := &Server{port: ":8080"}
+
+    http.HandleFunc("/", server.handleRoot)
+    http.HandleFunc("/health", server.handleHealth)
+
+    fmt.Printf("Server starting on port %s\n", server.port)
+    log.Fatal(http.ListenAndServe(server.port, nil))
+}
+```
+
+## JSON Configuration Example
+
+```json
+{
+  "name": "doom-aesthetic-blog",
+  "version": "1.0.0",
+  "description": "A blog with doom metal aesthetic",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "^14.0.0",
+    "react": "^18.0.0",
+    "tailwindcss": "^3.0.0"
+  },
+  "theme": {
+    "colors": {
+      "primary": "#ff3860",
+      "secondary": "#00ff99",
+      "background": "#0a0a0a"
+    }
+  }
+}
+```
+
+## SQL Example
+
+```sql
+-- User management queries
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  is_active BOOLEAN DEFAULT true
+);
+
+-- Insert sample data
+INSERT INTO users (name, email) VALUES
+  ('John Doe', 'john@example.com'),
+  ('Jane Smith', 'jane@example.com'),
+  ('Bob Wilson', 'bob@example.com');
+
+-- Query active users
+SELECT id, name, email, created_at
+FROM users
+WHERE is_active = true
+ORDER BY created_at DESC;
+
+-- Update user status
+UPDATE users
+SET is_active = false
+WHERE email = 'john@example.com';
+```
+
+## Dockerfile Example
+
+```dockerfile
+# Multi-stage build for Next.js app
+FROM node:18-alpine AS base
+WORKDIR /app
+COPY package*.json ./
+
+FROM base AS deps
+RUN npm ci --only=production
+
+FROM base AS builder
+COPY . .
+RUN npm ci
+RUN npm run build
+
+FROM node:18-alpine AS runner
+WORKDIR /app
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
+EXPOSE 3000
+ENV PORT 3000
+CMD ["node", "server.js"]
+```
+
+## Rust Example
+
+```rust
+use std::collections::HashMap;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Serialize, Deserialize)]
+struct DoomTheme {
+    primary: String,
+    secondary: String,
+    background: String,
+}
+
+#[derive(Debug)]
+struct ThemeManager {
+    themes: HashMap<String, DoomTheme>,
+}
+
+impl ThemeManager {
+    fn new() -> Self {
+        let mut themes = HashMap::new();
+
+        themes.insert("doom".to_string(), DoomTheme {
+            primary: "#ff3860".to_string(),
+            secondary: "#00ff99".to_string(),
+            background: "#0a0a0a".to_string(),
+        });
+
+        Self { themes }
+    }
+
+    fn get_theme(&self, name: &str) -> Option<&DoomTheme> {
+        self.themes.get(name)
+    }
+}
+
+fn main() {
+    let manager = ThemeManager::new();
+
+    if let Some(theme) = manager.get_theme("doom") {
+        println!("Doom theme: {:?}", theme);
+    }
+}
+```
+
+## YAML Configuration Example
+
+```yaml
+# Docker Compose for Doom Aesthetic Stack
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - THEME=doom
+    depends_on:
+      - redis
+      - postgres
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: doomdb
+      POSTGRES_USER: doomuser
+      POSTGRES_PASSWORD: doom_secret_123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  redis_data:
+  postgres_data:
+```
+
+---
+
+## Expected Results
+
+Each code block above should show:
+
+- ✅ **Syntax highlighting** for each language (colors for keywords, strings, etc.)
+- ✅ **Terminal-style header** with colored dots (red, yellow, green)
+- ✅ **Language badge** showing the programming language
+- ✅ **Doom aesthetic styling** with dark theme and proper borders
+- ✅ **Consistent styling** across all code blocks
+
+The syntax highlighting should be provided by `rehype-prism-plus` during build time, wrapped with our custom doom aesthetic styling.
+
+**Note:** Line numbers are handled by the explicit `<CodeBlock>` component, while standard markdown code blocks focus on clean syntax highlighting with the doom theme.

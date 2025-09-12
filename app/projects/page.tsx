@@ -52,18 +52,22 @@ export default function Projects() {
 	}, [searchValue, selectedCategory, sourceFilter, isLoaded]);
 
 	return (
-		<div className="divide-y divide-gray-200 dark:divide-gray-700">
-			<div className="space-y-2 pt-6 pb-8 md:space-y-5">
-				<h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 dark:text-gray-100">
-					Projects
-				</h1>
-				<p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-					A showcase of my technical explorations and creative solutions
-				</p>
-			</div>
+		<div className="divide-y divide-gray-700">
+			{/* Doom Metal Header */}
+			<section className="relative overflow-hidden pt-6 pb-8 md:space-y-5">
+				<div className="absolute inset-0 synthwave-grid opacity-10" />
+				<div className="relative z-10">
+					<h1 className="text-3xl leading-9 font-gothic tracking-tight text-[#ff3860] sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+						PROJECTS_ARCHIVE
+					</h1>
+					<p className="text-lg leading-7 text-gray-300 font-mono mt-4">
+						<span className="text-[#00ff99]">[SYSTEM]</span> Technical explorations and creative solutions from the void...
+					</p>
+				</div>
+			</section>
 
-			{/* Search and Filter */}
-			<div className="py-6">
+			{/* Search and Filter - Doom Style */}
+			<div className="py-6 border-t border-gray-700">
 				<div className="flex flex-col space-y-4">
 					{/* Search Input */}
 					<div className="relative max-w-lg">
@@ -71,16 +75,17 @@ export default function Projects() {
 							aria-label="Search projects"
 							type="text"
 							onChange={(e) => setSearchValue(e.target.value)}
-							placeholder="Search projects..."
-							className="block w-full px-4 py-2 text-gray-900 bg-white border border-gray-300 rounded-md dark:border-gray-900 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:text-gray-100"
+							placeholder="SEARCH_PROJECTS..."
+							className="block w-full px-4 py-2 font-mono text-gray-100 bg-gray-900 border border-gray-600 rounded-md focus:ring-[#00ff99] focus:border-[#00ff99] placeholder-gray-500 hover:border-[#00ff99] transition-all duration-300"
 						/>
 						<svg
-							className="absolute w-5 h-5 text-gray-400 right-3 top-3 dark:text-gray-300"
+							className="absolute w-5 h-5 text-[#00ff99] right-3 top-3"
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"
 							viewBox="0 0 24 24"
 							stroke="currentColor"
 						>
+							<title>Search</title>
 							<path
 								strokeLinecap="round"
 								strokeLinejoin="round"
@@ -90,22 +95,23 @@ export default function Projects() {
 						</svg>
 					</div>
 
-					{/* Filters Section */}
+					{/* Filters Section - Doom Style */}
 					<div className="flex flex-col sm:flex-row gap-4">
 						{/* Category filter */}
 						<div>
-							<h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-								Categories
+							<h3 className="text-sm font-medium font-mono text-[#ff3860] mb-2 uppercase tracking-wider">
+								[CATEGORIES]
 							</h3>
 							<div className="flex flex-wrap gap-2">
 								{allCategories.map((category) => (
 									<button
 										key={category}
+										type="button"
 										onClick={() => setSelectedCategory(category)}
-										className={`px-3 py-1 text-sm font-medium rounded-md transition-colors
+										className={`px-3 py-1 text-sm font-mono font-medium rounded-md transition-all duration-300 uppercase tracking-wide
                         ${selectedCategory === category
-												? "bg-primary-500 text-white"
-												: "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
+												? "bg-[#00ff99] text-gray-900 shadow-lg shadow-[#00ff99]/20"
+												: "bg-gray-900 border border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-[#00ff99] hover:border-[#00ff99]"
 											}`}
 									>
 										{category}
@@ -116,21 +122,22 @@ export default function Projects() {
 
 						{/* Source type filter */}
 						<div>
-							<h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-								Source Type
+							<h3 className="text-sm font-medium font-mono text-[#ff3860] mb-2 uppercase tracking-wider">
+								[SOURCE_TYPE]
 							</h3>
 							<div className="flex gap-2">
 								{["All", "Open Source", "Closed Source"].map((type) => (
 									<button
 										key={type}
+										type="button"
 										onClick={() => setSourceFilter(type)}
-										className={`px-3 py-1 text-sm font-medium rounded-md transition-colors
+										className={`px-3 py-1 text-sm font-mono font-medium rounded-md transition-all duration-300 uppercase tracking-wide
                         ${sourceFilter === type
-												? "bg-primary-500 text-white"
-												: "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
+												? "bg-[#00ff99] text-gray-900 shadow-lg shadow-[#00ff99]/20"
+												: "bg-gray-900 border border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-[#00ff99] hover:border-[#00ff99]"
 											}`}
 									>
-										{type}
+										{type === "Open Source" ? "OPEN" : type === "Closed Source" ? "CLOSED" : "ALL"}
 									</button>
 								))}
 							</div>

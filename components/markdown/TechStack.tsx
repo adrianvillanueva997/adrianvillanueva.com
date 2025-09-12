@@ -88,14 +88,16 @@ export function TechStack({ technologies, showLabels = true }: TechStackProps) {
 					<span
 						key={name}
 						className="group flex items-center gap-2 px-4 py-2
-              rounded-full text-sm font-medium
-              bg-neutral-100 dark:bg-neutral-800/30
-              border border-neutral-200 dark:border-neutral-700
-              text-neutral-600 dark:text-neutral-300
-              hover:bg-neutral-200 dark:hover:bg-neutral-700/50
-              hover:border-neutral-300 dark:hover:border-neutral-600
+              rounded-full text-sm font-medium font-mono
+              bg-gray-900/50
+              border border-gray-600
+              text-gray-200
+              hover:bg-gray-800/70
+              hover:border-[#00ff99]
+              hover:text-[#00ff99]
               transition-all duration-300 ease-in-out
               hover:translate-y-[-2px]
+              hover:shadow-lg hover:shadow-[#00ff99]/20
               cursor-default"
 					>
 						{Icon && <Icon className="w-4 h-4" />}
