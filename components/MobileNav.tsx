@@ -41,13 +41,13 @@ const MobileNav = () => {
 				type="button"
 				aria-label="Toggle Menu"
 				onClick={onToggleNav}
-				className="sm:hidden p-1 hover:bg-gray-800/50 rounded transition-colors"
+				className="group sm:hidden relative p-2 rounded-lg border border-gray-700/50 hover:border-[#00ff99]/60 transition-all duration-300 hover:shadow-sm hover:shadow-[#00ff99]/20"
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 20 20"
 					fill="currentColor"
-					className="h-6 w-6 text-gray-100 hover:text-[#00ff99] transition-colors"
+					className="relative z-10 h-5 w-5 text-gray-300 group-hover:text-[#00ff99] transition-all duration-300 group-hover:scale-110"
 					aria-hidden="true"
 				>
 					<path
@@ -56,6 +56,10 @@ const MobileNav = () => {
 						clipRule="evenodd"
 					/>
 				</svg>
+				{/* Menu indicator */}
+				<span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 text-xs font-mono text-[#00ff99]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+					MENU
+				</span>
 			</button>
 			<Transition appear show={navShow} as={Fragment} unmount={false}>
 				<Dialog as="div" onClose={onToggleNav} unmount={false}>
