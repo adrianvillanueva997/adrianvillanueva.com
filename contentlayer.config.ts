@@ -1,5 +1,3 @@
-import { writeFileSync } from "node:fs";
-import path from "node:path";
 import {
 	type ComputedFields,
 	defineDocumentType,
@@ -7,6 +5,8 @@ import {
 } from "contentlayer2/source-files";
 import { slug } from "github-slugger";
 import { fromHtmlIsomorphic } from "hast-util-from-html-isomorphic";
+import { writeFileSync } from "node:fs";
+import path from "node:path";
 // Remark packages
 import {
 	extractTocHeadings,
@@ -68,18 +68,18 @@ const computedFields: ComputedFields = {
  */
 async function createTagCount(allBlogs) {
 	const tagCount: Record<string, number> = {};
-	allBlogs.forEach((file) => {
+	for (const file of allBlogs) {
 		if (file.tags && (!isProduction || file.draft !== true)) {
-			file.tags.forEach((tag) => {
+			for (const tag of file.tags) {
 				const formattedTag = slug(tag);
 				if (formattedTag in tagCount) {
 					tagCount[formattedTag] += 1;
 				} else {
 					tagCount[formattedTag] = 1;
 				}
-			});
+			}
 		}
-	});
+	}
 	const formatted = await prettier.format(JSON.stringify(tagCount, null, 2), {
 		parser: "json",
 	});
@@ -153,9 +153,38 @@ export const Authors = defineDocumentType(() => ({
 	computedFields,
 }));
 
+export const Now = defineDocumentType(() => ({
+	name: "Now",
+	filePathPattern: "now/**/*.mdx",
+	contentType: "mdx",
+	fields: {
+		title: { type: "string", required: true },
+		lastUpdated: { type: "date", required: true },
+	},
+	computedFields: {
+		...computedFields,
+		structuredData: {
+			type: "json",
+			resolve: (doc) => ({
+				"@context": "https://schema.org",
+				"@type": "WebPage",
+				name: doc.title,
+				description: "Current activities and focus areas - a now page",
+				dateModified: doc.lastUpdated,
+				url: `${siteMetadata.siteUrl}/now`,
+				author: {
+					"@type": "Person",
+					name: siteMetadata.author,
+					url: siteMetadata.siteUrl,
+				},
+			}),
+		},
+	},
+}));
+
 export default makeSource({
 	contentDirPath: "data",
-	documentTypes: [Blog, Authors],
+	documentTypes: [Blog, Authors, Now],
 	mdx: {
 		cwd: process.cwd(),
 		remarkPlugins: [

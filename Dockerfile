@@ -19,21 +19,41 @@ RUN apk add --no-cache curl bash make
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/.yarnrc.yml ./
 
-RUN  curl -fsSL https://d2lang.com/install.sh -o /tmp/d2install.sh \
-    && sh /tmp/d2install.sh \
-    && rm /tmp/d2install.sh
+# Install d2 for diagram generation
+RUN curl -fsSL https://d2lang.com/install.sh -o /tmp/d2install.sh && \
+    sh /tmp/d2install.sh && \
+    rm /tmp/d2install.sh
 
-COPY data/diagrams ./data/diagrams
-RUN mkdir -p public/static/diagrams \
-    && for f in data/diagrams/*.d2; do \
+# Copy necessary config files first
+COPY next.config.js ./
+COPY tsconfig.json ./
+COPY tailwind.config.js ./
+COPY postcss.config.js ./
+COPY contentlayer.config.ts ./
+COPY jsconfig.json ./
+
+# Copy source directories
+COPY app ./app
+COPY components ./components
+COPY data ./data
+COPY layouts ./layouts
+COPY utils ./utils
+COPY css ./css
+COPY public ./public
+COPY scripts ./scripts
+
+# Generate diagrams
+RUN mkdir -p public/static/diagrams && \
+    for f in data/diagrams/*.d2; do \
+    [ -f "$f" ] && { \
     name=$(basename "${f%.d2}"); \
     d2 --theme 0 --dark-theme 200 "$f" "public/static/diagrams/${name}.svg"; \
-    done
+    } \
+    done || echo "No .d2 files found"
 
-
-COPY . .
-RUN yarn optimize_svgs
-RUN yarn build
+# Optimize SVGs and build
+RUN yarn optimize_svgs && \
+    yarn build
 
 # Production image, copy all the files and run next
 FROM node:23.9.0-alpine AS runner

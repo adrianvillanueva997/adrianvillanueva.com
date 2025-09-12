@@ -79,14 +79,29 @@ export default function TagGraph({ posts }: TagGraphProps) {
 				});
 			});
 
-			// Generate tag colors
-			function getTagColor(tag) {
+			// Generate doom/synthwave colors
+			function getTagColor(tag, count) {
+				const colors = [
+					'#ff3860', // Primary red
+					'#00ff99', // Primary green
+					'#ff6b9d', // Pink
+					'#6b73ff', // Blue
+					'#ff9f40', // Orange
+					'#9d65c9', // Purple
+					'#5ce1e6', // Cyan
+					'#ffd93d', // Yellow
+				];
+
+				// Hash function to consistently assign colors
 				let hash = 0;
 				for (let i = 0; i < tag.length; i++) {
 					hash = tag.charCodeAt(i) + ((hash << 5) - hash);
 				}
-				const hue = Math.abs(hash % 360);
-				return `hsl(${hue}, 70%, 60%)`;
+
+				// Always return the base color without alpha
+				// Canvas rendering will handle transparency
+				const baseColor = colors[Math.abs(hash) % colors.length];
+				return baseColor;
 			}
 
 			// Create nodes for each tag
@@ -94,7 +109,7 @@ export default function TagGraph({ posts }: TagGraphProps) {
 				id: tag,
 				name: tag,
 				val: Math.max(3, Math.sqrt(count) * 2), // Size based on count
-				color: getTagColor(tag),
+				color: getTagColor(tag, count),
 			}));
 
 			// Get the set of all valid node IDs
@@ -165,13 +180,27 @@ export default function TagGraph({ posts }: TagGraphProps) {
 	// No data or still loading
 	if (isLoading) {
 		return (
-			<div className="mt-8 mb-12" ref={graphRef}>
-				<h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-					Tag Relationships
-				</h2>
-				<div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
+			<div ref={graphRef}>
+				<div className="bg-gray-950 border border-gray-700 rounded-lg p-6">
 					<div className="flex justify-center items-center h-[500px]">
-						<p>Building knowledge graph...</p>
+						<div className="text-center">
+							<div className="text-[#00ff99] font-mono text-lg mb-2">
+								BUILDING_NEURAL_MAP...
+							</div>
+							<div className="text-gray-400 font-mono text-sm">
+								PROCESSING_KNOWLEDGE_NODES
+							</div>
+							{/* Loading animation */}
+							<div className="mt-4 flex justify-center space-x-1">
+								{[0, 1, 2].map((i) => (
+									<div
+										key={i}
+										className="w-2 h-2 bg-[#ff3860] rounded-full animate-pulse"
+										style={{ animationDelay: `${i * 0.2}s` }}
+									/>
+								))}
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -181,13 +210,17 @@ export default function TagGraph({ posts }: TagGraphProps) {
 	// No graph data
 	if (!graphData.nodes.length) {
 		return (
-			<div className="mt-8 mb-12" ref={graphRef}>
-				<h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-					Tag Relationships
-				</h2>
-				<div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
+			<div ref={graphRef}>
+				<div className="bg-gray-950 border border-gray-700 rounded-lg p-6">
 					<div className="flex justify-center items-center h-[300px]">
-						<p>Not enough connected tags to generate a graph.</p>
+						<div className="text-center">
+							<div className="text-[#ff3860] font-mono text-lg mb-2">
+								INSUFFICIENT_DATA
+							</div>
+							<div className="text-gray-400 font-mono text-sm">
+								NOT_ENOUGH_CONNECTED_NODES
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -195,75 +228,125 @@ export default function TagGraph({ posts }: TagGraphProps) {
 	}
 
 	return (
-		<div className="mt-8 mb-12" ref={graphRef}>
-			<h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-				Tag Relationships
-			</h2>
-			<p className="text-gray-600 dark:text-gray-400 mb-4">
-				Explore how topics are connected in my writing. Larger nodes represent
-				more frequent tags.
-			</p>
-			<div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
+		<div ref={graphRef}>
+			<div className="bg-gray-950 border border-gray-700 rounded-lg overflow-hidden">
 				<ForceGraph2D
 					graphData={graphData}
 					width={dimensions.width}
 					height={dimensions.height}
-					nodeLabel="name"
+					backgroundColor="#0a0a0a"
+					nodeLabel={(node) => {
+						const nodeData = graphData.nodes.find(n => n.id === node.id);
+						const connections = nodeData?.val || 0;
+						return `${node.name.toUpperCase().replace(/\s+/g, '_')} - ${connections} posts`;
+					}}
 					nodeColor="color"
-					nodeVal="val"
-					linkWidth={(link) => Math.sqrt(link.value) * 1.2} // Thicker lines
-					linkColor={() => "rgba(100, 120, 180, 0.6)"} // More visible blue color with higher opacity
-					linkDirectionalParticles={2} // Add particles that flow along the links
-					linkDirectionalParticleWidth={2} // Size of particles
-					linkDirectionalParticleSpeed={0.01} // Slow particle movement
-					linkCurvature={0.15} // Slightly curved links
+					nodeVal={(node) => Math.max(8, Math.sqrt(node.val) * 4)} // Larger base size for better visibility
+					linkWidth={(link) => Math.max(2, Math.sqrt(link.value) * 2)} // Better link visibility
+					linkColor={() => "rgba(255, 56, 96, 0.4)"} // More visible doom red with proper alpha
+					linkDirectionalParticles={2} // Fewer particles for less distraction
+					linkDirectionalParticleWidth={3} // Larger particles
+					linkDirectionalParticleSpeed={0.006} // Slower movement
+					linkDirectionalParticleColor={() => "#00ff99"} // Synthwave green particles
+					linkCurvature={0.1} // Less curve for cleaner look
 					onNodeClick={handleNodeClick}
+					onNodeHover={(node) => {
+						// Add cursor pointer on hover
+						document.body.style.cursor = node ? 'pointer' : 'default';
+					}}
 					cooldownTicks={100}
 					nodeCanvasObject={(node, ctx, globalScale) => {
 						const label = node.name;
-						const fontSize = 12 / globalScale;
-						ctx.font = `${fontSize}px Sans-Serif`;
+						const fontSize = Math.max(8, 10 / globalScale); // Smaller font size
+						const nodeSize = node.val ?? 8;
 
-						// Draw node circle
+						ctx.font = `${fontSize}px 'JetBrains Mono', monospace`;
+
+						// Draw node with better visibility
 						ctx.beginPath();
 						ctx.arc(
 							node.x ?? 0,
 							node.y ?? 0,
-							node.val ?? 3,
+							nodeSize,
 							0,
 							2 * Math.PI,
 							false,
 						);
-						ctx.fillStyle = node.color;
-						ctx.fill();
 
-						// Add node stroke/border to make it stand out from links
-						ctx.strokeStyle = "rgba(255, 255, 255, 0.8)";
-						ctx.lineWidth = 1.5 / globalScale;
+						// Main node fill with gradient effect
+						const gradient = ctx.createRadialGradient(
+							node.x ?? 0, node.y ?? 0, 0,
+							node.x ?? 0, node.y ?? 0, nodeSize
+						);
+
+						// Ensure we have a clean base color (remove any existing alpha)
+						const baseColor = node.color?.startsWith('#') ?
+							(node.color.length > 7 ? node.color.substring(0, 7) : node.color) :
+							'#ff3860'; // Fallback color
+
+						try {
+							gradient.addColorStop(0, baseColor);
+							gradient.addColorStop(1, `${baseColor}40`); // Semi-transparent outer edge
+							ctx.fillStyle = gradient;
+							ctx.fill();
+						} catch (error) {
+							// Fallback to solid color if gradient fails
+							ctx.fillStyle = baseColor;
+							ctx.fill();
+						}
+
+						// Strong border for visibility
+						ctx.strokeStyle = "#ffffff";
+						ctx.lineWidth = 2.5 / globalScale;
 						ctx.stroke();
 
-						// Only show text labels if zoomed in enough
-						if (globalScale >= 0.8) {
-							const textWidth = ctx.measureText(label).width;
-							const backgroundRectHeight = fontSize + 4;
+						// Inner bright core
+						ctx.beginPath();
+						ctx.arc(
+							node.x ?? 0,
+							node.y ?? 0,
+							nodeSize * 0.4,
+							0,
+							2 * Math.PI,
+							false,
+						);
+						ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+						ctx.fill();
 
-							// Draw text background
-							ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+						// Show labels only when zoomed in enough to be readable
+						if (globalScale >= 0.8) { // Higher threshold for better readability
+							const displayLabel = label.length > 10 ? `${label.substring(0, 10)}...` : label;
+							const textWidth = ctx.measureText(displayLabel).width;
+							const backgroundRectHeight = fontSize + 4; // Smaller padding
+							const rectY = (node.y ?? 0) + nodeSize + 8; // More distance from node
+
+							// Compact background
+							ctx.fillStyle = "rgba(0, 0, 0, 0.9)";
 							ctx.fillRect(
-								(node.x ?? 0) - textWidth / 2 - 2,
-								(node.y ?? 0) + (node.val ?? 3) + 2,
-								textWidth + 4,
+								(node.x ?? 0) - textWidth / 2 - 3,
+								rectY,
+								textWidth + 6,
 								backgroundRectHeight,
 							);
 
-							// Draw text
+							// Thin border
+							ctx.strokeStyle = "#00ff99";
+							ctx.lineWidth = 1;
+							ctx.strokeRect(
+								(node.x ?? 0) - textWidth / 2 - 3,
+								rectY,
+								textWidth + 6,
+								backgroundRectHeight,
+							);
+
+							// Smaller text
 							ctx.textAlign = "center";
 							ctx.textBaseline = "middle";
-							ctx.fillStyle = "#000";
+							ctx.fillStyle = "#ffffff";
 							ctx.fillText(
-								label,
+								displayLabel.toUpperCase(),
 								node.x ?? 0,
-								(node.y ?? 0) + (node.val ?? 3) + backgroundRectHeight / 2 + 2,
+								rectY + backgroundRectHeight / 2,
 							);
 						}
 					}}

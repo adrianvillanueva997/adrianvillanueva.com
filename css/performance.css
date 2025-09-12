@@ -1,0 +1,55 @@
+/**
+ * Performance optimized CSS for cyber-doom theme
+ * Loaded separately to improve First Contentful Paint
+ */
+
+/* GPU acceleration for animations */
+.synthwave-grid,
+.doom-glow,
+.synthwave-glow {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+
+    .animate-pulse,
+    .animate-doom-pulse,
+    .animate-synthwave-scan {
+        animation: none;
+    }
+
+    .transition-all,
+    .transition-colors,
+    .transition-transform {
+        transition: none;
+    }
+}
+
+/* Optimize font loading - placeholder for gothic font */
+.font-gothic {
+    font-display: swap;
+}
+
+/* Critical CSS for above-the-fold content */
+.cyber-doom-hero {
+    contain: layout style paint;
+}
+
+/* Lazy load non-critical effects */
+.particle-field {
+    content-visibility: auto;
+    contain-intrinsic-size: 100vh;
+}
+
+/* Optimize background patterns */
+.synthwave-grid {
+    background-image:
+        linear-gradient(rgba(255, 56, 96, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 56, 96, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-attachment: fixed;
+    opacity: 0.1;
+}

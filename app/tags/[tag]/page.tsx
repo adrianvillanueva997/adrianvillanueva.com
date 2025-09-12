@@ -1,11 +1,11 @@
+import siteMetadata from "@/data/siteMetadata";
+import ListLayout from "@/layouts/ListLayoutWithTags";
 import { genPageMetadata } from "app/seo";
 import tagData from "app/tag-data.json";
 import { allBlogs } from "contentlayer/generated";
 import { slug } from "github-slugger";
 import type { Metadata } from "next";
 import { allCoreContent, sortPosts } from "pliny/utils/contentlayer";
-import siteMetadata from "@/data/siteMetadata";
-import ListLayout from "@/layouts/ListLayoutWithTags";
 
 const POSTS_PER_PAGE = 5;
 
@@ -39,12 +39,15 @@ export default async function TagPage(props: {
 }) {
 	const params = await props.params;
 	const tag = decodeURI(params.tag);
-	const title = tag[0].toUpperCase() + tag.split(" ").join("-").slice(1);
+
 	const filteredPosts = allCoreContent(
 		sortPosts(
 			allBlogs.filter((post) => post.tags?.map((t) => slug(t)).includes(tag)),
 		),
 	);
+
+	const title = `TAG::${tag.toUpperCase().replace(/[\s-]/g, "_")}`;
+	const description = `Exploring ${filteredPosts.length} knowledge fragments tagged with "${tag}". Enter the void of specialized content.`;
 	const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
 	const initialDisplayPosts = filteredPosts.slice(0, POSTS_PER_PAGE);
 	const pagination = {
@@ -58,6 +61,7 @@ export default async function TagPage(props: {
 			initialDisplayPosts={initialDisplayPosts}
 			pagination={pagination}
 			title={title}
+			description={description}
 		/>
 	);
 }

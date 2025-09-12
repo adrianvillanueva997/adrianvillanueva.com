@@ -6,7 +6,7 @@ const siteMetadata = {
 	description:
 		"Personal website and technical blog of Adrian Villanueva Martinez. Projects, articles, and software engineering resources.",
 	language: "en-us",
-	theme: "system", // system, dark or light
+	theme: "dark", // Always dark - doom metal aesthetic
 	siteUrl: "https://adrianvillanueva.com",
 	siteRepo: "https://github.com/adrianvillanueva997/adrianvillanueva.com",
 	siteLogo: `${process.env.BASE_PATH || ""}/static/images/logo.png`,

@@ -1,0 +1,715 @@
+---
+title: 'MDX Components Showcase: Doom Metal Aesthetic Guide'
+date: '2025-09-12'
+tags: ['mdx', 'components', 'design-system', 'doom-metal', 'synthwave']
+draft: true
+summary: 'A comprehensive showcase of all available MDX components with doom metal/synthwave aesthetic styling. This post demonstrates every component in action with practical examples.'
+
+---
+
+# MDX Components Showcase
+
+Welcome to the complete showcase of our doom metal/synthwave themed MDX components! This post demonstrates every available component with real-world examples.
+
+## Badges & Tags
+
+Group related technologies or concepts with our badge system:
+
+<BadgeGroup
+  title="Technology Stack"
+  badges={["React", "TypeScript", "Next.js", "Tailwind CSS", "MDX"]}
+  variant="success"
+/>
+
+<BadgeGroup
+  title="Skills Required"
+  badges={["JavaScript", "CSS", "Design Systems", "Component Architecture"]}
+  variant="default"
+/>
+
+Individual badges work too: <Badge variant="error">Critical</Badge> <Badge variant="warning">Beta</Badge> <Badge variant="success">Stable</Badge>
+
+## Code Examples
+
+Our enhanced code blocks support syntax highlighting, copy functionality, and file headers:
+
+```javascript
+console.log("Hello World!");
+const x = 42;
+function test() {
+  return "doom aesthetic";
+}
+```
+
+```typescript
+
+const applyDoomTheme = (config: DoomTheme): void => {
+  document.documentElement.style.setProperty('--primary', config.colors.primary);
+  document.documentElement.style.setProperty('--secondary', config.colors.secondary);
+  document.documentElement.style.setProperty('--bg', config.colors.background);
+};
+
+// Initialize the doom aesthetic
+applyDoomTheme({
+  colors: {
+    primary: '#ff3860',
+    secondary: '#00ff99',
+    background: '#0a0a0a'
+  }
+});`}
+```
+
+```bash
+npm install doom-aesthetic-components
+npm run build:doom
+echo "The matrix has you..."`
+```
+
+## Image Comparisons
+
+Perfect for showing before/after transformations:
+
+<ImageComparison
+  title="Doom Aesthetic Transformation"
+  beforeSrc="https://via.placeholder.com/400x300/cccccc/666666?text=Before"
+  afterSrc="https://via.placeholder.com/400x300/ff3860/00ff99?text=After"
+  beforeAlt="Standard boring interface"
+  afterAlt="Doom metal aesthetic interface"
+/>
+
+## Progress Tracking
+
+Show project completion or skill levels:
+
+<ProgressBar
+  value={85}
+  max={100}
+  label="Doom Aesthetic Implementation"
+  color="green"
+  animated={true}
+  showPercentage={true}
+/>
+
+<ProgressBar
+  value={42}
+  max={100}
+  label="Matrix Integration"
+  color="red"
+  animated={true}
+/>
+
+<ProgressBar
+  value={99}
+  max={100}
+  label="Synthwave Vibes"
+  color="blue"
+  showPercentage={false}
+/>
+
+## Inspirational Quotes
+
+Add wisdom and context with styled quotes:
+
+<Quote
+  author="Neo"
+  source="The Matrix"
+  type="success"
+>
+There is no spoon. There is only code, and the doom aesthetic that binds us all.
+</Quote>
+
+<Quote type="warning">
+With great power comes great responsibility to maintain consistent theming.
+</Quote>
+
+<Quote
+  author="Anonymous Developer"
+  type="error"
+>
+I tried to fight the doom aesthetic, but the doom aesthetic chose me.
+</Quote>
+
+## Statistics & Metrics
+
+Display key performance indicators and project stats:
+
+<StatsGrid
+  title="Project Metrics"
+  columns={3}
+  stats={[
+    {
+      title: "Components",
+      value: "15+",
+      subtitle: "Custom MDX components",
+      color: "green",
+      trend: { direction: "up", value: "+8" }
+    },
+    {
+      title: "Doom Level",
+      value: "9000",
+      subtitle: "Over 9000!",
+      color: "red",
+      trend: { direction: "up", value: "∞%" }
+    },
+    {
+      title: "Performance",
+      value: "99ms",
+      subtitle: "Average load time",
+      color: "blue",
+      trend: { direction: "down", value: "-15ms" }
+    }
+  ]}
+/>
+
+## Tabbed Content
+
+Organize complex information with tabs:
+
+<Tabs
+  defaultTab="overview"
+  items={[
+    {
+      id: "overview",
+      title: "Overview",
+      content: (
+        <div>
+          <h3>Doom Aesthetic Overview</h3>
+          <p>The doom metal aesthetic combines dark, moody colors with high-contrast accents. Our primary color palette consists of:</p>
+          <ul>
+            <li><strong>Primary Red (#ff3860):</strong> Used for destructive actions, errors, and dramatic highlights</li>
+            <li><strong>Secondary Green (#00ff99):</strong> Used for success states, active elements, and cyberpunk accents</li>
+            <li><strong>Dark Grays:</strong> Various shades for backgrounds and subtle elements</li>
+          </ul>
+        </div>
+      )
+    },
+    {
+      id: "implementation",
+      title: "Implementation",
+      content: (
+        <div>
+          <h3>Implementation Details</h3>
+          <p>Each component follows these principles:</p>
+          <BadgeGroup badges={["Consistent Colors", "Smooth Transitions", "Hover Effects", "Typography Hierarchy"]} variant="success" />
+          <br />
+          <Alert type="info">
+            All components use Tailwind CSS classes for styling consistency.
+          </Alert>
+        </div>
+      )
+    },
+    {
+      id: "examples",
+      title: "Examples",
+      content: (
+        <div>
+          <h3>Usage Examples</h3>
+          <CodeBlock language="mdx">
+{`<Alert type="success" title="Victory!">
+  You have successfully implemented the doom aesthetic.
+</Alert>
+
+<ProgressBar value={100} label="Awesomeness Level" color="green" />`}
+          </CodeBlock>
+        </div>
+      )
+    }
+  ]}
+/>
+
+## Project Timeline
+
+Track milestones and project evolution:
+
+<Timeline
+  title="Doom Aesthetic Evolution"
+  items={[
+    {
+      title: "Project Inception",
+      date: "Q1 2025",
+      description: "Initial concept and color palette selection. The vision of a doom metal aesthetic blog was born.",
+      status: "completed"
+    },
+    {
+      title: "Component Development",
+      date: "Q2 2025",
+      description: "Creation of core MDX components with consistent theming and interactive elements.",
+      status: "completed"
+    },
+    {
+      title: "Enhancement Phase",
+      date: "Q3 2025",
+      description: "Adding advanced components like tabs, timelines, and statistics grids.",
+      status: "current"
+    },
+    {
+      title: "Optimization & Polish",
+      date: "Q4 2025",
+      description: "Performance improvements, accessibility enhancements, and final polish.",
+      status: "upcoming"
+    },
+    {
+      title: "Community Release",
+      date: "2026",
+      description: "Open source the component library for the doom metal developer community.",
+      status: "upcoming"
+    }
+  ]}
+/>
+
+## Advanced Examples
+
+### Nested Components
+
+You can combine components for powerful layouts:
+
+<Tabs
+  defaultTab="performance"
+  items={[
+    {
+      id: "performance",
+      title: "Performance",
+      content: (
+        <div>
+          <StatsGrid
+            stats={[
+              { title: "Load Time", value: "1.2s", color: "green", trend: { direction: "down", value: "-0.3s" } },
+              { title: "Bundle Size", value: "45KB", color: "blue" },
+              { title: "Lighthouse", value: "98", color: "green", trend: { direction: "up", value: "+5" } }
+            ]}
+          />
+          <ProgressBar value={92} label="Overall Performance Score" color="green" />
+        </div>
+      )
+    },
+    {
+      id: "features",
+      title: "Features",
+      content: (
+        <div>
+          <BadgeGroup
+            title="Available Features"
+            badges={["Dark Mode", "Responsive", "Accessible", "Performant", "Customizable"]}
+            variant="success"
+          />
+          <Alert type="success" title="Feature Complete">
+            All planned features have been successfully implemented with doom aesthetic styling.
+          </Alert>
+        </div>
+      )
+    }
+  ]}
+/>
+
+### Complex Quote with Context
+
+<Quote
+  author="Doom Slayer"
+  source="DOOM Eternal"
+  type="error"
+>
+Rip and tear, until it is done. But make sure your components follow the style guide first.
+</Quote>
+
+## Data Visualization
+
+<StatsGrid
+  title="Component Usage Analytics"
+  columns={4}
+  stats={[
+    {
+      title: "Alert",
+      value: "89%",
+      subtitle: "Most used component",
+      color: "green"
+    },
+    {
+      title: "CodeBlock",
+      value: "76%",
+      subtitle: "Developer favorite",
+      color: "blue"
+    },
+    {
+      title: "ProgressBar",
+      value: "45%",
+      subtitle: "Project tracking",
+      color: "yellow"
+    },
+    {
+      title: "Timeline",
+      value: "23%",
+      subtitle: "Emerging popularity",
+      color: "red",
+      trend: { direction: "up", value: "+15%" }
+    }
+  ]}
+/>
+
+## Conclusion
+
+This showcase demonstrates the full power of our doom metal/synthwave themed component library. Each component is designed to work seamlessly together while maintaining the dark, edgy aesthetic that makes your content stand out.
+
+<Alert type="success" title="Mission Accomplished" dismissible>
+You've now seen every available component in action. Use them to create compelling, visually striking content that resonates with the doom metal aesthetic.
+</Alert>
+
+### What's Next?
+
+<Timeline
+  items={[
+    {
+      title: "Start Creating",
+      date: "Now",
+      description: "Begin using these components in your own blog posts",
+      status: "current"
+    },
+    {
+      title: "Experiment",
+      date: "Soon",
+      description: "Try different combinations and discover new layouts",
+      status: "upcoming"
+    },
+    {
+      title: "Share",
+      date: "Later",
+      description: "Show off your doom aesthetic creations to the world",
+      status: "upcoming"
+    }
+  ]}
+/>
+
+<Quote type="success">
+The matrix has you now. Welcome to the doom aesthetic revolution.
+</Quote>
+
+---
+
+## How to Use These Components
+
+Below you'll find the exact code for each component demonstrated above. Copy and paste these examples into your own MDX files:
+
+### Alert Components
+
+<CodeBlock language="mdx" filename="alerts.mdx">
+{`<!-- Success Alert -->
+<Alert type="success" title="Success Alert">
+Operation completed successfully! Your doom aesthetic is now fully operational.
+</Alert>
+
+<!-- Warning Alert -->
+<Alert type="warning" title="Performance Warning">
+This configuration might impact performance. Consider optimizing your setup.
+</Alert>
+
+<!-- Error Alert with dismiss button -->
+<Alert type="error" title="Critical Error" dismissible>
+A critical error occurred in the matrix. This alert can be dismissed by clicking the X.
+</Alert>
+
+<!-- Info Alert without title -->
+<Alert type="info">
+This is a simple info alert without a title. Perfect for general information.
+</Alert>`}
+</CodeBlock>
+
+### Badge System
+
+<CodeBlock language="mdx" filename="badges.mdx">
+{`<!-- Badge Group with title -->
+<BadgeGroup
+  title="Technology Stack"
+  badges={["React", "TypeScript", "Next.js", "Tailwind CSS", "MDX"]}
+  variant="success"
+/>
+
+<!-- Simple Badge Group -->
+<BadgeGroup
+  badges={["JavaScript", "CSS", "Design Systems"]}
+  variant="default"
+/>
+
+<!-- Individual Badges -->
+<Badge variant="error">Critical</Badge>
+<Badge variant="warning">Beta</Badge>
+<Badge variant="success">Stable</Badge>`}
+</CodeBlock>
+
+### Code Blocks
+
+<CodeBlock language="mdx" filename="code-examples.mdx">
+{`<!-- TypeScript Code Block -->
+<CodeBlock
+  language="typescript"
+  filename="doom-theme.ts"
+  copyable={true}
+>
+interface DoomTheme {
+  colors: {
+    primary: '#ff3860';
+    secondary: '#00ff99';
+  };
+}
+</CodeBlock>
+
+<!-- Bash Command Block -->
+<CodeBlock language="bash" filename="terminal">
+npm install doom-components
+npm run dev
+</CodeBlock>`}
+</CodeBlock>
+
+### Image Comparisons
+
+<CodeBlock language="mdx" filename="image-comparison.mdx">
+{`<ImageComparison
+  title="Before vs After Transformation"
+  beforeSrc="/images/github-traffic.png"
+  afterSrc="/images/logo.png"
+  beforeAlt="Before optimization"
+  afterAlt="After optimization"
+/>`}
+</CodeBlock>
+
+### Progress Bars
+
+<CodeBlock language="mdx" filename="progress.mdx">
+{`<!-- Animated Progress Bar -->
+<ProgressBar
+  value={85}
+  max={100}
+  label="Project Completion"
+  color="green"
+  animated={true}
+  showPercentage={true}
+/>
+
+<!-- Simple Progress Bar -->
+<ProgressBar
+  value={42}
+  label="Loading"
+  color="red"
+/>
+
+<!-- Progress without percentage -->
+<ProgressBar
+  value={99}
+  label="Almost Done"
+  color="blue"
+  showPercentage={false}
+/>`}
+</CodeBlock>
+
+### Quotes
+
+<CodeBlock language="mdx" filename="quotes.mdx">
+{`<!-- Quote with author -->
+<Quote
+  author="Neo"
+  source="The Matrix"
+  type="success"
+>
+There is no spoon. Only code.
+</Quote>
+
+<!-- Simple quote -->
+<Quote type="warning">
+With great power comes great responsibility.
+</Quote>
+
+<!-- Error-styled quote -->
+<Quote
+  author="Anonymous Developer"
+  type="error"
+>
+It works on my machine.
+</Quote>`}
+</CodeBlock>
+
+### Statistics Grids
+
+<CodeBlock language="mdx" filename="stats.mdx">
+{`<StatsGrid
+  title="Project Metrics"
+  columns={3}
+  stats={[
+    {
+      title: "Users",
+      value: "1,337",
+      subtitle: "Active monthly users",
+      color: "green",
+      trend: { direction: "up", value: "+12%" }
+    },
+    {
+      title: "Performance",
+      value: "99ms",
+      subtitle: "Average response time",
+      color: "blue",
+      trend: { direction: "down", value: "-15ms" }
+    },
+    {
+      title: "Uptime",
+      value: "99.9%",
+      color: "green"
+    }
+  ]}
+/>`}
+</CodeBlock>
+
+### Tabs
+
+<CodeBlock language="mdx" filename="tabs.mdx">
+{`<Tabs
+  defaultTab="overview"
+  items={[
+    {
+      id: "overview",
+      title: "Overview",
+      content: (
+        <div>
+          <h3>Project Overview</h3>
+          <p>This is the overview content...</p>
+        </div>
+      )
+    },
+    {
+      id: "details",
+      title: "Details",
+      content: (
+        <div>
+          <h3>Detailed Information</h3>
+          <p>More detailed content here...</p>
+        </div>
+      )
+    }
+  ]}
+/>`}
+</CodeBlock>
+
+### Timelines
+
+<CodeBlock language="mdx" filename="timeline.mdx">
+{`<Timeline
+  title="Project Roadmap"
+  items={[
+    {
+      title: "Planning Phase",
+      date: "Q1 2025",
+      description: "Initial planning and requirements gathering",
+      status: "completed"
+    },
+    {
+      title: "Development",
+      date: "Q2 2025",
+      description: "Core development and feature implementation",
+      status: "current"
+    },
+    {
+      title: "Launch",
+      date: "Q3 2025",
+      description: "Public release and deployment",
+      status: "upcoming"
+    }
+  ]}
+/>`}
+</CodeBlock>
+
+### Complex Nested Examples
+
+<CodeBlock language="mdx" filename="nested-components.mdx">
+{`<!-- Tabs containing other components -->
+<Tabs
+  items={[
+    {
+      id: "metrics",
+      title: "Metrics",
+      content: (
+        <div>
+          <StatsGrid
+            stats={[
+              { title: "Speed", value: "Fast", color: "green" },
+              { title: "Quality", value: "High", color: "blue" }
+            ]}
+          />
+          <ProgressBar value={95} label="Overall Score" />
+        </div>
+      )
+    },
+    {
+      id: "alerts",
+      title: "Status",
+      content: (
+        <div>
+          <Alert type="success" title="All Systems Operational">
+            Everything is running smoothly.
+          </Alert>
+          <BadgeGroup badges={["Online", "Secure", "Fast"]} variant="success" />
+        </div>
+      )
+    }
+  ]}
+/>`}
+</CodeBlock>
+
+## Component Properties Reference
+
+### Alert Props
+
+- `type`: `"info" | "success" | "warning" | "error"`
+- `title?`: Optional title string
+- `dismissible?`: Boolean for dismiss functionality (default: false)
+
+### BadgeGroup Props
+
+- `title?`: Optional group title
+- `badges`: Array of strings
+- `variant?`: `"default" | "success" | "error" | "warning" | "info"`
+
+### CodeBlock Props
+
+- `language?`: Programming language for syntax highlighting (default: "bash")
+- `filename?`: Optional filename display
+- `copyable?`: Enable copy button (default: true)
+- `showLineNumbers?`: Show line numbers (default: true)
+
+### ImageComparison Props
+
+- `title?`: Optional comparison title
+- `beforeSrc`: Path to before image
+- `afterSrc`: Path to after image
+- `beforeAlt`: Alt text for before image
+- `afterAlt`: Alt text for after image
+
+### ProgressBar Props
+
+- `value`: Current progress value
+- `max?`: Maximum value (default: 100)
+- `label?`: Progress label
+- `color?`: `"red" | "green" | "blue" | "yellow"` (default: "green")
+- `showPercentage?`: Show percentage (default: true)
+- `animated?`: Enable animations (default: true)
+
+### Quote Props
+
+- `author?`: Quote author
+- `source?`: Quote source/context
+- `type?`: `"default" | "warning" | "success" | "error"`
+
+### StatsGrid Props
+
+- `title?`: Grid title
+- `columns?`: `1 | 2 | 3 | 4` (default: 3)
+- `stats`: Array of stat objects with title, value, subtitle?, color?, trend?
+
+### Timeline Props
+
+- `title?`: Timeline title
+- `items`: Array with title, date, description?, status? ("completed" | "current" | "upcoming")
+
+### Tabs Props
+
+- `defaultTab?`: ID of default active tab
+- `items`: Array with id, title, and content (React.ReactNode)
+
+---
+
+*This post showcases all available MDX components with complete usage examples. Each component supports extensive customization and follows our doom metal design system principles.*
