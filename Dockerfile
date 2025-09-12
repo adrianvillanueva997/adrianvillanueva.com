@@ -7,12 +7,7 @@ ENV NODE_ENV=production
 FROM base AS deps
 WORKDIR /app
 
-# Pin package versions for security (Hadolint compliance)
-RUN apk add --no-cache \
-    libc6-compat=1.2.5-r1 \
-    curl=8.11.0-r2 \
-    bash=5.2.37-r0 \
-    make=4.4.1-r2
+RUN apk add --no-cache libc6-compat curl=8.11.0-r2 bash make
 
 # Copy package files
 COPY package.json yarn.lock .yarnrc.yml ./
@@ -26,10 +21,7 @@ FROM base AS builder
 WORKDIR /app
 
 # Pin package versions for security and install d2
-RUN apk add --no-cache \
-    curl=8.11.0-r2 \
-    bash=5.2.37-r0 \
-    make=4.4.1-r2 && \
+RUN apk add --no-cache curl bash make && \
     curl -fsSL https://d2lang.com/install.sh -o /tmp/d2install.sh && \
     sh /tmp/d2install.sh && \
     rm /tmp/d2install.sh
