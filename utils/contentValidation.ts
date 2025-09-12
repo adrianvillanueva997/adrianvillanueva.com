@@ -3,7 +3,7 @@
  */
 
 import { z } from "zod";
-
+import sanitizeHtml from "sanitize-html";
 // Schema for Now page frontmatter
 export const nowPageSchema = z.object({
 	title: z.string().min(1, "Title is required"),
@@ -43,17 +43,8 @@ export function validateContent(content: unknown, schema: z.ZodSchema) {
 
 // Content sanitization
 export function sanitizeContent(content: string): string {
-	// Remove potentially harmful scripts, styles, javascript: URLs, and event handlers recursively
-	let previous;
-	do {
-		previous = content;
-		content = content
-			.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
-			.replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, "")
-			.replace(/javascript:/gi, "")
-			.replace(/on\w+\s*=/gi, "");
-	} while (content !== previous);
-	return content;
+	// Use a well-tested library to sanitize HTML and remove harmful markup
+	return sanitizeHtml(content);
 }
 
 // Check if content is safe to render
