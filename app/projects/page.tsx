@@ -62,7 +62,7 @@ export default function Projects() {
 				<div className="relative z-10 space-y-6 text-center">
 					{/* Cyber-Doom terminal indicator */}
 					<div className="font-mono text-xs text-gray-500 mb-4 font-bold">
-						<span className="text-orange-400">⸸</span> DIGITAL_FORGE_ONLINE <span className="text-orange-400">⸸</span>
+						<span className="text-orange-400">▲</span> DIGITAL_FORGE_ONLINE <span className="text-orange-400">▲</span>
 					</div>
 
 					{/* Enhanced typography */}
@@ -72,7 +72,7 @@ export default function Projects() {
 
 					{/* Cyber-Doom subtitle */}
 					<div className="font-mono text-sm text-gray-600 tracking-wider mb-2">
-						⸸ NEURAL CONSTRUCTS FROM THE VOID ⸸
+						▲ NEURAL CONSTRUCTS FROM THE VOID ▲
 					</div>
 
 					<p className="text-lg md:text-xl font-mono text-gray-300 max-w-2xl mx-auto">
@@ -86,7 +86,7 @@ export default function Projects() {
 							<span className="text-gray-200 ml-2 font-bold">{projectsData.length}</span>
 						</div>
 						<div className="bg-black/60 border border-orange-900/50 px-4 py-2 rounded shadow-lg shadow-orange-900/20">
-							<span className="text-orange-400">⸸ VOID_STATUS:</span>
+							<span className="text-orange-400">▲ VOID_STATUS:</span>
 							<span className="text-orange-400 ml-2 font-bold">ACTIVE</span>
 						</div>
 					</div>
@@ -136,7 +136,7 @@ export default function Projects() {
 						{/* Category filter */}
 						<div className="text-center">
 							<h3 className="text-sm font-medium font-mono text-orange-400 mb-4 uppercase tracking-wider">
-								⸸ NEURAL_CATEGORIES ⸸
+								▲ NEURAL_CATEGORIES ▲
 							</h3>
 							<div className="flex flex-wrap justify-center gap-2">
 								{allCategories.map((category) => (
@@ -159,7 +159,7 @@ export default function Projects() {
 						{/* Source type filter */}
 						<div className="text-center">
 							<h3 className="text-sm font-medium font-mono text-orange-400 mb-4 uppercase tracking-wider">
-								⸸ SOURCE_MATRIX ⸸
+								▲ SOURCE_MATRIX ▲
 							</h3>
 							<div className="flex justify-center gap-2">
 								{["All", "Open Source", "Closed Source"].map((type) => (
@@ -173,7 +173,7 @@ export default function Projects() {
 												: "bg-black/60 border border-gray-800/50 text-gray-300 hover:bg-black/80 hover:text-[#ff3860] hover:border-[#ff3860]/60 hover:shadow-[#ff3860]/20"
 											}`}
 									>
-										{type === "Open Source" ? "◉ OPEN_VOID" : type === "Closed Source" ? "⸸ CLOSED_RITUAL" : "◈ ALL_MATRIX"}
+										{type === "Open Source" ? "◉ OPEN_VOID" : type === "Closed Source" ? "▲ CLOSED_RITUAL" : "◈ ALL_MATRIX"}
 									</button>
 								))}
 							</div>
@@ -190,7 +190,7 @@ export default function Projects() {
 					<div className="py-12">
 						<div className="text-center mb-8">
 							<h2 className="text-2xl md:text-3xl font-bold font-mono text-orange-400 tracking-wider mb-2">
-								⸸ PRIME_NEURAL_CONSTRUCT ⸸
+								▲ PRIME_NEURAL_CONSTRUCT ▲
 							</h2>
 							<div className="font-mono text-sm text-gray-600 tracking-wider">
 								◉ FEATURED VOID RITUAL ◉
@@ -248,7 +248,7 @@ export default function Projects() {
 															d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
 														/>
 													</svg>
-													⸸ SEALED_RITUAL
+													▲ SEALED_RITUAL
 												</>
 											)}
 										</span>
@@ -266,7 +266,7 @@ export default function Projects() {
 													key={cat}
 													className="text-xs font-mono font-bold bg-black/60 border border-gray-800/50 text-orange-400 py-1 px-3 rounded shadow-lg"
 												>
-													⸸ {cat.toUpperCase()}
+													▲ {cat.toUpperCase()}
 												</span>
 											))}
 										</div>
@@ -304,7 +304,7 @@ export default function Projects() {
 												href={featuredProject.href}
 												className="inline-flex items-center justify-center px-6 py-3 border border-[#ff3860]/50 text-sm font-mono font-bold rounded bg-black/60 text-[#ff3860] hover:bg-[#ff3860] hover:text-white transition-all duration-300 shadow-lg shadow-[#ff3860]/20 hover:shadow-[#ff3860]/40"
 											>
-												⸸ ENTER_RITUAL
+												▲ ENTER_RITUAL
 											</a>
 										)}
 									</div>
@@ -482,16 +482,16 @@ export default function Projects() {
 
 							<div className="relative z-10">
 								<div className="text-6xl md:text-8xl font-mono text-[#ff3860] mb-4 opacity-90 tracking-wider font-black">
-									⸸ VOID ⸸
+									▲ VOID ▲
 								</div>
 								<div className="text-2xl font-bold font-mono text-gray-300 mb-2 tracking-wider">NO_CONSTRUCTS_FOUND</div>
 								<div className="text-gray-500 font-mono text-sm mb-6">NEURAL_MATRIX :: QUERY_FAILED</div>
 
 								<div className="bg-black/70 border border-orange-900/40 rounded p-4 font-mono text-xs text-gray-400 shadow-lg shadow-orange-900/30">
 									<div className="flex items-center justify-center space-x-2 mb-2">
-										<span className="text-orange-400">⸸</span>
+										<span className="text-orange-400">▲</span>
 										<span>Recalibrating search parameters...</span>
-										<span className="text-orange-400">⸸</span>
+										<span className="text-orange-400">▲</span>
 									</div>
 									<div className="text-center">
 										<button

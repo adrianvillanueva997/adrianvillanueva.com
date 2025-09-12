@@ -11,9 +11,18 @@ export default function Footer() {
 	};
 
 	return (
-		<footer className="py-6 md:py-8 px-4 flex flex-col items-center text-center border-t border-gray-800 bg-gray-950/30">
+		<footer className="py-6 md:py-8 px-4 flex flex-col items-center text-center border-t border-gray-800/50 bg-black/40 relative overflow-hidden">
+			{/* Cyber-doom background effects */}
+			<div className="absolute inset-0 synthwave-grid opacity-5" />
+			<div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+
+			{/* Terminal indicator */}
+			<div className="relative z-10 font-mono text-xs text-gray-500 mb-4 font-bold">
+				<span className="text-orange-400">▲</span> TERMINAL_FOOTER <span className="text-orange-400">▲</span>
+			</div>
+
 			{/* Social Icons */}
-			<div className="flex space-x-4 md:space-x-5 mb-4 md:mb-6">
+			<div className="relative z-10 flex space-x-4 md:space-x-5 mb-4 md:mb-6 bg-black/60 border border-gray-800/50 rounded-lg px-6 py-3 shadow-lg">
 				<SocialIcon
 					kind="mail"
 					href={`mailto:${siteMetadata.email}`}
@@ -38,22 +47,24 @@ export default function Footer() {
 			</div>
 
 			{/* Legal Text */}
-			<div className="text-xs md:text-sm text-gray-400 mb-3 md:mb-4 max-w-2xl px-2 font-mono leading-relaxed">
-				Any and all opinions listed here are my own and not representative of
+			<div className="relative z-10 text-xs md:text-sm text-gray-400 mb-3 md:mb-4 max-w-2xl px-2 font-mono leading-relaxed bg-black/40 border border-gray-800/30 rounded p-4">
+				<span className="text-orange-400">◉ DISCLAIMER:</span> Any and all opinions listed here are my own and not representative of
 				any of my employers, past, future, and/or present.
 			</div>
 
 			{/* Copyright and Links */}
-			<div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-4 text-xs md:text-sm">
-				<div className="flex items-center text-gray-300 font-mono font-medium">
-					<span>© {new Date().getFullYear()}</span>
+			<div className="relative z-10 flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-4 text-xs md:text-sm">
+				<div className="flex items-center text-gray-300 font-mono font-medium bg-black/60 border border-gray-800/50 rounded px-4 py-2">
+					<span className="text-orange-400">▲</span>
+					<span className="mx-2">© {new Date().getFullYear()}</span>
 					<span className="mx-2 text-[#ff3860] animate-pulse">•</span>
 					<span>{siteMetadata.author}</span>
+					<span className="ml-2 text-orange-400">▲</span>
 				</div>
 
 				<Link
 					href={siteMetadata.siteRepo}
-					className="inline-flex items-center text-gray-400 hover:text-[#00ff99] transition duration-150 ease-in-out font-mono"
+					className="inline-flex items-center text-gray-400 hover:text-[#00ff99] transition duration-150 ease-in-out font-mono bg-black/60 border border-gray-800/50 rounded px-3 py-2 hover:border-[#00ff99]/50 shadow-lg"
 					target="_blank"
 					rel="noopener noreferrer"
 				>
@@ -69,15 +80,15 @@ export default function Footer() {
 							clipRule="evenodd"
 						/>
 					</svg>
-					Source Code
+					◉ Source Matrix
 				</Link>
 
 				<button
 					type="button"
 					onClick={handleScrollToTop}
-					className="inline-flex items-center text-gray-400 hover:text-[#ff3860] transition duration-150 ease-in-out bg-transparent border-none cursor-pointer font-mono"
+					className="inline-flex items-center text-gray-400 hover:text-[#ff3860] transition duration-150 ease-in-out bg-black/60 border border-gray-800/50 rounded px-3 py-2 hover:border-[#ff3860]/50 shadow-lg cursor-pointer font-mono"
 				>
-					Back to top
+					▲ Return to Nexus
 					<svg
 						className="ml-1 h-3 w-3 md:h-4 md:w-4"
 						fill="none"

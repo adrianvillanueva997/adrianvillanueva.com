@@ -1,5 +1,3 @@
-import { writeFileSync } from "node:fs";
-import path from "node:path";
 import {
 	type ComputedFields,
 	defineDocumentType,
@@ -7,6 +5,8 @@ import {
 } from "contentlayer2/source-files";
 import { slug } from "github-slugger";
 import { fromHtmlIsomorphic } from "hast-util-from-html-isomorphic";
+import { writeFileSync } from "node:fs";
+import path from "node:path";
 // Remark packages
 import {
 	extractTocHeadings,
@@ -153,9 +153,20 @@ export const Authors = defineDocumentType(() => ({
 	computedFields,
 }));
 
+export const Now = defineDocumentType(() => ({
+	name: "Now",
+	filePathPattern: "now/**/*.mdx",
+	contentType: "mdx",
+	fields: {
+		title: { type: "string", required: true },
+		lastUpdated: { type: "date", required: true },
+	},
+	computedFields,
+}));
+
 export default makeSource({
 	contentDirPath: "data",
-	documentTypes: [Blog, Authors],
+	documentTypes: [Blog, Authors, Now],
 	mdx: {
 		cwd: process.cwd(),
 		remarkPlugins: [

@@ -24,7 +24,7 @@ export default async function Page() {
 				<div className="relative z-10 space-y-6 text-center">
 					{/* Cyber-Doom terminal indicator */}
 					<div className="font-mono text-xs text-gray-500 mb-4 font-bold">
-						<span className="text-orange-400">⸸</span> NEURAL_TAG_MATRIX_ONLINE <span className="text-orange-400">⸸</span>
+						<span className="text-orange-400">▲</span> NEURAL_TAG_MATRIX_ONLINE <span className="text-orange-400">▲</span>
 					</div>
 
 					{/* Enhanced typography */}
@@ -34,7 +34,7 @@ export default async function Page() {
 
 					{/* Cyber-Doom subtitle */}
 					<div className="font-mono text-sm text-gray-600 tracking-wider mb-2">
-						⸸ DIGITAL VOID TAXONOMIES ⸸
+						▲ DIGITAL VOID TAXONOMIES ▲
 					</div>
 
 					<p className="text-lg md:text-xl font-mono text-gray-300 max-w-2xl mx-auto">
@@ -44,7 +44,7 @@ export default async function Page() {
 					{/* Enhanced stats display */}
 					<div className="mt-8 flex flex-wrap justify-center gap-4 text-sm font-mono">
 						<div className="bg-black/60 border border-orange-900/50 px-4 py-2 rounded shadow-lg shadow-orange-900/20">
-							<span className="text-orange-400">⸸ NEURAL_NODES:</span>
+							<span className="text-orange-400">▲ NEURAL_NODES:</span>
 							<span className="text-gray-200 ml-2 font-bold">{sortedTags.length}</span>
 						</div>
 						<div className="bg-black/60 border border-[#ff3860]/50 px-4 py-2 rounded shadow-lg shadow-[#ff3860]/20">
@@ -75,7 +75,7 @@ export default async function Page() {
 								<div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-[#00ff99] via-orange-400 to-[#ff3860] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-bottom" />
 
 								<span className="relative z-10">
-									⸸ {tag.toUpperCase().replace(/\s+/g, '_')}
+									▲ {tag.toUpperCase().replace(/\s+/g, '_')}
 								</span>
 								<span className="ml-3 text-xs text-gray-500 group-hover:text-orange-400 transition-colors bg-black/60 px-2 py-1 rounded border border-gray-700/50 group-hover:border-orange-900/50">
 									{count}
@@ -90,7 +90,7 @@ export default async function Page() {
 			<div className="mb-16">
 				<div className="text-center mb-8">
 					<h2 className="text-2xl md:text-3xl font-bold font-mono text-orange-400 tracking-wider mb-2">
-						⸸ NEURAL_NETWORK ⸸
+						▲ NEURAL_NETWORK ▲
 					</h2>
 					<div className="font-mono text-sm text-gray-600 tracking-wider">
 						◉ DIGITAL VOID TOPOLOGY ◉
@@ -126,7 +126,7 @@ export default async function Page() {
 				<div className="mt-6 bg-black/60 border border-orange-900/30 rounded-lg p-6 shadow-lg shadow-orange-900/10">
 					<div className="text-center">
 						<div className="text-sm font-mono text-gray-400 mb-4">
-							<span className="text-orange-400 font-bold">⸸ NEURAL_INTERFACE_COMMANDS ⸸</span>
+							<span className="text-orange-400 font-bold">▲ NEURAL_INTERFACE_COMMANDS ▲</span>
 						</div>
 						<div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-mono text-gray-500">
 							<div className="flex items-center justify-center bg-black/60 border border-gray-800/50 rounded p-3">
@@ -158,7 +158,7 @@ export default async function Page() {
 				<div className="relative z-10">
 					<div className="text-center mb-8">
 						<h3 className="text-xl font-mono font-bold text-orange-400 tracking-wider mb-2">
-							⸸ NEURAL_VOID_METRICS ⸸
+							▲ NEURAL_VOID_METRICS ▲
 						</h3>
 						<div className="font-mono text-sm text-gray-600">
 							◉ SYSTEM_DIAGNOSTICS ◉

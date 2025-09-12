@@ -1,13 +1,13 @@
 "use client";
 
+import Link from "@/components/Link";
+import Tag from "@/components/Tag";
+import siteMetadata from "@/data/siteMetadata";
 import type { Blog } from "contentlayer/generated";
 import { usePathname } from "next/navigation";
 import type { CoreContent } from "pliny/utils/contentlayer";
 import { formatDate } from "pliny/utils/formatDate";
 import { useState } from "react";
-import Link from "@/components/Link";
-import Tag from "@/components/Tag";
-import siteMetadata from "@/data/siteMetadata";
 
 interface PaginationProps {
 	totalPages: number;
@@ -32,13 +32,14 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
 
 	return (
 		<div className="space-y-2 pt-6 pb-8 md:space-y-5">
-			<nav className="flex justify-between">
+			<nav className="flex justify-between items-center bg-black/60 border border-gray-800/50 rounded-lg p-6 shadow-lg">
 				{!prevPage && (
 					<button
-						className="cursor-auto disabled:opacity-50"
+						type="button"
+						className="cursor-auto disabled:opacity-50 font-mono text-gray-600"
 						disabled={!prevPage}
 					>
-						Previous
+						▲ PREVIOUS_VOID
 					</button>
 				)}
 				{prevPage && (
@@ -49,24 +50,32 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
 								: `/${basePath}/page/${currentPage - 1}`
 						}
 						rel="prev"
+						className="inline-flex items-center px-4 py-2 bg-black/60 border border-gray-800/50 rounded hover:border-orange-900/60 transition-all duration-300 shadow-lg font-mono text-[#00ff99] hover:text-white"
 					>
-						Previous
+						<span className="mr-2">▲</span>
+						PREVIOUS_VOID
 					</Link>
 				)}
-				<span>
-					{currentPage} of {totalPages}
+				<span className="font-mono text-orange-400 font-bold bg-black/80 border border-orange-400/30 px-4 py-2 rounded">
+					◉ {currentPage} / {totalPages} ◉
 				</span>
 				{!nextPage && (
 					<button
-						className="cursor-auto disabled:opacity-50"
+						type="button"
+						className="cursor-auto disabled:opacity-50 font-mono text-gray-600"
 						disabled={!nextPage}
 					>
-						Next
+						NEXT_VOID ▲
 					</button>
 				)}
 				{nextPage && (
-					<Link href={`/${basePath}/page/${currentPage + 1}`} rel="next">
-						Next
+					<Link
+						href={`/${basePath}/page/${currentPage + 1}`}
+						rel="next"
+						className="inline-flex items-center px-4 py-2 bg-black/60 border border-gray-800/50 rounded hover:border-orange-900/60 transition-all duration-300 shadow-lg font-mono text-[#00ff99] hover:text-white"
+					>
+						NEXT_VOID
+						<span className="ml-2">▲</span>
 					</Link>
 				)}
 			</nav>
@@ -94,20 +103,32 @@ export default function ListLayout({
 
 	return (
 		<>
-			<div className="divide-y divide-gray-200 dark:divide-gray-700">
-				<div className="space-y-2 pt-6 pb-8 md:space-y-5">
-					<h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 dark:text-gray-100">
-						{title}
-					</h1>
-					<div className="relative max-w-lg">
+			<div className="divide-y divide-gray-800/50 dark:divide-gray-700">
+				<div className="space-y-6 pt-6 pb-8 md:space-y-8 relative overflow-hidden">
+					{/* Cyber-doom background effects */}
+					<div className="absolute inset-0 synthwave-grid opacity-5" />
+					<div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
+
+					<div className="relative z-10">
+						{/* Terminal indicator */}
+						<div className="font-mono text-xs text-gray-500 mb-4 font-bold text-center">
+							<span className="text-orange-400">▲</span> ARCHIVE_NEXUS <span className="text-orange-400">▲</span>
+						</div>
+
+						<h1 className="text-3xl leading-9 font-extrabold tracking-tight text-[#ff3860] sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 font-gothic text-center">
+							{title}
+						</h1>
+					</div>
+
+					<div className="relative max-w-lg mx-auto z-10">
 						<label>
 							<span className="sr-only">Search articles</span>
 							<input
 								aria-label="Search articles"
 								type="text"
 								onChange={(e) => setSearchValue(e.target.value)}
-								placeholder="Search articles"
-								className="focus:border-primary-500 focus:ring-primary-500 block w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-900 dark:border-gray-900 dark:bg-gray-800 dark:text-gray-100"
+								placeholder="Search neural entries..."
+								className="w-full px-4 py-3 bg-black/60 border border-gray-800/50 rounded-lg text-[#00ff99] font-mono placeholder-gray-500 focus:border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-400/20 transition-all duration-300"
 							/>
 						</label>
 						<svg
@@ -116,7 +137,9 @@ export default function ListLayout({
 							fill="none"
 							viewBox="0 0 24 24"
 							stroke="currentColor"
+							aria-label="Search icon"
 						>
+							<title>Search</title>
 							<path
 								strokeLinecap="round"
 								strokeLinejoin="round"
@@ -126,38 +149,48 @@ export default function ListLayout({
 						</svg>
 					</div>
 				</div>
-				<ul>
-					{!filteredBlogPosts.length && "No posts found."}
+				<ul className="space-y-6">
+					{!filteredBlogPosts.length && (
+						<div className="text-center py-12 bg-black/40 border border-gray-800/30 rounded-lg">
+							<p className="font-mono text-orange-400 text-lg">
+								▲ NO NEURAL_ENTRIES DETECTED ▲
+							</p>
+							<p className="font-mono text-gray-500 text-sm mt-2">
+								The void speaks no wisdom today.
+							</p>
+						</div>
+					)}
 					{displayPosts.map((post) => {
 						const { path, date, title, summary, tags } = post;
 						return (
-							<li key={path} className="py-4">
-								<article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
-									<dl>
+							<li key={path} className="py-6">
+								<article className="space-y-4 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0 bg-black/40 border border-gray-800/30 rounded-lg p-6 hover:border-orange-900/60 transition-all duration-300 shadow-lg hover:shadow-xl">
+									<dl className="xl:mb-0 mb-4">
 										<dt className="sr-only">Published on</dt>
-										<dd className="text-base leading-6 font-medium text-gray-500 dark:text-gray-400">
-											<time dateTime={date}>
+										<dd className="text-sm leading-6 font-mono font-medium text-orange-400 bg-black/60 border border-orange-400/30 px-3 py-2 rounded shadow-lg shadow-orange-400/10">
+											<span className="text-gray-500">◉</span>
+											<time dateTime={date} className="ml-2">
 												{formatDate(date, siteMetadata.locale)}
 											</time>
 										</dd>
 									</dl>
-									<div className="space-y-3 xl:col-span-3">
+									<div className="space-y-4 xl:col-span-3">
 										<div>
-											<h3 className="text-2xl leading-8 font-bold tracking-tight">
+											<h3 className="text-xl leading-7 font-bold tracking-tight font-gothic">
 												<Link
 													href={`/${path}`}
-													className="text-gray-900 dark:text-gray-100"
+													className="text-[#00ff99] hover:text-white transition-colors duration-300"
 												>
 													{title}
 												</Link>
 											</h3>
-											<div className="flex flex-wrap">
+											<div className="flex flex-wrap gap-2 mt-3">
 												{tags?.map((tag) => (
 													<Tag key={tag} text={tag} />
 												))}
 											</div>
 										</div>
-										<div className="prose max-w-none text-gray-500 dark:text-gray-400">
+										<div className="prose max-w-none text-gray-400 font-mono text-sm leading-relaxed">
 											{summary}
 										</div>
 									</div>
