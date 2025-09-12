@@ -7,7 +7,7 @@ ENV NODE_ENV=production
 FROM base AS deps
 WORKDIR /app
 
-RUN apk add --no-cache libc6-compat curl=8.11.0-r2 bash make
+RUN apk add --no-cache libc6-compat curl bash make
 
 # Copy package files
 COPY package.json yarn.lock .yarnrc.yml ./
