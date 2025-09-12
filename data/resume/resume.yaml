@@ -67,10 +67,10 @@ skills:
   cloud: ["AWS", "Azure", "GCP"]
   tools: ["Databricks", "Docker", "Terraform", "Kubernetes"]
   mlops: ["MLflow"]
-  databases: ["AWS Athena", "SQL-based databases", "Redis"]
+  databases: ["AWS Athena", "SQL", "Redis"]
   monitoring: ["OpenTelemetry", "Prometheus", "Grafana"]
   CI/CD: ["GitHub Actions", "Jenkins", "ArgoCD"]
-  other: ["Linux (Ubuntu, CentOS)", "Windows Server"]
+  other: ["Linux", "Windows Server"]
 
 languages:
   - name: "Spanish"

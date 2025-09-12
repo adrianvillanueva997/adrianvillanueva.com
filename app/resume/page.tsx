@@ -104,7 +104,7 @@ export default function ResumePage() {
 				<h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-gray-100">
 					Skills & Technologies
 				</h2>
-				<Skills />
+				<Skills resumeData={resumeData} />
 			</div>
 
 			{/* Experience Section */}
