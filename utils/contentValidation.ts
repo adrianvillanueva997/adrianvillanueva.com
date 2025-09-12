@@ -43,12 +43,17 @@ export function validateContent(content: unknown, schema: z.ZodSchema) {
 
 // Content sanitization
 export function sanitizeContent(content: string): string {
-	// Remove potentially harmful scripts and styles
-	return content
-		.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
-		.replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, "")
-		.replace(/javascript:/gi, "")
-		.replace(/on\w+\s*=/gi, "");
+	// Remove potentially harmful scripts, styles, javascript: URLs, and event handlers recursively
+	let previous;
+	do {
+		previous = content;
+		content = content
+			.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
+			.replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, "")
+			.replace(/javascript:/gi, "")
+			.replace(/on\w+\s*=/gi, "");
+	} while (content !== previous);
+	return content;
 }
 
 // Check if content is safe to render
