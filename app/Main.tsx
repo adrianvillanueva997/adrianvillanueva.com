@@ -66,7 +66,7 @@ export default function Home({ posts }) {
 								<Image
 									src="/static/images/me/me.jpeg"
 									alt="Profile"
-									className="object-cover grayscale contrast-125 brightness-90 group-hover:grayscale-0 group-hover:contrast-100 group-hover:brightness-100 transition-all duration-500"
+									className="object-cover grayscale contrast-125 brightness-90 group-hover:grayscale-0 group-hover:contrast-100 group-hover:brightness-100 transition-all duration-500 tzeentchian-photo"
 									fill
 									sizes="(max-width: 768px) 192px, 272px"
 								/>
