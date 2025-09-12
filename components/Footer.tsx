@@ -52,6 +52,22 @@ export default function Footer() {
 				any of my employers, past, future, and/or present.
 			</div>
 
+			{/* Human Verification Badge - Standalone */}
+			<div className="relative z-10 mb-4">
+				<Link
+					href="https://notbyai.fyi/"
+					className="inline-flex items-center text-gray-400 hover:text-[#00ff99] transition duration-150 ease-in-out font-mono bg-black/60 border border-gray-800/50 rounded px-4 py-3 hover:border-[#00ff99]/50 shadow-lg text-sm md:text-base"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<img
+						src="/static/images/footer/Written-By-a-Human-Not-By-AI-Badge-black.svg"
+						alt="Written by Human, Not by AI"
+						className="h-6 md:h-8 w-auto mr-3"
+					/>
+				</Link>
+			</div>
+
 			{/* Copyright and Links */}
 			<div className="relative z-10 flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-4 text-xs md:text-sm">
 				<div className="flex items-center text-gray-300 font-mono font-medium bg-black/60 border border-gray-800/50 rounded px-4 py-2">
@@ -80,9 +96,8 @@ export default function Footer() {
 							clipRule="evenodd"
 						/>
 					</svg>
-					◉ Source Matrix
+					◉ Source
 				</Link>
-
 				<button
 					type="button"
 					onClick={handleScrollToTop}
