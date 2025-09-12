@@ -11,8 +11,8 @@ export default async function BlogPage() {
 	return (
 		<BlogLayout
 			posts={posts}
-			title="BLOG_ARCHIVE"
-			description="Temporal fragments of knowledge and digital thoughts preserved in the void."
+			title="NEURAL_ARCHIVE"
+			description="Data streams from the silicon underground. Digital consciousness fragments encoded in neon."
 		/>
 	);
 }
