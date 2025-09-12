@@ -1,39 +1,54 @@
 # Base stage for shared settings
 FROM node:23.9.0-alpine AS base
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV NODE_ENV=production
 
 # Install dependencies only when needed
 FROM base AS deps
 WORKDIR /app
-RUN apk add --no-cache libc6-compat curl bash make
+
+# Pin package versions for security (Hadolint compliance)
+RUN apk add --no-cache \
+    libc6-compat=1.2.5-r1 \
+    curl=8.11.0-r2 \
+    bash=5.2.37-r0 \
+    make=4.4.1-r2
+
+# Copy package files
 COPY package.json yarn.lock .yarnrc.yml ./
-# Install dependencies
-RUN yarn install --frozen-lockfile
+
+# Install dependencies with clean cache
+RUN yarn install --frozen-lockfile --production=false && \
+    yarn cache clean
 
 # Builder stage
 FROM base AS builder
 WORKDIR /app
 
-RUN apk add --no-cache curl bash make
+# Pin package versions for security and install d2
+RUN apk add --no-cache \
+    curl=8.11.0-r2 \
+    bash=5.2.37-r0 \
+    make=4.4.1-r2 && \
+    curl -fsSL https://d2lang.com/install.sh -o /tmp/d2install.sh && \
+    sh /tmp/d2install.sh && \
+    rm /tmp/d2install.sh
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/.yarnrc.yml ./
 
-RUN  curl -fsSL https://d2lang.com/install.sh -o /tmp/d2install.sh \
-    && sh /tmp/d2install.sh \
-    && rm /tmp/d2install.sh
-
+# Copy diagrams and generate SVGs
 COPY data/diagrams ./data/diagrams
-RUN mkdir -p public/static/diagrams \
-    && for f in data/diagrams/*.d2; do \
+RUN mkdir -p public/static/diagrams && \
+    for f in data/diagrams/*.d2; do \
     name=$(basename "${f%.d2}"); \
     d2 --theme 0 --dark-theme 200 "$f" "public/static/diagrams/${name}.svg"; \
     done
 
-
+# Copy source code and build
 COPY . .
-RUN yarn optimize_svgs
-RUN yarn build
+RUN yarn optimize_svgs && \
+    yarn build
 
 # Production image, copy all the files and run next
 FROM node:23.9.0-alpine AS runner
