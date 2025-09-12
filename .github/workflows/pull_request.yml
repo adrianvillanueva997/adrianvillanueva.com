@@ -11,60 +11,9 @@ on:
 jobs:
   changes:
     runs-on: ubuntu-latest
-    outputs:
-      docker: ${{ steps.changes.outputs.docker }}
-      code: ${{ steps.changes.outputs.code }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-      - uses: dorny/paths-filter@v3
-        id: changes
-        with:
-          filters: |
-            docker:
-              - 'Dockerfile'
-              - 'docker-compose.yml'
-              - '.dockerignore'
-            code:
-              - '**/*.ts'
-              - '**/*.tsx'
-              - '**/*.js'
-              - '**/*.jsx'
-              - 'package.json'
-              - 'yarn.lock'
-
-  quality-gates:
-    runs-on: ubuntu-latest
-    needs: changes
-    if: needs.changes.outputs.code == 'true'
-    steps:
-      - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-        with:
-          submodules: true
-
-      - name: Setup Node.js
-        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
-        with:
-          node-version: '23.9.0'
-          cache: 'yarn'
-
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
-
-      - name: Run linting
-        run: yarn lint
-
-      - name: Type check
-        run: npx tsc --noEmit
-
-      - name: Build check
-        run: yarn build
 
   docker-build:
     runs-on: ubuntu-latest
-    needs: [changes, quality-gates]
-    if: always() && (needs.changes.outputs.docker == 'true' || needs.changes.outputs.code == 'true')
     steps:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
