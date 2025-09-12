@@ -79,36 +79,72 @@ export const RecentPostSkeleton: React.FC = () => {
     );
 };
 
-export const SkillsSkeleton: React.FC = () => {
+export const BlogListSkeleton: React.FC = () => {
     return (
-        <div className="bg-gray-900/30 border border-gray-700/50 rounded-lg p-6">
-            {/* Terminal header skeleton */}
-            <div className="flex items-center justify-between pb-4 mb-6 border-b border-gray-700/50">
-                <div className="flex items-center space-x-2">
-                    <Skeleton className="h-6 w-4" />
-                    <Skeleton className="h-6 w-32" />
-                </div>
-                <div className="flex space-x-1">
-                    <Skeleton className="w-3 h-3 rounded-full" />
-                    <Skeleton className="w-3 h-3 rounded-full" />
-                    <Skeleton className="w-3 h-3 rounded-full" />
-                </div>
+        <div className="space-y-6">
+            {Array.from({ length: 5 }, (_, i) => ({ id: `skeleton-${Date.now()}-${i}` })).map((item) => (
+                <PostCardSkeleton key={item.id} />
+            ))}
+        </div>
+    );
+};
+
+export const NowPageSkeleton: React.FC = () => {
+    return (
+        <>
+            {/* Header Skeleton */}
+            <div className="divide-y divide-gray-800/50">
+                <section className="relative overflow-hidden pb-8 pt-6 md:space-y-5">
+                    <div className="absolute inset-0 synthwave-grid opacity-5" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
+
+                    <div className="relative z-10 space-y-6 text-center">
+                        <Skeleton className="h-4 w-48 mx-auto" />
+                        <Skeleton className="h-16 w-64 mx-auto" />
+                        <Skeleton className="h-6 w-80 mx-auto" />
+                        <Skeleton className="h-8 w-40 mx-auto" />
+                    </div>
+                </section>
             </div>
 
-            {/* Skills grid skeleton */}
-            <div className="space-y-6">
-                {[1, 2, 3].map((category) => (
-                    <div key={category} className="space-y-3">
-                        <Skeleton className="h-6 w-40" />
-                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                            {[1, 2, 3, 4, 5, 6].map((skill) => (
-                                <Skeleton key={skill} className="h-10" />
-                            ))}
-                        </div>
+            {/* Content Skeleton */}
+            <div className="bg-black/20 border border-gray-800/30 rounded-lg p-8 shadow-2xl shadow-black/50 mt-8 space-y-6">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#00ff99]/5 to-transparent animate-pulse pointer-events-none" />
+
+                <Skeleton className="h-8 w-48" />
+                <div className="space-y-3">
+                    <Skeleton className="h-4 w-full" />
+                    <Skeleton className="h-4 w-3/4" />
+                    <Skeleton className="h-4 w-5/6" />
+                </div>
+
+                <Skeleton className="h-8 w-56" />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                        <Skeleton className="h-6 w-32" />
+                        <Skeleton className="h-4 w-full" />
+                        <Skeleton className="h-4 w-5/6" />
                     </div>
-                ))}
+                    <div className="space-y-2">
+                        <Skeleton className="h-6 w-28" />
+                        <Skeleton className="h-4 w-full" />
+                        <Skeleton className="h-4 w-4/5" />
+                    </div>
+                </div>
+
+                <Skeleton className="h-8 w-44" />
+                <div className="space-y-4">
+                    <div className="border border-gray-800/50 rounded-lg p-4">
+                        <Skeleton className="h-6 w-40 mb-2" />
+                        <Skeleton className="h-4 w-full" />
+                    </div>
+                    <div className="border border-gray-800/50 rounded-lg p-4">
+                        <Skeleton className="h-6 w-36 mb-2" />
+                        <Skeleton className="h-4 w-5/6" />
+                    </div>
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

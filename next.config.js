@@ -50,7 +50,22 @@ const securityHeaders = [
 	// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy
 	{
 		key: "Permissions-Policy",
-		value: "camera=(), microphone=(), geolocation=()",
+		value: "camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=(), magnetometer=(), gyroscope=(), accelerometer=()",
+	},
+	// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Opener-Policy
+	{
+		key: "Cross-Origin-Opener-Policy",
+		value: "same-origin",
+	},
+	// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Resource-Policy
+	{
+		key: "Cross-Origin-Resource-Policy",
+		value: "same-origin",
+	},
+	// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Embedder-Policy
+	{
+		key: "Cross-Origin-Embedder-Policy",
+		value: "credentialless",
 	},
 ];
 

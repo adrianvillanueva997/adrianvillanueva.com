@@ -45,7 +45,9 @@ export default function ResumePage() {
 								fill="none"
 								viewBox="0 0 24 24"
 								stroke="currentColor"
+								aria-labelledby="location-icon-title"
 							>
+								<title id="location-icon-title">Location</title>
 								<path
 									strokeLinecap="round"
 									strokeLinejoin="round"
@@ -70,7 +72,9 @@ export default function ResumePage() {
 								fill="none"
 								viewBox="0 0 24 24"
 								stroke="currentColor"
+								aria-labelledby="email-icon-title-resume"
 							>
+								<title id="email-icon-title-resume">Email</title>
 								<path
 									strokeLinecap="round"
 									strokeLinejoin="round"
@@ -116,7 +120,7 @@ export default function ResumePage() {
 					<div className="space-y-6">
 						{resumeData.experience.map((exp, index) => (
 							<div
-								key={index}
+								key={`exp-${exp.company}-${exp.position}-${index}`}
 								className="border-l-2 border-gray-200 dark:border-gray-700 pl-4 ml-2"
 							>
 								<div className="flex flex-col sm:flex-row sm:justify-between">
@@ -135,7 +139,7 @@ export default function ResumePage() {
 								</p>
 								<ul className="mt-2 list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400">
 									{exp.highlights?.map((highlight, i) => (
-										<li key={i}>{highlight}</li>
+										<li key={`highlight-${exp.company}-${i}-${highlight.slice(0, 20)}`}>{highlight}</li>
 									))}
 								</ul>
 							</div>
@@ -153,7 +157,7 @@ export default function ResumePage() {
 					<div className="space-y-4">
 						{resumeData.education.map((edu, index) => (
 							<div
-								key={index}
+								key={`edu-${edu.institution}-${edu.degree}-${index}`}
 								className="border-l-2 border-gray-200 dark:border-gray-700 pl-4 ml-2"
 							>
 								<div className="flex flex-col sm:flex-row sm:justify-between">
@@ -189,7 +193,7 @@ export default function ResumePage() {
 					<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 						{resumeData.languages.map((lang, index) => (
 							<div
-								key={index}
+								key={`lang-${lang.name}-${lang.level}-${index}`}
 								className="flex items-center border border-gray-200 dark:border-gray-700 rounded-md p-3"
 							>
 								<span className="font-medium text-gray-900 dark:text-gray-100 mr-2">

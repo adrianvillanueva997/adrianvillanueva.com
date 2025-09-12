@@ -4,15 +4,50 @@ import { allNows } from 'contentlayer/generated'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import { formatDate } from 'pliny/utils/formatDate'
 
-export const metadata = genPageMetadata({ title: 'Now' })
+export const metadata = genPageMetadata({
+    title: 'Now',
+    description: 'What I\'m currently working on and focusing my attention on right now - a living document of my current activities and interests.',
+    keywords: ['current projects', 'now page', 'focus', 'learning', 'activities']
+})
 
 export default function NowPage() {
     const now = allNows[0] // Assuming there's only one now page
 
     if (!now) {
         return (
-            <div className="text-center py-12">
-                <p className="text-gray-500 font-mono">No now page found</p>
+            <div className="flex flex-col items-center justify-center min-h-[40vh] text-center space-y-6">
+                <div className="font-mono text-sm text-gray-500 mb-4">
+                    <span className="text-orange-400">▲</span> CONTENT_ERROR <span className="text-orange-400">▲</span>
+                </div>
+                <h1 className="text-2xl font-gothic font-bold text-[#ff3860] uppercase tracking-wider">
+                    NOW_PAGE_NOT_FOUND
+                </h1>
+                <div className="bg-black/60 border border-gray-800/50 rounded-lg p-6">
+                    <p className="text-gray-300 font-mono text-sm">
+                        <span className="text-[#00ff99]">[SYSTEM]</span> No MDX content found for the now page.
+                    </p>
+                    <p className="text-gray-400 font-mono text-xs mt-2">
+                        Please create a file at <code>/data/now/now.mdx</code>
+                    </p>
+                </div>
+            </div>
+        )
+    }
+
+    if (!now.body?.code) {
+        return (
+            <div className="flex flex-col items-center justify-center min-h-[40vh] text-center space-y-6">
+                <div className="font-mono text-sm text-gray-500 mb-4">
+                    <span className="text-orange-400">▲</span> CONTENT_ERROR <span className="text-orange-400">▲</span>
+                </div>
+                <h1 className="text-2xl font-gothic font-bold text-[#ff3860] uppercase tracking-wider">
+                    CONTENT_COMPILATION_FAILED
+                </h1>
+                <div className="bg-black/60 border border-gray-800/50 rounded-lg p-6">
+                    <p className="text-gray-300 font-mono text-sm">
+                        <span className="text-[#00ff99]">[SYSTEM]</span> MDX content could not be compiled.
+                    </p>
+                </div>
             </div>
         )
     }
