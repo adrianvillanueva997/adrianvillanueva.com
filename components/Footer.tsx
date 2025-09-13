@@ -24,21 +24,25 @@ export default function Footer() {
 			{/* Social Icons */}
 			<div className="relative z-10 flex space-x-4 md:space-x-5 mb-4 md:mb-6 bg-black/60 border border-gray-800/50 rounded-lg px-6 py-3 shadow-lg">
 				<SocialIcon
+					key="mail"
 					kind="mail"
 					href={`mailto:${siteMetadata.email}`}
 					size={4}
 				/>
 				<SocialIcon
+					key="github"
 					kind="github"
 					href={siteMetadata.github}
 					size={4}
 				/>
 				<SocialIcon
+					key="linkedin"
 					kind="linkedin"
 					href={siteMetadata.linkedin}
 					size={4}
 				/>
 				<SocialIcon
+					key="rss"
 					kind="rss"
 					href={siteMetadata.rss}
 					size={4}
