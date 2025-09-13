@@ -67,8 +67,7 @@ export default function Skills({ resumeData }: SkillsProps) {
 				{/* Simple grid of all skills */}
 				<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
 					{allSkills.map((skill, index) => (
-						<div
-							key={skill}
+						<div key={`skill-${index}-${skill}`}
 							className="group relative"
 							onMouseEnter={() => setHoveredSkill(skill)}
 							onMouseLeave={() => setHoveredSkill(null)}

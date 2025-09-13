@@ -24,21 +24,25 @@ export default function Footer() {
 			{/* Social Icons */}
 			<div className="relative z-10 flex space-x-4 md:space-x-5 mb-4 md:mb-6 bg-black/60 border border-gray-800/50 rounded-lg px-6 py-3 shadow-lg">
 				<SocialIcon
+					key="mail"
 					kind="mail"
 					href={`mailto:${siteMetadata.email}`}
 					size={4}
 				/>
 				<SocialIcon
+					key="github"
 					kind="github"
 					href={siteMetadata.github}
 					size={4}
 				/>
 				<SocialIcon
+					key="linkedin"
 					kind="linkedin"
 					href={siteMetadata.linkedin}
 					size={4}
 				/>
 				<SocialIcon
+					key="rss"
 					kind="rss"
 					href={siteMetadata.rss}
 					size={4}
@@ -50,6 +54,22 @@ export default function Footer() {
 			<div className="relative z-10 text-xs md:text-sm text-gray-400 mb-3 md:mb-4 max-w-2xl px-2 font-mono leading-relaxed bg-black/40 border border-gray-800/30 rounded p-4">
 				<span className="text-orange-400">◉ DISCLAIMER:</span> Any and all opinions listed here are my own and not representative of
 				any of my employers, past, future, and/or present.
+			</div>
+
+			{/* Human Verification Badge - Standalone */}
+			<div className="relative z-10 mb-4">
+				<Link
+					href="https://notbyai.fyi/"
+					className="inline-flex items-center text-gray-400 hover:text-[#00ff99] transition duration-150 ease-in-out font-mono bg-black/60 border border-gray-800/50 rounded px-4 py-3 hover:border-[#00ff99]/50 shadow-lg text-sm md:text-base"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<img
+						src="/static/images/footer/Written-By-a-Human-Not-By-AI-Badge-black.svg"
+						alt="Written by Human, Not by AI"
+						className="h-6 md:h-8 w-auto mr-3"
+					/>
+				</Link>
 			</div>
 
 			{/* Copyright and Links */}
@@ -80,9 +100,8 @@ export default function Footer() {
 							clipRule="evenodd"
 						/>
 					</svg>
-					◉ Source Matrix
+					◉ Source
 				</Link>
-
 				<button
 					type="button"
 					onClick={handleScrollToTop}
