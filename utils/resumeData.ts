@@ -1,6 +1,6 @@
-import * as fs from "node:fs";
-import * as path from "node:path";
-import * as yaml from "js-yaml";
+import yaml from "js-yaml";
+import fs from "node:fs";
+import path from "node:path";
 
 // Define TypeScript interfaces for your resume data structure
 export interface ResumeData {

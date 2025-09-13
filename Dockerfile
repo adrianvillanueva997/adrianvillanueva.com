@@ -27,7 +27,11 @@ RUN curl -fsSL https://d2lang.com/install.sh -o /tmp/d2install.sh && \
     rm /tmp/d2install.sh
 
 # Copy Everything
+# Copy repo contents
 COPY . .
+
+# Ensure js/ts path aliases are visible to Next's resolver in docker
+RUN test -f jsconfig.json || test -f tsconfig.json
 
 # Generate diagrams
 RUN mkdir -p public/static/diagrams && \
