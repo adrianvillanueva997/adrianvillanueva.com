@@ -24,23 +24,8 @@ RUN curl -fsSL https://d2lang.com/install.sh -o /tmp/d2install.sh && \
     sh /tmp/d2install.sh && \
     rm /tmp/d2install.sh
 
-# Copy necessary config files first
-COPY next.config.js ./
-COPY tsconfig.json ./
-COPY tailwind.config.js ./
-COPY postcss.config.js ./
-COPY contentlayer.config.ts ./
-COPY jsconfig.json ./
-
-# Copy source directories
-COPY app ./app
-COPY components ./components
-COPY data ./data
-COPY layouts ./layouts
-COPY utils ./utils
-COPY css ./css
-COPY public ./public
-COPY scripts ./scripts
+# Copy Everything
+COPY . .
 
 # Generate diagrams
 RUN mkdir -p public/static/diagrams && \
