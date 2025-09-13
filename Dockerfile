@@ -18,6 +18,8 @@ RUN apk add --no-cache curl bash make
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/.yarnrc.yml ./
+COPY --from=deps /app/package.json ./package.json
+COPY --from=deps /app/yarn.lock ./yarn.lock
 
 # Install d2 for diagram generation
 RUN curl -fsSL https://d2lang.com/install.sh -o /tmp/d2install.sh && \

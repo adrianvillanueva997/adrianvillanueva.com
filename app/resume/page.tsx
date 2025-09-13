@@ -1,6 +1,6 @@
 import Link from "@/components/Link";
 import Skills from "@/components/Skills";
-import { getResumeData } from "@/utils/resumeData";
+import { getResumeData, type ResumeData } from "@/utils/resumeData";
 import { genPageMetadata } from "app/seo";
 
 export const metadata = genPageMetadata({ title: "Resume" });
