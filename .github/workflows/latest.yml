@@ -2,8 +2,8 @@ name: Build and push Docker image to GitHub Packages and create release
 
 on:
   push:
-    tags:
-      - '*'
+    branches:
+      - master
 
 env:
   REGISTRY: ghcr.io
@@ -53,5 +53,5 @@ jobs:
           file: ./Dockerfile
           platforms: ${{ matrix.architectures }}
           push: true
-          tags: ${{env.REGISTRY}}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.tags }}
+          tags: ${{env.REGISTRY}}/${{ env.IMAGE_NAME }}:latest,
           labels: ${{ steps.meta.outputs.labels }}
