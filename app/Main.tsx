@@ -18,12 +18,12 @@ export default function Home({ posts }) {
 	return (
 		<>
 			{/* Hero Section with Doom/Synthwave Aesthetic - Responsive */}
-			<section className="relative overflow-hidden mb-12 md:mb-20 px-4 sm:px-6 md:px-10 py-8 md:py-12 lg:py-16 bg-gray-950">
+			<section className="cyber-doom-hero relative overflow-hidden mb-12 md:mb-20 px-4 sm:px-6 md:px-10 py-8 md:py-12 lg:py-16 bg-gray-950">
 				{/* Particle Field Background */}
 				<ParticleField />
 
 				{/* Synthwave Grid Background */}
-				<div className="absolute inset-0 opacity-20">
+				<div className="synthwave-grid absolute inset-0 opacity-20">
 					<div className="absolute inset-0" style={{
 						backgroundImage: `
 							linear-gradient(rgba(0, 255, 153, 0.1) 1px, transparent 1px),
