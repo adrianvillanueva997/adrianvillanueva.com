@@ -6,6 +6,7 @@ const headerNavLinks = [
 	{ href: "/now", title: "Now" },
 	{ href: "/resume", title: "Resume" },
 	{ href: "/contact", title: "Contact" },
+	{ href: "https://brain.adrianvillanueva.com", title: "Digital Garden" },
 ];
 
 export default headerNavLinks;
