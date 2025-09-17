@@ -45,7 +45,8 @@ RUN mkdir -p public/static/diagrams && \
     done || echo "No .d2 files found"
 
 # Optimize SVGs and build
-RUN pnpm optimize_svgs && \
+RUN npm install --global corepack@latest && \
+    corepack enable pnpm && pnpm optimize_svgs && \
     pnpm build
 
 # Production image, copy all the files and run next
