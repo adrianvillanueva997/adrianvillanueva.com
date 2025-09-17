@@ -5,10 +5,10 @@ ENV NEXT_TELEMETRY_DISABLED=1
 # Install dependencies only when needed
 FROM base AS deps
 WORKDIR /app
-RUN apk add --no-cache libc6-compat curl bash make
-RUN npm install --global corepack@latest
-RUN corepack enable pnpm
-COPY package.json pnpm-lock.yaml ./
+RUN apk add --no-cache libc6-compat curl bash make && \
+    npm install --global corepack@latest && \
+    corepack enable pnpm
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 # Install dependencies
 RUN pnpm install
 
@@ -19,9 +19,9 @@ WORKDIR /app
 RUN apk add --no-cache curl bash make
 
 COPY --from=deps /app/node_modules ./node_modules
-COPY --from=deps /app/.yarnrc.yml ./
 COPY --from=deps /app/package.json ./package.json
-COPY --from=deps /app/yarn.lock ./yarn.lock
+COPY --from=deps /app/pnpm-lock.yaml ./pnpm-lock.yaml
+COPY --from=deps /app/pnpm-workspace.yaml ./pnpm-workspace.yaml
 
 # Install d2 for diagram generation
 RUN curl -fsSL https://d2lang.com/install.sh -o /tmp/d2install.sh && \
