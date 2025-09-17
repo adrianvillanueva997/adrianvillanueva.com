@@ -6,9 +6,11 @@ ENV NEXT_TELEMETRY_DISABLED=1
 FROM base AS deps
 WORKDIR /app
 RUN apk add --no-cache libc6-compat curl bash make
-COPY package.json yarn.lock .yarnrc.yml ./
+RUN npm install --global corepack@latest
+RUN corepack enable pnpm
+COPY package.json yarn.lock .pnpm-lock.yml ./
 # Install dependencies
-RUN yarn install --frozen-lockfile
+RUN pnpm install
 
 # Builder stage
 FROM base AS builder
@@ -43,8 +45,8 @@ RUN mkdir -p public/static/diagrams && \
     done || echo "No .d2 files found"
 
 # Optimize SVGs and build
-RUN yarn optimize_svgs && \
-    yarn build
+RUN pnpm optimize_svgs && \
+    pnpm build
 
 # Production image, copy all the files and run next
 FROM node:23.9.0-alpine AS runner
