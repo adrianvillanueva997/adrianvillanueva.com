@@ -8,7 +8,7 @@ WORKDIR /app
 RUN apk add --no-cache libc6-compat curl bash make
 RUN npm install --global corepack@latest
 RUN corepack enable pnpm
-COPY package.json yarn.lock .pnpm-lock.yml ./
+COPY package.json pnpm-lock.yaml ./
 # Install dependencies
 RUN pnpm install
 
