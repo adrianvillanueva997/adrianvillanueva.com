@@ -53,7 +53,8 @@
 		"remark-math": "6.0.0",
 		"sanitize-html": "^2.17.0",
 		"tailwindcss": "4.0.17",
-		"unist-util-visit": "5.0.0"
+		"unist-util-visit": "5.0.0",
+		"zod": "^4.1.9"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
@@ -85,16 +86,16 @@
 		"*.+(js|jsx|ts|tsx|json|css|md|mdx)": [
 			"prettier --write"
 		]
+	},
+	"overrides": {
+		"esbuild": "0.25.10",
+		"@contentlayer2/core": {
+			"esbuild": "0.25.10"
 		},
-			"overrides": {
-				"esbuild": "0.25.10",
-				"@contentlayer2/core": {
-					"esbuild": "0.25.10"
-				},
-				"pliny": {
-					"@contentlayer2/core": {
-						"esbuild": "0.25.10"
-					}
-				}
+		"pliny": {
+			"@contentlayer2/core": {
+				"esbuild": "0.25.10"
 			}
+		}
+	}
 }
