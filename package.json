@@ -22,7 +22,7 @@
 		"body-scroll-lock": "4.0.0-beta.0",
 		"contentlayer2": "0.5.4",
 		"d3": "7.9.0",
-		"esbuild": "0.25.5",
+		"esbuild": "0.25.10",
 		"feed": "4.2.2",
 		"github-slugger": "2.0.0",
 		"gray-matter": "4.0.3",
@@ -85,5 +85,16 @@
 		"*.+(js|jsx|ts|tsx|json|css|md|mdx)": [
 			"prettier --write"
 		]
-	}
+		},
+			"overrides": {
+				"esbuild": "0.25.10",
+				"@contentlayer2/core": {
+					"esbuild": "0.25.10"
+				},
+				"pliny": {
+					"@contentlayer2/core": {
+						"esbuild": "0.25.10"
+					}
+				}
+			}
 }
