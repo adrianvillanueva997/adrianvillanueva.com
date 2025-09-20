@@ -22,7 +22,7 @@
 		"body-scroll-lock": "4.0.0-beta.0",
 		"contentlayer2": "0.5.4",
 		"d3": "7.9.0",
-		"esbuild": "0.25.5",
+		"esbuild": "0.25.10",
 		"feed": "4.2.2",
 		"github-slugger": "2.0.0",
 		"gray-matter": "4.0.3",
@@ -53,7 +53,8 @@
 		"remark-math": "6.0.0",
 		"sanitize-html": "^2.17.0",
 		"tailwindcss": "4.0.17",
-		"unist-util-visit": "5.0.0"
+		"unist-util-visit": "5.0.0",
+		"zod": "^4.1.9"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
@@ -85,5 +86,16 @@
 		"*.+(js|jsx|ts|tsx|json|css|md|mdx)": [
 			"prettier --write"
 		]
+	},
+	"overrides": {
+		"esbuild": "0.25.10",
+		"@contentlayer2/core": {
+			"esbuild": "0.25.10"
+		},
+		"pliny": {
+			"@contentlayer2/core": {
+				"esbuild": "0.25.10"
+			}
+		}
 	}
 }

@@ -5,10 +5,12 @@ ENV NEXT_TELEMETRY_DISABLED=1
 # Install dependencies only when needed
 FROM base AS deps
 WORKDIR /app
-RUN apk add --no-cache libc6-compat curl bash make
-COPY package.json yarn.lock .yarnrc.yml ./
+RUN apk add --no-cache libc6-compat curl bash make && \
+    npm install --global corepack@latest && \
+    corepack enable pnpm
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 # Install dependencies
-RUN yarn install --frozen-lockfile
+RUN pnpm install
 
 # Builder stage
 FROM base AS builder
@@ -17,9 +19,9 @@ WORKDIR /app
 RUN apk add --no-cache curl bash make
 
 COPY --from=deps /app/node_modules ./node_modules
-COPY --from=deps /app/.yarnrc.yml ./
 COPY --from=deps /app/package.json ./package.json
-COPY --from=deps /app/yarn.lock ./yarn.lock
+COPY --from=deps /app/pnpm-lock.yaml ./pnpm-lock.yaml
+COPY --from=deps /app/pnpm-workspace.yaml ./pnpm-workspace.yaml
 
 # Install d2 for diagram generation
 RUN curl -fsSL https://d2lang.com/install.sh -o /tmp/d2install.sh && \
@@ -43,8 +45,9 @@ RUN mkdir -p public/static/diagrams && \
     done || echo "No .d2 files found"
 
 # Optimize SVGs and build
-RUN yarn optimize_svgs && \
-    yarn build
+RUN npm install --global corepack@latest && \
+    corepack enable pnpm && pnpm optimize_svgs && \
+    pnpm build
 
 # Production image, copy all the files and run next
 FROM node:23.9.0-alpine AS runner

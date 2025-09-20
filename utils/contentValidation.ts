@@ -2,8 +2,8 @@
  * Content validation utilities for MDX files
  */
 
-import { z } from "zod";
 import sanitizeHtml from "sanitize-html";
+import { z } from "zod";
 // Schema for Now page frontmatter
 export const nowPageSchema = z.object({
 	title: z.string().min(1, "Title is required"),
@@ -34,7 +34,7 @@ export function validateContent(content: unknown, schema: z.ZodSchema) {
 		return schema.parse(content);
 	} catch (error) {
 		if (error instanceof z.ZodError) {
-			console.error("Content validation failed:", error.errors);
+			console.error("Content validation failed:", error.issues);
 			return null;
 		}
 		throw error;
