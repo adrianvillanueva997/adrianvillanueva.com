@@ -1,5 +1,5 @@
+import "css/brutalist.css";
 import "css/performance.css";
-import "css/tailwind.css";
 import "pliny/search/algolia.css";
 import "remark-github-blockquote-alert/alert.css";
 
@@ -8,17 +8,17 @@ import Header from "@/components/Header";
 import SectionContainer from "@/components/SectionContainer";
 import siteMetadata from "@/data/siteMetadata";
 import type { Metadata } from "next";
-import { IBM_Plex_Sans, JetBrains_Mono, Unica_One } from "next/font/google";
+import { Archivo_Black, Inter, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import { Plausible } from "pliny/analytics";
 import { type SearchConfig, SearchProvider } from "pliny/search";
 import { ThemeProviders } from "./theme-providers";
 
-const ibm_plex_sans = IBM_Plex_Sans({
+const inter = Inter({
 	subsets: ["latin"],
 	display: "swap",
 	variable: "--font-sans",
-	weight: ["400", "600"],
+	weight: ["400", "700", "900"],
 });
 
 const jetbrains_mono = JetBrains_Mono({
@@ -27,7 +27,7 @@ const jetbrains_mono = JetBrains_Mono({
 	variable: "--font-mono",
 });
 
-const unica_one = Unica_One({
+const archivo_black = Archivo_Black({
 	subsets: ["latin"],
 	display: "swap",
 	variable: "--font-heading",
@@ -94,7 +94,7 @@ export default function RootLayout({
 	return (
 		<html
 			lang={siteMetadata.language}
-			className={`${ibm_plex_sans.variable} ${jetbrains_mono.variable} ${unica_one.variable} scroll-smooth`}
+			className={`${inter.variable} ${jetbrains_mono.variable} ${archivo_black.variable} scroll-smooth brutalist-theme`}
 			suppressHydrationWarning
 		>
 			<link

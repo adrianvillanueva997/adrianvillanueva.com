@@ -7,50 +7,44 @@ import ThemeSwitch from "./ThemeSwitch";
 
 const Header = () => {
 	const headerClass =
-		"sticky top-0 z-50 flex items-center w-full bg-gray-950/95 justify-between px-4 sm:px-6 py-3 sm:py-4 md:py-5 lg:py-6 border-b border-gray-700/60 backdrop-blur-md backdrop-saturate-150 shadow-lg shadow-gray-950/20";
+		"sticky top-0 z-50 flex items-center w-full bg-white justify-between px-4 sm:px-6 py-3 sm:py-4 md:py-5 lg:py-6 brutalist-header";
 
 	return (
 		<header className={headerClass}>
 			<Link href="/" aria-label="Adrian Villanueva Martinez - Software Engineer">
 				<div className="flex items-center group">
-					<div className="relative mr-3 p-1.5 rounded-xl border-2 border-[#00ff99]/60 hover:border-[#ff3860] transition-all duration-500 hover:shadow-lg hover:shadow-[#ff3860]/30 hover:scale-105 group-hover:rotate-3">
+					<div className="relative mr-3 p-1.5 brutalist-box">
 						<Image
 							src="/logo.png"
 							alt="AVM Logo"
 							width={36}
 							height={36}
 							priority
-							className="brightness-110 contrast-125 transition-transform duration-300 group-hover:brightness-125"
+							className="brightness-100 contrast-100"
 						/>
 					</div>
 					<div className="flex flex-col">
-						<div className="text-lg sm:text-xl md:text-2xl font-heading font-bold tracking-tight text-[#ff3860] uppercase transition-all duration-300 group-hover:text-[#ff3860]/90 group-hover:tracking-wide">
+						<div className="text-lg sm:text-xl md:text-2xl font-heading font-black tracking-tight text-black uppercase">
 							AVM
 						</div>
-						<div className="hidden sm:block text-xs font-mono text-gray-400 uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-1 group-hover:translate-y-0">
-							Software Engineer
+						<div className="hidden sm:block text-xs font-mono text-gray-600 uppercase tracking-widest font-bold">
+							SOFTWARE ENGINEER
 						</div>
 					</div>
 				</div>
 			</Link>
 			<div className="flex items-center space-x-3 sm:space-x-4 leading-5">
 				{/* Desktop Navigation */}
-				<nav className="hidden lg:flex items-center gap-x-8">
+				<nav className="hidden lg:flex items-center gap-x-4">
 					{headerNavLinks
 						.filter((link) => link.href !== "/")
-						.map((link, index) => (
+						.map((link) => (
 							<Link
 								key={link.title}
 								href={link.href}
-								className="group relative font-mono font-medium text-sm text-gray-300 hover:text-[#00ff99] uppercase tracking-wide transition-all duration-300 whitespace-nowrap py-2 px-1"
+								className="brutalist-nav-link"
 							>
-								{/* Animated underline */}
-								<span className="relative z-10">{link.title}</span>
-								<div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#00ff99] to-[#ff3860] group-hover:w-full transition-all duration-500 ease-out" />
-								{/* Index indicator */}
-								<span className="absolute -top-1 -right-1 text-xs font-mono text-[#00ff99]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-									{String(index + 1).padStart(2, '0')}
-								</span>
+								{link.title}
 							</Link>
 						))}
 				</nav>
@@ -59,20 +53,20 @@ const Header = () => {
 				<nav className="hidden md:flex lg:hidden items-center gap-x-2">
 					{headerNavLinks
 						.filter((link) => link.href !== "/")
-						.slice(0, 3) // Show only first 3 items on medium screens
+						.slice(0, 3)
 						.map((link) => (
 							<Link
 								key={link.title}
 								href={link.href}
-								className="group font-mono font-medium text-xs text-gray-300 hover:text-[#00ff99] uppercase tracking-wide transition-all duration-300 px-3 py-2 rounded-lg border border-gray-700/50 hover:border-[#00ff99]/60 hover:bg-[#00ff99]/5 hover:shadow-sm hover:shadow-[#00ff99]/20"
+								className="brutalist-nav-link text-xs px-3 py-2"
 							>
 								{link.title}
 							</Link>
 						))}
 				</nav>
 
-				{/* Action buttons with enhanced styling */}
-				<div className="flex items-center space-x-2 sm:space-x-3 ml-4 pl-4 border-l border-gray-700/50">
+				{/* Action buttons */}
+				<div className="flex items-center space-x-2 sm:space-x-3 ml-4 pl-4 border-l-4 border-black">
 					<SearchButton />
 					<ThemeSwitch />
 					<MobileNav />
