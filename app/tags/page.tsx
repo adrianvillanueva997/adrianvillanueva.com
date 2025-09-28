@@ -15,69 +15,134 @@ export default async function Page() {
 
 	return (
 		<>
-			{/* Cyber-Doom Hero Section */}
-			<section className="relative overflow-hidden pb-8 pt-6 md:space-y-5 mb-12">
-				{/* Dark atmosphere background */}
-				<div className="absolute inset-0 synthwave-grid opacity-5" />
-				<div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
-
-				<div className="relative z-10 space-y-6 text-center">
-					{/* Cyber-Doom terminal indicator */}
-					<div className="font-mono text-xs text-gray-500 mb-4 font-bold">
-						<span className="text-orange-400">▲</span> NEURAL_TAG_MATRIX_ONLINE <span className="text-orange-400">▲</span>
+			{/* Brutalist Header Section */}
+			<section className="px-4 sm:px-6 md:px-10 bg-white py-16 border-b-4 border-black">
+				<div className="text-center max-w-5xl mx-auto">
+					<div className="relative inline-block mb-8">
+						<h1 className="text-5xl md:text-7xl font-black font-mono text-black uppercase">
+							TAGS
+						</h1>
 					</div>
 
-					{/* Enhanced typography */}
-					<h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-widest text-[#ff3860] mb-4 font-mono drop-shadow-lg">
-						TAG_REGISTRY
-					</h1>
-
-					{/* Cyber-Doom subtitle */}
-					<div className="font-mono text-sm text-gray-600 tracking-wider mb-2">
-						▲ DIGITAL VOID TAXONOMIES ▲
+					<div className="border-4 border-black bg-white p-8 max-w-3xl mx-auto">
+						<p className="text-xl font-mono text-black leading-relaxed font-medium">
+							Explore content organized by topic. Each tag represents a collection of related posts and ideas.
+						</p>
 					</div>
-
-					<p className="text-lg md:text-xl font-mono text-gray-300 max-w-2xl mx-auto">
-						<span className="text-[#00ff99]">[DARK_NEXUS]</span> Navigate the knowledge void. Each tag is a neural pathway to deeper understanding.
-					</p>
 
 					{/* Enhanced stats display */}
-					<div className="mt-8 flex flex-wrap justify-center gap-4 text-sm font-mono">
-						<div className="bg-black/60 border border-orange-900/50 px-4 py-2 rounded shadow-lg shadow-orange-900/20">
-							<span className="text-orange-400">▲ NEURAL_NODES:</span>
-							<span className="text-gray-200 ml-2 font-bold">{sortedTags.length}</span>
+					<div className="mt-12 flex flex-wrap justify-center gap-6">
+						<div className="bg-white border-4 border-black px-8 py-4">
+							<span className="font-mono font-black text-black text-sm uppercase tracking-wider">Total Tags:</span>
+							<span className="font-mono text-black ml-3 text-2xl font-black">{sortedTags.length}</span>
 						</div>
-						<div className="bg-black/60 border border-[#ff3860]/50 px-4 py-2 rounded shadow-lg shadow-[#ff3860]/20">
-							<span className="text-[#ff3860]">◉ MATRIX_STATUS:</span>
-							<span className="text-[#ff3860] ml-2 font-bold">ACTIVE</span>
+						<div className="bg-red-500 border-4 border-black px-8 py-4">
+							<span className="font-mono font-black text-white text-sm uppercase tracking-wider">Total Posts:</span>
+							<span className="font-mono text-white ml-3 text-2xl font-black">
+								{Object.values(tagData).reduce((sum, count) => sum + count, 0)}
+							</span>
+						</div>
+						<div className="bg-black border-4 border-black px-8 py-4">
+							<span className="font-mono font-black text-white text-sm uppercase tracking-wider">Most Used:</span>
+							<span className="font-mono text-white ml-3 text-2xl font-black">
+								{Math.max(...Object.values(tagData))}
+							</span>
 						</div>
 					</div>
 				</div>
 			</section>
 
-			{/* Cyber-Doom Tag Grid */}
-			<div className="mb-16">
-				<div className="mb-6 text-center">
-					<div className="font-mono text-sm text-gray-500">
-						<span className="text-[#00ff99]">◉</span> NEURAL_NODE_DIRECTORY <span className="text-[#00ff99]">◉</span>
+			{/* Brutalist Tag Graph Section */}
+			<div className="px-4 sm:px-6 md:px-10 bg-white py-16">
+				<div className="text-center mb-12">
+					<h2 className="text-3xl font-black font-mono text-black uppercase mb-6">
+						TAG NETWORK
+					</h2>
+					<p className="font-mono text-black max-w-3xl mx-auto text-lg leading-relaxed">
+						Interactive visualization showing relationships between tags based on shared posts. 
+						Larger nodes indicate more popular tags.
+					</p>
+				</div>
+
+				{/* Enhanced Graph Legend */}
+				<div className="mb-12 bg-white border-4 border-black p-8 max-w-5xl mx-auto">
+					<h3 className="font-mono font-black text-black uppercase text-lg mb-6 text-center">
+						LEGEND
+					</h3>
+					<div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-base font-mono text-black">
+						<div className="flex items-center justify-center border-2 border-black p-4 bg-white hover:bg-gray-50 transition-colors">
+							<div className="w-6 h-6 bg-red-500 border-2 border-black mr-4 flex-shrink-0" />
+							<span className="font-black">Node Size = Post Count</span>
+						</div>
+						<div className="flex items-center justify-center border-2 border-black p-4 bg-white hover:bg-gray-50 transition-colors">
+							<div className="w-12 h-1 bg-black mr-4 flex-shrink-0" />
+							<span className="font-black">Line = Shared Posts</span>
+						</div>
+						<div className="flex items-center justify-center border-2 border-black p-4 bg-white hover:bg-gray-50 transition-colors">
+							<div className="w-4 h-4 bg-black mr-4 flex-shrink-0 cursor-pointer" />
+							<span className="font-black">Click to Navigate</span>
+						</div>
 					</div>
 				</div>
-				<div className="flex flex-wrap gap-3 justify-center">
-					{sortedTags.map((tag) => {
+
+				<div className="bg-white border-4 border-black">
+					<TagGraph posts={posts} />
+				</div>
+
+				{/* Enhanced Controls */}
+				<div className="mt-8 bg-white border-4 border-black p-8 max-w-5xl mx-auto">
+					<h3 className="font-mono font-black text-black uppercase text-lg mb-6 text-center">
+						INTERACTION GUIDE
+					</h3>
+					<div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm font-mono text-black">
+						<div className="flex items-center justify-center border-2 border-black p-4 hover:bg-gray-50 transition-colors">
+							<kbd className="px-4 py-2 bg-black text-white border-2 border-black mr-4 font-mono font-black text-sm">DRAG</kbd>
+							<span className="font-black">Move nodes around</span>
+						</div>
+						<div className="flex items-center justify-center border-2 border-black p-4 hover:bg-gray-50 transition-colors">
+							<kbd className="px-4 py-2 bg-black text-white border-2 border-black mr-4 font-mono font-black text-sm">SCROLL</kbd>
+							<span className="font-black">Zoom in and out</span>
+						</div>
+						<div className="flex items-center justify-center border-2 border-black p-4 hover:bg-gray-50 transition-colors">
+							<kbd className="px-4 py-2 bg-red-500 text-white border-2 border-black mr-4 font-mono font-black text-sm">CLICK</kbd>
+							<span className="font-black">Go to tag page</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			{/* Brutalist Tag Grid */}
+			<div className="px-4 sm:px-6 md:px-10 bg-white py-16 border-t-4 border-black">
+				<div className="mb-12 text-center">
+					<h2 className="text-3xl font-black font-mono text-black uppercase mb-6">
+						TAG INDEX
+					</h2>
+					<p className="font-mono text-black max-w-2xl mx-auto text-lg leading-relaxed">
+						Click any tag below to explore related content
+					</p>
+				</div>
+
+				<div className="flex flex-wrap gap-3 justify-center max-w-6xl mx-auto">
+					{sortedTags.map((tag, index) => {
 						const count = tagData[tag];
+						const isLarge = count > 5;
 						return (
 							<Link
 								key={tag}
 								href={`/tags/${tag}`}
-								className="group relative inline-flex items-center px-4 py-3 bg-black/60 border border-gray-800/50 text-[#00ff99] hover:text-white hover:border-orange-900/60 hover:bg-black/80 transition-all duration-300 rounded font-mono text-sm shadow-lg hover:shadow-orange-900/20 overflow-hidden"
+								className={`inline-flex items-center bg-white border-3 border-black hover:bg-red-500 hover:text-white text-black transition-all duration-200 font-mono font-black uppercase text-sm hover:scale-105 hover:shadow-lg hover:border-red-500 group ${
+									isLarge ? 'px-6 py-3 text-base' : 'px-4 py-2'
+								}`}
 							>
-								{/* Cyber-Doom glow effect */}
-								<div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-[#00ff99] via-orange-400 to-[#ff3860] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-bottom" />
-
-								<span className="relative z-10">
-									▲ {tag.toUpperCase().replace(/\s+/g, '_')}
+								<span className="relative">
+									{tag}
+									{isLarge && (
+										<div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 group-hover:bg-white" />
+									)}
 								</span>
-								<span className="ml-3 text-xs text-gray-500 group-hover:text-orange-400 transition-colors bg-black/60 px-2 py-1 rounded border border-gray-700/50 group-hover:border-orange-900/50">
+								<span className={`ml-3 bg-black text-white group-hover:bg-white group-hover:text-black px-2 py-1 text-xs font-black border border-black group-hover:border-white ${
+									isLarge ? 'px-3 py-1' : 'px-2 py-1'
+								}`}>
 									{count}
 								</span>
 							</Link>
@@ -86,116 +151,175 @@ export default async function Page() {
 				</div>
 			</div>
 
-			{/* Cyber-Doom Knowledge Graph Section */}
-			<div className="mb-16">
-				<div className="text-center mb-8">
-					<h2 className="text-2xl md:text-3xl font-bold font-mono text-orange-400 tracking-wider mb-2">
-						▲ NEURAL_NETWORK ▲
+			{/* Brutalist Statistics Section */}
+			<div className="px-4 sm:px-6 md:px-10 bg-white py-16 border-t-4 border-black">
+				<div className="text-center mb-16">
+					<h2 className="text-3xl font-black font-mono text-black uppercase mb-6">
+						STATISTICS
 					</h2>
-					<div className="font-mono text-sm text-gray-600 tracking-wider">
-						◉ DIGITAL VOID TOPOLOGY ◉
+					<p className="font-mono text-black max-w-3xl mx-auto text-lg leading-relaxed">
+						Comprehensive metrics about content organization and tag distribution across the site
+					</p>
+				</div>
+
+				{/* Main Statistics Grid */}
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto mb-16">
+					<div className="text-center bg-white border-4 border-black p-8 group hover:shadow-2xl hover:shadow-black/20 transition-all duration-300 hover:-translate-y-1">
+						<div className="text-5xl font-mono font-black text-black mb-4">
+							{sortedTags.length}
+						</div>
+						<div className="text-xl font-mono font-black text-black uppercase tracking-wider mb-2">
+							Total Tags
+						</div>
+						<div className="text-sm font-mono text-black opacity-75">
+							Unique topic categories
+						</div>
+					</div>
+
+					<div className="text-center bg-red-500 border-4 border-black p-8 group hover:shadow-2xl hover:shadow-red-500/30 transition-all duration-300 hover:-translate-y-1">
+						<div className="text-5xl font-mono font-black text-white mb-4">
+							{Object.values(tagData).reduce((sum, count) => sum + count, 0)}
+						</div>
+						<div className="text-xl font-mono font-black text-white uppercase tracking-wider mb-2">
+							Total Posts
+						</div>
+						<div className="text-sm font-mono text-white opacity-90">
+							All tagged content
+						</div>
+					</div>
+
+					<div className="text-center bg-black border-4 border-black p-8 group hover:shadow-2xl hover:shadow-black/40 transition-all duration-300 hover:-translate-y-1">
+						<div className="text-5xl font-mono font-black text-white mb-4">
+							{Math.max(...Object.values(tagData))}
+						</div>
+						<div className="text-xl font-mono font-black text-white uppercase tracking-wider mb-2">
+							Most Used
+						</div>
+						<div className="text-sm font-mono text-white opacity-90">
+							Highest tag count
+						</div>
+					</div>
+
+					<div className="text-center bg-white border-4 border-black p-8 group hover:shadow-2xl hover:shadow-black/20 transition-all duration-300 hover:-translate-y-1">
+						<div className="text-5xl font-mono font-black text-black mb-4">
+							{(Object.values(tagData).reduce((sum, count) => sum + count, 0) / sortedTags.length).toFixed(1)}
+						</div>
+						<div className="text-xl font-mono font-black text-black uppercase tracking-wider mb-2">
+							Average
+						</div>
+						<div className="text-sm font-mono text-black opacity-75">
+							Posts per tag
+						</div>
 					</div>
 				</div>
 
-				{/* Enhanced Graph Legend */}
-				<div className="mb-6 bg-black/70 border border-orange-900/30 rounded-lg p-6 shadow-2xl shadow-orange-900/10">
-					<div className="text-center mb-4">
-						<span className="font-mono text-sm text-orange-400 font-bold">INTERFACE_LEGEND</span>
-					</div>
-					<div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm font-mono">
-						<div className="flex items-center justify-center bg-black/60 border border-gray-800/50 rounded p-3">
-							<div className="w-4 h-4 bg-[#ff3860] rounded-full mr-2 border border-white shadow-lg shadow-[#ff3860]/30" />
-							<span className="text-gray-300">Node Size = Ritual Count</span>
-						</div>
-						<div className="flex items-center justify-center bg-black/60 border border-gray-800/50 rounded p-3">
-							<div className="w-8 h-0.5 bg-orange-400 mr-2 opacity-60" />
-							<span className="text-gray-300">Connection = Shared Posts</span>
-						</div>
-						<div className="flex items-center justify-center bg-black/60 border border-gray-800/50 rounded p-3">
-							<div className="w-2 h-2 bg-[#00ff99] rounded-full mr-2 animate-pulse" />
-							<span className="text-gray-300">Pulse = Data Flow</span>
-						</div>
-					</div>
-				</div>
-
-				<div className="bg-black/80 border border-orange-900/50 rounded-lg overflow-hidden shadow-2xl shadow-orange-900/20">
-					<TagGraph posts={posts} />
-				</div>
-
-				{/* Cyber-Doom Enhanced Controls */}
-				<div className="mt-6 bg-black/60 border border-orange-900/30 rounded-lg p-6 shadow-lg shadow-orange-900/10">
-					<div className="text-center">
-						<div className="text-sm font-mono text-gray-400 mb-4">
-							<span className="text-orange-400 font-bold">▲ NEURAL_INTERFACE_COMMANDS ▲</span>
-						</div>
-						<div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-mono text-gray-500">
-							<div className="flex items-center justify-center bg-black/60 border border-gray-800/50 rounded p-3">
-								<kbd className="px-3 py-2 bg-black/80 border border-[#00ff99]/50 rounded text-[#00ff99] mr-3 shadow-lg shadow-[#00ff99]/20 font-bold">DRAG</kbd>
-								<span>Rearrange neural nodes</span>
-							</div>
-							<div className="flex items-center justify-center bg-black/60 border border-gray-800/50 rounded p-3">
-								<kbd className="px-3 py-2 bg-black/80 border border-orange-400/50 rounded text-orange-400 mr-3 shadow-lg shadow-orange-400/20 font-bold">SCROLL</kbd>
-								<span>Zoom void matrix</span>
-							</div>
-							<div className="flex items-center justify-center bg-black/60 border border-gray-800/50 rounded p-3">
-								<kbd className="px-3 py-2 bg-black/80 border border-[#ff3860]/50 rounded text-[#ff3860] mr-3 shadow-lg shadow-[#ff3860]/20 font-bold">CLICK</kbd>
-								<span>Execute ritual</span>
-							</div>
-						</div>
-						<div className="mt-4 text-xs text-gray-500 border-t border-orange-900/30 pt-4">
-							<span className="text-orange-400">◉</span> Interactive neural topology mapping void relationships <span className="text-orange-400">◉</span>
-							<br />
-							<span className="text-gray-600">Larger nodes = more digital rituals • Connected nodes share knowledge paths</span>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			{/* Cyber-Doom Statistics Section */}
-			<div className="bg-black/80 border border-orange-900/50 rounded-lg p-8 shadow-2xl shadow-orange-900/10 relative overflow-hidden">
-				<div className="absolute inset-0 bg-gradient-to-b from-orange-900/5 via-black/20 to-[#ff3860]/5" />
-
-				<div className="relative z-10">
-					<div className="text-center mb-8">
-						<h3 className="text-xl font-mono font-bold text-orange-400 tracking-wider mb-2">
-							▲ NEURAL_VOID_METRICS ▲
+				{/* Tag Distribution Analysis */}
+				<div className="max-w-6xl mx-auto">
+					<div className="text-center mb-12">
+						<h3 className="text-2xl font-black font-mono text-black uppercase mb-4">
+							TAG DISTRIBUTION
 						</h3>
-						<div className="font-mono text-sm text-gray-600">
-							◉ SYSTEM_DIAGNOSTICS ◉
+						<p className="font-mono text-black max-w-2xl mx-auto">
+							Analysis of content distribution across different tag categories
+						</p>
+					</div>
+
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+						{/* Popular Tags */}
+						<div className="bg-white border-4 border-black p-6">
+							<h4 className="font-mono font-black text-black uppercase text-lg mb-4 text-center">
+								TOP 5 TAGS
+							</h4>
+							<div className="space-y-3">
+								{sortedTags.slice(0, 5).map((tag, index) => (
+									<div key={tag} className="flex items-center justify-between bg-gray-50 border-2 border-black p-3">
+										<div className="flex items-center">
+											<div className="w-6 h-6 bg-red-500 border border-black mr-3 flex items-center justify-center">
+												<span className="text-white font-mono font-black text-xs">
+													{index + 1}
+												</span>
+											</div>
+											<Link 
+												href={`/tags/${tag}`}
+												className="font-mono font-black text-black uppercase hover:text-red-500 transition-colors"
+											>
+												{tag}
+											</Link>
+										</div>
+										<span className="bg-black text-white px-3 py-1 font-mono font-black text-sm">
+											{tagData[tag]}
+										</span>
+									</div>
+								))}
+							</div>
+						</div>
+
+						{/* Tag Categories */}
+						<div className="bg-white border-4 border-black p-6">
+							<h4 className="font-mono font-black text-black uppercase text-lg mb-4 text-center">
+								DISTRIBUTION
+							</h4>
+							<div className="space-y-3">
+								<div className="flex items-center justify-between bg-gray-50 border-2 border-black p-3">
+									<span className="font-mono font-black text-black uppercase">High Usage (5+ posts)</span>
+									<span className="bg-red-500 text-white px-3 py-1 font-mono font-black text-sm">
+										{Object.values(tagData).filter(count => count >= 5).length}
+									</span>
+								</div>
+								<div className="flex items-center justify-between bg-gray-50 border-2 border-black p-3">
+									<span className="font-mono font-black text-black uppercase">Medium Usage (2-4 posts)</span>
+									<span className="bg-black text-white px-3 py-1 font-mono font-black text-sm">
+										{Object.values(tagData).filter(count => count >= 2 && count < 5).length}
+									</span>
+								</div>
+								<div className="flex items-center justify-between bg-gray-50 border-2 border-black p-3">
+									<span className="font-mono font-black text-black uppercase">Low Usage (1 post)</span>
+									<span className="bg-white border-2 border-black text-black px-3 py-1 font-mono font-black text-sm">
+										{Object.values(tagData).filter(count => count === 1).length}
+									</span>
+								</div>
+							</div>
 						</div>
 					</div>
 
-					<div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-						<div className="text-center bg-black/60 border border-gray-800/50 rounded-lg p-4 shadow-lg hover:shadow-[#00ff99]/20 transition-all duration-300">
-							<div className="text-2xl md:text-3xl font-mono font-bold text-[#00ff99] mb-2">
-								{sortedTags.length}
+					{/* Key Insights */}
+					<div className="bg-black border-4 border-black p-8">
+						<h3 className="text-2xl font-black font-mono text-white uppercase mb-6 text-center">
+							KEY INSIGHTS
+						</h3>
+						<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+							<div className="bg-white border-2 border-white p-4 text-center">
+								<div className="font-mono font-black text-black uppercase text-sm mb-2">
+									Most Popular Tag
+								</div>
+								<div className="text-lg font-mono font-black text-black">
+									{sortedTags[0]}
+								</div>
+								<div className="text-sm font-mono text-black opacity-75">
+									{tagData[sortedTags[0]]} posts
+								</div>
 							</div>
-							<div className="text-sm font-mono text-gray-400">
-								NEURAL_NODES
+							<div className="bg-red-500 border-2 border-white p-4 text-center">
+								<div className="font-mono font-black text-white uppercase text-sm mb-2">
+									Coverage Range
+								</div>
+								<div className="text-lg font-mono font-black text-white">
+									{Math.min(...Object.values(tagData))} - {Math.max(...Object.values(tagData))}
+								</div>
+								<div className="text-sm font-mono text-white opacity-90">
+									posts per tag
+								</div>
 							</div>
-						</div>
-						<div className="text-center bg-black/60 border border-gray-800/50 rounded-lg p-4 shadow-lg hover:shadow-orange-400/20 transition-all duration-300">
-							<div className="text-2xl md:text-3xl font-mono font-bold text-orange-400 mb-2">
-								{Object.values(tagData).reduce((sum, count) => sum + count, 0)}
-							</div>
-							<div className="text-sm font-mono text-gray-400">
-								VOID_RITUALS
-							</div>
-						</div>
-						<div className="text-center bg-black/60 border border-gray-800/50 rounded-lg p-4 shadow-lg hover:shadow-[#ff3860]/20 transition-all duration-300">
-							<div className="text-2xl md:text-3xl font-mono font-bold text-[#ff3860] mb-2">
-								{Math.max(...Object.values(tagData))}
-							</div>
-							<div className="text-sm font-mono text-gray-400">
-								MAX_COMMUNION
-							</div>
-						</div>
-						<div className="text-center bg-black/60 border border-gray-800/50 rounded-lg p-4 shadow-lg hover:shadow-gray-500/20 transition-all duration-300">
-							<div className="text-2xl md:text-3xl font-mono font-bold text-gray-300 mb-2">
-								{(Object.values(tagData).reduce((sum, count) => sum + count, 0) / sortedTags.length).toFixed(1)}
-							</div>
-							<div className="text-sm font-mono text-gray-400">
-								AVG_DENSITY
+							<div className="bg-white border-2 border-white p-4 text-center">
+								<div className="font-mono font-black text-black uppercase text-sm mb-2">
+									Tagging Efficiency
+								</div>
+								<div className="text-lg font-mono font-black text-black">
+									{((Object.values(tagData).filter(count => count > 1).length / sortedTags.length) * 100).toFixed(0)}%
+								</div>
+								<div className="text-sm font-mono text-black opacity-75">
+									tags with multiple posts
+								</div>
 							</div>
 						</div>
 					</div>
