@@ -114,19 +114,17 @@ export default async function Page(props: {
 	const Layout = layouts[post.layout || defaultLayout];
 
 	return (
-		<>
-			<Layout
-				content={mainContent}
-				authorDetails={authorDetails}
-				next={next}
-				prev={prev}
-			>
-				<MDXLayoutRenderer
-					code={post.body.code}
-					components={components}
-					toc={post.toc}
-				/>
-			</Layout>
-		</>
+		<Layout
+			content={mainContent}
+			authorDetails={authorDetails}
+			next={next}
+			prev={prev}
+		>
+			<MDXLayoutRenderer
+				code={post.body.code}
+				components={components}
+				toc={post.toc}
+			/>
+		</Layout>
 	);
 }

@@ -16,31 +16,31 @@ export default function Alert({ type, title, children, dismissible = false }: Al
 
 	const alertStyles = {
 		info: {
-			container: "border-blue-500 bg-blue-950/20",
-			icon: "text-blue-400",
-			title: "text-blue-300",
-			text: "text-blue-100",
+			container: "border-blue-500 bg-blue-50",
+			icon: "text-blue-500",
+			title: "text-blue-700",
+			text: "text-blue-800",
 			iconPath: "M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
 		},
 		success: {
-			container: "border-[#00ff99] bg-[#00ff99]/10",
-			icon: "text-[#00ff99]",
-			title: "text-[#00ff99]",
-			text: "text-gray-100",
+			container: "border-green-500 bg-green-50",
+			icon: "text-green-500",
+			title: "text-green-700",
+			text: "text-green-800",
 			iconPath: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
 		},
 		warning: {
-			container: "border-yellow-500 bg-yellow-950/20",
-			icon: "text-yellow-400",
-			title: "text-yellow-300",
-			text: "text-yellow-100",
+			container: "border-yellow-500 bg-yellow-50",
+			icon: "text-yellow-500",
+			title: "text-yellow-700",
+			text: "text-yellow-800",
 			iconPath: "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z",
 		},
 		error: {
-			container: "border-[#ff3860] bg-[#ff3860]/10",
-			icon: "text-[#ff3860]",
-			title: "text-[#ff3860]",
-			text: "text-gray-100",
+			container: "border-red-500 bg-red-50",
+			icon: "text-red-500",
+			title: "text-red-700",
+			text: "text-red-800",
 			iconPath: "M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z",
 		},
 	};
@@ -48,7 +48,7 @@ export default function Alert({ type, title, children, dismissible = false }: Al
 	const style = alertStyles[type];
 
 	return (
-		<div className={`my-6 rounded-xl border-l-4 ${style.container} p-4 relative`}>
+		<div className={`my-6 border-4 ${style.container} p-6 relative`}>
 			<div className="flex items-start">
 				{/* Icon */}
 				<div className="flex-shrink-0">
@@ -62,20 +62,20 @@ export default function Alert({ type, title, children, dismissible = false }: Al
 						<path
 							strokeLinecap="round"
 							strokeLinejoin="round"
-							strokeWidth={2}
+							strokeWidth={3}
 							d={style.iconPath}
 						/>
 					</svg>
 				</div>
 
 				{/* Content */}
-				<div className="ml-3 flex-1">
+				<div className="ml-4 flex-1">
 					{title && (
-						<h3 className={`font-mono text-sm font-semibold ${style.title} uppercase tracking-wide mb-2`}>
+						<h3 className={`font-mono text-sm font-black ${style.title} uppercase tracking-wide mb-2`}>
 							{title}
 						</h3>
 					)}
-					<div className={`text-sm ${style.text} leading-relaxed`}>
+					<div className={`text-sm ${style.text} leading-relaxed font-mono`}>
 						{children}
 					</div>
 				</div>
@@ -85,9 +85,9 @@ export default function Alert({ type, title, children, dismissible = false }: Al
 					<button
 						type="button"
 						onClick={() => setDismissed(true)}
-						className={`ml-3 flex-shrink-0 ${style.icon} hover:opacity-70 transition-opacity`}
+						className={`ml-4 flex-shrink-0 p-1 border-2 border-current ${style.icon} hover:bg-current hover:text-white transition-all`}
 					>
-						<svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+						<svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
 							<path
 								fillRule="evenodd"
 								d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"

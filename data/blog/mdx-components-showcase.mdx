@@ -1,15 +1,15 @@
 ---
-title: 'MDX Components Showcase: Doom Metal Aesthetic Guide'
+title: 'MDX Components Showcase: Brutalist Design Guide'
 date: '2025-09-12'
-tags: ['mdx', 'components', 'design-system', 'doom-metal', 'synthwave']
+tags: ['mdx', 'components', 'design-system', 'brutalist', 'minimalism']
 draft: true
-summary: 'A comprehensive showcase of all available MDX components with doom metal/synthwave aesthetic styling. This post demonstrates every component in action with practical examples.'
+summary: 'A comprehensive showcase of all available MDX components with brutalist aesthetic styling. This post demonstrates every component in action with practical examples.'
 
 ---
 
-# MDX Components Showcase
+# MDX COMPONENTS SHOWCASE
 
-Welcome to the complete showcase of our doom metal/synthwave themed MDX components! This post demonstrates every available component with real-world examples.
+Welcome to the complete showcase of our brutalist themed MDX components! This post demonstrates every available component with real-world examples.
 
 ## Badges & Tags
 
@@ -37,32 +37,39 @@ Our enhanced code blocks support syntax highlighting, copy functionality, and fi
 console.log("Hello World!");
 const x = 42;
 function test() {
-  return "doom aesthetic";
+  return "brutalist aesthetic";
 }
 ```
 
 ```typescript
+interface BrutalistTheme {
+  colors: {
+    primary: string;
+    secondary: string;
+    background: string;
+  };
+}
 
-const applyDoomTheme = (config: DoomTheme): void => {
+const applyBrutalistTheme = (config: BrutalistTheme): void => {
   document.documentElement.style.setProperty('--primary', config.colors.primary);
   document.documentElement.style.setProperty('--secondary', config.colors.secondary);
   document.documentElement.style.setProperty('--bg', config.colors.background);
 };
 
-// Initialize the doom aesthetic
-applyDoomTheme({
+// Initialize the brutalist aesthetic
+applyBrutalistTheme({
   colors: {
-    primary: '#ff3860',
-    secondary: '#00ff99',
-    background: '#0a0a0a'
+    primary: '#000000',
+    secondary: '#ff0000',
+    background: '#ffffff'
   }
-});`}
+});
 ```
 
 ```bash
-npm install doom-aesthetic-components
-npm run build:doom
-echo "The matrix has you..."`
+npm install brutalist-design-system
+npm run build:brutalist
+echo "FORM FOLLOWS FUNCTION"
 ```
 
 ## Image Comparisons
@@ -70,11 +77,12 @@ echo "The matrix has you..."`
 Perfect for showing before/after transformations:
 
 <ImageComparison
-  title="Doom Aesthetic Transformation"
-  beforeSrc="https://via.placeholder.com/400x300/cccccc/666666?text=Before"
-  afterSrc="https://via.placeholder.com/400x300/ff3860/00ff99?text=After"
-  beforeAlt="Standard boring interface"
-  afterAlt="Doom metal aesthetic interface"
+  title="Brutalist Design Transformation"
+  beforeSrc="/static/images/before-clean.jpg"
+  afterSrc="/static/images/after-brutalist.jpg"
+  beforeAlt="Clean minimal interface"
+  afterAlt="Bold brutalist aesthetic interface"
+  height="400"
 />
 
 ## Progress Tracking
@@ -84,25 +92,25 @@ Show project completion or skill levels:
 <ProgressBar
   value={85}
   max={100}
-  label="Doom Aesthetic Implementation"
-  color="green"
+  label="Brutalist Design Implementation"
+  color="black"
   animated={true}
   showPercentage={true}
 />
 
 <ProgressBar
-  value={42}
+  value={92}
   max={100}
-  label="Matrix Integration"
+  label="Typography Hierarchy"
   color="red"
   animated={true}
 />
 
 <ProgressBar
-  value={99}
+  value={88}
   max={100}
-  label="Synthwave Vibes"
-  color="blue"
+  label="Functional Layout"
+  color="gray"
   showPercentage={false}
 />
 
@@ -111,22 +119,22 @@ Show project completion or skill levels:
 Add wisdom and context with styled quotes:
 
 <Quote
-  author="Neo"
-  source="The Matrix"
+  author="Dieter Rams"
+  source="Ten principles for good design"
   type="success"
 >
-There is no spoon. There is only code, and the doom aesthetic that binds us all.
+Good design is as little design as possible. Function over form, always.
 </Quote>
 
 <Quote type="warning">
-With great power comes great responsibility to maintain consistent theming.
+With great power comes great responsibility to maintain functional clarity.
 </Quote>
 
 <Quote
-  author="Anonymous Developer"
+  author="Le Corbusier"
   type="error"
 >
-I tried to fight the doom aesthetic, but the doom aesthetic chose me.
+The house is a machine for living in. Every element must serve a purpose.
 </Quote>
 
 ## Statistics & Metrics
@@ -145,11 +153,11 @@ Display key performance indicators and project stats:
       trend: { direction: "up", value: "+8" }
     },
     {
-      title: "Doom Level",
-      value: "9000",
-      subtitle: "Over 9000!",
+      title: "Function Level",
+      value: "100%",
+      subtitle: "Form follows function",
       color: "red",
-      trend: { direction: "up", value: "∞%" }
+      trend: { direction: "up", value: "+∞" }
     },
     {
       title: "Performance",
@@ -173,12 +181,12 @@ Organize complex information with tabs:
       title: "Overview",
       content: (
         <div>
-          <h3>Doom Aesthetic Overview</h3>
-          <p>The doom metal aesthetic combines dark, moody colors with high-contrast accents. Our primary color palette consists of:</p>
+          <h3>Brutalist Design Overview</h3>
+          <p>The brutalist design aesthetic emphasizes function over form with bold, utilitarian elements. Our primary design principles consist of:</p>
           <ul>
-            <li><strong>Primary Red (#ff3860):</strong> Used for destructive actions, errors, and dramatic highlights</li>
-            <li><strong>Secondary Green (#00ff99):</strong> Used for success states, active elements, and cyberpunk accents</li>
-            <li><strong>Dark Grays:</strong> Various shades for backgrounds and subtle elements</li>
+            <li><strong>Bold Black Borders:</strong> Thick 4px black borders for clear visual separation</li>
+            <li><strong>Monospace Typography:</strong> JetBrains Mono for consistent, functional text hierarchy</li>
+            <li><strong>High Contrast Colors:</strong> Pure whites, blacks, with selective red and yellow accents</li>
           </ul>
         </div>
       )
@@ -190,7 +198,7 @@ Organize complex information with tabs:
         <div>
           <h3>Implementation Details</h3>
           <p>Each component follows these principles:</p>
-          <BadgeGroup badges={["Consistent Colors", "Smooth Transitions", "Hover Effects", "Typography Hierarchy"]} variant="success" />
+          <BadgeGroup badges={["Bold Typography", "Thick Borders", "High Contrast", "Functional Layout"]} variant="success" />
           <br />
           <Alert type="info">
             All components use Tailwind CSS classes for styling consistency.

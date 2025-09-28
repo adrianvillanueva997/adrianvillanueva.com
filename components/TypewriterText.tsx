@@ -53,7 +53,7 @@ export default function TypewriterText({
         <span className={className}>
             {displayText}
             {cursor && (
-                <span className="inline-block w-0.5 h-6 ml-1 bg-[#00ff99] animate-pulse">
+                <span className="inline-block w-0.5 h-6 ml-1 bg-red-500 animate-pulse">
                     |
                 </span>
             )}

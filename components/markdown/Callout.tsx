@@ -7,26 +7,26 @@ const styles: Record<
 	{ bg: string; border: string; icon: string; title: string }
 > = {
 	info: {
-		bg: "bg-gray-950/50",
-		border: "border-[#00ff99]/50",
+		bg: "bg-blue-50",
+		border: "border-black",
 		icon: "💡",
 		title: "SYSTEM_INFO",
 	},
 	warning: {
-		bg: "bg-gray-950/50",
-		border: "border-[#ff3860]/50",
+		bg: "bg-yellow-50",
+		border: "border-black",
 		icon: "⚠️",
 		title: "CRITICAL_WARNING",
 	},
 	note: {
-		bg: "bg-gray-950/50",
-		border: "border-gray-600/50",
+		bg: "bg-gray-50",
+		border: "border-black",
 		icon: "📝",
 		title: "DATA_NOTE",
 	},
 	tip: {
-		bg: "bg-gray-950/50",
-		border: "border-[#00ff99]/50",
+		bg: "bg-green-50",
+		border: "border-black",
 		icon: "💪",
 		title: "OPTIMIZATION_TIP",
 	},
@@ -41,7 +41,7 @@ interface CalloutProps {
 export function Callout({ type, title, children }: CalloutProps) {
 	return (
 		<div
-			className={`${styles[type].bg} border-l-4 ${styles[type].border} p-4 my-6 rounded-r-lg`}
+			className={`${styles[type].bg} border-4 ${styles[type].border} p-4 my-6`}
 		>
 			<div className="flex">
 				<div className="flex-shrink-0 mr-3 mt-1">
@@ -49,11 +49,11 @@ export function Callout({ type, title, children }: CalloutProps) {
 				</div>
 				<div className="w-full">
 					{title ? (
-						<h5 className="font-mono font-medium text-lg mb-1 text-[#00ff99] uppercase tracking-wider">{title}</h5>
+						<h5 className="font-mono font-black text-lg mb-1 text-black uppercase tracking-wider">{title}</h5>
 					) : (
-						<h5 className="font-mono font-medium text-lg mb-1 text-[#00ff99] uppercase tracking-wider">{styles[type].title}</h5>
+						<h5 className="font-mono font-black text-lg mb-1 text-black uppercase tracking-wider">{styles[type].title}</h5>
 					)}
-					<div className="prose dark:prose-dark max-w-none text-gray-300">{children}</div>
+					<div className="prose max-w-none text-black font-mono">{children}</div>
 				</div>
 			</div>
 		</div>

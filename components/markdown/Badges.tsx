@@ -12,11 +12,11 @@ interface BadgeGroupProps {
 
 function Badge({ children, variant = "default", size = "md" }: BadgeProps) {
     const variants = {
-        default: "bg-gray-800 text-gray-200 border-gray-600",
-        success: "bg-[#00ff99]/20 text-[#00ff99] border-[#00ff99]",
-        error: "bg-[#ff3860]/20 text-[#ff3860] border-[#ff3860]",
-        warning: "bg-yellow-500/20 text-yellow-400 border-yellow-500",
-        info: "bg-blue-500/20 text-blue-400 border-blue-500",
+        default: "bg-white text-black border-black",
+        success: "bg-green-50 text-green-600 border-black",
+        error: "bg-red-50 text-red-600 border-black",
+        warning: "bg-yellow-50 text-yellow-600 border-black",
+        info: "bg-blue-50 text-blue-600 border-black",
     };
 
     const sizes = {
@@ -27,7 +27,7 @@ function Badge({ children, variant = "default", size = "md" }: BadgeProps) {
 
     return (
         <span
-            className={`inline-flex items-center font-mono font-medium rounded-full border transition-all duration-300 hover:scale-105 ${variants[variant]} ${sizes[size]}`}
+            className={`inline-flex items-center font-mono font-black border-4 transition-all duration-200 hover:bg-red-500 hover:text-white ${variants[variant]} ${sizes[size]}`}
         >
             {children}
         </span>
@@ -36,9 +36,9 @@ function Badge({ children, variant = "default", size = "md" }: BadgeProps) {
 
 export default function BadgeGroup({ badges, variant = "default", title }: BadgeGroupProps) {
     return (
-        <div className="my-6 p-4 rounded-xl border border-gray-700 bg-gray-950/30">
+        <div className="my-6 p-4 border-4 border-black bg-white">
             {title && (
-                <h3 className="text-lg font-mono font-semibold text-[#00ff99] uppercase tracking-wide mb-4">
+                <h3 className="text-lg font-mono font-black text-black uppercase tracking-wide mb-4">
                     {title}
                 </h3>
             )}

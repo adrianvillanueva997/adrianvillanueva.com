@@ -4,6 +4,8 @@ import siteMetadata from '@/data/siteMetadata';
 import type { Authors } from "contentlayer/generated";
 import Script from "next/script";
 import type { ReactNode } from "react";
+import { FaBuilding, FaMapMarkerAlt, FaUserTie } from "react-icons/fa";
+
 interface Props {
 	children: ReactNode;
 	content: Omit<Authors, "_id" | "_raw" | "body">;
@@ -35,147 +37,149 @@ export default function AuthorLayout({ children, content }: Props) {
 	};
 
 	return (
-		<div className="divide-y divide-primary-700/30">
+		<div className="bg-white min-h-screen">
 			<Script id="author-jsonld" type="application/ld+json" strategy="afterInteractive">
 				{JSON.stringify(personSchema)}
 			</Script>
-			<section className="relative overflow-hidden pt-6 pb-8 md:space-y-5">
-				{/* Enhanced background effects */}
-				<div className="absolute inset-0 synthwave-grid opacity-5" />
-				<div className="absolute inset-0 bg-gradient-to-br from-orange-900/10 via-transparent to-blue-900/10" />
 
-				{/* Animated scan lines */}
-				<div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-orange-500 to-transparent animate-pulse" />
-				<div className="absolute bottom-0 right-0 w-full h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent animate-pulse delay-700" />
-
-				{/* Floating particles effect */}
-				<div className="absolute inset-0 overflow-hidden pointer-events-none">
-					<div className="absolute top-1/4 left-1/4 w-1 h-1 bg-orange-500/40 rounded-full animate-ping delay-1000" />
-					<div className="absolute top-3/4 right-1/3 w-1 h-1 bg-blue-500/40 rounded-full animate-ping delay-2000" />
-					<div className="absolute bottom-1/4 left-1/2 w-1 h-1 bg-green-500/40 rounded-full animate-ping delay-3000" />
-				</div>
-
-				<div className="relative z-10 space-y-4">
-					<div className="font-mono text-xs text-orange-400/80 mb-2 flex items-center space-x-2">
-						<span className="animate-pulse">&gt;</span>
-						<span>ACCESSING PERSONNEL FILES...</span>
-						<div className="flex space-x-1">
-							<div className="w-1 h-1 bg-orange-500 rounded-full animate-pulse" />
-							<div className="w-1 h-1 bg-orange-500 rounded-full animate-pulse delay-100" />
-							<div className="w-1 h-1 bg-orange-500 rounded-full animate-pulse delay-200" />
-						</div>
-						<span className="text-green-400">[████████████] 100%</span>
-					</div>
-					<h1 className="text-3xl leading-9 font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-red-400 to-orange-500 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 drop-shadow-lg">
-						PROFILE_DATA
+			{/* Header */}
+			<section className="px-4 sm:px-6 md:px-10 bg-white py-16 border-b-4 border-black">
+				<div className="text-center max-w-5xl mx-auto">
+					<h1 className="text-5xl md:text-7xl font-black font-mono text-black uppercase mb-8">
+						ABOUT
 					</h1>
-					<div className="font-mono text-xs text-green-400/80 flex items-center space-x-4">
-						<span>&gt; CLEARANCE_LEVEL: <span className="text-orange-400 font-bold">LAMBDA</span></span>
-						<span className="text-blue-400">|</span>
-						<span>STATUS: <span className="text-green-500 animate-pulse">[ACTIVE]</span></span>
+					<div className="border-4 border-black bg-white p-8 max-w-3xl mx-auto">
+						<p className="text-xl font-mono text-black leading-relaxed font-medium">
+							Software Engineer & Systems Designer building cloud-native data platforms.
+						</p>
 					</div>
 				</div>
 			</section>
-			<div className="items-start space-y-8 xl:grid xl:grid-cols-3 xl:gap-x-12 xl:space-y-0">
-				<div className="flex flex-col items-center pt-8">
-					{avatar && (
-						<div className="relative group mb-6">
-							{/* Enhanced glow effect */}
-							<div className="absolute -inset-2 bg-gradient-to-r from-orange-500/30 via-red-500/20 to-blue-500/30 rounded-full opacity-60 group-hover:opacity-100 transition-all duration-500 blur-lg animate-pulse" />
-							<div className="absolute -inset-1 bg-gradient-to-r from-orange-600/50 to-blue-600/50 rounded-full opacity-40 group-hover:opacity-70 transition-all duration-300 blur" />
 
-							{/* Main avatar */}
-							<Image
-								src={avatar}
-								alt="avatar"
-								width={192}
-								height={192}
-								className="relative h-48 w-48 rounded-full border-2 border-orange-500/60 shadow-2xl shadow-orange-500/20 filter grayscale contrast-125 hover:contrast-150 hover:grayscale-0 transition-all duration-500"
-							/>
+			{/* Content */}
+			<div className="px-4 sm:px-6 md:px-10 bg-gray-50 py-16">
+				<div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12">
 
-							{/* Overlay effects */}
-							<div className="absolute inset-0 rounded-full bg-gradient-to-br from-orange-900/10 via-transparent to-blue-900/10" />
-							<div className="absolute top-3 right-3 w-3 h-3 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50 border border-green-300" />
-
-							{/* Scanning line effect */}
-							<div className="absolute inset-0 rounded-full overflow-hidden">
-								<div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-orange-400 to-transparent animate-pulse group-hover:animate-none" />
-							</div>
-						</div>
-					)}
-
-					{/* Status indicators */}
-					<div className="space-y-3 text-center">
-						<div className="font-mono text-xs text-green-400/80 bg-gray-950/50 px-3 py-1 rounded border border-green-500/20">
-							&gt; BIOMETRIC_SCAN: <span className="text-green-400 font-bold">[VERIFIED]</span>
-						</div>
-
-						<h3 className="text-2xl leading-8 font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400 uppercase">
-							{name}
-						</h3>
-
-						<div className="space-y-2 text-sm">
-							<div className="text-gray-300 font-mono bg-gray-950/30 px-3 py-1 rounded border border-orange-500/20">
-								<span className="text-orange-400">[ROLE]</span> {occupation}
-							</div>
-							{company && (
-								<div className="text-gray-300 font-mono bg-gray-950/30 px-3 py-1 rounded border border-blue-500/20">
-									<span className="text-blue-400">[FACILITY]</span> {company}
+					{/* Profile Section */}
+					<div className="lg:col-span-1">
+						<div className="border-4 border-black bg-white p-8 sticky top-8">
+							{/* Avatar */}
+							{avatar && (
+								<div className="text-center mb-8">
+									<div className="inline-block border-4 border-black">
+										<Image
+											src={avatar}
+											alt="Profile"
+											width={200}
+											height={200}
+											className="w-full h-auto"
+										/>
+									</div>
 								</div>
 							)}
+
+							{/* Name */}
+							<div className="text-center mb-8">
+								<h2 className="text-2xl font-black font-mono text-black uppercase mb-4 border-b-4 border-black pb-4">
+									{name}
+								</h2>
+							</div>
+
+							{/* Info Cards */}
+							<div className="space-y-4">
+								<div className="border-2 border-black bg-gray-100 p-4">
+									<div className="flex items-center mb-2">
+										<FaUserTie className="text-red-500 mr-3" />
+										<h3 className="font-mono font-black text-black uppercase text-sm">
+											OCCUPATION
+										</h3>
+									</div>
+									<p className="font-mono text-black">
+										{occupation}
+									</p>
+								</div>
+
+								{company && (
+									<div className="border-2 border-black bg-gray-100 p-4">
+										<div className="flex items-center mb-2">
+											<FaBuilding className="text-red-500 mr-3" />
+											<h3 className="font-mono font-black text-black uppercase text-sm">
+												COMPANY
+											</h3>
+										</div>
+										<p className="font-mono text-black">
+											{company}
+										</p>
+									</div>
+								)}
+
+								<div className="border-2 border-black bg-yellow-300 p-4">
+									<div className="flex items-center mb-2">
+										<FaMapMarkerAlt className="text-red-500 mr-3" />
+										<h3 className="font-mono font-black text-black uppercase text-sm">
+											LOCATION
+										</h3>
+									</div>
+									<p className="font-mono text-black">
+										Tokyo, Japan 🇯🇵
+									</p>
+								</div>
+							</div>
+
+							{/* Social Links */}
+							<div className="mt-8 pt-8 border-t-4 border-black">
+								<h3 className="font-mono font-black text-black uppercase text-sm mb-4">
+									CONNECT
+								</h3>
+								<div className="flex flex-wrap gap-3">
+									{email && (
+										<div className="border-2 border-black bg-gray-100 p-2 hover:bg-red-500 hover:text-white transition-colors">
+											<SocialIcon kind="mail" href={`mailto:${email}`} size={5} />
+										</div>
+									)}
+									{github && (
+										<div className="border-2 border-black bg-gray-100 p-2 hover:bg-red-500 hover:text-white transition-colors">
+											<SocialIcon kind="github" href={github} size={5} />
+										</div>
+									)}
+									{linkedin && (
+										<div className="border-2 border-black bg-gray-100 p-2 hover:bg-red-500 hover:text-white transition-colors">
+											<SocialIcon kind="linkedin" href={linkedin} size={5} />
+										</div>
+									)}
+									{twitter && (
+										<div className="border-2 border-black bg-gray-100 p-2 hover:bg-red-500 hover:text-white transition-colors">
+											<SocialIcon kind="x" href={twitter} size={5} />
+										</div>
+									)}
+									{bluesky && (
+										<div className="border-2 border-black bg-gray-100 p-2 hover:bg-red-500 hover:text-white transition-colors">
+											<SocialIcon kind="bluesky" href={bluesky} size={5} />
+										</div>
+									)}
+								</div>
+							</div>
 						</div>
+					</div>
 
-						<div className="font-mono text-xs text-orange-400/60 bg-gray-950/50 px-3 py-1 rounded border border-orange-500/20">
-							&gt; SECURITY_CLEARANCE: <span className="text-orange-400 font-bold">LAMBDA</span>
+					{/* Content Section */}
+					<div className="lg:col-span-2">
+						<div className="border-4 border-black bg-white p-8">
+							<div className="prose prose-lg max-w-none
+								prose-headings:font-mono prose-headings:font-black prose-headings:uppercase prose-headings:text-black prose-headings:border-b-4 prose-headings:border-black prose-headings:pb-4 prose-headings:mb-6
+								prose-p:font-mono prose-p:text-black prose-p:leading-relaxed
+								prose-strong:font-black prose-strong:text-black
+								prose-code:font-mono prose-code:bg-yellow-300 prose-code:text-black prose-code:px-2 prose-code:py-1 prose-code:border prose-code:border-black prose-code:rounded-none prose-code:before:content-none prose-code:after:content-none
+								prose-pre:bg-black prose-pre:text-green-400 prose-pre:border-4 prose-pre:border-black prose-pre:p-6 prose-pre:font-mono
+								prose-blockquote:border-l-4 prose-blockquote:border-red-500 prose-blockquote:bg-gray-100 prose-blockquote:p-4 prose-blockquote:font-mono prose-blockquote:text-black prose-blockquote:italic-0
+								prose-ul:font-mono prose-ul:text-black
+								prose-li:text-black prose-li:font-mono
+								prose-a:text-red-500 prose-a:font-mono prose-a:font-black prose-a:no-underline hover:prose-a:underline hover:prose-a:decoration-4 prose-a:transition-all
+								prose-hr:border-4 prose-hr:border-black prose-hr:my-8
+							">
+								{children}
+							</div>
 						</div>
-					</div>
-
-					{/* Social links with enhanced styling */}
-					<div className="flex space-x-4 pt-6">
-						<SocialIcon kind="mail" href={`mailto:${email}`} />
-						<SocialIcon kind="github" href={github} />
-						<SocialIcon kind="linkedin" href={linkedin} />
-						<SocialIcon kind="x" href={twitter} />
-						<SocialIcon kind="bluesky" href={bluesky} />
-					</div>
-				</div>
-				<div className="prose prose-invert max-w-none pt-8 pb-8 xl:col-span-2 bg-gradient-to-br from-gray-950 via-gray-950 to-gray-900 border border-orange-500/20 rounded-xl p-8 relative overflow-hidden shadow-2xl shadow-orange-500/10">
-					{/* Enhanced background effects */}
-					<div className="absolute inset-0 bg-gradient-to-br from-orange-900/5 via-transparent to-blue-900/5" />
-					<div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-orange-500/60 via-yellow-400/40 to-orange-500/60 animate-pulse" />
-					<div className="absolute bottom-0 right-0 w-full h-px bg-gradient-to-r from-blue-500/60 via-purple-400/40 to-blue-500/60 animate-pulse delay-1000" />
-
-					{/* Corner decorative elements */}
-					<div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-orange-500/10 to-transparent rounded-bl-full" />
-					<div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-blue-500/10 to-transparent rounded-tr-full" />
-
-					{/* Floating particles */}
-					<div className="absolute inset-0 overflow-hidden pointer-events-none">
-						<div className="absolute top-1/3 left-1/4 w-0.5 h-0.5 bg-orange-400/60 rounded-full animate-ping delay-500" />
-						<div className="absolute top-2/3 right-1/3 w-0.5 h-0.5 bg-blue-400/60 rounded-full animate-ping delay-1500" />
-						<div className="absolute bottom-1/3 left-2/3 w-0.5 h-0.5 bg-green-400/60 rounded-full animate-ping delay-2500" />
-					</div>
-
-					{/* Header */}
-					<div className="relative z-10 font-mono text-xs text-orange-400/80 mb-6 flex items-center space-x-2 bg-gray-950/50 px-4 py-2 rounded border border-orange-500/20">
-						<span className="animate-pulse">&gt;</span>
-						<span>ACCESSING_DATABASE...</span>
-						<div className="flex space-x-1 ml-2">
-							<div className="w-1 h-1 bg-orange-500 rounded-full animate-pulse" />
-							<div className="w-1 h-1 bg-orange-500 rounded-full animate-pulse delay-100" />
-							<div className="w-1 h-1 bg-orange-500 rounded-full animate-pulse delay-200" />
-						</div>
-						<span className="text-green-400 font-bold">[████████████] 100%</span>
-					</div>
-
-					{/* Content area with enhanced styling */}
-					<div className="relative z-10">
-						{children}
-					</div>
-
-					{/* Footer */}
-					<div className="relative z-10 font-mono text-xs text-orange-400/50 mt-8 pt-4 border-t border-orange-500/20 bg-gray-950/30 px-4 py-2 rounded">
-						&gt; END_OF_TRANSMISSION
 					</div>
 				</div>
 			</div>

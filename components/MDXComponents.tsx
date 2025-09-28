@@ -1,6 +1,7 @@
 import Alert from "@/components/markdown/Alert";
 import BadgeGroup, { Badge } from "@/components/markdown/Badges";
 import { Callout } from "@/components/markdown/Callout";
+import CodeBlock from "@/components/markdown/CodeBlock";
 import { Details } from "@/components/markdown/Details";
 import ImageComparison from "@/components/markdown/ImageComparison";
 import ProgressBar from "@/components/markdown/ProgressBar";
@@ -21,7 +22,7 @@ import Image from "./Image";
 import CustomLink from "./Link";
 import TableWrapper from "./TableWrapper";
 
-// Custom pre component that wraps Pliny's Pre with our doom aesthetic
+// Custom pre component that wraps Pliny's Pre with our brutalist aesthetic
 function CustomPre({ children, ...props }: { children?: React.ReactNode;[key: string]: unknown }) {
 	// Check if this is a code block that has been processed by rehype-prism-plus
 	if (React.isValidElement(children) && children.props) {
@@ -34,24 +35,24 @@ function CustomPre({ children, ...props }: { children?: React.ReactNode;[key: st
 			const language = className.replace('language-', '') || 'text';
 
 			return (
-				<div className="my-6 rounded-xl border border-gray-700 bg-gray-950/50 overflow-hidden">
+				<div className="my-6 border-4 border-black bg-white overflow-hidden">
 					{/* Header */}
-					<div className="flex items-center justify-between px-4 py-2 bg-gray-900/50 border-b border-gray-700">
+					<div className="flex items-center justify-between px-4 py-2 bg-black border-b-4 border-black">
 						<div className="flex items-center space-x-3">
 							<div className="flex space-x-1">
-								<div className="w-3 h-3 rounded-full bg-[#ff3860]" />
-								<div className="w-3 h-3 rounded-full bg-yellow-500" />
-								<div className="w-3 h-3 rounded-full bg-[#00ff99]" />
+								<div className="w-3 h-3 border-2 border-white bg-red-500" />
+								<div className="w-3 h-3 border-2 border-white bg-yellow-400" />
+								<div className="w-3 h-3 border-2 border-white bg-green-500" />
 							</div>
-							<span className="font-mono text-xs text-gray-500 uppercase">
+							<span className="font-mono text-xs text-white font-black uppercase">
 								{language}
 							</span>
 						</div>
 					</div>
 
 					{/* Code Content - let Pliny's Pre handle the syntax highlighted content */}
-					<div className="overflow-x-auto">
-						<div className="[&>pre]:bg-transparent [&>pre]:border-0 [&>pre]:rounded-none [&>pre]:mt-0 [&>pre]:mb-0 [&>pre]:p-4">
+					<div className="overflow-x-auto bg-gray-50">
+						<div className="[&>pre]:bg-gray-50 [&>pre]:border-0 [&>pre]:rounded-none [&>pre]:mt-0 [&>pre]:mb-0 [&>pre]:p-6 [&>pre]:font-mono [&>pre]:text-black">
 							<Pre {...props}>
 								{children}
 							</Pre>
@@ -74,7 +75,7 @@ export const components: MDXComponents = {
 	pre: CustomPre,
 	table: TableWrapper,
 	BlogNewsletterForm,
-	// Enhanced MDX components with doom aesthetic
+	// Enhanced MDX components with brutalist aesthetic
 	Callout,
 	Details,
 	Steps,
@@ -84,6 +85,7 @@ export const components: MDXComponents = {
 	Alert,
 	Badge,
 	BadgeGroup,
+	CodeBlock,
 	ImageComparison,
 	ProgressBar,
 	Quote,

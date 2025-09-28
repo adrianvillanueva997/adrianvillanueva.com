@@ -33,27 +33,26 @@ export function Terminal({
 	};
 
 	return (
-		<div className="rounded-lg p-4 my-4 font-mono text-sm relative group bg-black border border-gray-700 shadow-lg shadow-[#00ff99]/10">
-			{/* Terminal Header with Doom Aesthetic */}
-			<div className="flex items-center justify-between mb-3 pb-2 border-b border-gray-700">
+		<div className="border-4 border-black p-4 my-4 font-mono text-sm relative group bg-white">
+			{/* Terminal Header with Brutalist Aesthetic */}
+			<div className="flex items-center justify-between mb-3 pb-2 border-b-4 border-black">
 				<div className="flex items-center space-x-2">
-					<div className="w-3 h-3 rounded-full bg-[#ff3860] animate-pulse" />
-					<div className="w-3 h-3 rounded-full bg-yellow-500" />
-					<div className="w-3 h-3 rounded-full bg-[#00ff99]" />
-					<span className="text-xs font-mono text-[#00ff99] ml-3 font-bold tracking-wider uppercase">
+					<div className="w-3 h-3 bg-red-500" />
+					<div className="w-3 h-3 bg-yellow-500" />
+					<div className="w-3 h-3 bg-green-500" />
+					<span className="text-xs font-mono text-black ml-3 font-black tracking-wider uppercase">
 						SYSTEM_TERMINAL
 					</span>
 				</div>
-				<span className="text-xs text-gray-500 font-mono">[{shell.toUpperCase()}]</span>
+				<span className="text-xs text-black font-mono font-black">[{shell.toUpperCase()}]</span>
 			</div>
 
 			<button
 				type="button"
 				onClick={handleCopy}
-				className="absolute right-4 top-4 p-2 rounded-md
-        opacity-0 group-hover:opacity-100 transition-all duration-300
-        hover:bg-gray-800/50 text-[#00ff99] hover:text-[#ff3860]
-        border border-transparent hover:border-[#00ff99]"
+				className="absolute right-4 top-4 p-2 border-4 border-black bg-white
+        opacity-0 group-hover:opacity-100 transition-all duration-200
+        hover:bg-red-500 hover:text-white text-black"
 				aria-label={copied ? "Copied" : "Copy commands"}
 			>
 				{copied ? (
@@ -66,27 +65,27 @@ export function Terminal({
 			{commands.map((cmd, index) => (
 				<div key={`${cmd.command}-${index}`} className="space-y-1 mb-4">
 					<div className="flex items-start space-x-2">
-						<span className="text-[#ff3860] font-bold">
+						<span className="text-red-600 font-black">
 							{cmd.prompt || `${shellPrompts[shell]} `}
 						</span>
-						<span className={`${cmd.error ? "text-red-400" : "text-gray-100"} font-semibold`}>
+						<span className={`${cmd.error ? "text-red-600" : "text-black"} font-black`}>
 							{cmd.command}
 						</span>
 						{cmd.timing && (
-							<span className="text-gray-500 text-xs ml-2 font-mono">[{cmd.timing}]</span>
+							<span className="text-black text-xs ml-2 font-mono">[{cmd.timing}]</span>
 						)}
 					</div>
 
 					{cmd.loading && (
-						<div className="flex items-center space-x-2 text-[#00ff99]">
+						<div className="flex items-center space-x-2 text-red-600">
 							<LoadingSpinner />
-							<span className="font-mono font-bold tracking-wider uppercase">PROCESSING...</span>
+							<span className="font-mono font-black tracking-wider uppercase">PROCESSING...</span>
 						</div>
 					)}
 
 					{cmd.output && (
 						<div
-							className={`pl-6 ${cmd.error ? "text-red-400" : "text-gray-300"
+							className={`pl-6 ${cmd.error ? "text-red-600" : "text-black"
 								}`}
 						>
 							{cmd.output}
