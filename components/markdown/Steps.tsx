@@ -18,15 +18,13 @@ export function Steps({ children }: { children: React.ReactNode }) {
 					{/* Step number circle */}
 					<div
 						className="absolute -left-[34px] -top-1
-              bg-gray-900 p-1.5 rounded-full
-              ring-2 ring-cyan-800/30 ring-offset-2 ring-offset-gray-900
-              group-hover:ring-cyan-600/50 transition-all duration-200"
+              bg-red-500 p-1.5 border-4 border-black
+              transition-all duration-200"
 					>
 						<div
-							className="w-5 h-5 rounded-full
-                bg-gradient-to-br from-cyan-900/80 to-cyan-800/30
+							className="w-5 h-5 bg-white
                 flex items-center justify-center
-                text-xs font-medium text-cyan-100"
+                text-xs font-black text-black"
 						>
 							{index + 1}
 						</div>

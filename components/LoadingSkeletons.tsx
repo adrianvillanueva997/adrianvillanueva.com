@@ -9,9 +9,9 @@ interface SkeletonProps {
 const Skeleton: React.FC<SkeletonProps> = ({ className = '' }) => {
     return (
         <div
-            className={`animate-pulse bg-gray-700/40 rounded ${className}`}
+            className={`animate-pulse bg-gray-300 ${className}`}
             style={{
-                background: 'linear-gradient(90deg, rgba(55,65,81,0.4) 25%, rgba(75,85,99,0.6) 50%, rgba(55,65,81,0.4) 75%)',
+                background: 'linear-gradient(90deg, rgba(229,231,235,1) 25%, rgba(209,213,219,1) 50%, rgba(229,231,235,1) 75%)',
                 backgroundSize: '200% 100%',
                 animation: 'shimmer 2s infinite linear'
             }}
@@ -21,17 +21,17 @@ const Skeleton: React.FC<SkeletonProps> = ({ className = '' }) => {
 
 export const PostCardSkeleton: React.FC = () => {
     return (
-        <div className="bg-gray-900/40 border border-gray-700/50 rounded-lg p-6 space-y-4">
-            {/* Scan line effect for loading */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#00ff99]/10 to-transparent animate-pulse pointer-events-none" />
+        <div className="bg-white border-4 border-black p-6 space-y-4">
+            {/* Loading indicator */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-red-500/10 to-transparent animate-pulse pointer-events-none" />
 
             {/* Header skeleton */}
             <div className="flex items-center justify-between">
                 <Skeleton className="h-6 w-32" />
                 <div className="flex space-x-1">
-                    <Skeleton className="w-3 h-3 rounded-full" />
-                    <Skeleton className="w-3 h-3 rounded-full" />
-                    <Skeleton className="w-3 h-3 rounded-full" />
+                    <Skeleton className="w-3 h-3" />
+                    <Skeleton className="w-3 h-3" />
+                    <Skeleton className="w-3 h-3" />
                 </div>
             </div>
 
@@ -53,7 +53,7 @@ export const PostCardSkeleton: React.FC = () => {
             </div>
 
             {/* Footer skeleton */}
-            <div className="pt-4 border-t border-gray-700/50 flex items-center justify-between">
+            <div className="pt-4 border-t-4 border-black flex items-center justify-between">
                 <Skeleton className="h-5 w-24" />
                 <Skeleton className="h-5 w-5" />
             </div>
@@ -63,7 +63,7 @@ export const PostCardSkeleton: React.FC = () => {
 
 export const RecentPostSkeleton: React.FC = () => {
     return (
-        <div className="py-3 px-4 flex flex-col sm:flex-row sm:items-center sm:justify-between border border-gray-700/30 rounded space-y-2 sm:space-y-0">
+        <div className="py-3 px-4 flex flex-col sm:flex-row sm:items-center sm:justify-between border-4 border-black bg-white space-y-2 sm:space-y-0">
             <div className="flex flex-col sm:flex-row sm:items-center flex-grow space-y-2 sm:space-y-0">
                 <div className="flex items-center space-x-3 sm:w-40 sm:flex-shrink-0">
                     <Skeleton className="h-4 w-8" />
@@ -108,8 +108,8 @@ export const NowPageSkeleton: React.FC = () => {
             </div>
 
             {/* Content Skeleton */}
-            <div className="bg-black/20 border border-gray-800/30 rounded-lg p-8 shadow-2xl shadow-black/50 mt-8 space-y-6">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#00ff99]/5 to-transparent animate-pulse pointer-events-none" />
+            <div className="bg-white border-4 border-black p-8 mt-8 space-y-6">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-red-200/10 to-transparent animate-pulse pointer-events-none" />
 
                 <Skeleton className="h-8 w-48" />
                 <div className="space-y-3">
@@ -134,11 +134,11 @@ export const NowPageSkeleton: React.FC = () => {
 
                 <Skeleton className="h-8 w-44" />
                 <div className="space-y-4">
-                    <div className="border border-gray-800/50 rounded-lg p-4">
+                    <div className="border-4 border-black bg-white p-4">
                         <Skeleton className="h-6 w-40 mb-2" />
                         <Skeleton className="h-4 w-full" />
                     </div>
-                    <div className="border border-gray-800/50 rounded-lg p-4">
+                    <div className="border-4 border-black bg-white p-4">
                         <Skeleton className="h-6 w-36 mb-2" />
                         <Skeleton className="h-4 w-5/6" />
                     </div>

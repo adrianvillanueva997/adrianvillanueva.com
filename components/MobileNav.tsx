@@ -41,13 +41,13 @@ const MobileNav = () => {
 				type="button"
 				aria-label="Toggle Menu"
 				onClick={onToggleNav}
-				className="group sm:hidden relative p-2 rounded-lg border border-gray-700/50 hover:border-[#00ff99]/60 transition-all duration-300 hover:shadow-sm hover:shadow-[#00ff99]/20"
+				className="group sm:hidden relative p-3 border-4 border-black bg-white hover:bg-red-500 hover:text-white transition-all duration-200"
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 20 20"
 					fill="currentColor"
-					className="relative z-10 h-5 w-5 text-gray-300 group-hover:text-[#00ff99] transition-all duration-300 group-hover:scale-110"
+					className="relative z-10 h-5 w-5 text-black group-hover:text-white transition-colors duration-200"
 					aria-hidden="true"
 				>
 					<path
@@ -57,7 +57,7 @@ const MobileNav = () => {
 					/>
 				</svg>
 				{/* Menu indicator */}
-				<span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 text-xs font-mono text-[#00ff99]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+				<span className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs font-mono text-black font-black uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-200">
 					MENU
 				</span>
 			</button>
@@ -86,32 +86,31 @@ const MobileNav = () => {
 						leaveTo="translate-x-full opacity-0"
 						unmount={false}
 					>
-						<DialogPanel className="fixed top-0 left-0 z-70 h-full w-full bg-gray-950/98 backdrop-blur-sm duration-300 border-r border-[#ff3860]/30">
+						<DialogPanel className="fixed top-0 left-0 z-70 h-full w-full bg-white border-r-4 border-black">
 							<nav
 								ref={navRef}
-								className="mt-16 flex h-full basis-0 flex-col items-start overflow-y-auto pt-4 pl-8 pr-4 text-left"
+								className="mt-16 flex h-full basis-0 flex-col items-start overflow-y-auto pt-8 pl-8 pr-4 text-left"
 							>
 								{headerNavLinks.map((link) => (
 									<Link
 										key={link.title}
 										href={link.href}
-										className="mb-6 py-3 pr-4 text-xl md:text-2xl font-mono font-bold tracking-wide text-gray-100 hover:text-[#00ff99] transition-colors border-b border-gray-800 hover:border-[#00ff99] w-full"
+										className="mb-6 py-4 pr-4 text-2xl md:text-3xl font-mono font-black tracking-tight text-black hover:text-red-500 transition-colors border-b-4 border-black hover:border-red-500 w-full uppercase"
 										onClick={onToggleNav}
 									>
 										{link.title}
 									</Link>
 								))}
 
-								{/* Doom aesthetic elements */}
-								<div className="mt-8 w-full">
-									<div className="text-[#ff3860] font-mono text-xs tracking-wider mb-2">VOID_MODE</div>
-									<div className="text-gray-500 font-mono text-xs">SYSTEM_ONLINE</div>
+								{/* Simple status indicator */}
+								<div className="mt-8 w-full border-t-2 border-black pt-4">
+									<div className="text-black font-mono text-sm font-bold uppercase">Menu</div>
 								</div>
 							</nav>
 
 							<button
 								type="button"
-								className="fixed top-4 right-4 z-80 h-12 w-12 p-2 text-gray-100 hover:text-[#ff3860] bg-gray-800/80 hover:bg-gray-700/80 rounded-lg transition-colors"
+								className="fixed top-4 right-4 z-80 h-12 w-12 p-2 text-black hover:text-white bg-white hover:bg-red-500 border-4 border-black transition-colors"
 								aria-label="Close Menu"
 								onClick={onToggleNav}
 							>

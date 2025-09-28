@@ -50,7 +50,7 @@ export default function ParticleField() {
             ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
         };
 
-        const colors = ["#00ff99", "#ff3860", "#8b5cf6", "#00ffff", "#ff8c00"];
+        const colors = ["#000000", "#ff0000", "#ffff00", "#ffffff"];
 
         const createParticles = () => {
             // Compute count from CSS pixels (not scaled by DPR)
@@ -154,7 +154,7 @@ export default function ParticleField() {
                                 // Fade based on distance; very thin line
                                 const distance = Math.sqrt(dist2);
                                 ctx.globalAlpha = 0.08 * (1 - distance / maxD);
-                                ctx.strokeStyle = "#00ff99";
+                                ctx.strokeStyle = "#ff0000";
                                 ctx.lineWidth = 0.5;
                                 ctx.beginPath();
                                 ctx.moveTo(particle.x, particle.y);

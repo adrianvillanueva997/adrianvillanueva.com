@@ -11,8 +11,8 @@ export default async function BlogPage() {
 	return (
 		<BlogLayout
 			posts={posts}
-			title="NEURAL_ARCHIVE"
-			description="Data streams from the silicon underground. Digital consciousness fragments encoded in neon."
+			title="BLOG"
+			description="Technical writings, thoughts, and documentation."
 		/>
 	);
 }

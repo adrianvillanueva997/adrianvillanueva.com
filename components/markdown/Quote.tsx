@@ -13,28 +13,28 @@ export default function Quote({
 }: QuoteProps) {
     const typeStyles = {
         default: {
-            border: "border-gray-600",
-            accent: "text-gray-400",
-            bg: "bg-gray-950/30",
-            icon: "#6b7280",
+            border: "border-black",
+            accent: "text-black",
+            bg: "bg-white",
+            icon: "#000000",
         },
         warning: {
-            border: "border-yellow-600",
-            accent: "text-yellow-400",
-            bg: "bg-yellow-950/20",
-            icon: "#fbbf24",
+            border: "border-black",
+            accent: "text-yellow-600",
+            bg: "bg-yellow-50",
+            icon: "#d97706",
         },
         success: {
-            border: "border-[#00ff99]",
-            accent: "text-[#00ff99]",
-            bg: "bg-[#00ff99]/10",
-            icon: "#00ff99",
+            border: "border-black",
+            accent: "text-green-600",
+            bg: "bg-green-50",
+            icon: "#059669",
         },
         error: {
-            border: "border-[#ff3860]",
-            accent: "text-[#ff3860]",
-            bg: "bg-[#ff3860]/10",
-            icon: "#ff3860",
+            border: "border-black",
+            accent: "text-red-600",
+            bg: "bg-red-50",
+            icon: "#dc2626",
         },
     };
 
@@ -42,7 +42,7 @@ export default function Quote({
 
     return (
         <div
-            className={`my-6 relative rounded-xl border-l-4 ${style.border} ${style.bg} pl-6 pr-4 py-4 overflow-hidden`}
+            className={`my-6 relative border-4 ${style.border} ${style.bg} pl-6 pr-4 py-4 overflow-hidden`}
         >
             {/* Quote Icon */}
             <svg
@@ -56,14 +56,14 @@ export default function Quote({
 
             {/* Content */}
             <div className="relative z-10">
-                <blockquote className="text-gray-100 font-medium leading-relaxed italic mb-4">
+                <blockquote className="text-black font-mono font-medium leading-relaxed italic mb-4">
                     "{children}"
                 </blockquote>
 
                 {(author || source) && (
-                    <footer className="border-t border-gray-700 pt-3">
-                        <cite className={`font-mono text-sm not-italic ${style.accent}`}>
-                            {author && <span className="font-semibold">{author}</span>}
+                    <footer className="border-t-4 border-black pt-3">
+                        <cite className={`font-mono text-sm not-italic font-black ${style.accent}`}>
+                            {author && <span className="font-black">{author}</span>}
                             {author && source && <span className="mx-2">—</span>}
                             {source && <span>{source}</span>}
                         </cite>

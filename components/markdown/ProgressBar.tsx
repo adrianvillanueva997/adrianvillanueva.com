@@ -19,14 +19,14 @@ export default function ProgressBar({
 
     const colorStyles = {
         red: {
-            bg: "bg-[#ff3860]",
-            gradient: "from-[#ff3860] to-red-400",
-            shadow: "shadow-[#ff3860]/20",
+            bg: "bg-red-500",
+            gradient: "from-red-500 to-red-400",
+            shadow: "shadow-red-500/20",
         },
         green: {
-            bg: "bg-[#00ff99]",
-            gradient: "from-[#00ff99] to-green-400",
-            shadow: "shadow-[#00ff99]/20",
+            bg: "bg-green-500",
+            gradient: "from-green-500 to-green-400",
+            shadow: "shadow-green-500/20",
         },
         blue: {
             bg: "bg-blue-500",
@@ -43,60 +43,32 @@ export default function ProgressBar({
     const style = colorStyles[color];
 
     return (
-        <div className="my-6 p-4 rounded-xl border border-gray-700 bg-gray-950/30">
+        <div className="my-6 p-4 border-4 border-black bg-white">
             {label && (
                 <div className="flex justify-between items-center mb-3">
-                    <span className="font-mono text-sm text-gray-300 font-medium">
+                    <span className="font-mono text-sm text-black font-black">
                         {label}
                     </span>
                     {showPercentage && (
-                        <span className="font-mono text-sm text-gray-400 font-bold">
+                        <span className="font-mono text-sm text-black font-black">
                             {percentage.toFixed(1)}%
                         </span>
                     )}
                 </div>
             )}
 
-            <div className="relative w-full h-3 bg-gray-800 rounded-full overflow-hidden">
-                {/* Background glow */}
-                <div className="absolute inset-0 bg-gradient-to-r from-gray-800 to-gray-700 rounded-full" />
-
+            <div className="relative w-full h-3 bg-gray-200 border-4 border-black overflow-hidden">
                 {/* Progress bar */}
                 <div
-                    className={`relative h-full bg-gradient-to-r ${style.gradient} rounded-full transition-all duration-1000 ease-out ${animated ? "animate-pulse" : ""
-                        } shadow-lg ${style.shadow}`}
+                    className={`relative h-full ${style} transition-all duration-1000 ease-out`}
                     style={{ width: `${percentage}%` }}
-                >
-                    {/* Shine effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent rounded-full" />
-
-                    {/* Animated stripe effect */}
-                    {animated && (
-                        <div
-                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent rounded-full animate-ping"
-                            style={{
-                                backgroundSize: "30px 30px",
-                                backgroundImage:
-                                    "linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.1) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.1) 75%)",
-                                animation: "move 2s linear infinite",
-                            }}
-                        />
-                    )}
-                </div>
-
-                {/* Value indicator */}
-                {percentage > 0 && (
-                    <div
-                        className="absolute top-0 h-full w-px bg-white/50 z-10 transition-all duration-1000"
-                        style={{ left: `${percentage}%` }}
-                    />
-                )}
+                />
             </div>
 
             {/* Value display */}
-            <div className="flex justify-between items-center mt-2 text-xs font-mono text-gray-500">
+            <div className="flex justify-between items-center mt-2 text-xs font-mono text-black">
                 <span>0</span>
-                <span className="font-bold text-gray-300">
+                <span className="font-black text-black">
                     {value} / {max}
                 </span>
                 <span>{max}</span>

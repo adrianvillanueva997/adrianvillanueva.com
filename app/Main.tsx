@@ -1,7 +1,5 @@
 import Link from "@/components/Link";
-import ParticleField from "@/components/ParticleField";
 import Skills from "@/components/Skills";
-import TypewriterText from "@/components/TypewriterText";
 import siteMetadata from "@/data/siteMetadata";
 import { getResumeData } from "@/utils/resumeData";
 import Image from "next/image";
@@ -17,103 +15,57 @@ export default function Home({ posts }) {
 
 	return (
 		<>
-			{/* Hero Section with Doom/Synthwave Aesthetic - Responsive */}
-			<section className="cyber-doom-hero relative overflow-hidden mb-12 md:mb-20 px-4 sm:px-6 md:px-10 py-8 md:py-12 lg:py-16 bg-gray-950">
-				{/* Particle Field Background */}
-				<ParticleField />
-
-				{/* Synthwave Grid Background */}
-				<div className="synthwave-grid absolute inset-0 opacity-20">
-					<div className="absolute inset-0" style={{
-						backgroundImage: `
-							linear-gradient(rgba(0, 255, 153, 0.1) 1px, transparent 1px),
-							linear-gradient(90deg, rgba(0, 255, 153, 0.1) 1px, transparent 1px)
-						`,
-						backgroundSize: '40px 40px'
-					}} />
+			{/* Hero Section with Brutalist Aesthetic */}
+			<section className="relative overflow-hidden mb-16 md:mb-24 brutalist-section bg-white">
+				{/* Enhanced geometric shapes background */}
+				<div className="absolute inset-0 opacity-8">
+					<div className="absolute top-10 left-10 w-24 h-24 bg-black rotate-12" />
+					<div className="absolute top-40 right-20 w-40 h-6 bg-red-500 -rotate-3" />
+					<div className="absolute bottom-20 left-1/3 w-20 h-20 bg-black rotate-45" />
+					<div className="absolute top-1/2 right-1/4 w-8 h-32 bg-red-500 rotate-12" />
 				</div>
 
-				{/* Animated Scan Lines */}
-				<div className="absolute top-0 left-0 w-px h-full bg-gradient-to-b from-transparent via-[#00ff99] to-transparent animate-pulse" />
-				<div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-[#ff3860] to-transparent animate-pulse delay-500" />
-				<div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#00ff99] to-transparent animate-pulse delay-1000" />
-				<div className="absolute bottom-0 right-0 w-full h-px bg-gradient-to-r from-transparent via-[#ff3860] to-transparent animate-pulse delay-1500" />
-
-				<div className="relative z-10 grid lg:grid-cols-5 gap-6 md:gap-8 lg:gap-10 items-center">
-					<div className="lg:col-span-3 space-y-4 md:space-y-6 text-center lg:text-left">
-						{/* Terminal Header */}
-						<div className="font-mono text-sm text-gray-500 mb-4 opacity-0 animate-[fadeIn_1s_ease-in_0.5s_forwards]">
-							<span className="text-[#00ff99]">❯</span> initializing_profile.sh...
-							<div className="inline-block ml-2 w-2 h-4 bg-[#00ff99] animate-pulse" />
-						</div>
-
-						<h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold tracking-tight leading-tight">
-							<TypewriterText
-								text="Adrian Villanueva Martinez"
-								className="text-[#ff3860] drop-shadow-lg"
-								speed={80}
-								delay={1500}
-							/>
+				<div className="relative z-10 grid lg:grid-cols-5 gap-8 md:gap-12 lg:gap-16 items-center">
+					<div className="lg:col-span-3 space-y-6 md:space-y-8 text-center lg:text-left">
+						<h1 className="brutalist-heading-xl text-black">
+							Adrian Villanueva Martinez
 						</h1>
 
-						{/* Animated subtitle */}
-						<div className="font-mono text-lg text-[#00ff99] opacity-0 animate-[fadeIn_1s_ease-in_3s_forwards]">
-							&gt; SOFTWARE_ENGINEER.sh loaded successfully
+						<div className="font-mono text-xl md:text-2xl brutalist-text-accent font-black uppercase tracking-wide border-l-4 border-red-500 pl-4">
+							Software Engineer
 						</div>
-						<p className="text-base sm:text-lg md:text-xl text-gray-300 font-mono max-w-2xl mx-auto lg:mx-0">
-							<span className="text-neon-cyan">Engineer of systems</span>, structure and sound.
+
+						<p className="text-lg sm:text-xl md:text-2xl text-gray-800 font-sans max-w-3xl mx-auto lg:mx-0 leading-relaxed">
+							<span className="text-black font-bold">Engineer of systems</span>, structure and sound.
 							<br className="hidden sm:block" />
-							I build <span className="text-primary-400">resilient, high-performance</span> data systems using Python, Rust, and cloud infrastructure, with the same <span className="text-neon-purple">obsession</span> I bring to crafting synthwave and doom metal.
+							I build <span className="brutalist-text-accent font-bold">resilient, high-performance</span> data systems using Python, Rust, and cloud infrastructure, with the same <span className="text-black font-bold">obsession</span> I bring to crafting synthwave and doom metal.
 							<br className="hidden sm:block" />
-							<span className="text-neon-yellow font-bold">
+							<span className="text-black font-bold uppercase text-base">
 								Born in {resumeData.personal.nationality}, living in {resumeData.personal.location}.
 							</span>
 						</p>
-						<div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 justify-center lg:justify-start">
-							<Link
-								href="/about"
-								className="inline-flex items-center justify-center px-4 sm:px-5 py-2.5 border border-primary-500 text-sm sm:text-base font-medium rounded-md shadow-sm text-primary-400 bg-gray-900 hover:bg-primary-900 hover:text-primary-300 transition-all duration-300 doom-glow"
-							>
-								<span className="font-doom">Initialize_Profile</span>
-							</Link>
 
-							<Link
-								href="/projects"
-								className="inline-flex items-center justify-center px-4 sm:px-5 py-2.5 border border-neon-cyan text-sm sm:text-base font-medium rounded-md text-neon-cyan bg-gray-900 hover:bg-gray-800 hover:synthwave-glow transition-all duration-300"
-							>
-								<span className="font-doom">Load_Projects</span>
+						<div className="flex flex-col sm:flex-row gap-4 sm:gap-6 pt-6 justify-center lg:justify-start">
+							<Link href="/about" className="brutalist-button">
+								About Me
+							</Link>
+							<Link href="/projects" className="brutalist-button">
+								View Projects
 							</Link>
 						</div>
 					</div>
+
 					<div className="lg:col-span-2 flex justify-center order-first lg:order-last">
 						<div className="relative group">
-							{/* Outer glowing ring */}
-							<div className="w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 lg:w-72 lg:h-72 rounded-full absolute -inset-2 bg-gradient-to-r from-primary-500 via-neon-cyan to-primary-500 opacity-75 group-hover:opacity-100 blur-sm group-hover:blur transition-all duration-500 animate-doom-pulse" />
-
-							{/* Middle ring */}
-							<div className="w-34 h-34 sm:w-42 sm:h-42 md:w-50 md:h-50 lg:w-70 lg:h-70 rounded-full absolute -inset-1 bg-gradient-to-r from-neon-purple via-primary-400 to-neon-cyan opacity-50 group-hover:opacity-75 transition-all duration-300" />
-
-							{/* Photo container */}
-							<div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-68 lg:h-68 relative overflow-hidden rounded-full border-2 border-gray-900 shadow-2xl group-hover:shadow-primary-500/50 transition-all duration-300">
+							<div className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-80 lg:h-80 relative overflow-hidden brutalist-box">
 								<Image
 									src="/static/images/me/me.jpeg"
 									alt="Profile"
-									className="object-cover grayscale contrast-125 brightness-90 group-hover:grayscale-0 group-hover:contrast-100 group-hover:brightness-100 transition-all duration-500 tzeentchian-photo"
+									className="object-cover filter grayscale hover:grayscale-0 transition-all duration-300"
 									fill
-									sizes="(max-width: 768px) 192px, 272px"
+									sizes="(max-width: 768px) 240px, 320px"
 								/>
-
-								{/* Cyberpunk overlay effect */}
-								<div className="absolute inset-0 bg-gradient-to-br from-primary-900/30 via-transparent to-neon-cyan/20 group-hover:from-primary-500/20 group-hover:to-neon-purple/30 transition-all duration-500" />
-
-								{/* Scan line effect */}
-								<div className="absolute top-0 left-0 w-full h-0.5 bg-neon-cyan opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-all duration-300" />
-								<div className="absolute bottom-0 left-0 w-full h-0.5 bg-primary-500 opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-all duration-300 delay-150" />
 							</div>
-
-							{/* Hexagonal accent corners */}
-							<div className="absolute top-2 right-2 w-3 h-3 bg-neon-cyan rotate-45 opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
-							<div className="absolute bottom-2 left-2 w-3 h-3 bg-primary-500 rotate-45 opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
 						</div>
 					</div>
 				</div>
@@ -121,139 +73,94 @@ export default function Home({ posts }) {
 
 			{/* Featured Work Section */}
 			{featuredPosts.length > 0 && (
-				<section className="relative mb-8 md:mb-16 overflow-hidden">
-					{/* Section header with program loading styling */}
-					<div className="flex items-center mb-6">
-						<div className="font-mono text-sm text-[#00ff99] mr-4">
-							<span className="animate-pulse">▶</span> featured_work.sh
-						</div>
-						<h2 className="text-2xl md:text-3xl font-heading font-bold text-[#ff3860] uppercase tracking-wide">
-							Featured_Work
+				<section className="relative mb-16 md:mb-24 overflow-hidden brutalist-section">
+					<div className="flex items-center mb-8 md:mb-12">
+						<h2 className="brutalist-heading-lg text-black border-b-4 border-red-500 pb-3">
+							Featured Work
 						</h2>
-						<div className="flex-1 ml-4 h-px bg-gradient-to-r from-[#ff3860] to-transparent" />
 					</div>
 
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-						{featuredPosts.map(({ slug, date, title, summary, tags }, index) => (
+					<div className="brutalist-grid">
+						{featuredPosts.map(({ slug, date, title, summary, tags }) => (
 							<Link key={slug} href={`/blog/${slug}`} className="group">
-								<div className="relative h-full p-6 bg-gray-900/80 backdrop-blur-sm border border-gray-700/60 rounded-lg shadow-xl hover:shadow-2xl hover:shadow-[#ff3860]/20 transition-all duration-500 hover:border-[#ff3860]/60 hover:-translate-y-2">
-									{/* Program header */}
-									<div className="flex items-center justify-between mb-3 font-mono text-xs">
-										<div className="flex items-center">
-											<span className="text-[#00ff99] mr-2">▶</span>
-											<span className="text-gray-500">project_{index + 1}.exe</span>
-										</div>
-										<div className="flex space-x-1">
-											<div className="w-2 h-2 rounded-full bg-[#ff3860] animate-pulse" />
-											<div className="w-2 h-2 rounded-full bg-[#ffff00] animate-pulse delay-150" />
-											<div className="w-2 h-2 rounded-full bg-[#00ff99] animate-pulse delay-300" />
-										</div>
-									</div>
-
-									{/* Scan line effect */}
-									<div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-[#ff3860] to-transparent opacity-0 group-hover:opacity-100 animate-pulse transition-opacity duration-300" />
-
+								<article className="brutalist-card h-full">
 									<div className="flex flex-col h-full">
-										<time dateTime={date} className="text-xs font-mono text-[#00ff99]/80 mb-2 block">
+										<time dateTime={date} className="text-sm font-mono text-gray-600 mb-6 block uppercase font-bold tracking-wide">
 											{formatDate(date, siteMetadata.locale)}
 										</time>
-										<h3 className="text-xl md:text-2xl font-mono font-bold text-[#ff3860] mb-3 group-hover:text-[#00ff99] transition-colors duration-300 uppercase tracking-wide">
+										<h3 className="text-base md:text-lg font-heading font-black text-black mb-4 uppercase tracking-normal leading-relaxed">
 											{title}
 										</h3>
 
-										{/* Tags with enhanced styling */}
-										<div className="flex flex-wrap gap-2 mb-4">
+										{/* Enhanced tags with better spacing */}
+										<div className="flex flex-wrap gap-3 mb-6">
 											{tags.map((tag) => (
 												<span
 													key={tag}
-													className="px-2 py-1 text-xs font-mono bg-gray-800/60 text-[#00ff99] border border-[#00ff99]/30 rounded font-bold uppercase tracking-wider hover:bg-[#00ff99]/10 hover:border-[#00ff99] transition-all duration-200"
+													className="px-3 py-2 text-sm font-mono bg-white text-black border-2 border-black font-bold uppercase tracking-wider hover:bg-red-500 hover:text-white transition-colors duration-150"
 												>
 													#{tag}
 												</span>
 											))}
 										</div>
 
-										<p className="text-sm md:text-base text-gray-400 leading-relaxed flex-grow mb-4 group-hover:text-gray-300 transition-colors duration-300">
+										<p className="text-base md:text-lg text-gray-800 leading-relaxed flex-grow mb-6 font-sans">
 											{summary}
 										</p>
 
-										{/* Enhanced call-to-action */}
-										<div className="mt-auto pt-4 border-t border-gray-700/50 group-hover:border-[#ff3860]/30 transition-colors duration-300">
+										<div className="mt-auto pt-6 border-t-3 border-black">
 											<div className="flex items-center justify-between">
-												<span className="font-mono text-sm font-bold text-[#00ff99] uppercase tracking-wider group-hover:text-[#ff3860] transition-colors duration-300">
-													▶ Run_Program
+												<span className="font-mono text-base font-black text-black uppercase tracking-wider">
+													Read Article
 												</span>
 												<svg
-													className="w-5 h-5 text-[#00ff99] group-hover:text-[#ff3860] group-hover:translate-x-1 transition-all duration-300"
+													className="w-6 h-6 text-black group-hover:text-red-500 transition-colors duration-150"
 													fill="none"
 													stroke="currentColor"
 													viewBox="0 0 24 24"
-													role="img"
-													aria-label="Arrow right"
+													aria-hidden="true"
 												>
-													<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+													<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" />
 												</svg>
 											</div>
 										</div>
 									</div>
-								</div>
+								</article>
 							</Link>
 						))}
 					</div>
 				</section>
 			)}
 
-			{/* Recent Posts Section with Program Loading */}
-			<section className="mb-8 md:mb-16">
-				<div className="bg-gray-900/30 border border-gray-700/50 rounded-lg p-6">
-					{/* Program Loading Header */}
-					<div className="flex items-center space-x-2 pb-4 mb-6 border-b border-[#00ff99]/20">
-						<span className="font-mono text-[#00ff99] font-bold text-lg">▶</span>
-						<span className="font-mono text-gray-300 text-lg">Running blog_reader.sh</span>
-						<div className="flex space-x-1 ml-auto">
-							<div className="w-3 h-3 rounded-full bg-[#00ff99] animate-pulse" />
-							<div className="w-3 h-3 rounded-full bg-[#ffaa00] opacity-60" />
-							<div className="w-3 h-3 rounded-full bg-[#ff3860] opacity-40" />
-						</div>
+			{/* Recent Posts Section */}
+			<section className="mb-8 md:mb-16 px-4 sm:px-6 md:px-10">
+				<div className="brutalist-box p-8">
+					<div className="flex items-center space-x-4 pb-6 mb-8 border-b-4 border-black">
+						<h2 className="brutalist-heading-lg text-black uppercase">Recent Posts</h2>
 					</div>
 
-					<div className="space-y-3">
+					<div className="space-y-4">
 						{!regularPosts.length && (
-							<div className="bg-gray-800/60 border border-[#ff3860]/30 rounded p-4">
-								<p className="text-[#ff3860] font-mono text-center">ERROR: blog_reader.exe crashed - No posts loaded</p>
+							<div className="brutalist-box-red p-6">
+								<p className="text-white font-mono text-center uppercase font-bold text-lg">No posts found</p>
 							</div>
 						)}
 
 						{regularPosts.map(({ slug, date, title }, index) => (
 							<Link key={slug} href={`/blog/${slug}`}>
-								<article className="group py-3 px-4 flex flex-col sm:flex-row sm:items-center sm:justify-between border border-gray-700/30 rounded hover:border-[#00ff99]/50 hover:bg-gray-800/40 transition-all duration-300 font-mono">
-									<div className="flex flex-col sm:flex-row sm:items-center flex-grow">
-										<div className="flex items-center space-x-3 sm:w-32 sm:flex-shrink-0 mb-2 sm:mb-0">
-											<span className="text-[#00ff99]/60 text-xs font-bold">
-												#{String(index + 1).padStart(2, '0')}
-											</span>
-											<time dateTime={date} className="text-xs text-[#00ff99]/80 bg-gray-800/60 px-2 py-1 rounded border border-gray-600/50 whitespace-nowrap">
+								<article className="group py-4 px-4 border-2 border-black bg-white hover:bg-red-500 hover:text-white transition-all duration-200">
+									<div className="flex items-center justify-between">
+										<div className="flex-grow">
+											<h3 className="text-base font-black text-black group-hover:text-white uppercase mb-2">
+												{title}
+											</h3>
+											<time dateTime={date} className="text-sm text-gray-600 group-hover:text-white font-mono">
 												{new Date(date).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: '2-digit' })}
 											</time>
 										</div>
-										<h3 className="text-sm md:text-base font-medium sm:flex-grow sm:px-4 text-gray-300 group-hover:text-[#ff3860] transition-colors duration-300 uppercase tracking-wide">
-											{title}
-										</h3>
-									</div>
-									<div className="flex items-center space-x-2 self-end sm:self-center mt-2 sm:mt-0">
-										<span className="text-[#00ff99] font-bold text-sm uppercase tracking-wider group-hover:text-[#ff3860] transition-colors duration-300">
-											Run
-										</span>
-										<svg
-											className="w-4 h-4 text-[#00ff99] group-hover:text-[#ff3860] group-hover:translate-x-1 transition-all duration-300"
-											fill="none"
-											stroke="currentColor"
-											viewBox="0 0 24 24"
-											role="img"
-											aria-label="Arrow right"
-										>
-											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-										</svg>
+										<div className="text-black group-hover:text-white font-bold text-sm ml-4">
+											→
+										</div>
 									</div>
 								</article>
 							</Link>
@@ -263,17 +170,17 @@ export default function Home({ posts }) {
 			</section>
 
 			{/* Skills Section */}
-			<section className="mb-8 md:mb-16">
+			<section className="mb-8 md:mb-16 px-4 sm:px-6 md:px-10">
 				<Skills resumeData={resumeData} />
 			</section>
 
-			{/* Newsletter Section (optional) */}
+			{/* Newsletter Section */}
 			{siteMetadata.newsletter?.provider && (
-				<div className="mt-12 md:mt-20 p-4 md:p-8 bg-[#f1f1f1] dark:bg-[#121212] border border-[#ff3860]">
-					<h2 className="text-xl md:text-2xl font-gothic text-center mb-3 md:mb-4 text-[#ff3860]">
-						Subscribe to my newsletter
+				<div className="mt-12 md:mt-20 mx-4 sm:mx-6 md:mx-10 brutalist-box-red p-10">
+					<h2 className="brutalist-heading-lg text-center mb-4 md:mb-6 text-white uppercase">
+						Subscribe to Newsletter
 					</h2>
-					<p className="text-center mb-4 md:mb-6 text-sm md:text-base text-gray-600 dark:text-gray-400">
+					<p className="text-center mb-6 md:mb-8 text-base md:text-lg text-white font-mono font-bold uppercase tracking-wide">
 						Get notified when I publish new content. No spam, ever.
 					</p>
 					<div className="max-w-md mx-auto">

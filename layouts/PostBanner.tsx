@@ -1,3 +1,5 @@
+"use client";
+
 import Comments from "@/components/Comments";
 import Image from "@/components/Image";
 import Link from "@/components/Link";

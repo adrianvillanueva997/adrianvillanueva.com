@@ -25,9 +25,9 @@ export default function Tabs({ items, defaultTab }: TabsProps) {
 						key={item.id}
 						type="button"
 						onClick={() => setActiveTab(item.id)}
-						className={`px-6 py-4 font-mono text-sm font-medium uppercase tracking-wide transition-all duration-300 whitespace-nowrap border-b-2 ${activeTab === item.id
-								? "border-[#00ff99] text-[#00ff99] bg-gray-800/50"
-								: "border-transparent text-gray-400 hover:text-gray-200 hover:border-gray-600"
+						className={`px-6 py-4 font-mono text-sm font-black uppercase tracking-wide transition-all duration-200 whitespace-nowrap border-b-4 ${activeTab === item.id
+							? "border-black text-black bg-white"
+							: "border-transparent text-black hover:text-red-500 hover:border-red-500"
 							}`}
 					>
 						{item.title}
@@ -41,8 +41,8 @@ export default function Tabs({ items, defaultTab }: TabsProps) {
 					<div
 						key={item.id}
 						className={`transition-all duration-300 ${activeTab === item.id
-								? "block opacity-100"
-								: "hidden opacity-0"
+							? "block opacity-100"
+							: "hidden opacity-0"
 							}`}
 					>
 						{item.content}
