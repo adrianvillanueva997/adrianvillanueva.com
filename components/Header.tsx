@@ -7,27 +7,28 @@ import ThemeSwitch from "./ThemeSwitch";
 
 const Header = () => {
 	const headerClass =
-		"sticky top-0 z-50 flex items-center w-full bg-white justify-between px-4 sm:px-6 py-3 sm:py-4 md:py-5 lg:py-6 brutalist-header";
+		"sticky top-0 z-50 flex items-center w-full bg-white justify-between px-4 sm:px-6 py-4 md:py-5 border-b-4 border-black";
 
 	return (
 		<header className={headerClass}>
 			<Link href="/" aria-label="Adrian Villanueva Martinez - Software Engineer">
 				<div className="flex items-center group">
-					<div className="relative mr-3 p-1.5 brutalist-box">
+					<div className="relative mr-6">
 						<Image
 							src="/logo.png"
 							alt="AVM Logo"
-							width={36}
-							height={36}
+							width={48}
+							height={48}
 							priority
 							className="brightness-100 contrast-100"
 						/>
+						<div className="absolute -bottom-1 -right-1 w-3 h-3 bg-red-500" />
 					</div>
 					<div className="flex flex-col">
-						<div className="text-lg sm:text-xl md:text-2xl font-heading font-black tracking-tight text-black uppercase">
+						<div className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-black uppercase font-mono">
 							AVM
 						</div>
-						<div className="hidden sm:block text-xs font-mono text-gray-600 uppercase tracking-widest font-bold">
+						<div className="hidden sm:block text-xs font-mono text-black uppercase tracking-widest font-bold border-l-4 border-red-500 pl-2">
 							SOFTWARE ENGINEER
 						</div>
 					</div>

@@ -102,10 +102,9 @@ const MobileNav = () => {
 									</Link>
 								))}
 
-								{/* Doom aesthetic elements */}
-								<div className="mt-8 w-full">
-									<div className="text-[#ff3860] font-mono text-xs tracking-wider mb-2">VOID_MODE</div>
-									<div className="text-gray-500 font-mono text-xs">SYSTEM_ONLINE</div>
+								{/* Simple status indicator */}
+								<div className="mt-8 w-full border-t-2 border-black pt-4">
+									<div className="text-black font-mono text-sm font-bold uppercase">Menu</div>
 								</div>
 							</nav>
 
