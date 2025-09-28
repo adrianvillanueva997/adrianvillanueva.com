@@ -15,77 +15,111 @@ export default function NowPage() {
 
     if (!now) {
         return (
-            <div className="flex flex-col items-center justify-center min-h-[40vh] text-center space-y-6">
-                <div className="font-mono text-sm text-gray-500 mb-4">
-                    <span className="text-orange-400">▲</span> CONTENT_ERROR <span className="text-orange-400">▲</span>
-                </div>
-                <h1 className="text-2xl font-gothic font-bold text-[#ff3860] uppercase tracking-wider">
-                    NOW_PAGE_NOT_FOUND
-                </h1>
-                <div className="bg-black/60 border border-gray-800/50 rounded-lg p-6">
-                    <p className="text-gray-300 font-mono text-sm">
-                        <span className="text-[#00ff99]">[SYSTEM]</span> No MDX content found for the now page.
-                    </p>
-                    <p className="text-gray-400 font-mono text-xs mt-2">
-                        Please create a file at <code>/data/now/now.mdx</code>
-                    </p>
-                </div>
+            <div className="bg-white min-h-screen">
+                <section className="px-4 sm:px-6 md:px-10 bg-white py-16 border-b-4 border-black">
+                    <div className="text-center max-w-3xl mx-auto">
+                        <h1 className="text-5xl md:text-7xl font-black font-mono text-black uppercase mb-8">
+                            ERROR
+                        </h1>
+                        <div className="border-4 border-black bg-red-500 p-8">
+                            <p className="text-xl font-mono text-white font-black uppercase">
+                                NOW PAGE NOT FOUND
+                            </p>
+                            <p className="text-sm font-mono text-white mt-4">
+                                Create /data/now/now.mdx
+                            </p>
+                        </div>
+                    </div>
+                </section>
             </div>
         )
     }
 
     if (!now.body?.code) {
         return (
-            <div className="flex flex-col items-center justify-center min-h-[40vh] text-center space-y-6">
-                <div className="font-mono text-sm text-gray-500 mb-4">
-                    <span className="text-orange-400">▲</span> CONTENT_ERROR <span className="text-orange-400">▲</span>
-                </div>
-                <h1 className="text-2xl font-gothic font-bold text-[#ff3860] uppercase tracking-wider">
-                    CONTENT_COMPILATION_FAILED
-                </h1>
-                <div className="bg-black/60 border border-gray-800/50 rounded-lg p-6">
-                    <p className="text-gray-300 font-mono text-sm">
-                        <span className="text-[#00ff99]">[SYSTEM]</span> MDX content could not be compiled.
-                    </p>
-                </div>
+            <div className="bg-white min-h-screen">
+                <section className="px-4 sm:px-6 md:px-10 bg-white py-16 border-b-4 border-black">
+                    <div className="text-center max-w-3xl mx-auto">
+                        <h1 className="text-5xl md:text-7xl font-black font-mono text-black uppercase mb-8">
+                            ERROR
+                        </h1>
+                        <div className="border-4 border-black bg-red-500 p-8">
+                            <p className="text-xl font-mono text-white font-black uppercase">
+                                CONTENT COMPILATION FAILED
+                            </p>
+                        </div>
+                    </div>
+                </section>
             </div>
         )
     }
 
     return (
-        <>
-            <div className="divide-y divide-gray-800/50">
-                <section className="relative overflow-hidden pb-8 pt-6 md:space-y-5">
-                    {/* Cyber-Doom background effects */}
-                    <div className="absolute inset-0 synthwave-grid opacity-5" />
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
-
-                    <div className="relative z-10 space-y-6 text-center">
-                        {/* Terminal indicator */}
-                        <div className="font-mono text-xs text-gray-500 mb-4 font-bold">
-                            <span className="text-orange-400">▲</span> CURRENT_STATUS_PROTOCOL <span className="text-orange-400">▲</span>
-                        </div>
-
-                        <h1 className="text-3xl font-gothic font-extrabold leading-9 tracking-tight text-[#ff3860] sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-                            {now.title}
-                        </h1>
-                        <p className="text-lg leading-7 text-gray-300 font-mono">
-                            <span className="text-[#00ff99]">[SYSTEM]</span> Real-time consciousness stream...
+        <div className="bg-white min-h-screen">
+            {/* Header */}
+            <section className="px-4 sm:px-6 md:px-10 bg-white py-16 border-b-4 border-black">
+                <div className="text-center max-w-5xl mx-auto">
+                    <h1 className="text-5xl md:text-7xl font-black font-mono text-black uppercase mb-8">
+                        NOW
+                    </h1>
+                    <div className="border-4 border-black bg-white p-8 max-w-3xl mx-auto mb-8">
+                        <p className="text-xl font-mono text-black leading-relaxed font-medium">
+                            What I'm focused on right now. Updated regularly.
                         </p>
+                    </div>
 
-                        {/* Last updated */}
-                        <div className="text-sm font-mono text-orange-400 bg-black/60 border border-orange-400/30 px-4 py-2 rounded shadow-lg shadow-orange-400/10 inline-block">
-                            <span className="text-gray-400">◉ LAST_SYNC:</span>
-                            <span className="ml-2">{formatDate(now.lastUpdated, siteMetadata.locale)}</span>
+                    {/* Last Updated Badge */}
+                    <div className="inline-block border-4 border-black bg-yellow-300 px-6 py-3">
+                        <p className="text-sm font-mono text-black font-black uppercase">
+                            LAST UPDATED: {formatDate(now.lastUpdated, siteMetadata.locale)}
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            {/* Content */}
+            <div className="px-4 sm:px-6 md:px-10 bg-gray-50 py-16">
+                <div className="max-w-4xl mx-auto">
+                    <div className="border-4 border-black bg-white">
+                        {/* MDX Content with Brutalist Styling */}
+                        <div className="p-8 md:p-12">
+                            <div className="prose prose-black max-w-none
+                                prose-headings:font-mono prose-headings:font-black prose-headings:text-black prose-headings:uppercase prose-headings:border-b-2 prose-headings:border-black prose-headings:pb-2 prose-headings:mb-6
+                                prose-h2:text-2xl prose-h2:mt-12 prose-h2:first:mt-0
+                                prose-h3:text-xl prose-h3:mt-8
+                                prose-p:font-mono prose-p:text-black prose-p:leading-relaxed prose-p:text-base
+                                prose-strong:font-black prose-strong:text-black prose-strong:bg-yellow-300 prose-strong:px-1
+                                prose-code:font-mono prose-code:bg-gray-200 prose-code:border prose-code:border-black prose-code:px-2 prose-code:py-1 prose-code:text-black prose-code:font-black
+                                prose-ul:font-mono prose-ul:text-black
+                                prose-li:mb-2
+                                prose-blockquote:border-l-4 prose-blockquote:border-black prose-blockquote:bg-gray-100 prose-blockquote:font-mono prose-blockquote:italic prose-blockquote:pl-6 prose-blockquote:py-4
+                                prose-a:text-black prose-a:underline prose-a:decoration-4 prose-a:decoration-red-500 prose-a:font-black hover:prose-a:bg-red-500 hover:prose-a:text-white prose-a:transition-all prose-a:duration-300"
+                            >
+                                <MDXLayoutRenderer code={now.body.code} />
+                            </div>
                         </div>
                     </div>
-                </section>
-            </div>
 
-            {/* MDX Content */}
-            <div className="prose prose-invert max-w-none py-8 bg-black/20 border border-gray-800/30 rounded-lg p-8 shadow-2xl shadow-black/50 mt-8">
-                <MDXLayoutRenderer code={now.body.code} />
+                    {/* Now Page Movement Info */}
+                    <div className="mt-12 border-4 border-black bg-gray-100 p-6">
+                        <h3 className="text-lg font-mono font-black text-black uppercase mb-4 border-b-2 border-black pb-2">
+                            ABOUT NOW PAGES
+                        </h3>
+                        <p className="font-mono text-black text-sm leading-relaxed">
+                            This follows the{' '}
+                            <a
+                                href="https://nownownow.com/about"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-black underline decoration-4 decoration-red-500 font-black hover:bg-red-500 hover:text-white transition-all duration-300"
+                            >
+                                now page movement
+                            </a>
+                            {' '}— a simple way to share what I'm focused on at this point in my life.
+                        </p>
+                    </div>
+                </div>
             </div>
-        </>
+        </div>
     )
 }
