@@ -2,6 +2,7 @@ import Link from "@/components/Link";
 import Skills from "@/components/Skills";
 import { getResumeData } from "@/utils/resumeData";
 import { genPageMetadata } from "app/seo";
+import { FaDownload, FaEnvelope, FaFlag, FaMapMarkerAlt } from "react-icons/fa";
 
 export const metadata = genPageMetadata({ title: "Resume" });
 
@@ -9,213 +10,211 @@ export default function ResumePage() {
 	const resumeData = getResumeData();
 
 	return (
-		<>
-			{/* Header Section - Doom Style */}
-			<div className="divide-y divide-gray-700">
-				<section className="relative overflow-hidden pb-8 pt-6 md:space-y-5">
-					<div className="absolute inset-0 synthwave-grid opacity-10" />
-					<div className="relative z-10 space-y-2">
-						<h1 className="text-3xl font-gothic font-extrabold leading-9 tracking-tight text-[#ff3860] sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-							RESUME_DATA
-						</h1>
-						<p className="text-lg leading-7 text-gray-300 font-mono">
-							<span className="text-[#00ff99]">[SYSTEM]</span> Professional background and qualifications archive
+		<div className="bg-white min-h-screen">
+			{/* Header */}
+			<section className="px-4 sm:px-6 md:px-10 bg-white py-16 border-b-4 border-black">
+				<div className="text-center max-w-5xl mx-auto">
+					<h1 className="text-5xl md:text-7xl font-black font-mono text-black uppercase mb-8">
+						RESUME
+					</h1>
+					<div className="border-4 border-black bg-white p-8 max-w-3xl mx-auto">
+						<p className="text-xl font-mono text-black leading-relaxed font-medium">
+							Professional background and qualifications.
 						</p>
 					</div>
-				</section>
-			</div>
-
-			{/* Personal Info Section */}
-			<div className="mb-8">
-				<h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">
-					{resumeData.personal?.name || "Your Name"}
-				</h2>
-				<p className="text-xl text-[#00ff99] mb-4 font-mono">
-					{resumeData.personal?.title || "Your Title"}
-				</p>
-				<div className="prose dark:prose-dark max-w-none mb-4">
-					<p>{resumeData.personal?.summary || "Your professional summary"}</p>
 				</div>
-				<div className="flex flex-wrap gap-y-2 gap-x-4 text-sm text-gray-600 dark:text-gray-400">
-					{resumeData.personal?.location && (
-						<div className="flex items-center">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								className="h-4 w-4 mr-1"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-								aria-labelledby="location-icon-title"
-							>
-								<title id="location-icon-title">Location</title>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth={2}
-									d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-								/>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth={2}
-									d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-								/>
-							</svg>
-							<span>{resumeData.personal.location}</span>
+			</section>
+
+			{/* Content */}
+			<div className="px-4 sm:px-6 md:px-10 bg-gray-50 py-16">
+				<div className="max-w-5xl mx-auto space-y-12">
+
+					{/* Personal Info */}
+					<div className="border-4 border-black bg-white p-8">
+						<h2 className="text-3xl font-black font-mono text-black uppercase mb-6 border-b-4 border-black pb-4">
+							{resumeData.personal?.name || "YOUR NAME"}
+						</h2>
+						<div className="mb-6">
+							<p className="text-xl font-mono text-red-500 font-black uppercase mb-4">
+								{resumeData.personal?.title || "Your Title"}
+							</p>
+							<p className="font-mono text-black leading-relaxed text-base mb-6">
+								{resumeData.personal?.summary || "Your professional summary"}
+							</p>
+						</div>
+
+						{/* Contact Info */}
+						<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+							{resumeData.personal?.location && (
+								<div className="flex items-center border-2 border-black bg-gray-100 p-3">
+									<FaMapMarkerAlt className="text-black mr-3" />
+									<span className="font-mono text-black font-medium">
+										{resumeData.personal.location}
+									</span>
+								</div>
+							)}
+							{resumeData.personal?.email && (
+								<div className="flex items-center border-2 border-black bg-gray-100 p-3">
+									<FaEnvelope className="text-black mr-3" />
+									<a
+										href={`mailto:${resumeData.personal.email}`}
+										className="font-mono text-black font-medium hover:text-red-500 transition-colors"
+									>
+										{resumeData.personal.email}
+									</a>
+								</div>
+							)}
+							{resumeData.personal?.nationality && (
+								<div className="flex items-center border-2 border-black bg-gray-100 p-3 md:col-span-2">
+									<FaFlag className="text-black mr-3" />
+									<span className="font-mono text-black font-medium">
+										{resumeData.personal.nationality}
+									</span>
+								</div>
+							)}
+						</div>
+					</div>
+
+					{/* PDF Download Button */}
+					<div className="text-center">
+						<Link
+							href="/static/files/resume.pdf"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="inline-flex items-center px-8 py-4 border-4 border-black bg-red-500 text-white font-mono font-black uppercase text-lg hover:bg-black transition-all duration-300"
+						>
+							<FaDownload className="mr-3" />
+							DOWNLOAD PDF
+						</Link>
+					</div>
+
+					{/* Skills Section */}
+					<div className="border-4 border-black bg-white p-8">
+						<h2 className="text-2xl font-black font-mono text-black uppercase mb-6 border-b-4 border-black pb-4">
+							SKILLS & TECHNOLOGIES
+						</h2>
+						<Skills resumeData={resumeData} />
+					</div>
+
+					{/* Experience Section */}
+					{resumeData.experience && resumeData.experience.length > 0 && (
+						<div className="border-4 border-black bg-white p-8">
+							<h2 className="text-2xl font-black font-mono text-black uppercase mb-6 border-b-4 border-black pb-4">
+								PROFESSIONAL EXPERIENCE
+							</h2>
+							<div className="space-y-8">
+								{resumeData.experience.map((exp, index) => (
+									<div
+										key={`exp-${exp.company}-${exp.position}-${index}`}
+										className="border-l-4 border-red-500 pl-6 bg-gray-50 p-6"
+									>
+										<div className="mb-4">
+											<h3 className="text-xl font-mono font-black text-black uppercase mb-2">
+												{exp.position}
+											</h3>
+											<div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-2">
+												<p className="text-lg font-mono text-red-500 font-black">
+													{exp.company}
+												</p>
+												<div className="text-sm font-mono text-black bg-yellow-300 px-3 py-1 border-2 border-black">
+													{exp.startDate} - {exp.endDate || "PRESENT"}
+												</div>
+											</div>
+											<p className="text-sm font-mono text-black">
+												{exp.location}
+											</p>
+										</div>
+										<ul className="space-y-3">
+											{exp.highlights?.map((highlight, i) => (
+												<li
+													key={`highlight-${exp.company}-${i}-${highlight.slice(0, 20)}`}
+													className="flex items-start"
+												>
+													<span className="text-red-500 mr-3 mt-1">▪</span>
+													<span className="font-mono text-black text-sm leading-relaxed">
+														{highlight}
+													</span>
+												</li>
+											))}
+										</ul>
+									</div>
+								))}
+							</div>
 						</div>
 					)}
-					{resumeData.personal?.email && (
-						<div className="flex items-center">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								className="h-4 w-4 mr-1"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-								aria-labelledby="email-icon-title-resume"
-							>
-								<title id="email-icon-title-resume">Email</title>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth={2}
-									d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-								/>
-							</svg>
-							<a href={`mailto:${resumeData.personal.email}`}>
-								{resumeData.personal.email}
-							</a>
+
+					{/* Education Section */}
+					{resumeData.education && resumeData.education.length > 0 && (
+						<div className="border-4 border-black bg-white p-8">
+							<h2 className="text-2xl font-black font-mono text-black uppercase mb-6 border-b-4 border-black pb-4">
+								EDUCATION
+							</h2>
+							<div className="space-y-6">
+								{resumeData.education.map((edu, index) => (
+									<div
+										key={`edu-${edu.institution}-${edu.degree}-${index}`}
+										className="border-l-4 border-red-500 pl-6 bg-gray-50 p-6"
+									>
+										<h3 className="text-xl font-mono font-black text-black uppercase mb-2">
+											{edu.degree}
+										</h3>
+										<div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-2">
+											<p className="text-lg font-mono text-red-500 font-black">
+												{edu.institution}
+											</p>
+											<div className="text-sm font-mono text-black bg-yellow-300 px-3 py-1 border-2 border-black">
+												{edu.startDate} - {edu.endDate || "Present"}
+											</div>
+										</div>
+										{edu.description && (
+											<p className="font-mono text-black text-sm leading-relaxed mt-3">
+												{edu.description}
+											</p>
+										)}
+									</div>
+								))}
+							</div>
 						</div>
 					)}
-				</div>
-			</div>
 
-			{/* PDF Button - Modified to open in new tab */}
-			<div className="mb-8 flex">
-				<Link
-					href="/static/files/resume.pdf"
-					className="px-4 py-2 text-sm font-mono font-medium text-gray-900 bg-[#00ff99] rounded-md hover:bg-[#ff3860] hover:text-white transition-all duration-300 shadow-lg shadow-[#00ff99]/20 hover:shadow-[#ff3860]/20"
-					aria-label="View PDF Resume"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					DOWNLOAD_RESUME.PDF
-				</Link>
-			</div>
-
-			{/* Skills Section */}
-			<div className="mb-8">
-				<h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-gray-100">
-					Skills & Technologies
-				</h2>
-				<Skills resumeData={resumeData} />
-			</div>
-
-			{/* Experience Section */}
-			{resumeData.experience && resumeData.experience.length > 0 && (
-				<div className="mb-8">
-					<h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-gray-100">
-						Professional Experience
-					</h2>
-					<div className="space-y-6">
-						{resumeData.experience.map((exp, index) => (
-							<div
-								key={`exp-${exp.company}-${exp.position}-${index}`}
-								className="border-l-2 border-gray-200 dark:border-gray-700 pl-4 ml-2"
-							>
-								<div className="flex flex-col sm:flex-row sm:justify-between">
-									<h3 className="text-lg font-medium text-gray-100">
-										{exp.position} •{" "}
-										<span className="text-[#00ff99] font-mono">
-											{exp.company}
-										</span>
-									</h3>
-									<p className="text-sm text-gray-500 dark:text-gray-400 mt-1 sm:mt-0">
-										{exp.startDate} - {exp.endDate || "Present"}
-									</p>
+					{/* Languages Section */}
+					<div className="border-4 border-black bg-white p-8">
+						<h2 className="text-2xl font-black font-mono text-black uppercase mb-6 border-b-4 border-black pb-4">
+							LANGUAGES
+						</h2>
+						<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+							{resumeData.languages && Array.isArray(resumeData.languages) && resumeData.languages.length > 0 ? (
+								resumeData.languages.map((lang, index) => (
+									<div
+										key={`lang-${lang.name}-${lang.level}-${index}`}
+										className="border-2 border-black bg-gray-100 p-4"
+									>
+										<div className="text-center">
+											<p className="font-mono font-black text-black uppercase text-sm mb-2">
+												{lang.name || "Unknown"}
+											</p>
+											<p className="font-mono text-red-500 text-xs font-black uppercase">
+												{lang.level || "Native"}
+											</p>
+										</div>
+									</div>
+								))
+							) : (
+								<div className="border-2 border-black bg-gray-100 p-4">
+									<div className="text-center">
+										<p className="font-mono font-black text-black uppercase text-sm mb-2">
+											ENGLISH
+										</p>
+										<p className="font-mono text-red-500 text-xs font-black uppercase">
+											NATIVE
+										</p>
+									</div>
 								</div>
-								<p className="mt-2 text-gray-600 dark:text-gray-400">
-									{exp.location}
-								</p>
-								<ul className="mt-2 list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400">
-									{exp.highlights?.map((highlight, i) => (
-										<li key={`highlight-${exp.company}-${i}-${highlight.slice(0, 20)}`}>{highlight}</li>
-									))}
-								</ul>
-							</div>
-						))}
+							)}
+						</div>
 					</div>
 				</div>
-			)}
-
-			{/* Education Section */}
-			{resumeData.education && resumeData.education.length > 0 && (
-				<div className="mb-8">
-					<h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-gray-100">
-						Education
-					</h2>
-					<div className="space-y-4">
-						{resumeData.education.map((edu, index) => (
-							<div
-								key={`edu-${edu.institution}-${edu.degree}-${index}`}
-								className="border-l-2 border-gray-200 dark:border-gray-700 pl-4 ml-2"
-							>
-								<div className="flex flex-col sm:flex-row sm:justify-between">
-									<h3 className="text-lg font-medium text-gray-100">
-										{edu.degree} •{" "}
-										<span className="text-[#00ff99] font-mono">
-											{edu.institution}
-										</span>
-									</h3>
-									<p className="text-sm text-gray-500 dark:text-gray-400 mt-1 sm:mt-0">
-										{edu.startDate} - {edu.endDate || "Present"}
-									</p>
-								</div>
-								{edu.description && (
-									<p className="mt-2 text-gray-600 dark:text-gray-400">
-										{edu.description}
-									</p>
-								)}
-							</div>
-						))}
-					</div>
-				</div>
-			)}
-
-			{/* Languages Section */}
-			{resumeData.languages &&
-				Array.isArray(resumeData.languages) &&
-				resumeData.languages.length > 0 ? (
-				<div className="mb-8">
-					<h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-gray-100">
-						Languages
-					</h2>
-					<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-						{resumeData.languages.map((lang, index) => (
-							<div
-								key={`lang-${lang.name}-${lang.level}-${index}`}
-								className="flex items-center border border-gray-200 dark:border-gray-700 rounded-md p-3"
-							>
-								<span className="font-medium text-gray-900 dark:text-gray-100 mr-2">
-									{lang.name || "Unknown"}:
-								</span>
-								<span className="text-gray-600 dark:text-gray-400">
-									{lang.level || "Native"}
-								</span>
-							</div>
-						))}
-					</div>
-				</div>
-			) : (
-				<div className="mb-8">
-					<h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-gray-100">
-						Languages
-					</h2>
-					<div className="border border-gray-200 dark:border-gray-700 rounded-md p-4">
-						<p className="text-gray-600 dark:text-gray-400">English (Native)</p>
-					</div>
-				</div>
-			)}
-		</>
+			</div>
+		</div>
 	);
 }
