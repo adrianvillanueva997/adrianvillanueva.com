@@ -47,7 +47,7 @@ export default async function TagPage(props: {
 	);
 
 	const title = `TAG::${tag.toUpperCase().replace(/[\s-]/g, "_")}`;
-	const description = `Exploring ${filteredPosts.length} knowledge fragments tagged with "${tag}". Enter the void of specialized content.`;
+	const description = `${filteredPosts.length} posts tagged with "${tag}". Industrial-grade content organization.`;
 	const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
 	const initialDisplayPosts = filteredPosts.slice(0, POSTS_PER_PAGE);
 	const pagination = {

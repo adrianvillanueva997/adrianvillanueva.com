@@ -59,7 +59,7 @@ export default async function Page() {
 						TAG NETWORK
 					</h2>
 					<p className="font-mono text-black max-w-3xl mx-auto text-lg leading-relaxed">
-						Interactive visualization showing relationships between tags based on shared posts. 
+						Interactive visualization showing relationships between tags based on shared posts.
 						Larger nodes indicate more popular tags.
 					</p>
 				</div>
@@ -130,9 +130,8 @@ export default async function Page() {
 							<Link
 								key={tag}
 								href={`/tags/${tag}`}
-								className={`inline-flex items-center bg-white border-3 border-black hover:bg-red-500 hover:text-white text-black transition-all duration-200 font-mono font-black uppercase text-sm hover:scale-105 hover:shadow-lg hover:border-red-500 group ${
-									isLarge ? 'px-6 py-3 text-base' : 'px-4 py-2'
-								}`}
+								className={`inline-flex items-center bg-white border-3 border-black hover:bg-red-500 hover:text-white text-black transition-all duration-200 font-mono font-black uppercase text-sm hover:scale-105 hover:shadow-lg hover:border-red-500 group ${isLarge ? 'px-6 py-3 text-base' : 'px-4 py-2'
+									}`}
 							>
 								<span className="relative">
 									{tag}
@@ -140,9 +139,8 @@ export default async function Page() {
 										<div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 group-hover:bg-white" />
 									)}
 								</span>
-								<span className={`ml-3 bg-black text-white group-hover:bg-white group-hover:text-black px-2 py-1 text-xs font-black border border-black group-hover:border-white ${
-									isLarge ? 'px-3 py-1' : 'px-2 py-1'
-								}`}>
+								<span className={`ml-3 bg-black text-white group-hover:bg-white group-hover:text-black px-2 py-1 text-xs font-black border border-black group-hover:border-white ${isLarge ? 'px-3 py-1' : 'px-2 py-1'
+									}`}>
 									{count}
 								</span>
 							</Link>
@@ -239,7 +237,7 @@ export default async function Page() {
 													{index + 1}
 												</span>
 											</div>
-											<Link 
+											<Link
 												href={`/tags/${tag}`}
 												className="font-mono font-black text-black uppercase hover:text-red-500 transition-colors"
 											>
