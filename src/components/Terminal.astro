@@ -1,0 +1,521 @@
+---
+interface TerminalCommand {
+    command: string;
+    output?: string;
+    error?: boolean;
+    timing?: string;
+    prompt?: string;
+}
+
+interface Props {
+    commands: TerminalCommand[];
+    shell?: 'bash' | 'zsh' | 'fish' | 'powershell';
+    title?: string;
+    className?: string;
+}
+
+const {
+    commands,
+    shell = 'zsh',
+    title = 'TERMINAL',
+    className = '',
+} = Astro.props;
+
+const shellPrompts = {
+    bash: '$',
+    zsh: '❯',
+    fish: '~>',
+    powershell: '>',
+};
+---
+
+<div class={`terminal-brutalist ${className}`}>
+    <!-- Terminal Header -->
+    <div class="terminal-header">
+        <div class="terminal-controls">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+        </div>
+        <span class="terminal-title">{title}</span>
+        <div class="terminal-actions">
+            <span class="shell-badge">{shell.toUpperCase()}</span>
+            <button
+                class="copy-button"
+                type="button"
+                aria-label="Copy commands"
+            >
+                <svg
+                    class="copy-icon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <rect width="14" height="14" x="8" y="8" rx="2" ry="2"
+                    ></rect>
+                    <path
+                        d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+                    ></path>
+                </svg>
+                <svg
+                    class="check-icon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="M20 6 9 17l-5-5"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Terminal Content -->
+    <div class="terminal-content">
+        {
+            commands.map((cmd) => (
+                <div class="command-block">
+                    <div class="command-line">
+                        <span class="prompt">
+                            {cmd.prompt || shellPrompts[shell]}
+                        </span>
+                        <span
+                            class={cmd.error ? 'command-error' : 'command-text'}
+                        >
+                            {cmd.command}
+                        </span>
+                        {cmd.timing && <span class="timing">{cmd.timing}</span>}
+                    </div>
+
+                    {cmd.output && (
+                        <div class={cmd.error ? 'output-error' : 'output-text'}>
+                            {cmd.output}
+                        </div>
+                    )}
+                </div>
+            ))
+        }
+        <div class="cursor-line">
+            <span class="prompt">{shellPrompts[shell]}</span>
+            <span class="cursor">█</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    .terminal-brutalist {
+        margin: 2rem 0;
+        background: var(--bg-primary);
+        border: 3px solid var(--accent-cyan);
+        box-shadow: var(--shadow-brutal);
+        font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+        font-size: 0.9rem;
+        position: relative;
+        transition: all 0.2s ease;
+        overflow: hidden;
+    }
+
+    .terminal-brutalist::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            var(--accent-cyan),
+            transparent
+        );
+        transition: left 0.5s ease;
+        z-index: 1;
+    }
+
+    .terminal-brutalist:hover::before {
+        left: 100%;
+    }
+
+    .terminal-brutalist:hover {
+        box-shadow: 8px 8px 0 var(--accent-cyan);
+        transform: translate(-2px, -2px);
+    }
+
+    /* Header */
+    .terminal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem 1rem;
+        background: var(--bg-secondary);
+        border-bottom: 3px solid var(--accent-cyan);
+        position: relative;
+        z-index: 2;
+    }
+
+    .terminal-controls {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .dot {
+        width: 12px;
+        height: 12px;
+        border: 2px solid var(--bg-primary);
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+        transition: all 0.2s ease;
+    }
+
+    .terminal-brutalist:hover .dot {
+        box-shadow: 0 0 8px currentColor;
+    }
+
+    .dot-red {
+        background: var(--accent-crimson);
+    }
+
+    .dot-yellow {
+        background: #ffff00;
+    }
+
+    .dot-green {
+        background: #00ff00;
+    }
+
+    .terminal-title {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: 'Orbitron', monospace;
+        font-weight: 900;
+        font-size: 0.75rem;
+        letter-spacing: 0.15em;
+        color: var(--accent-cyan);
+        text-transform: uppercase;
+        text-shadow: 0 0 10px var(--accent-cyan-glow);
+    }
+
+    .terminal-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-left: auto;
+    }
+
+    .shell-badge {
+        font-family: 'Orbitron', monospace;
+        font-weight: 700;
+        font-size: 0.7rem;
+        color: var(--text-secondary);
+        letter-spacing: 0.1em;
+        padding: 0.25rem 0.5rem;
+        border: 1px solid var(--bg-tertiary);
+        background: var(--bg-tertiary);
+    }
+
+    /* Copy Button */
+    .copy-button {
+        padding: 0.4rem;
+        background: transparent;
+        border: 2px solid var(--accent-cyan);
+        color: var(--accent-cyan);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .copy-button:hover {
+        background: var(--accent-cyan);
+        color: var(--bg-primary);
+        box-shadow: 2px 2px 0 var(--accent-cyan);
+        transform: translate(-1px, -1px);
+    }
+
+    .copy-button:active {
+        transform: translate(0, 0);
+        box-shadow: none;
+    }
+
+    .copy-icon,
+    .check-icon {
+        width: 16px;
+        height: 16px;
+        display: block;
+    }
+
+    .check-icon {
+        display: none;
+    }
+
+    .copy-button.copied {
+        background: var(--accent-cyan);
+        color: var(--bg-primary);
+    }
+
+    .copy-button.copied .copy-icon {
+        display: none;
+    }
+
+    .copy-button.copied .check-icon {
+        display: block;
+    }
+
+    /* Terminal Content */
+    .terminal-content {
+        padding: 1.5rem;
+        min-height: 120px;
+        background: var(--bg-primary);
+    }
+
+    .command-block {
+        margin-bottom: 1rem;
+        animation: fadeIn 0.3s ease-in;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-4px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .command-block:last-child {
+        margin-bottom: 0.5rem;
+    }
+
+    .command-line {
+        display: flex;
+        align-items: baseline;
+        gap: 0.75rem;
+        margin-bottom: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .prompt {
+        color: var(--accent-cyan);
+        font-weight: 700;
+        user-select: none;
+        text-shadow: 0 0 8px var(--accent-cyan-glow);
+        flex-shrink: 0;
+    }
+
+    .command-text {
+        color: var(--text-primary);
+        font-weight: 500;
+        word-break: break-word;
+        flex: 1;
+    }
+
+    .command-error {
+        color: var(--accent-crimson);
+        font-weight: 500;
+        word-break: break-word;
+        flex: 1;
+        text-shadow: 0 0 8px var(--accent-crimson-glow);
+    }
+
+    .timing {
+        color: var(--text-muted);
+        font-size: 0.75rem;
+        font-family: 'Courier New', monospace;
+        margin-left: auto;
+        opacity: 0.7;
+    }
+
+    .output-text {
+        padding-left: 2rem;
+        color: var(--text-secondary);
+        line-height: 1.7;
+        white-space: pre-wrap;
+        word-break: break-word;
+        margin-bottom: 0.5rem;
+    }
+
+    .output-error {
+        padding-left: 2rem;
+        color: var(--accent-crimson);
+        line-height: 1.7;
+        white-space: pre-wrap;
+        word-break: break-word;
+        margin-bottom: 0.5rem;
+        text-shadow: 0 0 6px var(--accent-crimson-glow);
+    }
+
+    /* Cursor Line */
+    .cursor-line {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        opacity: 0.8;
+    }
+
+    .cursor {
+        display: inline-block;
+        color: var(--accent-cyan);
+        animation: blink 1s step-end infinite;
+        text-shadow: 0 0 8px var(--accent-cyan-glow);
+    }
+
+    @keyframes blink {
+        0%,
+        50% {
+            opacity: 1;
+        }
+        50.1%,
+        100% {
+            opacity: 0;
+        }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .terminal-brutalist {
+            margin: 1.5rem 0;
+            box-shadow: 4px 4px 0 var(--accent-cyan);
+            font-size: 0.85rem;
+        }
+
+        .terminal-brutalist:hover {
+            box-shadow: 5px 5px 0 var(--accent-cyan);
+        }
+
+        .terminal-header {
+            padding: 0.625rem 0.875rem;
+        }
+
+        .terminal-title {
+            font-size: 0.65rem;
+        }
+
+        .shell-badge {
+            font-size: 0.65rem;
+            padding: 0.2rem 0.4rem;
+        }
+
+        .terminal-content {
+            padding: 1rem;
+            min-height: 100px;
+        }
+
+        .copy-button {
+            padding: 0.35rem;
+        }
+
+        .copy-icon,
+        .check-icon {
+            width: 14px;
+            height: 14px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .terminal-brutalist {
+            box-shadow: 3px 3px 0 var(--accent-cyan);
+            font-size: 0.8rem;
+        }
+
+        .terminal-title {
+            display: none;
+        }
+
+        .terminal-content {
+            padding: 0.875rem;
+            min-height: 80px;
+        }
+
+        .output-text,
+        .output-error {
+            padding-left: 1rem;
+        }
+
+        .terminal-actions {
+            gap: 0.5rem;
+        }
+    }
+
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+        .cursor {
+            animation: none;
+            opacity: 1;
+        }
+
+        .terminal-brutalist::before {
+            transition: none;
+        }
+
+        .command-block {
+            animation: none;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const terminals = document.querySelectorAll('.terminal-brutalist');
+
+        terminals.forEach((terminal) => {
+            const copyButton = terminal.querySelector('.copy-button');
+            if (!copyButton) return;
+
+            copyButton.addEventListener('click', async () => {
+                const commands = Array.from(
+                    terminal.querySelectorAll('.command-text, .command-error')
+                )
+                    .map((el) => el.textContent?.trim())
+                    .filter(Boolean)
+                    .join('\n');
+
+                try {
+                    await navigator.clipboard.writeText(commands);
+                    copyButton.classList.add('copied');
+
+                    // Reset after 2 seconds
+                    setTimeout(() => {
+                        copyButton.classList.remove('copied');
+                    }, 2000);
+                } catch (err) {
+                    console.error('Failed to copy commands:', err);
+
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = commands;
+                    textArea.style.position = 'fixed';
+                    textArea.style.left = '-999999px';
+                    document.body.appendChild(textArea);
+                    textArea.select();
+
+                    try {
+                        document.execCommand('copy');
+                        copyButton.classList.add('copied');
+                        setTimeout(() => {
+                            copyButton.classList.remove('copied');
+                        }, 2000);
+                    } catch (fallbackErr) {
+                        console.error('Fallback copy failed:', fallbackErr);
+                    }
+
+                    document.body.removeChild(textArea);
+                }
+            });
+        });
+    });
+</script>

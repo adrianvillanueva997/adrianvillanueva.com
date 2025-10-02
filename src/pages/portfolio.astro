@@ -1,0 +1,432 @@
+---
+import BaseHead from '@/components/BaseHead.astro';
+import Footer from '@/components/Footer.astro';
+import Header from '@/components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '@/consts';
+
+// Detailed portfolio projects - replace with your actual work
+const portfolioProjects = [
+    {
+        id: 'digital-platform-transformation',
+        title: 'Digital Platform Transformation',
+        category: 'Web Development',
+        year: '2024',
+        client: 'Enterprise Corp',
+        description:
+            'Complete rebuild of enterprise platform serving 10M+ users globally. Increased performance by 300% and user engagement by 150%.',
+        challenge:
+            "Legacy system couldn't scale, poor user experience, technical debt accumulated over 8 years",
+        solution:
+            'Modern React architecture, microservices backend, progressive web app capabilities, comprehensive testing suite',
+        impact: [
+            '300% performance improvement',
+            '150% user engagement increase',
+            '99.9% uptime achieved',
+            '40% development velocity boost',
+        ],
+        tech: [
+            'React',
+            'Node.js',
+            'AWS',
+            'PostgreSQL',
+            'Docker',
+            'Kubernetes',
+            'TypeScript',
+        ],
+        image: '/api/placeholder/600/400',
+        featured: true,
+    },
+    {
+        id: 'creative-ar-experience',
+        title: 'Creative AR Experience',
+        category: 'Creative Technology',
+        year: '2024',
+        client: 'Contemporary Art Museum',
+        description:
+            'Immersive augmented reality installation for major art exhibition. Featured in international tech and art publications.',
+        challenge:
+            'Bridge digital and physical art experiences, work across different device capabilities, create accessible AR',
+        solution:
+            'WebXR-based AR experience, progressive enhancement, multi-platform compatibility, accessibility-first design',
+        impact: [
+            '250k+ visitors engaged',
+            'Featured in 15+ publications',
+            '95% user satisfaction',
+            'Award-winning design',
+        ],
+        tech: [
+            'Three.js',
+            'WebXR',
+            'AI/ML',
+            'Computer Vision',
+            'Web Audio API',
+            'PWA',
+        ],
+        image: '/api/placeholder/600/400',
+        featured: true,
+    },
+    {
+        id: 'open-source-framework',
+        title: 'Open Source Framework',
+        category: 'Open Source',
+        year: '2023',
+        client: 'Developer Community',
+        description:
+            'Developer tools framework adopted by 50k+ developers. Simplifies complex workflows and accelerates development cycles.',
+        challenge:
+            'Fragmented tooling ecosystem, steep learning curves, inconsistent developer experience',
+        solution:
+            'Unified CLI framework, plugin architecture, comprehensive documentation, active community building',
+        impact: [
+            '50k+ active users',
+            '2.5k GitHub stars',
+            '40% faster development',
+            'Active contributor community',
+        ],
+        tech: [
+            'TypeScript',
+            'CLI Tools',
+            'Node.js',
+            'Rollup',
+            'Testing Libraries',
+        ],
+        image: '/api/placeholder/600/400',
+        featured: true,
+    },
+    {
+        id: 'fintech-mobile-app',
+        title: 'FinTech Mobile Application',
+        category: 'Mobile Apps',
+        year: '2023',
+        client: 'Financial Startup',
+        description:
+            'Secure mobile banking application with biometric authentication and real-time transaction processing.',
+        challenge:
+            'High security requirements, complex financial regulations, seamless user experience',
+        solution:
+            'Native mobile apps, end-to-end encryption, biometric auth, real-time sync, comprehensive testing',
+        impact: [
+            '100k+ active users',
+            'Bank-grade security',
+            '4.8 app store rating',
+            'Zero security incidents',
+        ],
+        tech: [
+            'React Native',
+            'Node.js',
+            'MongoDB',
+            'Biometric API',
+            'Push Notifications',
+        ],
+        image: '/api/placeholder/600/400',
+        featured: false,
+    },
+    {
+        id: 'ai-content-platform',
+        title: 'AI Content Platform',
+        category: 'Creative Technology',
+        year: '2023',
+        client: 'Media Company',
+        description:
+            'AI-powered content creation platform that generates high-quality written content and visual assets.',
+        challenge:
+            'Quality control at scale, creative authenticity, user-friendly AI interaction',
+        solution:
+            'Custom AI models, human-in-the-loop workflows, intuitive interface design, quality assurance systems',
+        impact: [
+            '80% content creation speedup',
+            '200+ enterprise clients',
+            'Award-winning UI/UX',
+            '95% user retention',
+        ],
+        tech: ['Python', 'TensorFlow', 'React', 'FastAPI', 'Redis', 'AI/ML'],
+        image: '/api/placeholder/600/400',
+        featured: false,
+    },
+    {
+        id: 'blockchain-voting-system',
+        title: 'Blockchain Voting System',
+        category: 'Web Development',
+        year: '2022',
+        client: 'Government Initiative',
+        description:
+            'Secure, transparent voting system built on blockchain technology for municipal elections.',
+        challenge:
+            'Voter privacy, system transparency, scalability, accessibility requirements',
+        solution:
+            'Ethereum-based smart contracts, zero-knowledge proofs, accessible web interface, audit trails',
+        impact: [
+            '50k+ votes processed',
+            '100% transparency',
+            'Zero fraud incidents',
+            'Adopted by 3 cities',
+        ],
+        tech: [
+            'Solidity',
+            'Ethereum',
+            'React',
+            'Node.js',
+            'IPFS',
+            'Cryptography',
+        ],
+        image: '/api/placeholder/600/400',
+        featured: false,
+    },
+];
+
+const featuredProjects = portfolioProjects.filter(
+    (project) => project.featured
+);
+const allProjects = portfolioProjects;
+
+// Get all unique categories
+const allCategories = Array.from(
+    new Set(portfolioProjects.map((project) => project.category))
+);
+const categories = ['All', ...allCategories];
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead
+            title={`Portfolio - ${SITE_TITLE}`}
+            description="Showcasing creative technology projects that blend innovation with impact. From web applications to AR experiences."
+        />
+    </head>
+    <body>
+        <Header />
+
+        <!-- Hero Section -->
+        <section
+            class="hero"
+            style="min-height: 60vh; display: flex; align-items: center; padding: 2rem;"
+        >
+            <div class="grid-content">
+                <h1
+                    style="font-size: clamp(3rem, 8vw, 6rem); margin-bottom: 2rem; text-align: center;"
+                >
+                    PORTFOLIO
+                </h1>
+                <p
+                    style="font-size: 1.5rem; color: var(--text-secondary); text-align: center; max-width: 800px; margin: 0 auto 3rem;"
+                >
+                    Creative technology projects that push boundaries and
+                    deliver measurable impact. From enterprise platforms to
+                    artistic installations.
+                </p>
+            </div>
+        </section>
+
+        <!-- Featured Work -->
+        <section class="grid-container" style="padding: 4rem 0;">
+            <div class="grid-content">
+                <h2
+                    style="text-align: center; margin-bottom: 3rem; color: var(--accent-cyan);"
+                >
+                    Featured Projects
+                </h2>
+                <div class="portfolio-grid">
+                    {
+                        featuredProjects.map((project) => (
+                            <article class="case-study-card featured-project">
+                                <div class="project-image">
+                                    <div style="width: 100%; height: 200px; background: var(--bg-tertiary); border: 1px solid var(--accent-cyan); display: flex; align-items: center; justify-content: center; color: var(--text-muted); margin-bottom: 1.5rem;">
+                                        Project Image
+                                    </div>
+                                </div>
+                                <div class="blog-meta">
+                                    {project.category} • {project.year} •{' '}
+                                    {project.client}
+                                </div>
+                                <h3 style="margin-bottom: 1rem; font-size: 1.5rem;">
+                                    {project.title}
+                                </h3>
+                                <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.6;">
+                                    {project.description}
+                                </p>
+
+                                <div
+                                    class="project-stats"
+                                    style="margin-bottom: 1.5rem;"
+                                >
+                                    <h4 style="font-size: 1rem; margin-bottom: 0.5rem; color: var(--accent-crimson);">
+                                        Impact
+                                    </h4>
+                                    <ul style="list-style: none; padding: 0; margin: 0;">
+                                        {project.impact
+                                            .slice(0, 2)
+                                            .map((impact) => (
+                                                <li style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.25rem;">
+                                                    • {impact}
+                                                </li>
+                                            ))}
+                                    </ul>
+                                </div>
+
+                                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;">
+                                    {project.tech.slice(0, 4).map((tech) => (
+                                        <span style="background: var(--bg-tertiary); color: var(--accent-cyan); padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; font-family: monospace;">
+                                            {tech}
+                                        </span>
+                                    ))}
+                                    {project.tech.length > 4 && (
+                                        <span style="color: var(--text-muted); font-size: 0.875rem; align-self: center;">
+                                            +{project.tech.length - 4} more
+                                        </span>
+                                    )}
+                                </div>
+
+                                <a
+                                    href={`/portfolio/${project.id}`}
+                                    style="color: var(--accent-cyan); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;"
+                                >
+                                    View Case Study →
+                                </a>
+                            </article>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+
+        <!-- All Projects Grid -->
+        <section
+            class="grid-container"
+            style="padding: 4rem 0; background: var(--bg-secondary);"
+        >
+            <div class="grid-content">
+                <h2
+                    style="text-align: center; margin-bottom: 3rem; color: var(--accent-crimson);"
+                >
+                    All Projects
+                </h2>
+
+                <!-- Category Filter -->
+                <div
+                    class="category-filter"
+                    style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem;"
+                >
+                    {
+                        categories.map((category) => (
+                            <button
+                                class="filter-btn"
+                                data-category={category.toLowerCase()}
+                                style="background: var(--bg-primary); color: var(--text-secondary); border: 1px solid var(--bg-tertiary); padding: 0.75rem 1.5rem; font-family: 'Orbitron', monospace; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; transition: all 0.3s ease;"
+                            >
+                                {category}
+                            </button>
+                        ))
+                    }
+                </div>
+
+                <div class="portfolio-grid">
+                    {
+                        allProjects.map((project) => (
+                            <article
+                                class="case-study-card project-item"
+                                data-category={project.category.toLowerCase()}
+                            >
+                                <div class="project-image">
+                                    <div style="width: 100%; height: 150px; background: var(--bg-tertiary); border: 1px solid var(--bg-tertiary); display: flex; align-items: center; justify-content: center; color: var(--text-muted); margin-bottom: 1rem;">
+                                        {project.title}
+                                    </div>
+                                </div>
+                                <div class="blog-meta">
+                                    {project.category} • {project.year}
+                                </div>
+                                <h3 style="margin-bottom: 1rem; font-size: 1.25rem;">
+                                    {project.title}
+                                </h3>
+                                <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.875rem; line-height: 1.6;">
+                                    {project.description}
+                                </p>
+                                <a
+                                    href={`/portfolio/${project.id}`}
+                                    style="color: var(--accent-cyan); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem;"
+                                >
+                                    View Details →
+                                </a>
+                            </article>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact CTA -->
+        <section class="grid-container" style="padding: 6rem 0;">
+            <div class="grid-content">
+                <div
+                    style="text-align: center; max-width: 600px; margin: 0 auto;"
+                >
+                    <h2
+                        style="font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 2rem;"
+                    >
+                        Ready to Build Something Extraordinary?
+                    </h2>
+                    <p
+                        style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 3rem; line-height: 1.6;"
+                    >
+                        Let's transform your vision into reality. Whether it's a
+                        cutting-edge application, creative installation, or
+                        innovative tech solution.
+                    </p>
+                    <div
+                        style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;"
+                    >
+                        <button class="btn-primary">Start a Project</button>
+                        <button class="btn-secondary"
+                            >Download Portfolio PDF</button
+                        >
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <Footer />
+
+        <script>
+            // Category filtering functionality
+            document.addEventListener('DOMContentLoaded', function () {
+                const filterBtns = document.querySelectorAll('.filter-btn');
+                const projectItems = document.querySelectorAll('.project-item');
+
+                filterBtns.forEach((btn) => {
+                    btn.addEventListener('click', function () {
+                        const category = this.dataset.category;
+
+                        // Update active filter button
+                        filterBtns.forEach((b) => {
+                            b.style.backgroundColor = 'var(--bg-primary)';
+                            b.style.color = 'var(--text-secondary)';
+                            b.style.borderColor = 'var(--bg-tertiary)';
+                        });
+
+                        this.style.backgroundColor = 'var(--bg-tertiary)';
+                        this.style.color = 'var(--accent-cyan)';
+                        this.style.borderColor = 'var(--accent-cyan)';
+
+                        // Filter projects
+                        projectItems.forEach((item) => {
+                            if (
+                                category === 'all' ||
+                                item.dataset.category === category
+                            ) {
+                                item.style.display = 'block';
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        });
+                    });
+                });
+
+                // Set initial active state
+                const allBtn = document.querySelector('[data-category="all"]');
+                if (allBtn) {
+                    allBtn.click();
+                }
+            });
+        </script>
+    </body>
+</html>

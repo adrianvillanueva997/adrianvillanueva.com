@@ -1,0 +1,215 @@
+---
+type CalloutType = 'info' | 'warning' | 'note' | 'tip';
+
+interface Props {
+    type: CalloutType;
+    title?: string;
+}
+
+const { type, title } = Astro.props;
+
+const styles: Record<
+    CalloutType,
+    { bg: string; border: string; icon: string; title: string }
+> = {
+    info: {
+        bg: 'var(--bg-secondary)',
+        border: 'var(--accent-cyan)',
+        icon: '💡',
+        title: 'SYSTEM_INFO',
+    },
+    warning: {
+        bg: 'var(--bg-secondary)',
+        border: 'var(--accent-crimson)',
+        icon: '⚠️',
+        title: 'CRITICAL_WARNING',
+    },
+    note: {
+        bg: 'var(--bg-secondary)',
+        border: 'var(--text-muted)',
+        icon: '📝',
+        title: 'DATA_NOTE',
+    },
+    tip: {
+        bg: 'var(--bg-secondary)',
+        border: '#00ff00',
+        icon: '💪',
+        title: 'OPTIMIZATION_TIP',
+    },
+};
+
+const currentStyle = styles[type];
+---
+
+<div class="callout" data-type={type}>
+    <div class="callout-content">
+        <div class="callout-icon">
+            <span>{currentStyle.icon}</span>
+        </div>
+        <div class="callout-body">
+            <h5 class="callout-title">
+                {title || currentStyle.title}
+            </h5>
+            <div class="callout-text">
+                <slot />
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .callout {
+        background: rgba(20, 20, 25, 0.95);
+        border: 3px solid;
+        padding: 1.5rem;
+        margin: 2rem 0;
+        position: relative;
+        box-shadow:
+            0 0 20px rgba(0, 255, 255, 0.1),
+            inset 0 0 30px rgba(0, 0, 0, 0.5);
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+    }
+    .callout::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            currentColor,
+            transparent
+        );
+        opacity: 0.5;
+    }
+
+    .callout[data-type='info'] {
+        border-color: var(--accent-cyan);
+        color: var(--accent-cyan);
+    }
+
+    .callout[data-type='warning'] {
+        border-color: var(--accent-crimson);
+        color: var(--accent-crimson);
+    }
+
+    .callout[data-type='note'] {
+        border-color: var(--text-muted);
+        color: var(--text-muted);
+    }
+
+    .callout[data-type='tip'] {
+        border-color: #00ff00;
+        color: #00ff00;
+    }
+
+    .callout:hover {
+        box-shadow:
+            0 0 30px rgba(0, 255, 255, 0.2),
+            inset 0 0 30px rgba(0, 0, 0, 0.5);
+        transform: translateY(-2px);
+    }
+
+    .callout-content {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .callout-icon {
+        flex-shrink: 0;
+        margin-top: 0.25rem;
+    }
+
+    .callout-icon span {
+        font-size: 1.5rem;
+        line-height: 1;
+        display: block;
+        filter: drop-shadow(0 0 8px currentColor);
+    }
+
+    .callout-body {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .callout-title {
+        font-family: 'Orbitron', monospace;
+        font-weight: 900;
+        font-size: 1.125rem;
+        margin: 0 0 0.75rem 0;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: currentColor;
+        text-shadow: 0 0 10px currentColor;
+    }
+
+    .callout-text {
+        font-family: 'Courier New', monospace;
+        font-size: 0.9375rem;
+        line-height: 1.7;
+        color: #e0e0e0;
+        font-weight: 400;
+    }
+
+    .callout-text :global(p) {
+        margin: 0 0 0.75rem 0;
+        color: #e0e0e0;
+    }
+
+    .callout-text :global(p:last-child) {
+        margin-bottom: 0;
+    }
+
+    .callout-text :global(code) {
+        background: rgba(0, 0, 0, 0.6);
+        padding: 0.25rem 0.5rem;
+        border: 1px solid currentColor;
+        border-radius: 3px;
+        font-size: 0.875rem;
+        color: var(--accent-cyan);
+        font-weight: 600;
+    }
+
+    .callout-text :global(strong) {
+        color: #ffffff;
+        font-weight: 700;
+        text-shadow: 0 0 5px currentColor;
+    }
+    .callout-text :global(a) {
+        color: var(--accent-cyan);
+        text-decoration: underline;
+        text-decoration-color: rgba(0, 255, 255, 0.3);
+        transition: all 0.2s ease;
+    }
+
+    .callout-text :global(a:hover) {
+        text-decoration-color: var(--accent-cyan);
+        text-shadow: 0 0 8px var(--accent-cyan);
+    }
+
+    @media (max-width: 480px) {
+        .callout {
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .callout-content {
+            gap: 0.75rem;
+        }
+
+        .callout-icon span {
+            font-size: 1.25rem;
+        }
+
+        .callout-title {
+            font-size: 1rem;
+        }
+
+        .callout-text {
+            font-size: 0.875rem;
+        }
+    }
+</style>

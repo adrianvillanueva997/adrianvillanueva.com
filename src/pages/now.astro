@@ -1,0 +1,249 @@
+---
+import { readFileSync } from 'fs';
+import { join } from 'path';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
+
+// Read and parse the now markdown file
+const nowPath = join(process.cwd(), 'src/content/now.md');
+const nowContent = readFileSync(nowPath, 'utf8');
+
+// Extract frontmatter and content
+const frontmatterRegex = /^---\s*\n(.*?)\n---\s*\n(.*)$/s;
+const match = nowContent.match(frontmatterRegex);
+
+let frontmatter: { title: string; lastUpdated: string } = { title: 'NOW', lastUpdated: 'Recently' };
+let markdownContent = nowContent;
+
+if (match) {
+	// Parse YAML frontmatter
+	const yamlContent = match[1];
+	const content = match[2];
+
+	// Simple YAML parsing for our specific format
+	const titleMatch = yamlContent.match(/title:\s*['"](.+?)['"]$/m);
+	const dateMatch = yamlContent.match(/lastUpdated:\s*['"](.+?)['"]$/m);
+
+	if (titleMatch) frontmatter.title = titleMatch[1];
+	if (dateMatch) frontmatter.lastUpdated = dateMatch[1];
+
+	markdownContent = content;
+}
+
+// Simple markdown to HTML conversion for our specific content
+function markdownToHtml(md: string): string {
+	return md
+		// Headers
+		.replace(/^### (.+)$/gm, '<h3 class="section-subtitle">$1</h3>')
+		.replace(/^## (.+)$/gm, '<h2 class="section-title">$1</h2>')
+		// Bold text
+		.replace(/\*\*(.+?)\*\*/g, '<strong class="highlight">$1</strong>')
+		// Code blocks
+		.replace(/`(.+?)`/g, '<code class="inline-code">$1</code>')
+		// Paragraphs
+		.replace(/^([^<\n].*)$/gm, '<p>$1</p>')
+		// Clean up extra p tags around headers
+		.replace(/<p>(<h[23][^>]*>.*?<\/h[23]>)<\/p>/g, '$1')
+		// Remove empty paragraphs
+		.replace(/<p><\/p>/g, '');
+}
+
+const htmlContent = markdownToHtml(markdownContent);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`${frontmatter.title} - ${SITE_TITLE}`} description="What Adrian Villanueza Martinez is currently working on, learning, and focused on in Tokyo." />
+	</head>
+	<body>
+		<Header />
+		<main class="container">
+			<!-- Hero Section -->
+			<section class="hero-section">
+				<div class="hero-content">
+					<h1 class="hero-title">{frontmatter.title}</h1>
+					<p class="hero-subtitle">
+						Last updated: {frontmatter.lastUpdated}
+					</p>
+				</div>
+			</section>
+
+			<!-- Markdown Content -->
+			<section class="now-content">
+				<div class="markdown-content" set:html={htmlContent}></div>
+			</section>
+
+			<!-- Update Note -->
+			<section class="now-section">
+				<div class="update-note">
+					<p>This page follows the <a href="https://nownownow.com/about" target="_blank" class="now-link">/now movement</a> -
+					a way to share what you're focused on at this point in your life.</p>
+					<p class="last-updated">Last updated: {frontmatter.lastUpdated}</p>
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 2rem;
+	}
+
+	.hero-section {
+		text-align: center;
+		margin-bottom: 4rem;
+		padding-bottom: 3rem;
+		border-bottom: 2px solid var(--border-color);
+	}
+
+	.hero-title {
+		font-family: 'Orbitron', monospace;
+		font-size: 3rem;
+		font-weight: 900;
+		margin-bottom: 1rem;
+		background: linear-gradient(135deg, var(--accent-cyan), var(--text-primary));
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	.hero-subtitle {
+		font-size: 1.2rem;
+		color: var(--text-secondary);
+		margin-bottom: 2rem;
+	}
+
+	.now-content {
+		margin-bottom: 4rem;
+	}
+
+	.markdown-content {
+		max-width: 800px;
+		margin: 0 auto;
+		background: var(--surface-color);
+		border: 2px solid var(--border-color);
+		padding: 3rem;
+		border-radius: 4px;
+		line-height: 1.7;
+	}
+
+	.markdown-content :global(h2.section-title) {
+		font-family: 'Orbitron', monospace;
+		font-size: 2rem;
+		font-weight: 700;
+		margin-bottom: 2rem;
+		margin-top: 0;
+		color: var(--accent-cyan);
+		border-left: 4px solid var(--accent-crimson);
+		padding-left: 1rem;
+	}
+
+	.markdown-content :global(h3.section-subtitle) {
+		font-family: 'Orbitron', monospace;
+		font-size: 1.5rem;
+		font-weight: 600;
+		margin: 2rem 0 1rem 0;
+		color: var(--accent-crimson);
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+	}
+
+	.markdown-content :global(p) {
+		color: var(--text-secondary);
+		margin-bottom: 1.5rem;
+		font-size: 1.1rem;
+	}
+
+	.markdown-content :global(p:last-child) {
+		margin-bottom: 0;
+	}
+
+	.markdown-content :global(strong.highlight) {
+		color: var(--accent-cyan);
+		font-weight: 700;
+		font-family: 'Orbitron', monospace;
+		letter-spacing: 0.05em;
+	}
+
+	.markdown-content :global(code.inline-code) {
+		background: var(--bg-primary);
+		border: 1px solid var(--border-color);
+		color: var(--accent-cyan);
+		padding: 0.25rem 0.5rem;
+		border-radius: 2px;
+		font-family: 'Orbitron', monospace;
+		font-size: 0.9em;
+		font-weight: 600;
+	}
+
+	.now-section {
+		margin-bottom: 4rem;
+	}
+
+	.update-note {
+		text-align: center;
+		padding: 2rem;
+		background: var(--bg-secondary);
+		border-radius: 4px;
+		border: 1px solid var(--border-color);
+	}
+
+	.update-note p {
+		color: var(--text-secondary);
+		margin-bottom: 1rem;
+	}
+
+	.update-note p:last-child {
+		margin-bottom: 0;
+	}
+
+	.now-link {
+		color: var(--accent-cyan);
+		text-decoration: none;
+		transition: all 0.3s ease;
+	}
+
+	.now-link:hover {
+		color: var(--accent-crimson);
+		text-decoration: underline;
+	}
+
+	.last-updated {
+		color: var(--text-muted) !important;
+		font-style: italic;
+		font-size: 0.9rem;
+	}
+
+	@media (max-width: 768px) {
+		.container {
+			padding: 1rem;
+		}
+
+		.hero-title {
+			font-size: 2rem;
+		}
+
+		.markdown-content {
+			padding: 2rem;
+		}
+
+		.markdown-content :global(h2.section-title) {
+			font-size: 1.5rem;
+		}
+
+		.markdown-content :global(h3.section-subtitle) {
+			font-size: 1.2rem;
+		}
+
+		.markdown-content :global(p) {
+			font-size: 1rem;
+		}
+	}
+</style>

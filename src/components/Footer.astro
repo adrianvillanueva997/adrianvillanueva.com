@@ -1,0 +1,297 @@
+---
+import { Icon } from 'astro-icon/components';
+import badge from "@/assets/footer/Written-By-a-Human-Not-By-AI-Badge-black.svg";
+import { SITE_TITLE, SOCIAL_LINKS } from '@/consts';
+
+const today = new Date();
+---
+
+<footer>
+	<div class="footer-container">
+		<!-- Social Icons -->
+		<div class="social-icons">
+			<a
+				href={`mailto:${SOCIAL_LINKS.email}`}
+				title="Email"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				<Icon name="mdi:email" size={24} />
+			</a>
+			<a
+				href={SOCIAL_LINKS.github}
+				title="GitHub"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				<Icon name="mdi:github" size={24} />
+			</a>
+			<a
+				href={SOCIAL_LINKS.linkedin}
+				title="LinkedIn"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				<Icon name="mdi:linkedin" size={24} />
+			</a>
+			<a
+				href="/rss.xml"
+				title="RSS Feed"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				<Icon name="mdi:rss" size={24} />
+			</a>
+		</div>
+
+		<!-- Disclaimer -->
+		<div class="disclaimer">
+			<span class="disclaimer-label">Disclaimer:</span> Any and all opinions
+			listed here are my own and not representative of any of my employers,
+			past, future, and/or present.
+		</div>
+
+		<!-- Human Written Badge -->
+		<div class="badge-container">
+			<a
+				href="https://notbyai.fyi/"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				<img
+					src={badge.src}
+					alt="Written by Human, Not by AI"
+					class="badge-image"
+				/>
+			</a>
+		</div>
+
+		<!-- Copyright -->
+		<div class="copyright">
+			© {today.getFullYear()}
+			{SITE_TITLE}
+		</div>
+
+		<!-- Simple Links -->
+		<div class="footer-links">
+			<a
+				href="https://github.com/adrianvillanueva997/adrianvillanueva.com"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="footer-link"
+			>
+				Source
+			</a>
+			<button
+				type="button"
+				id="scroll-to-top"
+				class="footer-link scroll-btn"
+			>
+				↑ Top
+			</button>
+		</div>
+	</div>
+</footer>
+
+<script>
+	document.getElementById('scroll-to-top')?.addEventListener('click', () => {
+		window.scrollTo({ top: 0, behavior: 'smooth' });
+	});
+</script>
+
+<style>
+	footer {
+		padding: 2rem 1rem;
+		border-top: 4px solid var(--text-primary);
+		background: var(--bg-primary);
+		margin-top: 4rem;
+	}
+
+	.footer-container {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+	/* Social Icons */
+	.social-icons {
+		display: flex;
+		justify-content: center;
+		gap: 1.5rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.social-icons a {
+		color: var(--text-primary);
+		transition: color 0.2s ease;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.social-icons a:hover {
+		color: var(--accent-crimson);
+	}
+
+	/* Disclaimer */
+	.disclaimer {
+		text-align: center;
+		font-size: 0.875rem;
+		color: var(--text-primary);
+		margin-bottom: 1.5rem;
+		max-width: 42rem;
+		margin-left: auto;
+		margin-right: auto;
+		font-family: 'Courier New', monospace;
+		line-height: 1.6;
+	}
+
+	.disclaimer-label {
+		color: var(--accent-crimson);
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+
+	/* Badge */
+	.badge-container {
+		display: flex;
+		justify-content: center;
+		margin-bottom: 1.5rem;
+	}
+
+	.badge-link {
+		display: inline-flex;
+		align-items: center;
+		color: var(--text-primary);
+		border: 2px solid var(--text-primary);
+		padding: 0.5rem 1rem;
+		text-decoration: none;
+		font-family: 'Courier New', monospace;
+		font-weight: 700;
+		text-transform: uppercase;
+		transition: all 0.2s ease;
+	}
+
+	.badge-link:hover {
+		color: var(--accent-crimson);
+		border-color: var(--accent-crimson);
+	}
+
+	.badge-image {
+		height: 1.5rem;
+		width: auto;
+		margin-right: 0.75rem;
+	}
+
+	/* Copyright */
+	.copyright {
+		text-align: center;
+		color: var(--text-primary);
+		font-family: 'Courier New', monospace;
+		font-weight: 700;
+		font-size: 0.875rem;
+		margin-bottom: 1rem;
+	}
+
+	/* Footer Links */
+	.footer-links {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+		font-size: 0.875rem;
+	}
+
+	.footer-link {
+		color: var(--text-primary);
+		text-decoration: none;
+		font-family: 'Courier New', monospace;
+		font-weight: 700;
+		text-transform: uppercase;
+		transition: color 0.2s ease;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 0;
+	}
+
+	.footer-link:hover {
+		color: var(--accent-crimson);
+	}
+
+	.scroll-btn {
+		font-size: 0.875rem;
+	}
+
+	/* Responsive */
+	@media (max-width: 768px) {
+		footer {
+			padding: 1.5rem 1rem;
+			margin-top: 3rem;
+		}
+
+		.social-icons {
+			gap: 1.25rem;
+			margin-bottom: 1.25rem;
+		}
+
+		.social-icons a svg {
+			width: 22px;
+			height: 22px;
+		}
+
+		.disclaimer {
+			font-size: 0.8rem;
+			margin-bottom: 1.25rem;
+		}
+
+		.badge-container {
+			margin-bottom: 1.25rem;
+		}
+
+		.badge-image {
+			height: 1.25rem;
+		}
+
+		.copyright {
+			font-size: 0.8rem;
+			margin-bottom: 0.875rem;
+		}
+
+		.footer-links {
+			font-size: 0.8rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.social-icons {
+			gap: 1rem;
+		}
+
+		.social-icons a svg {
+			width: 20px;
+			height: 20px;
+		}
+
+		.disclaimer {
+			font-size: 0.75rem;
+			padding: 0 0.5rem;
+		}
+
+		.badge-link {
+			padding: 0.4rem 0.75rem;
+			font-size: 0.75rem;
+		}
+
+		.badge-image {
+			height: 1rem;
+			margin-right: 0.5rem;
+		}
+
+		.copyright {
+			font-size: 0.75rem;
+		}
+
+		.footer-links {
+			font-size: 0.75rem;
+		}
+	}
+</style>

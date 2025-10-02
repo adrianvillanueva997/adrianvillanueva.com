@@ -6,7 +6,7 @@ services:
       - otlp
     restart: unless-stopped
     ports:
-      - 3000
+      - 80
     labels:
       - traefik.enable=true
       - traefik.http.middlewares.adrianvillanueva-redirect-https.redirectscheme.scheme=https

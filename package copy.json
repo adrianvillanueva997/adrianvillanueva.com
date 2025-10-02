@@ -1,0 +1,35 @@
+{
+  "name": "adrianvillanueva.com",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/mdx": "^4.3.6",
+    "@astrojs/rss": "^4.0.12",
+    "@astrojs/sitemap": "^3.6.0",
+    "@expressive-code/plugin-collapsible-sections": "^0.41.3",
+    "@expressive-code/plugin-line-numbers": "^0.41.3",
+    "@iconify-json/mdi": "^1.2.3",
+    "@iconify-json/simple-icons": "^1.2.53",
+    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/vite": "^4.1.13",
+    "@types/js-yaml": "^4.0.9",
+    "astro": "^5.14.1",
+    "astro-d2": "^0.8.0",
+    "astro-expressive-code": "^0.41.3",
+    "astro-icon": "^1.1.5",
+    "astro-robots-txt": "^1.0.0",
+    "forms\n": "link:@tailwindcss/forms\n",
+    "js-yaml": "^4.1.0",
+    "sharp": "^0.34.3",
+    "tailwindcss": "^4.1.13",
+    "typescript": "^5.9.3"
+  }
+}
