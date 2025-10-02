@@ -2,7 +2,7 @@ FROM node:24.4.0-bookworm-slim AS builder
 
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
-RUN apt-get update && apt-get install --no-install-recommends curl make -y
+RUN apt-get update && apt-get install --no-install-recommends curl make ca-certificates -y
 
 RUN curl -fsSL https://d2lang.com/install.sh -o /tmp/d2install.sh && \
     sh /tmp/d2install.sh && \
