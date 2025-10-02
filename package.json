@@ -1,101 +1,34 @@
 {
 	"name": "adrianvillanueva.com",
-	"version": "2.3.0",
-	"private": true,
+	"type": "module",
+	"version": "0.0.1",
 	"scripts": {
-		"start": "next dev",
-		"dev": "cross-env INIT_CWD=$PWD next dev",
-		"optimize_svgs": "svgo -f public/static/diagrams",
-		"build": "cross-env INIT_CWD=$PWD next build && cross-env NODE_OPTIONS='--experimental-json-modules' node ./scripts/postbuild.mjs",
-		"serve": "next start",
-		"analyze": "cross-env ANALYZE=true next build",
-		"lint": "next lint --fix --dir pages --dir app --dir components --dir lib --dir layouts --dir scripts",
-		"prepare": "husky"
+		"dev": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro"
 	},
 	"dependencies": {
-		"@headlessui/react": "2.2.4",
-		"@next/bundle-analyzer": "15.2.4",
-		"@tailwindcss/forms": "0.5.10",
-		"@tailwindcss/postcss": "4.0.17",
-		"@tailwindcss/typography": "0.5.16",
-		"@types/prismjs": "^1.26.5",
-		"body-scroll-lock": "4.0.0-beta.0",
-		"contentlayer2": "0.5.4",
-		"d3": "7.9.0",
-		"esbuild": "0.25.10",
-		"feed": "4.2.2",
-		"github-slugger": "2.0.0",
-		"gray-matter": "4.0.3",
-		"hast-util-from-html-isomorphic": "2.0.0",
-		"image-size": "1.2.1",
-		"js-yaml": "^4.1.0",
-		"next": "15.4.7",
-		"next-contentlayer2": "0.5.4",
-		"next-themes": "0.4.6",
-		"pliny": "0.4.1",
-		"postcss": "8.5.3",
-		"prismjs": "^1.30.0",
-		"react": "19.1.0",
-		"react-dom": "19.1.0",
-		"react-force-graph-2d": "1.27.1",
-		"react-icons": "5.5.0",
-		"reading-time": "1.5.0",
-		"rehype-autolink-headings": "7.1.0",
-		"rehype-citation": "2.3.0",
-		"rehype-katex": "7.0.1",
-		"rehype-katex-notranslate": "1.1.4",
-		"rehype-preset-minify": "7.0.1",
-		"rehype-prism-plus": "2.0.0",
-		"rehype-slug": "6.0.0",
-		"remark": "15.0.1",
-		"remark-gfm": "4.0.1",
-		"remark-github-blockquote-alert": "1.3.0",
-		"remark-math": "6.0.0",
-		"sanitize-html": "^2.17.0",
-		"tailwindcss": "4.0.17",
-		"unist-util-visit": "5.0.0",
-		"zod": "^4.1.9"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "1.9.4",
-		"@eslint/eslintrc": "3.3.1",
-		"@eslint/js": "9.23.0",
-		"@svgr/webpack": "8.1.0",
+		"@astrojs/check": "^0.9.4",
+		"@astrojs/mdx": "^4.3.6",
+		"@astrojs/rss": "^4.0.12",
+		"@astrojs/sitemap": "^3.6.0",
+		"@expressive-code/plugin-collapsible-sections": "^0.41.3",
+		"@expressive-code/plugin-line-numbers": "^0.41.3",
+		"@iconify-json/mdi": "^1.2.3",
+		"@iconify-json/simple-icons": "^1.2.53",
+		"@tailwindcss/forms": "^0.5.10",
+		"@tailwindcss/typography": "^0.5.19",
+		"@tailwindcss/vite": "^4.1.13",
 		"@types/js-yaml": "^4.0.9",
-		"@types/mdx": "2.0.13",
-		"@types/react": "19.0.14",
-		"@typescript-eslint/eslint-plugin": "8.28.0",
-		"@typescript-eslint/parser": "8.28.0",
-		"cross-env": "7.0.3",
-		"eslint": "9.23.0",
-		"eslint-config-next": "15.2.4",
-		"eslint-config-prettier": "10.1.5",
-		"eslint-plugin-prettier": "5.2.6",
-		"globals": "16.0.0",
-		"husky": "9.1.7",
-		"lint-staged": "15.5.2",
-		"prettier": "3.5.3",
-		"prettier-plugin-tailwindcss": "0.6.13",
-		"svgo": "^4.0.0",
-		"typescript": "5.8.3"
-	},
-	"lint-staged": {
-		"*.+(js|jsx|ts|tsx)": [
-			"eslint --fix"
-		],
-		"*.+(js|jsx|ts|tsx|json|css|md|mdx)": [
-			"prettier --write"
-		]
-	},
-	"overrides": {
-		"esbuild": "0.25.10",
-		"@contentlayer2/core": {
-			"esbuild": "0.25.10"
-		},
-		"pliny": {
-			"@contentlayer2/core": {
-				"esbuild": "0.25.10"
-			}
-		}
+		"astro": "^5.14.1",
+		"astro-d2": "^0.8.0",
+		"astro-expressive-code": "^0.41.3",
+		"astro-icon": "^1.1.5",
+		"astro-robots-txt": "^1.0.0",
+		"js-yaml": "^4.1.0",
+		"sharp": "^0.34.3",
+		"tailwindcss": "^4.1.13",
+		"typescript": "^5.9.3"
 	}
 }
