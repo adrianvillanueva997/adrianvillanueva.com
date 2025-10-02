@@ -3,7 +3,14 @@ import type { ImageMetadata } from 'astro';
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import FallbackImage from '@/assets/blog-placeholder-1.jpg';
-import { SITE_AUTHOR, SITE_KEYWORDS, SITE_TITLE, SITE_URL } from '@/consts';
+import {
+	PLAUSIBLE_DOMAIN,
+	PLAUSIBLE_SCRIPT_URL,
+	SITE_AUTHOR,
+	SITE_KEYWORDS,
+	SITE_TITLE,
+	SITE_URL,
+} from '@/consts';
 import '@/styles/global.css';
 
 interface Props {
@@ -138,8 +145,8 @@ const fullTitle =
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={new URL(image.src, Astro.url)} />
-<meta name="twitter:creator" content="@yourtwitterhandle" />
-<meta name="twitter:site" content="@yourtwitterhandle" />
+<meta name="twitter:creator" content="@adrianv5x" />
+<meta name="twitter:site" content="@adrianv5x" />
 
 <!-- Additional SEO -->
 <meta name="format-detection" content="telephone=no" />
@@ -177,3 +184,14 @@ const fullTitle =
 				}),
 	})}
 />
+
+<!-- Plausible Analytics -->
+<script defer data-domain={PLAUSIBLE_DOMAIN} src={PLAUSIBLE_SCRIPT_URL}
+></script>
+<script is:inline>
+	window.plausible =
+		window.plausible ||
+		function () {
+			(window.plausible.q = window.plausible.q || []).push(arguments);
+		};
+</script>
