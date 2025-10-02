@@ -1,0 +1,773 @@
+---
+import { Image } from 'astro:assets';
+import { readFileSync } from 'fs';
+import { join } from 'path';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
+
+// Glob import all project images from assets folder
+const images = import.meta.glob('@/assets/**/*.{png,jpg,jpeg,webp,svg}', {
+    eager: true,
+});
+
+// Create a mapping of filename to image module
+const imageMap: Record<string, any> = {};
+for (const path in images) {
+    const filename = path.split('/').pop();
+    if (filename) {
+        imageMap[filename] = (images[path] as any).default;
+    }
+}
+
+// Define types for the projects data
+interface Project {
+    title: string;
+    description: string;
+    href?: string;
+    imgSrc?: string;
+    categories?: string[];
+    isOpenSource?: boolean;
+    repoUrl?: string;
+}
+
+interface ProjectsData {
+    projects: Project[];
+}
+
+// Read and parse the projects YAML file
+const projectsPath = join(process.cwd(), 'src/data/projects.yaml');
+const projectsContent = readFileSync(projectsPath, 'utf8');
+const { load } = await import('js-yaml');
+const projectsData = load(projectsContent) as ProjectsData;
+
+// Get all projects
+const allProjects = projectsData.projects;
+
+// Get all unique categories
+const allCategories = Array.from(
+    new Set(
+        projectsData.projects
+            .flatMap((project) => project.categories || [])
+            .filter(Boolean)
+    )
+).sort();
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead
+            title={`Projects - ${SITE_TITLE}`}
+            description="Projects and work by Adrian Villanueva Martinez - exploring data engineering, IoT, and innovative software solutions."
+        />
+    </head>
+    <body>
+        <Header />
+        <main class="container">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-content">
+                    <h1 class="hero-title">Projects</h1>
+                    <p class="hero-subtitle">
+                        Building the future through code, data, and innovative
+                        solutions
+                    </p>
+                    <p class="hero-description">
+                        From cloud-native data platforms to IoT systems, here's
+                        a collection of projects that showcase my journey
+                        through software engineering, data architecture, and
+                        emerging technologies.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Categories Filter -->
+            <section class="filter-section">
+                <h2 class="section-title">Filter by Technology</h2>
+                <div class="categories-filter">
+                    <button class="filter-btn active" data-category="all"
+                        >All Projects</button
+                    >
+                    {
+                        allCategories.map((category: string) => (
+                            <button
+                                class="filter-btn"
+                                data-category={category.toLowerCase()}
+                            >
+                                {category}
+                            </button>
+                        ))
+                    }
+                </div>
+            </section>
+
+            <!-- Projects Grid -->
+            <section class="projects-section">
+                <h2 class="section-title">Portfolio</h2>
+                <div class="projects-grid">
+                    {
+                        allProjects.map((project: Project) => (
+                            <article
+                                class="project-card"
+                                data-categories={
+                                    project.categories
+                                        ?.map((c) => c.toLowerCase())
+                                        .join(' ') || ''
+                                }
+                            >
+                                <div class="project-image">
+                                    {project.imgSrc &&
+                                    imageMap[project.imgSrc] ? (
+                                        <Image
+                                            src={imageMap[project.imgSrc]}
+                                            alt={project.title}
+                                            width={600}
+                                            height={400}
+                                            loading="lazy"
+                                            class="project-img"
+                                        />
+                                    ) : (
+                                        <div class="placeholder-image">
+                                            <span class="placeholder-icon">
+                                                ⚡
+                                            </span>
+                                        </div>
+                                    )}
+                                    <div class="project-overlay">
+                                        <div class="overlay-content">
+                                            {project.isOpenSource &&
+                                                project.repoUrl && (
+                                                    <a
+                                                        href={project.repoUrl}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        class="overlay-link repo-link"
+                                                    >
+                                                        <span class="link-icon">
+                                                            📂
+                                                        </span>
+                                                        <span>Source Code</span>
+                                                    </a>
+                                                )}
+                                            {project.href && (
+                                                <a
+                                                    href={project.href}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    class="overlay-link demo-link"
+                                                >
+                                                    <span class="link-icon">
+                                                        �
+                                                    </span>
+                                                    <span>Live Demo</span>
+                                                </a>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-content">
+                                    <div class="project-header">
+                                        <h3 class="project-title">
+                                            {project.title}
+                                        </h3>
+                                        <div class="project-badges">
+                                            {project.isOpenSource ? (
+                                                <span class="badge open-source">
+                                                    <span class="badge-icon">
+                                                        🔓
+                                                    </span>
+                                                    Open Source
+                                                </span>
+                                            ) : (
+                                                <span class="badge closed-source">
+                                                    <span class="badge-icon">
+                                                        🔒
+                                                    </span>
+                                                    Private
+                                                </span>
+                                            )}
+                                        </div>
+                                    </div>
+                                    <p class="project-description">
+                                        {project.description}
+                                    </p>
+                                    {project.categories &&
+                                        project.categories.length > 0 && (
+                                            <div class="project-categories">
+                                                {project.categories.map(
+                                                    (category: string) => (
+                                                        <span class="category-tag">
+                                                            {category}
+                                                        </span>
+                                                    )
+                                                )}
+                                            </div>
+                                        )}
+                                </div>
+                            </article>
+                        ))
+                    }
+                </div>
+            </section>
+
+            <!-- Technologies Overview -->
+            <section class="technologies-section">
+                <h2 class="section-title">Technologies & Domains</h2>
+                <div class="technologies-overview">
+                    <p class="technologies-description">
+                        Exploring diverse technologies across multiple domains -
+                        from systems programming to data engineering.
+                    </p>
+                    <div class="technologies-grid">
+                        {
+                            allCategories.map((category: string) => (
+                                <div class="technology-card">
+                                    <span class="technology-name">
+                                        {category}
+                                    </span>
+                                    <span class="technology-count">
+                                        {
+                                            allProjects.filter((p) =>
+                                                p.categories?.includes(category)
+                                            ).length
+                                        }{' '}
+                                        project
+                                        {allProjects.filter((p) =>
+                                            p.categories?.includes(category)
+                                        ).length !== 1
+                                            ? 's'
+                                            : ''}
+                                    </span>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+            </section>
+        </main>
+        <Footer />
+
+        <script>
+            // Project filtering functionality
+            document.addEventListener('DOMContentLoaded', () => {
+                const filterButtons = document.querySelectorAll('.filter-btn');
+                const projectCards = document.querySelectorAll('.project-card');
+
+                filterButtons.forEach((button) => {
+                    button.addEventListener('click', () => {
+                        const category = button.getAttribute('data-category');
+
+                        // Update active button
+                        filterButtons.forEach((btn) =>
+                            btn.classList.remove('active')
+                        );
+                        button.classList.add('active');
+
+                        // Filter projects
+                        projectCards.forEach((card) => {
+                            if (category === 'all') {
+                                card.style.display = 'flex';
+                            } else {
+                                const cardCategories =
+                                    card.getAttribute('data-categories') || '';
+                                if (cardCategories.includes(category)) {
+                                    card.style.display = 'flex';
+                                } else {
+                                    card.style.display = 'none';
+                                }
+                            }
+                        });
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>
+
+<style>
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .hero-section {
+        text-align: center;
+        margin-bottom: 4rem;
+        padding: 4rem 0;
+        background: linear-gradient(
+            135deg,
+            var(--bg-primary) 0%,
+            var(--bg-secondary) 100%
+        );
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            rgba(0, 255, 255, 0.02) 10px,
+            rgba(0, 255, 255, 0.02) 20px
+        );
+        pointer-events: none;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 1;
+        margin-bottom: 3rem;
+    }
+
+    .hero-title {
+        font-family: 'Orbitron', monospace;
+        font-size: 4rem;
+        font-weight: 900;
+        margin-bottom: 1rem;
+        background: linear-gradient(
+            135deg,
+            var(--accent-cyan),
+            var(--accent-crimson)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+    }
+
+    .hero-subtitle {
+        font-size: 1.5rem;
+        color: var(--accent-cyan);
+        margin-bottom: 2rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+
+    .hero-description {
+        font-size: 1.1rem;
+        color: var(--text-secondary);
+        max-width: 800px;
+        margin: 0 auto;
+        line-height: 1.8;
+    }
+
+    .filter-section {
+        margin-bottom: 3rem;
+        text-align: center;
+    }
+
+    .section-title {
+        font-family: 'Orbitron', monospace;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        color: var(--text-primary);
+        position: relative;
+        display: inline-block;
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(
+            90deg,
+            var(--accent-cyan),
+            var(--accent-crimson)
+        );
+    }
+
+    .categories-filter {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 2rem;
+    }
+
+    .filter-btn {
+        background: var(--bg-primary);
+        border: 2px solid var(--border-color);
+        color: var(--text-secondary);
+        padding: 0.75rem 1.5rem;
+        border-radius: 4px;
+        font-family: 'Orbitron', monospace;
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .filter-btn:hover {
+        border-color: var(--accent-cyan);
+        color: var(--accent-cyan);
+        transform: translateY(-2px);
+    }
+
+    .filter-btn.active {
+        background: var(--accent-cyan);
+        border-color: var(--accent-cyan);
+        color: var(--bg-primary);
+        box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
+    }
+
+    .projects-section {
+        margin-bottom: 4rem;
+    }
+
+    .projects-grid {
+        display: grid;
+        gap: 2.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    }
+
+    .project-card {
+        background: var(--surface-color);
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+
+    .project-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(
+            90deg,
+            var(--accent-cyan),
+            var(--accent-crimson)
+        );
+        transform: scaleX(0);
+        transition: transform 0.4s ease;
+    }
+
+    .project-card:hover::before {
+        transform: scaleX(1);
+    }
+
+    .project-card:hover {
+        border-color: var(--accent-cyan);
+        box-shadow: 0 8px 30px rgba(0, 255, 255, 0.15);
+        transform: translateY(-5px);
+    }
+
+    .project-image {
+        position: relative;
+        height: 240px;
+        overflow: hidden;
+        background: var(--bg-tertiary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .project-image img,
+    .project-image :global(img) {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+    }
+
+    .project-card:hover .project-image img,
+    .project-card:hover .project-image :global(img) {
+        transform: scale(1.1);
+    }
+
+    .placeholder-image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        background: linear-gradient(
+            135deg,
+            var(--bg-secondary),
+            var(--bg-tertiary)
+        );
+    }
+
+    .placeholder-icon {
+        font-size: 4rem;
+        background: linear-gradient(
+            135deg,
+            var(--accent-cyan),
+            var(--accent-crimson)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .project-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+            135deg,
+            rgba(0, 0, 0, 0.8),
+            rgba(0, 0, 0, 0.9)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+
+    .project-card:hover .project-overlay {
+        opacity: 1;
+    }
+
+    .overlay-content {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .overlay-link {
+        background: var(--accent-cyan);
+        color: var(--bg-primary);
+        padding: 0.75rem 1.5rem;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .overlay-link:hover {
+        background: var(--accent-crimson);
+        transform: scale(1.05);
+    }
+
+    .link-icon {
+        font-size: 1.1rem;
+    }
+
+    .project-content {
+        padding: 2.5rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .project-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .project-title {
+        font-family: 'Orbitron', monospace;
+        font-size: 1.5rem;
+        color: var(--text-primary);
+        margin: 0;
+        flex: 1;
+        font-weight: 700;
+    }
+
+    .project-badges {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+    }
+
+    .badge {
+        padding: 0.4rem 1rem;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+    .badge.open-source {
+        background: var(--accent-cyan);
+        color: var(--bg-primary);
+    }
+
+    .badge.closed-source {
+        background: var(--accent-crimson);
+        color: var(--bg-primary);
+    }
+
+    .badge-icon {
+        font-size: 0.9rem;
+    }
+
+    .project-description {
+        color: var(--text-secondary);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        flex: 1;
+        font-size: 1rem;
+    }
+
+    .project-categories {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: auto;
+    }
+
+    .category-tag {
+        background: var(--bg-primary);
+        border: 2px solid var(--border-color);
+        color: var(--text-secondary);
+        padding: 0.4rem 1rem;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        transition: all 0.3s ease;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .category-tag:hover {
+        border-color: var(--accent-cyan);
+        color: var(--accent-cyan);
+        transform: translateY(-1px);
+    }
+
+    .technologies-section {
+        margin-bottom: 4rem;
+    }
+
+    .technologies-overview {
+        background: var(--surface-color);
+        border: 2px solid var(--border-color);
+        padding: 3rem;
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    .technologies-description {
+        color: var(--text-secondary);
+        margin-bottom: 2rem;
+        font-size: 1.2rem;
+        line-height: 1.6;
+    }
+
+    .technologies-grid {
+        display: grid;
+        gap: 1.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .technology-card {
+        background: var(--bg-primary);
+        border: 2px solid var(--border-color);
+        padding: 1.5rem;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        text-align: center;
+    }
+
+    .technology-card:hover {
+        border-color: var(--accent-cyan);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 255, 255, 0.1);
+    }
+
+    .technology-name {
+        display: block;
+        font-family: 'Orbitron', monospace;
+        font-weight: 700;
+        color: var(--accent-cyan);
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .technology-count {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            padding: 1rem;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+        }
+
+        .projects-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .project-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .overlay-content {
+            flex-direction: column;
+        }
+
+        .categories-filter {
+            gap: 0.75rem;
+        }
+
+        .filter-btn {
+            padding: 0.6rem 1rem;
+            font-size: 0.8rem;
+        }
+
+        .technologies-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .project-overlay {
+            opacity: 1;
+            background: rgba(0, 0, 0, 0.6);
+        }
+    }
+</style>

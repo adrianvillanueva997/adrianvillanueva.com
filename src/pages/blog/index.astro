@@ -1,0 +1,182 @@
+---
+import BaseHead from '@/components/BaseHead.astro';
+import Footer from '@/components/Footer.astro';
+import FormattedDate from '@/components/FormattedDate.astro';
+import Header from '@/components/Header.astro';
+import { SITE_TITLE } from '@/consts';
+import { getCollection } from 'astro:content';
+
+const posts = (
+	await getCollection('blog', ({ data }) => {
+		// In production, filter out drafts. In dev, show all posts.
+		return import.meta.env.PROD ? data.draft !== true : true;
+	})
+).sort((a, b) => {
+	const dateA = a.data.date || a.data.pubDate;
+	const dateB = b.data.date || b.data.pubDate;
+	return dateB.valueOf() - dateA.valueOf();
+});
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title={`Blog - ${SITE_TITLE}`}
+			description="Thoughts on creative technology, innovation, and building the future."
+		/>
+	</head>
+	<body>
+		<Header />
+
+		<main class="blog-main">
+			<div class="blog-container">
+				<h1>Blog</h1>
+
+				{
+					posts.length === 0 ? (
+						<p class="no-posts">No posts yet. Check back soon!</p>
+					) : (
+						<ul class="posts-list">
+							{posts.map((post) => (
+								<li class="post-item">
+									<time class="post-date">
+										<FormattedDate
+											date={
+												(post.data.date ||
+													post.data.pubDate)!
+											}
+										/>
+									</time>
+									<a
+										href={`/blog/${post.id}/`}
+										class="post-link"
+									>
+										{post.data.title}
+									</a>
+									{post.data.draft && (
+										<span class="draft-badge">draft</span>
+									)}
+								</li>
+							))}
+						</ul>
+					)
+				}
+			</div>
+		</main>
+
+		<Footer />
+
+		<style>
+			.blog-main {
+				max-width: 720px;
+				margin: 0 auto;
+				padding: 4rem 2rem;
+				min-height: 70vh;
+			}
+
+			.blog-container h1 {
+				font-size: 2.5rem;
+				font-weight: 700;
+				margin-bottom: 3rem;
+				color: var(--text-primary);
+			}
+
+			.no-posts {
+				color: var(--text-secondary);
+				font-size: 1rem;
+			}
+
+			.posts-list {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+
+			.post-item {
+				display: flex;
+				align-items: baseline;
+				gap: 1.5rem;
+				margin-bottom: 1.25rem;
+				padding: 0.75rem 0;
+				transition: all 0.2s ease;
+			}
+
+			.post-item:hover {
+				padding-left: 0.5rem;
+			}
+
+			.post-date {
+				color: var(--text-muted);
+				font-size: 0.9rem;
+				font-family: monospace;
+				flex-shrink: 0;
+				min-width: 105px;
+			}
+
+			.post-link {
+				color: var(--accent-cyan);
+				text-decoration: none;
+				font-size: 1.1rem;
+				font-weight: 500;
+				transition: all 0.2s ease;
+				line-height: 1.4;
+			}
+
+			.post-link:hover {
+				color: var(--text-primary);
+				text-decoration: underline;
+			}
+
+			.draft-badge {
+				display: inline-block;
+				padding: 0.125rem 0.5rem;
+				background: rgba(220, 20, 60, 0.15);
+				border: 1px solid var(--accent-crimson);
+				color: var(--accent-crimson);
+				font-size: 0.7rem;
+				font-weight: 600;
+				font-family: monospace;
+				letter-spacing: 0.05em;
+				margin-left: 0.5rem;
+			}
+
+			/* Responsive */
+			@media (max-width: 768px) {
+				.blog-main {
+					padding: 3rem 1.5rem;
+				}
+
+				.blog-container h1 {
+					font-size: 2rem;
+					margin-bottom: 2rem;
+				}
+
+				.post-item {
+					flex-direction: column;
+					gap: 0.5rem;
+					margin-bottom: 1.75rem;
+				}
+
+				.post-date {
+					min-width: auto;
+					font-size: 0.85rem;
+				}
+
+				.post-link {
+					font-size: 1.05rem;
+				}
+			}
+
+			@media (max-width: 480px) {
+				.blog-main {
+					padding: 2rem 1rem;
+				}
+
+				.blog-container h1 {
+					font-size: 1.75rem;
+				}
+			}
+		</style>
+	</body>
+</html>

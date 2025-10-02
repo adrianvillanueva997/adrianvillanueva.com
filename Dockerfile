@@ -1,78 +1,32 @@
-# Base stage for shared settings
-FROM node:24.8.0-alpine AS base
-ENV NEXT_TELEMETRY_DISABLED=1
+FROM node:24.4.0-bookworm-slim AS builder
 
-# Install dependencies only when needed
-FROM base AS deps
-WORKDIR /app
-RUN apk add --no-cache libc6-compat curl bash make && \
-    npm install --global corepack@latest && \
-    corepack enable pnpm
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-# Install dependencies
-RUN pnpm install
+RUN corepack enable && corepack prepare pnpm@latest --activate
 
-# Builder stage
-FROM base AS builder
-WORKDIR /app
+RUN apt-get update && apt-get install --no-install-recommends curl make ca-certificates -y
 
-RUN apk add --no-cache curl bash make
-
-COPY --from=deps /app/node_modules ./node_modules
-COPY --from=deps /app/package.json ./package.json
-COPY --from=deps /app/pnpm-lock.yaml ./pnpm-lock.yaml
-COPY --from=deps /app/pnpm-workspace.yaml ./pnpm-workspace.yaml
-
-# Install d2 for diagram generation
 RUN curl -fsSL https://d2lang.com/install.sh -o /tmp/d2install.sh && \
     sh /tmp/d2install.sh && \
     rm /tmp/d2install.sh
 
-# Copy Everything
-# Copy repo contents
-COPY . .
-
-# Ensure js/ts path aliases are visible to Next's resolver in docker
-RUN test -f jsconfig.json || test -f tsconfig.json
-
-# Generate diagrams
-RUN mkdir -p public/static/diagrams && \
-    for f in data/diagrams/*.d2; do \
-    [ -f "$f" ] && { \
-    name=$(basename "${f%.d2}"); \
-    d2 --theme 0 --dark-theme 200 "$f" "public/static/diagrams/${name}.svg"; \
-    } \
-    done || echo "No .d2 files found"
-
-# Optimize SVGs and build
-RUN npm install --global corepack@latest && \
-    corepack enable pnpm && pnpm optimize_svgs && \
-    pnpm build
-
-# Production image, copy all the files and run next
-FROM node:23.9.0-alpine AS runner
 WORKDIR /app
 
-ENV NODE_ENV=production
-ENV NEXT_TELEMETRY_DISABLED=1
-ENV PORT=3000
-ENV HOSTNAME="0.0.0.0"
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
-# Add non root user for security
-RUN addgroup --system --gid 1001 nodejs && \
-    adduser --system --uid 1001 nextjs && \
-    chown -R nextjs:nodejs /app
+RUN pnpm install --frozen-lockfile
 
-# Copy only necessary files
-COPY --from=builder --chown=nextjs:nodejs /app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY . .
 
-# Use non-root user
-USER nextjs
+RUN pnpm build
 
-# Expose port
-EXPOSE 3000
+FROM nginx:1.29-bookworm AS production
 
-# Start the application
-CMD ["node", "server.js"]
+COPY nginx.conf /etc/nginx/nginx.conf
+
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD wget --quiet --tries=1 --spider http://localhost:80/ || exit 1
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

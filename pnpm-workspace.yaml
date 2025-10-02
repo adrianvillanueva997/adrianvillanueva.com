@@ -1,7 +1,4 @@
 onlyBuiltDependencies:
-  - '@biomejs/biome'
-  - contentlayer2
+  - '@tailwindcss/oxide'
   - esbuild
-  - protobufjs
   - sharp
-  - unrs-resolver

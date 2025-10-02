@@ -1,0 +1,108 @@
+---
+interface Props {
+  variant?: 'primary' | 'secondary' | 'outline';
+  size?: 'small' | 'medium' | 'large';
+  disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
+  href?: string;
+}
+
+const {
+  variant = 'primary',
+  size = 'medium',
+  disabled = false,
+  type = 'button',
+  href,
+  ...rest
+} = Astro.props;
+
+const Element = href ? 'a' : 'button';
+const elementProps = href
+  ? { href, ...rest }
+  : { type, disabled, ...rest };
+---
+
+<Element
+  class:list={[
+    'btn',
+    `btn--${variant}`,
+    `btn--${size}`,
+    { 'btn--disabled': disabled }
+  ]}
+  {...elementProps}
+>
+  <slot />
+</Element>
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+  }
+
+  /* Sizes */
+  .btn--small {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    gap: 0.25rem;
+  }
+
+  .btn--medium {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    gap: 0.5rem;
+  }
+
+  .btn--large {
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+    gap: 0.5rem;
+  }
+
+  /* Variants */
+  .btn--primary {
+    background: var(--accent, #2563eb);
+    color: white;
+  }
+
+  .btn--primary:hover:not(.btn--disabled) {
+    background: var(--accent-dark, #1d4ed8);
+    transform: translateY(-1px);
+  }
+
+  .btn--secondary {
+    background: #6b7280;
+    color: white;
+  }
+
+  .btn--secondary:hover:not(.btn--disabled) {
+    background: #4b5563;
+    transform: translateY(-1px);
+  }
+
+  .btn--outline {
+    background: transparent;
+    color: var(--accent, #2563eb);
+    border: 2px solid var(--accent, #2563eb);
+  }
+
+  .btn--outline:hover:not(.btn--disabled) {
+    background: var(--accent, #2563eb);
+    color: white;
+    transform: translateY(-1px);
+  }
+
+  .btn--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+  }
+</style>

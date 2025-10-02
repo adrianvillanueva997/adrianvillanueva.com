@@ -1,0 +1,99 @@
+---
+title: 'First post'
+date: '2022-07-08'
+tags: ['blog']
+draft: true
+summary: 'Lorem ipsum dolor sit amet'
+---
+import Terminal from '@/components/Terminal.astro';
+
+<Terminal
+  commands={[
+    { command: "git init", output: "Initialized empty Git repository in .git/" },
+    { command: "git add .", output: "Adding files to staging area..." },
+    { command: "git commit -m 'Initial commit'", output: "Created initial commit with 5 files" },
+    { command: "git push origin main", output: "Everything up-to-date" }
+  ]}
+/>
+
+<Terminal
+  commands={[
+    { command: "npm install", loading: true },
+    { command: "docker build -t myapp .", loading: true, timing: "5.2s" },
+    { command: "docker run myapp", output: "App started successfully!" }
+  ]}
+/>
+
+## Zsh Shell Example
+
+<Terminal
+  title="DEPLOYMENT"
+  shell="zsh"
+  commands={[
+    { command: "docker build -t myapp .", timing: "5.2s" },
+    { command: "docker push myapp:latest", output: "Push successful!" }
+  ]}
+/>
+
+### Error Handling
+
+<Terminal
+  commands={[
+    { command: "rm -rf node_modules", output: "Removed successfully" },
+    { command: "npm install", error: true, output: "Error: Network timeout" },
+    { command: "npm install --force", output: "Installation complete!" }
+  ]}
+/>
+
+### Different Shells
+
+<Terminal
+  shell="bash"
+  title="BASH_SESSION"
+  commands={[
+    { command: "echo $SHELL", output: "/bin/bash" }
+  ]}
+/>
+
+<Terminal
+  shell="zsh"
+  title="ZSH_SESSION"
+  commands={[
+    { command: "echo $SHELL", output: "/bin/zsh" }
+  ]}
+/>
+
+<Terminal
+  shell="fish"
+  title="FISH_SESSION"
+  commands={[
+    { command: "echo $SHELL", output: "/usr/bin/fish" }
+  ]}
+/>
+
+<Terminal
+  shell="powershell"
+  title="POWERSHELL"
+  commands={[
+    { command: "Get-Host", output: "Name : ConsoleHost" }
+  ]}
+/>
+
+### Custom Prompts
+
+<Terminal
+  commands={[
+    {
+      prompt: "root@server:/# ",
+      command: "systemctl status nginx",
+      output: "● nginx.service - A high performance web server\n   Active: active (running)"
+    },
+    {
+      prompt: "user@localhost:~$ ",
+      command: "whoami",
+      output: "user"
+    }
+  ]}
+/>
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
