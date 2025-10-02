@@ -12,7 +12,7 @@ COPY . .
 
 RUN pnpm build
 
-FROM nginx:1.29-1-bookworm AS production
+FROM nginx:1.29-bookworm AS production
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
