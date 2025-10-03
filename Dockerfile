@@ -18,12 +18,10 @@ COPY . .
 
 RUN pnpm build
 
-FROM nginx:1.29-bookworm AS production
+# Fix permissions on D2 generated SVG files
+RUN find /app/dist -type f -name "*.svg" -exec chmod 644 {} \;
 
-RUN apt-get update && apt-get install --no-install-recommends curl make ca-certificates -y
-RUN curl -fsSL https://d2lang.com/install.sh -o /tmp/d2install.sh && \
-    sh /tmp/d2install.sh && \
-    rm /tmp/d2install.sh
+FROM nginx:1.29-bookworm AS production
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
