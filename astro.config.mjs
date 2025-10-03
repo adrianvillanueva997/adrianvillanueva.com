@@ -18,7 +18,7 @@ export default defineConfig({
 		expressiveCode(),
 		mdx(),
 		sitemap(),
-		d2(),
+		d2({ output: "diagrams" }),
 		robotsTxt(),
 		icon()
 	],
