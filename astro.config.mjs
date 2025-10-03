@@ -13,12 +13,15 @@ import robotsTxt from 'astro-robots-txt';
 
 // https://astro.build/config
 export default defineConfig({
+	build: {
+		assets: 'static/assets'
+	},
 	site: 'https://adrianvillanueva.com',
 	integrations: [
 		expressiveCode(),
 		mdx(),
 		sitemap(),
-		d2({ output: "diagrams" }),
+		d2({ output: "static/diagrams" }),
 		robotsTxt(),
 		icon()
 	],
