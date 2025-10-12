@@ -16,7 +16,8 @@ export const SITE_KEYWORDS = [
 
 // Analytics
 export const PLAUSIBLE_DOMAIN = "adrianvillanueva.com";
-export const PLAUSIBLE_SCRIPT_URL = "https://analytics.thexiao77.com/js/script.file-downloads.hash.outbound-links.pageview-props.revenue.tagged-events.js";
+export const PLAUSIBLE_SCRIPT_URL =
+	"https://analytics.thexiao77.com/js/script.file-downloads.hash.outbound-links.pageview-props.revenue.tagged-events.js";
 
 // Hero section content
 export const HERO_TITLE = "SENIOR SOFTWARE ENGINEER";
@@ -25,11 +26,10 @@ export const HERO_TAGLINE =
 
 // Navigation
 export const NAV_ITEMS = [
-	{ label: "Projects", href: "/projects" },
 	{ label: "Blog", href: "/blog" },
 	{ label: "Now", href: "/now" },
-	{ label: "Resume", href: "/resume" },
 	{ label: "Contact", href: "/contact" },
+	{ label: "Resume", href: "https://resume.adrianvillanueva.com" },
 	{ label: "Digital Garden", href: "https://brain.adrianvillanueva.com" },
 ];
 
