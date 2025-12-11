@@ -1,0 +1,416 @@
+---
+import { Image } from "astro:assets";
+import Icon from "./Icon.astro";
+
+interface Props {
+	mePhoto: ImageMetadata;
+	latestPost: {
+		title: string;
+		date: Date;
+		slug: string;
+	};
+	nowStatus: string;
+}
+
+const { mePhoto, latestPost, nowStatus } = Astro.props;
+
+const techStack = [
+	{ name: "Rust", icon: "mdi:language-rust", color: "#dea584" },
+	{ name: "Python", icon: "mdi:language-python", color: "#3776ab" },
+	{ name: "AWS", icon: "mdi:aws", color: "#ff9900" },
+	{ name: "Kubernetes", icon: "mdi:kubernetes", color: "#326ce5" },
+	{ name: "Zig", icon: "mdi:flash", color: "#ec915c" },
+	{ name: "PostgreSQL", icon: "mdi:database", color: "#336791" },
+];
+---
+
+<section class="bento-grid">
+    <!-- Profile Module -->
+    <div class="bento-item profile-card">
+        <div class="profile-header">
+            <div class="avatar-container">
+                <Image
+                    src={mePhoto}
+                    alt="Adrian Villanueva"
+                    class="avatar"
+                    width={80}
+                    height={80}
+                />
+                <div class="status-indicator"></div>
+            </div>
+            <div class="profile-info">
+                <h1 class="name">Adrian Villanueva</h1>
+                <p class="role">Senior Systems Engineer</p>
+                <div class="location">
+                    <Icon name="mdi:map-marker" size={14} />
+                    <span>Tokyo, JP</span>
+                </div>
+            </div>
+        </div>
+        <p class="bio">
+            Building resilient cloud-native data platforms. Focused on
+            simplicity, scalability, and developer experience.
+        </p>
+        <div class="social-links">
+            <a
+                href="https://github.com/adrianvillanueva997"
+                target="_blank"
+                aria-label="GitHub"
+            >
+                <Icon name="mdi:github" size={20} />
+            </a>
+            <a
+                href="https://linkedin.com/in/adrian-villanueva-martinez"
+                target="_blank"
+                aria-label="LinkedIn"
+            >
+                <Icon name="mdi:linkedin" size={20} />
+            </a>
+            <a
+                href="mailto:adrian.villanueva.martinez@outlook.com"
+                aria-label="Email"
+            >
+                <Icon name="mdi:email" size={20} />
+            </a>
+        </div>
+    </div>
+
+    <!-- Status Monitor (NOW) -->
+    <div class="bento-item status-monitor">
+        <div class="module-header">
+            <Icon name="mdi:pulse" size={16} class="text-active" />
+            <span class="module-title">SYSTEM STATUS</span>
+        </div>
+        <div class="status-content">
+            <div class="status-item">
+                <span class="label">FOCUS</span>
+                <span class="value">{nowStatus}</span>
+            </div>
+            <div class="status-item">
+                <span class="label">LOCATION</span>
+                <span class="value">Tokyo, Japan</span>
+            </div>
+            <div class="status-item">
+                <span class="label">UPTIME</span>
+                <span class="value uptime-value">
+                    <span id="uptime-counter">Initializing...</span><span class="cursor">_</span>
+                </span>
+            </div>
+        </div>
+        <a href="/about" class="status-link">View Full Report &rarr;</a>
+    </div>
+
+<script>
+    function updateUptime() {
+        // System start date (Birth date: Jan 1, 1997)
+        const start = new Date('1997-01-01T00:00:00');
+        const now = new Date();
+        const diff = now.getTime() - start.getTime();
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        const element = document.getElementById('uptime-counter');
+        if (element) {
+            element.innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+    }
+
+    setInterval(updateUptime, 1000);
+    updateUptime();
+</script>
+
+    <!-- Latest Log -->
+    <a href={`/blog/${latestPost.slug}`} class="bento-item latest-log">
+        <div class="module-header">
+            <Icon name="mdi:file-document-outline" size={16} />
+            <span class="module-title">LATEST LOG</span>
+        </div>
+        <h3 class="log-title">{latestPost.title}</h3>
+        <p class="log-date">
+            {
+                latestPost.date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                })
+            }
+        </p>
+        <div class="log-arrow">
+            <Icon name="mdi:arrow-right" size={20} />
+        </div>
+    </a>
+
+    <!-- Tech Stack -->
+    <div class="bento-item tech-stack">
+        <div class="module-header">
+            <Icon name="mdi:chip" size={16} />
+            <span class="module-title">CORE MODULES</span>
+        </div>
+        <div class="tech-grid">
+            {
+                techStack.map((tech) => (
+                    <div class="tech-item">
+                        <Icon name={tech.icon} size={20} />
+                        <span>{tech.name}</span>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .bento-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, auto);
+        gap: 1.5rem;
+        margin: 2rem 0 4rem 0;
+    }
+
+    .bento-item {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-md);
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.2s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .bento-item:hover {
+        border-color: var(--border-light);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Profile Card - Spans 2x2 */
+    .profile-card {
+        grid-column: span 2;
+        grid-row: span 2;
+        justify-content: space-between;
+    }
+
+    .profile-header {
+        display: flex;
+        gap: 1.5rem;
+        align-items: flex-start;
+    }
+
+    .avatar {
+        border-radius: 50%;
+        border: 2px solid var(--bg-tertiary);
+    }
+
+    .avatar-container {
+        position: relative;
+    }
+
+    .status-indicator {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        width: 12px;
+        height: 12px;
+        background-color: var(--accent-active);
+        border-radius: 50%;
+        border: 2px solid var(--bg-secondary);
+        box-shadow: 0 0 8px var(--accent-active);
+    }
+
+    .name {
+        font-size: 1.5rem;
+        margin: 0 0 0.25rem 0;
+        line-height: 1.2;
+    }
+
+    .role {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .location {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        font-family: 'JetBrains Mono', monospace;
+    }
+
+    .bio {
+        margin: 1.5rem 0;
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .social-links a {
+        color: var(--text-muted);
+        transition: color 0.2s ease;
+    }
+
+    .social-links a:hover {
+        color: var(--text-primary);
+    }
+
+    /* Status Monitor - Spans 2x1 */
+    .status-monitor {
+        grid-column: span 2;
+    }
+
+    .module-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        letter-spacing: 0.05em;
+    }
+
+    .text-active {
+        color: var(--accent-active);
+    }
+
+    .status-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .status-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .label {
+        font-size: 0.7rem;
+        color: var(--text-muted);
+        font-family: 'JetBrains Mono', monospace;
+        text-transform: uppercase;
+    }
+
+    .value {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--text-primary);
+    }
+
+    .uptime-value {
+        font-family: 'JetBrains Mono', monospace;
+        color: var(--accent-active);
+    }
+
+    .cursor {
+        display: inline-block;
+        width: 8px;
+        animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+    }
+
+    .status-link {
+        margin-top: auto;
+        font-size: 0.8rem;
+        color: var(--accent-active);
+        text-align: right;
+    }
+
+    /* Latest Log - Spans 1x1 */
+    .latest-log {
+        grid-column: span 1;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .latest-log:hover .log-title {
+        color: var(--accent-info);
+    }
+
+    .log-title {
+        font-size: 1rem;
+        margin: 0.5rem 0;
+        line-height: 1.4;
+        flex-grow: 1;
+    }
+
+    .log-date {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        font-family: 'JetBrains Mono', monospace;
+    }
+
+    .log-arrow {
+        position: absolute;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        opacity: 0;
+        transform: translateX(-10px);
+        transition: all 0.2s ease;
+        color: var(--accent-info);
+    }
+
+    .latest-log:hover .log-arrow {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    /* Tech Stack - Spans 1x1 */
+    .tech-stack {
+        grid-column: span 1;
+    }
+
+    .tech-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+    }
+
+    .tech-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+        .bento-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .profile-card {
+            grid-column: span 2;
+        }
+
+        .status-monitor {
+            grid-column: span 2;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .bento-grid {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+</style>

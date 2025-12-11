@@ -1,0 +1,103 @@
+---
+import BaseHead from "@/components/BaseHead.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts";
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`404 - ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main class="container">
+			<div class="error-content">
+				<div class="error-code">404</div>
+				<div class="error-message">SYSTEM_ERROR: RESOURCE_NOT_FOUND</div>
+				<div class="terminal-output">
+					<p>> initiating_search_protocol...</p>
+					<p>> scanning_directories...</p>
+					<p class="error">> error: target_file_missing</p>
+					<p>> suggestion: return_to_base</p>
+				</div>
+				<a href="/" class="home-btn">
+					<span class="btn-bracket">[</span>
+					RETURN_HOME
+					<span class="btn-bracket">]</span>
+				</a>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.container {
+		min-height: 60vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.error-content {
+		text-align: center;
+		font-family: "JetBrains Mono", monospace;
+	}
+
+	.error-code {
+		font-size: 8rem;
+		font-weight: bold;
+		color: var(--accent-active);
+		line-height: 1;
+		margin-bottom: 1rem;
+		text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.5);
+	}
+
+	.error-message {
+		font-size: 1.5rem;
+		color: var(--text-primary);
+		margin-bottom: 2rem;
+		letter-spacing: 2px;
+	}
+
+	.terminal-output {
+		background: var(--bg-secondary);
+		border: 1px solid var(--border-color);
+		padding: 1.5rem;
+		text-align: left;
+		margin-bottom: 2rem;
+		border-radius: 4px;
+		max-width: 400px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.terminal-output p {
+		margin: 0.5rem 0;
+		color: var(--text-muted);
+		font-size: 0.9rem;
+	}
+
+	.terminal-output .error {
+		color: #ff4444;
+	}
+
+	.home-btn {
+		display: inline-block;
+		text-decoration: none;
+		color: var(--text-primary);
+		font-size: 1.2rem;
+		transition: color 0.2s ease;
+	}
+
+	.home-btn:hover {
+		color: var(--accent-active);
+	}
+
+	.btn-bracket {
+		color: var(--accent-active);
+		margin: 0 0.5rem;
+	}
+</style>

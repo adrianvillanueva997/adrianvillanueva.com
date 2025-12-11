@@ -1,249 +1,326 @@
 ---
-import { readFileSync } from 'fs';
-import { join } from 'path';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import { SITE_TITLE } from '../consts';
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { SITE_TITLE } from "../consts";
+import * as now from "../content/now.md";
 
-// Read and parse the now markdown file
-const nowPath = join(process.cwd(), 'src/content/now.md');
-const nowContent = readFileSync(nowPath, 'utf8');
+const { Content, frontmatter } = now;
 
-// Extract frontmatter and content
-const frontmatterRegex = /^---\s*\n(.*?)\n---\s*\n(.*)$/s;
-const match = nowContent.match(frontmatterRegex);
-
-let frontmatter: { title: string; lastUpdated: string } = { title: 'NOW', lastUpdated: 'Recently' };
-let markdownContent = nowContent;
-
-if (match) {
-	// Parse YAML frontmatter
-	const yamlContent = match[1];
-	const content = match[2];
-
-	// Simple YAML parsing for our specific format
-	const titleMatch = yamlContent.match(/title:\s*['"](.+?)['"]$/m);
-	const dateMatch = yamlContent.match(/lastUpdated:\s*['"](.+?)['"]$/m);
-
-	if (titleMatch) frontmatter.title = titleMatch[1];
-	if (dateMatch) frontmatter.lastUpdated = dateMatch[1];
-
-	markdownContent = content;
-}
-
-// Simple markdown to HTML conversion for our specific content
-function markdownToHtml(md: string): string {
-	return md
-		// Headers
-		.replace(/^### (.+)$/gm, '<h3 class="section-subtitle">$1</h3>')
-		.replace(/^## (.+)$/gm, '<h2 class="section-title">$1</h2>')
-		// Bold text
-		.replace(/\*\*(.+?)\*\*/g, '<strong class="highlight">$1</strong>')
-		// Code blocks
-		.replace(/`(.+?)`/g, '<code class="inline-code">$1</code>')
-		// Paragraphs
-		.replace(/^([^<\n].*)$/gm, '<p>$1</p>')
-		// Clean up extra p tags around headers
-		.replace(/<p>(<h[23][^>]*>.*?<\/h[23]>)<\/p>/g, '$1')
-		// Remove empty paragraphs
-		.replace(/<p><\/p>/g, '');
-}
-
-const htmlContent = markdownToHtml(markdownContent);
+// Mock system metrics for visual flair
+const metrics = [
+	{ label: "CPU_LOAD", value: "12%", status: "normal" },
+	{ label: "MEMORY", value: "64%", status: "warning" },
+	{ label: "NETWORK", value: "1.2Gbps", status: "normal" },
+	{ label: "STORAGE", value: "45%", status: "normal" },
+];
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={`${frontmatter.title} - ${SITE_TITLE}`} description="What Adrian Villanueza Martinez is currently working on, learning, and focused on in Tokyo." />
-	</head>
-	<body>
-		<Header />
-		<main class="container">
-			<!-- Hero Section -->
-			<section class="hero-section">
-				<div class="hero-content">
-					<h1 class="hero-title">{frontmatter.title}</h1>
-					<p class="hero-subtitle">
-						Last updated: {frontmatter.lastUpdated}
-					</p>
-				</div>
-			</section>
+    <head>
+        <BaseHead
+            title={`Now - ${SITE_TITLE}`}
+            description="What I'm doing now - Adrian Villanueva Martinez"
+        />
+    </head>
+    <body>
+        <Header />
+        <main class="container">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-content">
+                    <div class="system-status">
+                        <span class="status-dot"></span>
+                        <span class="status-text">SYSTEM.STATUS.UPDATE</span>
+                    </div>
+                    <h1 class="hero-title">NOW_LOG</h1>
+                    <p class="hero-subtitle">
+                        // LAST_UPDATE: {frontmatter.lastUpdated}<br />
+                        // LOCATION: TOKYO_JP
+                    </p>
+                </div>
+            </section>
 
-			<!-- Markdown Content -->
-			<section class="now-content">
-				<div class="markdown-content" set:html={htmlContent}></div>
-			</section>
+            <div class="content-grid">
+                <!-- Main Content -->
+                <div class="main-content">
+                    <div class="content-panel">
+                        <div class="panel-header">
+                            <span class="panel-title">CURRENT_FOCUS.MD</span>
+                            <div class="panel-controls">
+                                <span class="control">_</span>
+                                <span class="control">□</span>
+                                <span class="control">×</span>
+                            </div>
+                        </div>
+                        <div class="markdown-content">
+                            <Content />
+                        </div>
+                        <div class="panel-footer">
+                            <span class="footer-text">END_OF_LOG</span>
+                        </div>
+                    </div>
+                </div>
 
-			<!-- Update Note -->
-			<section class="now-section">
-				<div class="update-note">
-					<p>This page follows the <a href="https://nownownow.com/about" target="_blank" class="now-link">/now movement</a> -
-					a way to share what you're focused on at this point in your life.</p>
-					<p class="last-updated">Last updated: {frontmatter.lastUpdated}</p>
-				</div>
-			</section>
-		</main>
-		<Footer />
-	</body>
+                <!-- Sidebar / Metrics -->
+                <aside class="metrics-sidebar">
+                    <div class="metrics-panel">
+                        <div class="panel-header">
+                            <span class="panel-title">SYSTEM_METRICS</span>
+                        </div>
+                        <div class="metrics-grid">
+                            {
+                                metrics.map((metric) => (
+                                    <div class="metric-item">
+                                        <div class="metric-label">
+                                            {metric.label}
+                                        </div>
+                                        <div class="metric-value-row">
+                                            <span
+                                                class={`metric-value ${metric.status}`}
+                                            >
+                                                {metric.value}
+                                            </span>
+                                            <div class="metric-bar">
+                                                <div
+                                                    class={`bar-fill ${metric.status}`}
+                                                    style={`width: ${metric.value.replace('%', '').replace('Gbps', '0')}%`}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                        <div class="terminal-output">
+                            <div class="line">> scanning local_env...</div>
+                            <div class="line">
+                                > detecting active_projects...
+                            </div>
+                            <div class="line">> 3 processes found.</div>
+                            <div class="line blink">> _</div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </main>
+        <Footer />
+    </body>
 </html>
 
 <style>
-	.container {
-		max-width: 1200px;
-		margin: 0 auto;
-		padding: 2rem;
-	}
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
 
-	.hero-section {
-		text-align: center;
-		margin-bottom: 4rem;
-		padding-bottom: 3rem;
-		border-bottom: 2px solid var(--border-color);
-	}
+    /* Hero Section */
+    .hero-section {
+        margin-bottom: 3rem;
+        padding: 2rem;
+        border: 1px solid var(--border-color);
+        background: var(--bg-secondary);
+        position: relative;
+    }
 
-	.hero-title {
-		font-family: 'Orbitron', monospace;
-		font-size: 3rem;
-		font-weight: 900;
-		margin-bottom: 1rem;
-		background: linear-gradient(135deg, var(--accent-cyan), var(--text-primary));
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
-	}
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: var(--accent-active);
+    }
 
-	.hero-subtitle {
-		font-size: 1.2rem;
-		color: var(--text-secondary);
-		margin-bottom: 2rem;
-	}
+    .system-status {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+    }
 
-	.now-content {
-		margin-bottom: 4rem;
-	}
+    .status-dot {
+        width: 8px;
+        height: 8px;
+        background-color: var(--accent-active);
+        border-radius: 50%;
+        box-shadow: 0 0 5px var(--accent-active);
+        animation: pulse 2s infinite;
+    }
 
-	.markdown-content {
-		max-width: 800px;
-		margin: 0 auto;
-		background: var(--surface-color);
-		border: 2px solid var(--border-color);
-		padding: 3rem;
-		border-radius: 4px;
-		line-height: 1.7;
-	}
+    @keyframes pulse {
+        0% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.5;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
 
-	.markdown-content :global(h2.section-title) {
-		font-family: 'Orbitron', monospace;
-		font-size: 2rem;
-		font-weight: 700;
-		margin-bottom: 2rem;
-		margin-top: 0;
-		color: var(--accent-cyan);
-		border-left: 4px solid var(--accent-crimson);
-		padding-left: 1rem;
-	}
+    .hero-title {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 2.5rem;
+        margin: 0 0 1rem 0;
+        color: var(--text-primary);
+        letter-spacing: -1px;
+    }
 
-	.markdown-content :global(h3.section-subtitle) {
-		font-family: 'Orbitron', monospace;
-		font-size: 1.5rem;
-		font-weight: 600;
-		margin: 2rem 0 1rem 0;
-		color: var(--accent-crimson);
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-	}
+    .hero-subtitle {
+        font-family: 'JetBrains Mono', monospace;
+        color: var(--text-muted);
+        line-height: 1.6;
+    }
 
-	.markdown-content :global(p) {
-		color: var(--text-secondary);
-		margin-bottom: 1.5rem;
-		font-size: 1.1rem;
-	}
+    /* Content Grid */
+    .content-grid {
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        gap: 2rem;
+    }
 
-	.markdown-content :global(p:last-child) {
-		margin-bottom: 0;
-	}
+    @media (max-width: 768px) {
+        .content-grid {
+            grid-template-columns: 1fr;
+        }
+    }
 
-	.markdown-content :global(strong.highlight) {
-		color: var(--accent-cyan);
-		font-weight: 700;
-		font-family: 'Orbitron', monospace;
-		letter-spacing: 0.05em;
-	}
+    /* Main Content */
+    .content-panel {
+        border: 1px solid var(--border-color);
+        background: var(--bg-secondary);
+        height: 100%;
+    }
 
-	.markdown-content :global(code.inline-code) {
-		background: var(--bg-primary);
-		border: 1px solid var(--border-color);
-		color: var(--accent-cyan);
-		padding: 0.25rem 0.5rem;
-		border-radius: 2px;
-		font-family: 'Orbitron', monospace;
-		font-size: 0.9em;
-		font-weight: 600;
-	}
+    .panel-header {
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--bg-tertiary);
+    }
 
-	.now-section {
-		margin-bottom: 4rem;
-	}
+    .panel-title {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.9rem;
+        color: var(--text-muted);
+    }
 
-	.update-note {
-		text-align: center;
-		padding: 2rem;
-		background: var(--bg-secondary);
-		border-radius: 4px;
-		border: 1px solid var(--border-color);
-	}
+    .panel-controls {
+        display: flex;
+        gap: 0.5rem;
+        color: var(--text-muted);
+        font-size: 0.8rem;
+    }
 
-	.update-note p {
-		color: var(--text-secondary);
-		margin-bottom: 1rem;
-	}
+    .markdown-content {
+        padding: 2rem;
+        font-family: 'Inter', sans-serif;
+        line-height: 1.7;
+        color: var(--text-secondary);
+    }
 
-	.update-note p:last-child {
-		margin-bottom: 0;
-	}
+    .panel-footer {
+        padding: 0.5rem 1rem;
+        border-top: 1px solid var(--border-color);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        text-align: right;
+    }
 
-	.now-link {
-		color: var(--accent-cyan);
-		text-decoration: none;
-		transition: all 0.3s ease;
-	}
+    /* Metrics Sidebar */
+    .metrics-panel {
+        border: 1px solid var(--border-color);
+        background: var(--bg-secondary);
+        padding: 0;
+    }
 
-	.now-link:hover {
-		color: var(--accent-crimson);
-		text-decoration: underline;
-	}
+    .metrics-grid {
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
 
-	.last-updated {
-		color: var(--text-muted) !important;
-		font-style: italic;
-		font-size: 0.9rem;
-	}
+    .metric-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
 
-	@media (max-width: 768px) {
-		.container {
-			padding: 1rem;
-		}
+    .metric-label {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+    }
 
-		.hero-title {
-			font-size: 2rem;
-		}
+    .metric-value-row {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
 
-		.markdown-content {
-			padding: 2rem;
-		}
+    .metric-value {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 1rem;
+        color: var(--text-primary);
+        min-width: 60px;
+    }
 
-		.markdown-content :global(h2.section-title) {
-			font-size: 1.5rem;
-		}
+    .metric-value.warning {
+        color: #e5c07b;
+    }
 
-		.markdown-content :global(h3.section-subtitle) {
-			font-size: 1.2rem;
-		}
+    .metric-bar {
+        flex: 1;
+        height: 4px;
+        background: var(--bg-tertiary);
+        border-radius: 2px;
+        overflow: hidden;
+    }
 
-		.markdown-content :global(p) {
-			font-size: 1rem;
-		}
-	}
+    .bar-fill {
+        height: 100%;
+        background: var(--accent-active);
+    }
+
+    .bar-fill.warning {
+        background: #e5c07b;
+    }
+
+    .terminal-output {
+        padding: 1.5rem;
+        border-top: 1px solid var(--border-color);
+        background: #000;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .line {
+        opacity: 0.7;
+    }
+
+    .blink {
+        animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+        50% {
+            opacity: 0;
+        }
+    }
 </style>
