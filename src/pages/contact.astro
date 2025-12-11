@@ -2,6 +2,7 @@
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
+import Icon from "../components/Icon.astro";
 import { SITE_TITLE, SOCIAL_LINKS } from "../consts";
 ---
 
@@ -16,167 +17,83 @@ import { SITE_TITLE, SOCIAL_LINKS } from "../consts";
     <body>
         <Header />
         <main class="container">
-            <!-- Hero Section -->
-            <section class="hero-section">
-                <div class="hero-content">
-                    <div class="system-status">
-                        <span class="status-dot"></span>
-                        <span class="status-text">SYSTEM.COMMS.UPLINK</span>
+            <div class="contact-grid">
+                <!-- Email Card -->
+                <a href={`mailto:${SOCIAL_LINKS.email}`} class="bento-item contact-card">
+                    <div class="module-header">
+                        <Icon name="mdi:email" size={16} />
+                        <span class="module-title">EMAIL</span>
                     </div>
-                    <h1 class="hero-title">CONTACT_PROTOCOL</h1>
-                    <p class="hero-subtitle">
-                        // STATUS: LISTENING<br />
-                        // ENCRYPTION: STANDARD
-                    </p>
-                    <p class="hero-description">
-                        [SYSTEM_MSG]: Initiating handshake protocol. Open
-                        channels available for collaboration, open source
-                        contributions, and technical consultation.
-                    </p>
+                    <div class="card-content">
+                        <p class="card-desc">
+                            Best for project inquiries and professional discussions.
+                        </p>
+                        <span class="contact-value">{SOCIAL_LINKS.email}</span>
+                    </div>
+                    <div class="card-arrow">
+                        <Icon name="mdi:arrow-right" size={20} />
+                    </div>
+                </a>
+
+                <!-- LinkedIn Card -->
+                <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" class="bento-item contact-card">
+                    <div class="module-header">
+                        <Icon name="mdi:linkedin" size={16} />
+                        <span class="module-title">LINKEDIN</span>
+                    </div>
+                    <div class="card-content">
+                        <p class="card-desc">
+                            Connect for professional networking and opportunities.
+                        </p>
+                        <span class="contact-value">@adrian-villanueva-martinez</span>
+                    </div>
+                    <div class="card-arrow">
+                        <Icon name="mdi:arrow-right" size={20} />
+                    </div>
+                </a>
+
+                <!-- GitHub Card -->
+                <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer" class="bento-item contact-card">
+                    <div class="module-header">
+                        <Icon name="mdi:github" size={16} />
+                        <span class="module-title">GITHUB</span>
+                    </div>
+                    <div class="card-content">
+                        <p class="card-desc">
+                            Check out my open source projects and contributions.
+                        </p>
+                        <span class="contact-value">@adrianvillanueva997</span>
+                    </div>
+                    <div class="card-arrow">
+                        <Icon name="mdi:arrow-right" size={20} />
+                    </div>
+                </a>
+
+                <!-- Interests Panel -->
+                <div class="bento-item interests-panel">
+                    <div class="module-header">
+                        <Icon name="mdi:lightbulb-outline" size={16} />
+                        <span class="module-title">OPEN TO DISCUSS</span>
+                    </div>
+                    <div class="interests-content">
+                        <div class="interest-item">
+                            <Icon name="mdi:cloud" size={18} />
+                            <span>Cloud-native data platforms & architecture</span>
+                        </div>
+                        <div class="interest-item">
+                            <Icon name="mdi:database" size={18} />
+                            <span>Data engineering & MLOps</span>
+                        </div>
+                        <div class="interest-item">
+                            <Icon name="mdi:code-braces" size={18} />
+                            <span>Open source contributions</span>
+                        </div>
+                        <div class="interest-item">
+                            <Icon name="mdi:briefcase" size={18} />
+                            <span>Technical consulting & collaboration</span>
+                        </div>
+                    </div>
                 </div>
-            </section>
-
-            <div class="content-grid">
-                <!-- Contact Methods -->
-                <section class="contact-section">
-                    <div class="section-header">
-                        <span class="section-marker">>></span>
-                        <h2 class="section-title">COMMUNICATION_CHANNELS</h2>
-                    </div>
-                    <div class="methods-grid">
-                        <!-- Email -->
-                        <div class="contact-card">
-                            <div class="card-header-line">
-                                <span class="card-id">CH_01: SMTP</span>
-                                <span class="card-status">ACTIVE</span>
-                            </div>
-                            <div class="card-content">
-                                <div class="card-icon">
-                                    <span class="icon-symbol">@</span>
-                                </div>
-                                <h3 class="card-title">EMAIL_RELAY</h3>
-                                <p class="card-desc">
-                                    Direct line for project inquiries and
-                                    collaborations.
-                                </p>
-                                <a
-                                    href={`mailto:${SOCIAL_LINKS.email}`}
-                                    class="action-link"
-                                >
-                                    <span>SEND_MESSAGE</span>
-                                    <span class="link-arrow">→</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- LinkedIn -->
-                        <div class="contact-card">
-                            <div class="card-header-line">
-                                <span class="card-id">CH_02: LINKEDIN</span>
-                                <span class="card-status">ACTIVE</span>
-                            </div>
-                            <div class="card-content">
-                                <div class="card-icon">
-                                    <span class="icon-symbol">in</span>
-                                </div>
-                                <h3 class="card-title">PROFESSIONAL_NET</h3>
-                                <p class="card-desc">
-                                    Professional networking and career
-                                    opportunities.
-                                </p>
-                                <a
-                                    href={SOCIAL_LINKS.linkedin}
-                                    target="_blank"
-                                    class="action-link"
-                                >
-                                    <span>CONNECT</span>
-                                    <span class="link-arrow">→</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- GitHub -->
-                        <div class="contact-card">
-                            <div class="card-header-line">
-                                <span class="card-id">CH_03: GITHUB</span>
-                                <span class="card-status">ACTIVE</span>
-                            </div>
-                            <div class="card-content">
-                                <div class="card-icon">
-                                    <span class="icon-symbol">git</span>
-                                </div>
-                                <h3 class="card-title">CODE_REPOSITORY</h3>
-                                <p class="card-desc">
-                                    Open source contributions and project
-                                    archives.
-                                </p>
-                                <a
-                                    href={SOCIAL_LINKS.github}
-                                    target="_blank"
-                                    class="action-link"
-                                >
-                                    <span>ACCESS_REPO</span>
-                                    <span class="link-arrow">→</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- What I Work On -->
-                <section class="work-section">
-                    <div class="section-header">
-                        <span class="section-marker">>></span>
-                        <h2 class="section-title">OPERATIONAL_DOMAINS</h2>
-                    </div>
-                    <div class="work-panel">
-                        <div class="work-list">
-                            <div class="work-item">
-                                <div class="work-header">
-                                    <span class="work-index">01</span>
-                                    <span class="work-title"
-                                        >WEB_APPLICATIONS</span
-                                    >
-                                </div>
-                                <p class="work-desc">
-                                    Full-stack development, progressive web
-                                    apps, real-time systems.
-                                </p>
-                            </div>
-                            <div class="work-item">
-                                <div class="work-header">
-                                    <span class="work-index">02</span>
-                                    <span class="work-title">CREATIVE_TECH</span
-                                    >
-                                </div>
-                                <p class="work-desc">
-                                    Interactive installations, AR/VR
-                                    experiences, digital art.
-                                </p>
-                            </div>
-                            <div class="work-item">
-                                <div class="work-header">
-                                    <span class="work-index">03</span>
-                                    <span class="work-title">AI_&_ML</span>
-                                </div>
-                                <p class="work-desc">
-                                    Machine learning applications, AI-powered
-                                    tools, intelligent UX.
-                                </p>
-                            </div>
-                            <div class="work-item">
-                                <div class="work-header">
-                                    <span class="work-index">04</span>
-                                    <span class="work-title">OPEN_SOURCE</span>
-                                </div>
-                                <p class="work-desc">
-                                    Developer tools, frameworks, libraries,
-                                    community projects.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
             </div>
         </main>
         <Footer />
@@ -185,274 +102,119 @@ import { SITE_TITLE, SOCIAL_LINKS } from "../consts";
 
 <style>
     .container {
-        max-width: 1000px;
+        max-width: 900px;
         margin: 0 auto;
-        padding: 2rem;
+        padding: 2rem 1rem;
     }
 
-    /* Hero Section */
-    .hero-section {
-        margin-bottom: 4rem;
-        padding: 3rem;
-        border: 1px solid var(--border-color);
+    .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+    }
+
+    .bento-item {
         background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-md);
+        padding: 1.5rem;
+        transition: all 0.2s ease;
         position: relative;
     }
 
-    .hero-section::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 4px;
-        height: 100%;
-        background: var(--accent-active);
+    .bento-item:hover {
+        border-color: var(--border-light);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
-    .system-status {
+    .module-header {
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        margin-bottom: 1.5rem;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.8rem;
-        color: var(--text-muted);
-    }
-
-    .status-dot {
-        width: 8px;
-        height: 8px;
-        background-color: var(--accent-active);
-        border-radius: 50%;
-        box-shadow: 0 0 5px var(--accent-active);
-    }
-
-    .hero-title {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 3.5rem;
-        font-weight: 700;
         margin-bottom: 1rem;
-        color: var(--text-primary);
-        letter-spacing: -0.05em;
-    }
-
-    .hero-subtitle {
         font-family: 'JetBrains Mono', monospace;
-        font-size: 1rem;
-        color: var(--accent-active);
-        margin-bottom: 1.5rem;
-        line-height: 1.6;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        letter-spacing: 0.05em;
     }
 
-    .hero-description {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 1rem;
-        color: var(--text-secondary);
-        max-width: 700px;
-        line-height: 1.6;
-        border-left: 2px solid var(--border-color);
-        padding-left: 1rem;
-    }
-
-    /* Section Headers */
-    .section-header {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        margin-bottom: 2rem;
-        border-bottom: 1px solid var(--border-color);
-        padding-bottom: 0.5rem;
-    }
-
-    .section-marker {
-        color: var(--accent-active);
-        font-family: 'JetBrains Mono', monospace;
-        font-weight: 700;
-    }
-
-    .section-title {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: var(--text-primary);
-        margin: 0;
-        text-transform: uppercase;
-    }
-
-    /* Contact Methods */
-    .contact-section {
-        margin-bottom: 4rem;
-    }
-
-    .methods-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-    }
-
+    /* Contact Cards */
     .contact-card {
-        background: var(--bg-primary);
-        border: 1px solid var(--border-color);
+        text-decoration: none;
+        color: inherit;
         display: flex;
         flex-direction: column;
-        transition: all 0.2s ease;
-    }
-
-    .contact-card:hover {
-        border-color: var(--accent-active);
-        transform: translateY(-2px);
-        box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
-    }
-
-    .card-header-line {
-        display: flex;
-        justify-content: space-between;
-        padding: 0.5rem 1rem;
-        background: var(--bg-secondary);
-        border-bottom: 1px solid var(--border-color);
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.7rem;
-        color: var(--text-muted);
-    }
-
-    .card-status {
-        color: var(--accent-active);
     }
 
     .card-content {
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
         flex: 1;
-    }
-
-    .card-icon {
-        width: 60px;
-        height: 60px;
-        background: var(--bg-secondary);
-        border: 1px solid var(--border-color);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 1.5rem;
-        border-radius: 50%;
-    }
-
-    .icon-symbol {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 1.5rem;
-        color: var(--accent-active);
-        font-weight: 700;
-    }
-
-    .card-title {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: var(--text-primary);
-        margin-bottom: 1rem;
     }
 
     .card-desc {
-        font-family: 'JetBrains Mono', monospace;
         font-size: 0.9rem;
         color: var(--text-secondary);
-        margin-bottom: 2rem;
         line-height: 1.6;
-        flex: 1;
-    }
-
-    .action-link {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0.75rem 1rem;
-        border: 1px solid var(--border-color);
-        color: var(--text-secondary);
-        text-decoration: none;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.9rem;
-        transition: all 0.2s ease;
-    }
-
-    .action-link:hover {
-        background: var(--accent-active);
-        border-color: var(--accent-active);
-        color: var(--bg-primary);
-    }
-
-    /* Work Section */
-    .work-panel {
-        border: 1px solid var(--border-color);
-        background: var(--bg-primary);
-    }
-
-    .work-list {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-
-    .work-item {
-        padding: 2rem;
-        border-right: 1px solid var(--border-color);
-        border-bottom: 1px solid var(--border-color);
-        transition: background 0.2s ease;
-    }
-
-    .work-item:hover {
-        background: var(--bg-secondary);
-    }
-
-    .work-header {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
         margin-bottom: 1rem;
     }
 
-    .work-index {
+    .contact-value {
         font-family: 'JetBrains Mono', monospace;
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         color: var(--accent-active);
-        opacity: 0.5;
+        word-break: break-all;
     }
 
-    .work-title {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 1rem;
-        font-weight: 700;
-        color: var(--text-primary);
+    .card-arrow {
+        position: absolute;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        color: var(--accent-active);
+        opacity: 0;
+        transform: translateX(-10px);
+        transition: all 0.2s ease;
     }
 
-    .work-desc {
-        font-family: 'JetBrains Mono', monospace;
+    .contact-card:hover .card-arrow {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    /* Interests Panel */
+    .interests-panel {
+        grid-column: 1 / -1;
+    }
+
+    .interests-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+    }
+
+    .interest-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        background: var(--bg-tertiary);
+        border-radius: 4px;
         font-size: 0.9rem;
         color: var(--text-secondary);
-        line-height: 1.6;
     }
 
-    @media (max-width: 768px) {
-        .container {
-            padding: 1rem;
-        }
+    .interest-item :global(svg) {
+        color: var(--accent-active);
+        flex-shrink: 0;
+    }
 
-        .hero-title {
-            font-size: 2.5rem;
-        }
-
-        .methods-grid {
+    @media (max-width: 640px) {
+        .contact-grid {
             grid-template-columns: 1fr;
         }
 
-        .work-list {
+        .interests-content {
             grid-template-columns: 1fr;
-        }
-
-        .work-item {
-            border-right: none;
         }
     }
 </style>

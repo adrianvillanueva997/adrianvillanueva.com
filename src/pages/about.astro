@@ -1,7 +1,10 @@
 ---
+import { Image } from "astro:assets";
+import mePhoto from "@/assets/me/me.jpg";
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
+import Icon from "../components/Icon.astro";
 import { SITE_TITLE } from "../consts";
 import * as about from "../content/about.md";
 
@@ -44,110 +47,80 @@ const timeline = [
     <body>
         <Header />
         <main class="container">
-            <!-- Hero Section -->
-            <section class="hero-section">
-                <div class="hero-content">
-                    <div class="system-status">
-                        <span class="status-dot"></span>
-                        <span class="status-text">SYSTEM.USER.PROFILE</span>
+            <div class="about-grid">
+                <!-- Profile Card -->
+                <div class="bento-item profile-card">
+                    <div class="module-header">
+                        <Icon name="mdi:account" size={16} />
+                        <span class="module-title">PROFILE</span>
                     </div>
-                    <h1 class="hero-title">USER_PROFILE</h1>
-                    <p class="hero-subtitle">
-                        // ID: {frontmatter.name.toUpperCase()}<br />
-                        // ROLE: {frontmatter.occupation.toUpperCase()}
-                    </p>
+                    <div class="profile-content">
+                        <div class="avatar-container">
+                            <Image
+                                src={mePhoto}
+                                alt={frontmatter.name}
+                                class="avatar"
+                                width={120}
+                                height={120}
+                            />
+                            <div class="status-indicator"></div>
+                        </div>
+                        <h1 class="name">{frontmatter.name}</h1>
+                        <p class="role">{frontmatter.occupation}</p>
+                        <div class="location-info">
+                            <Icon name="mdi:map-marker" size={14} />
+                            <span>Tokyo, Japan</span>
+                        </div>
+                        <div class="social-links">
+                            <a href={frontmatter.github} target="_blank" aria-label="GitHub">
+                                <Icon name="mdi:github" size={20} />
+                            </a>
+                            <a href={frontmatter.linkedin} target="_blank" aria-label="LinkedIn">
+                                <Icon name="mdi:linkedin" size={20} />
+                            </a>
+                            <a href={`mailto:${frontmatter.email}`} aria-label="Email">
+                                <Icon name="mdi:email" size={20} />
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </section>
 
-            <div class="content-grid">
-                <!-- Sidebar / Profile Card -->
-                <aside class="profile-sidebar">
-                    <div class="profile-card">
-                        <div class="card-header">
-                            <span class="header-text">IDENTITY_MATRIX</span>
-                            <span class="header-icon">⬢</span>
-                        </div>
-                        <div class="profile-image-container">
-                            <img src={frontmatter.avatar} alt={frontmatter.name} class="profile-img" />
-                            <div class="scan-line"></div>
-                        </div>
-                        <div class="profile-stats">
-                            <div class="stat-row">
-                                <span class="stat-label">ORIGIN</span>
-                                <span class="stat-value">SPAIN [ES]</span>
-                            </div>
-                            <div class="stat-row">
-                                <span class="stat-label">LOC</span>
-                                <span class="stat-value">TOKYO [JP]</span>
-                            </div>
-                            <div class="stat-row">
-                                <span class="stat-label">STATUS</span>
-                                <span class="stat-value active">ONLINE</span>
-                            </div>
-                        </div>
-                        <div class="profile-actions">
-                            <a href={frontmatter.github} target="_blank" class="action-btn">
-                                <span>GITHUB</span>
-                                <span>↗</span>
-                            </a>
-                            <a href={frontmatter.linkedin} target="_blank" class="action-btn">
-                                <span>LINKEDIN</span>
-                                <span>↗</span>
-                            </a>
-                            <a href={`mailto:${frontmatter.email}`} class="action-btn primary">
-                                <span>CONTACT</span>
-                                <span>✉</span>
-                            </a>
-                        </div>
+                <!-- Bio Panel -->
+                <div class="bento-item bio-panel">
+                    <div class="module-header">
+                        <Icon name="mdi:file-document" size={16} />
+                        <span class="module-title">BIO</span>
                     </div>
-                </aside>
-
-                <!-- Main Content -->
-                <div class="main-content">
-                    <!-- Bio Section -->
-                    <div class="content-panel">
-                        <div class="panel-header">
-                            <span class="panel-title">BIO_DATA.MD</span>
-                            <div class="panel-controls">
-                                <span class="control">_</span>
-                                <span class="control">□</span>
-                                <span class="control">×</span>
-                            </div>
-                        </div>
-                        <div class="markdown-content">
-                            <Content />
-                        </div>
+                    <div class="bio-content">
+                        <Content />
                     </div>
+                </div>
 
-                    <!-- Countries Timeline -->
-                    <div class="content-panel">
-                        <div class="panel-header">
-                            <span class="panel-title">LOCATION_TIMELINE.LOG</span>
-                            <div class="panel-controls">
-                                <span class="control">_</span>
-                                <span class="control">□</span>
-                                <span class="control">×</span>
-                            </div>
-                        </div>
-                        <div class="timeline-container">
-                            {timeline.map((entry, index) => (
-                                <div class="timeline-entry">
-                                    <div class="timeline-marker">
-                                        <div class="marker-dot"></div>
-                                        {index < timeline.length - 1 && <div class="marker-line"></div>}
-                                    </div>
-                                    <div class="timeline-content">
-                                        <div class="timeline-header">
-                                            <span class="country-flag">{entry.flag}</span>
-                                            <h3 class="country-name">{entry.country}</h3>
-                                            <span class="timeline-years">{entry.years}</span>
-                                        </div>
-                                        <div class="timeline-period">{entry.period}</div>
-                                        <div class="timeline-description">// {entry.description}</div>
-                                    </div>
+                <!-- Timeline Panel -->
+                <div class="bento-item timeline-panel">
+                    <div class="module-header">
+                        <Icon name="mdi:map-marker-path" size={16} />
+                        <span class="module-title">LOCATIONS</span>
+                    </div>
+                    <div class="timeline-container">
+                        {timeline.map((entry, index) => (
+                            <div class="timeline-entry">
+                                <div class="timeline-marker">
+                                    <div class="marker-dot"></div>
+                                    {index < timeline.length - 1 && <div class="marker-line"></div>}
                                 </div>
-                            ))}
-                        </div>
+                                <div class="timeline-content">
+                                    <div class="timeline-header">
+                                        <span class="country-flag">{entry.flag}</span>
+                                        <h3 class="country-name">{entry.country}</h3>
+                                        <span class="timeline-years">{entry.years}</span>
+                                    </div>
+                                    <div class="timeline-period">{entry.period}</div>
+                                    <div class="timeline-description">{entry.description}</div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                     </div>
 
                 </div>
@@ -161,246 +134,164 @@ const timeline = [
     .container {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 2rem;
+        padding: 2rem 1rem;
     }
 
-    /* Hero Section */
-    .hero-section {
-        margin-bottom: 3rem;
-        padding: 2rem;
-        border: 1px solid var(--border-color);
-        background: var(--bg-secondary);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .hero-section::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 4px;
-        height: 100%;
-        background: var(--accent-active);
-    }
-
-    .system-status {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        margin-bottom: 1rem;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.8rem;
-        color: var(--text-muted);
-    }
-
-    .status-dot {
-        width: 8px;
-        height: 8px;
-        background-color: var(--accent-active);
-        border-radius: 50%;
-        box-shadow: 0 0 5px var(--accent-active);
-        animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-        0% { opacity: 1; }
-        50% { opacity: 0.5; }
-        100% { opacity: 1; }
-    }
-
-    .hero-title {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 2.5rem;
-        margin: 0 0 1rem 0;
-        color: var(--text-primary);
-        letter-spacing: -1px;
-    }
-
-    .hero-subtitle {
-        font-family: 'JetBrains Mono', monospace;
-        color: var(--text-muted);
-        line-height: 1.6;
-    }
-
-    /* Content Grid */
-    .content-grid {
+    .about-grid {
         display: grid;
         grid-template-columns: 300px 1fr;
-        gap: 2rem;
+        gap: 1.5rem;
+        margin: 2rem 0;
     }
 
-    @media (max-width: 768px) {
-        .content-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    /* Profile Sidebar */
-    .profile-card {
-        border: 1px solid var(--border-color);
+    .bento-item {
         background: var(--bg-secondary);
-        position: sticky;
-        top: 2rem;
-    }
-
-    .card-header {
-        padding: 1rem;
-        border-bottom: 1px solid var(--border-color);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.9rem;
-        color: var(--text-muted);
-    }
-
-    .profile-image-container {
-        position: relative;
-        width: 100%;
-        aspect-ratio: 1;
-        overflow: hidden;
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    .profile-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        filter: grayscale(100%) contrast(1.2);
-        transition: filter 0.3s ease;
-    }
-
-    .profile-card:hover .profile-img {
-        filter: grayscale(0%) contrast(1);
-    }
-
-    .scan-line {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background: rgba(var(--accent-rgb), 0.5);
-        animation: scan 3s linear infinite;
-        pointer-events: none;
-    }
-
-    @keyframes scan {
-        0% { top: 0; opacity: 0; }
-        10% { opacity: 1; }
-        90% { opacity: 1; }
-        100% { top: 100%; opacity: 0; }
-    }
-
-    .profile-stats {
-        padding: 1rem;
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    .stat-row {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 0.5rem;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.8rem;
-    }
-
-    .stat-row:last-child {
-        margin-bottom: 0;
-    }
-
-    .stat-label {
-        color: var(--text-muted);
-    }
-
-    .stat-value {
-        color: var(--text-primary);
-    }
-
-    .stat-value.active {
-        color: var(--accent-active);
-    }
-
-    .profile-actions {
-        padding: 1rem;
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .action-btn {
-        display: flex;
-        justify-content: space-between;
-        padding: 0.75rem 1rem;
         border: 1px solid var(--border-color);
-        color: var(--text-primary);
-        text-decoration: none;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.9rem;
+        border-radius: var(--radius-md);
+        padding: 1.5rem;
         transition: all 0.2s ease;
     }
 
-    .action-btn:hover {
-        background: var(--hover-bg);
-        border-color: var(--accent-active);
+    .bento-item:hover {
+        border-color: var(--border-light);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
-    .action-btn.primary {
-        background: var(--accent-active);
-        color: var(--bg-primary);
-        border-color: var(--accent-active);
+    .module-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        letter-spacing: 0.05em;
     }
 
-    .action-btn.primary:hover {
-        background: transparent;
-        color: var(--accent-active);
-    }
-
-    /* Main Content */
-    .main-content {
+    /* Profile Card */
+    .profile-card {
         display: flex;
         flex-direction: column;
-        gap: 2rem;
-    }
-
-    .content-panel {
-        border: 1px solid var(--border-color);
-        background: var(--bg-secondary);
-    }
-
-    .panel-header {
-        padding: 0.75rem 1rem;
-        border-bottom: 1px solid var(--border-color);
-        display: flex;
-        justify-content: space-between;
         align-items: center;
-        background: var(--bg-tertiary);
+        text-align: center;
     }
 
-    .panel-title {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.9rem;
-        color: var(--text-muted);
-    }
-
-    .panel-controls {
+    .profile-content {
         display: flex;
-        gap: 0.5rem;
-        color: var(--text-muted);
-        font-size: 0.8rem;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
     }
 
-    .markdown-content {
-        padding: 2rem;
+    .avatar-container {
+        position: relative;
+        margin-bottom: 1rem;
+    }
+
+    .avatar {
+        border-radius: 50%;
+        border: 2px solid var(--bg-tertiary);
+    }
+
+    .status-indicator {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        width: 12px;
+        height: 12px;
+        background-color: var(--accent-active);
+        border-radius: 50%;
+        border: 2px solid var(--bg-secondary);
+        box-shadow: 0 0 8px var(--accent-active);
+    }
+
+    .name {
+        font-size: 1.5rem;
+        margin: 0 0 0.5rem 0;
+        line-height: 1.2;
+    }
+
+    .role {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    .location-info {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        font-family: 'JetBrains Mono', monospace;
+        margin-bottom: 1.5rem;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .social-links a {
+        color: var(--text-muted);
+        transition: color 0.2s ease;
+    }
+
+    .social-links a:hover {
+        color: var(--text-primary);
+    }
+
+    /* Bio Panel */
+    .bio-panel {
+        grid-column: 2;
+    }
+
+    .bio-content {
         font-family: 'Inter', sans-serif;
         line-height: 1.7;
         color: var(--text-secondary);
+        font-size: 0.95rem;
     }
 
-    /* Countries Timeline */
+    .bio-content :global(strong) {
+        color: var(--text-primary);
+    }
+
+    .bio-content :global(h2) {
+        font-size: 1.1rem;
+        margin: 1.5rem 0 1rem 0;
+        border: none;
+        padding: 0;
+    }
+
+    .bio-content :global(ul) {
+        list-style: none;
+        padding: 0;
+    }
+
+    .bio-content :global(li) {
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .bio-content :global(li::before) {
+        content: '>';
+        position: absolute;
+        left: 0;
+        color: var(--accent-active);
+        font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Timeline Panel */
+    .timeline-panel {
+        grid-column: 2;
+    }
+
     .timeline-container {
-        padding: 2rem;
+        display: flex;
+        flex-direction: column;
     }
 
     .timeline-entry {
@@ -436,11 +327,15 @@ const timeline = [
 
     .timeline-content {
         flex: 1;
-        padding-bottom: 2rem;
+        padding-bottom: 1.5rem;
     }
 
     .timeline-entry:last-child .timeline-content {
         padding-bottom: 0;
+    }
+
+    .timeline-entry:last-child .marker-line {
+        display: none;
     }
 
     .timeline-header {
@@ -480,9 +375,20 @@ const timeline = [
     }
 
     .timeline-description {
-        font-family: 'JetBrains Mono', monospace;
         font-size: 0.9rem;
         color: var(--text-secondary);
         line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+        .about-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .profile-card,
+        .bio-panel,
+        .timeline-panel {
+            grid-column: 1;
+        }
     }
 </style>
