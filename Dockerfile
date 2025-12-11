@@ -2,11 +2,10 @@ FROM node:24.4.0-bookworm-slim AS builder
 
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
-RUN apt-get update && apt-get install --no-install-recommends curl make ca-certificates -y
+RUN apt-get update && apt-get install --no-install-recommends curl make ca-certificates golang git -y
 
-RUN curl -fsSL https://d2lang.com/install.sh -o /tmp/d2install.sh && \
-    sh /tmp/d2install.sh && \
-    rm /tmp/d2install.sh
+RUN go install oss.terrastruct.com/d2@latest && \
+    cp /root/go/bin/d2 /usr/local/bin/d2
 
 WORKDIR /app
 
