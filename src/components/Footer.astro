@@ -1,7 +1,7 @@
 ---
-import { Icon } from 'astro-icon/components';
+import { Icon } from "astro-icon/components";
 import badge from "@/assets/footer/Written-By-a-Human-Not-By-AI-Badge-black.svg";
-import { SITE_TITLE, SOCIAL_LINKS } from '@/consts';
+import { SITE_TITLE, SOCIAL_LINKS } from "@/consts";
 
 const today = new Date();
 ---
@@ -101,8 +101,8 @@ const today = new Date();
 
 <style>
 	footer {
-		padding: 2rem 1rem;
-		border-top: 4px solid var(--text-primary);
+		padding: 3rem 1rem;
+		border-top: 1px solid var(--border-color);
 		background: var(--bg-primary);
 		margin-top: 4rem;
 	}
@@ -117,11 +117,11 @@ const today = new Date();
 		display: flex;
 		justify-content: center;
 		gap: 1.5rem;
-		margin-bottom: 1.5rem;
+		margin-bottom: 2rem;
 	}
 
 	.social-icons a {
-		color: var(--text-primary);
+		color: var(--text-secondary);
 		transition: color 0.2s ease;
 		display: flex;
 		align-items: center;
@@ -129,25 +129,25 @@ const today = new Date();
 	}
 
 	.social-icons a:hover {
-		color: var(--accent-crimson);
+		color: var(--accent-active);
 	}
 
 	/* Disclaimer */
 	.disclaimer {
 		text-align: center;
-		font-size: 0.875rem;
-		color: var(--text-primary);
-		margin-bottom: 1.5rem;
+		font-size: 0.8rem;
+		color: var(--text-muted);
+		margin-bottom: 2rem;
 		max-width: 42rem;
 		margin-left: auto;
 		margin-right: auto;
-		font-family: 'Courier New', monospace;
+		font-family: 'JetBrains Mono', monospace;
 		line-height: 1.6;
 	}
 
 	.disclaimer-label {
-		color: var(--accent-crimson);
-		font-weight: 700;
+		color: var(--text-secondary);
+		font-weight: 600;
 		text-transform: uppercase;
 	}
 
@@ -155,40 +155,27 @@ const today = new Date();
 	.badge-container {
 		display: flex;
 		justify-content: center;
-		margin-bottom: 1.5rem;
-	}
-
-	.badge-link {
-		display: inline-flex;
-		align-items: center;
-		color: var(--text-primary);
-		border: 2px solid var(--text-primary);
-		padding: 0.5rem 1rem;
-		text-decoration: none;
-		font-family: 'Courier New', monospace;
-		font-weight: 700;
-		text-transform: uppercase;
-		transition: all 0.2s ease;
-	}
-
-	.badge-link:hover {
-		color: var(--accent-crimson);
-		border-color: var(--accent-crimson);
+		margin-bottom: 2rem;
 	}
 
 	.badge-image {
 		height: 1.5rem;
 		width: auto;
-		margin-right: 0.75rem;
+		opacity: 0.7;
+		transition: opacity 0.2s ease;
+	}
+
+	.badge-image:hover {
+		opacity: 1;
 	}
 
 	/* Copyright */
 	.copyright {
 		text-align: center;
-		color: var(--text-primary);
-		font-family: 'Courier New', monospace;
-		font-weight: 700;
-		font-size: 0.875rem;
+		color: var(--text-muted);
+		font-family: 'JetBrains Mono', monospace;
+		font-weight: 500;
+		font-size: 0.8rem;
 		margin-bottom: 1rem;
 	}
 
@@ -196,15 +183,15 @@ const today = new Date();
 	.footer-links {
 		display: flex;
 		justify-content: center;
-		gap: 1rem;
-		font-size: 0.875rem;
+		gap: 1.5rem;
+		font-size: 0.8rem;
 	}
 
 	.footer-link {
-		color: var(--text-primary);
+		color: var(--text-secondary);
 		text-decoration: none;
-		font-family: 'Courier New', monospace;
-		font-weight: 700;
+		font-family: 'JetBrains Mono', monospace;
+		font-weight: 500;
 		text-transform: uppercase;
 		transition: color 0.2s ease;
 		background: none;
@@ -214,23 +201,23 @@ const today = new Date();
 	}
 
 	.footer-link:hover {
-		color: var(--accent-crimson);
+		color: var(--accent-active);
 	}
 
 	.scroll-btn {
-		font-size: 0.875rem;
+		font-size: 0.8rem;
 	}
 
 	/* Responsive */
 	@media (max-width: 768px) {
 		footer {
-			padding: 1.5rem 1rem;
+			padding: 2rem 1rem;
 			margin-top: 3rem;
 		}
 
 		.social-icons {
 			gap: 1.25rem;
-			margin-bottom: 1.25rem;
+			margin-bottom: 1.5rem;
 		}
 
 		.social-icons a svg {
@@ -239,12 +226,12 @@ const today = new Date();
 		}
 
 		.disclaimer {
-			font-size: 0.8rem;
-			margin-bottom: 1.25rem;
+			font-size: 0.75rem;
+			margin-bottom: 1.5rem;
 		}
 
 		.badge-container {
-			margin-bottom: 1.25rem;
+			margin-bottom: 1.5rem;
 		}
 
 		.badge-image {
@@ -252,12 +239,12 @@ const today = new Date();
 		}
 
 		.copyright {
-			font-size: 0.8rem;
+			font-size: 0.75rem;
 			margin-bottom: 0.875rem;
 		}
 
 		.footer-links {
-			font-size: 0.8rem;
+			font-size: 0.75rem;
 		}
 	}
 
@@ -272,26 +259,20 @@ const today = new Date();
 		}
 
 		.disclaimer {
-			font-size: 0.75rem;
+			font-size: 0.7rem;
 			padding: 0 0.5rem;
-		}
-
-		.badge-link {
-			padding: 0.4rem 0.75rem;
-			font-size: 0.75rem;
 		}
 
 		.badge-image {
 			height: 1rem;
-			margin-right: 0.5rem;
 		}
 
 		.copyright {
-			font-size: 0.75rem;
+			font-size: 0.7rem;
 		}
 
 		.footer-links {
-			font-size: 0.75rem;
+			font-size: 0.7rem;
 		}
 	}
 </style>

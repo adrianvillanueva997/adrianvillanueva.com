@@ -1,45 +1,45 @@
 ---
-import { Image } from 'astro:assets';
-import { readFileSync } from 'fs';
-import { join } from 'path';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import { SITE_TITLE } from '../consts';
+import { Image } from "astro:assets";
+import { readFileSync } from "fs";
+import { join } from "path";
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { SITE_TITLE } from "../consts";
 
 // Glob import all project images from assets folder
-const images = import.meta.glob('@/assets/**/*.{png,jpg,jpeg,webp,svg}', {
-    eager: true,
+const images = import.meta.glob("@/assets/**/*.{png,jpg,jpeg,webp,svg}", {
+	eager: true,
 });
 
 // Create a mapping of filename to image module
 const imageMap: Record<string, any> = {};
 for (const path in images) {
-    const filename = path.split('/').pop();
-    if (filename) {
-        imageMap[filename] = (images[path] as any).default;
-    }
+	const filename = path.split("/").pop();
+	if (filename) {
+		imageMap[filename] = (images[path] as any).default;
+	}
 }
 
 // Define types for the projects data
 interface Project {
-    title: string;
-    description: string;
-    href?: string;
-    imgSrc?: string;
-    categories?: string[];
-    isOpenSource?: boolean;
-    repoUrl?: string;
+	title: string;
+	description: string;
+	href?: string;
+	imgSrc?: string;
+	categories?: string[];
+	isOpenSource?: boolean;
+	repoUrl?: string;
 }
 
 interface ProjectsData {
-    projects: Project[];
+	projects: Project[];
 }
 
 // Read and parse the projects YAML file
-const projectsPath = join(process.cwd(), 'src/data/projects.yaml');
-const projectsContent = readFileSync(projectsPath, 'utf8');
-const { load } = await import('js-yaml');
+const projectsPath = join(process.cwd(), "src/data/projects.yaml");
+const projectsContent = readFileSync(projectsPath, "utf8");
+const { load } = await import("js-yaml");
 const projectsData = load(projectsContent) as ProjectsData;
 
 // Get all projects
@@ -47,11 +47,11 @@ const allProjects = projectsData.projects;
 
 // Get all unique categories
 const allCategories = Array.from(
-    new Set(
-        projectsData.projects
-            .flatMap((project) => project.categories || [])
-            .filter(Boolean)
-    )
+	new Set(
+		projectsData.projects
+			.flatMap((project) => project.categories || [])
+			.filter(Boolean),
+	),
 ).sort();
 ---
 
@@ -69,34 +69,44 @@ const allCategories = Array.from(
             <!-- Hero Section -->
             <section class="hero-section">
                 <div class="hero-content">
-                    <h1 class="hero-title">Projects</h1>
+                    <div class="system-status">
+                        <span class="status-dot"></span>
+                        <span class="status-text">SYSTEM.PROJECTS.INDEX</span>
+                    </div>
+                    <h1 class="hero-title">PROJECT_LOG</h1>
                     <p class="hero-subtitle">
-                        Building the future through code, data, and innovative
-                        solutions
+                        // ARCHIVE_ACCESS: GRANTED<br />
+                        // LOADING_MODULES: COMPLETED
                     </p>
                     <p class="hero-description">
-                        From cloud-native data platforms to IoT systems, here's
-                        a collection of projects that showcase my journey
-                        through software engineering, data architecture, and
-                        emerging technologies.
+                        [SYSTEM_NOTE]: Accessing project database. Displaying
+                        records of engineering solutions, data architectures,
+                        and experimental systems.
                     </p>
                 </div>
             </section>
 
             <!-- Categories Filter -->
             <section class="filter-section">
-                <h2 class="section-title">Filter by Technology</h2>
+                <div class="section-header">
+                    <span class="section-marker">>></span>
+                    <h2 class="section-title">FILTER_PROTOCOL</h2>
+                </div>
                 <div class="categories-filter">
-                    <button class="filter-btn active" data-category="all"
-                        >All Projects</button
-                    >
+                    <button class="filter-btn active" data-category="all">
+                        <span class="btn-marker">[</span>
+                        ALL_SYSTEMS
+                        <span class="btn-marker">]</span>
+                    </button>
                     {
                         allCategories.map((category: string) => (
                             <button
                                 class="filter-btn"
                                 data-category={category.toLowerCase()}
                             >
-                                {category}
+                                <span class="btn-marker">[</span>
+                                {category.toUpperCase()}
+                                <span class="btn-marker">]</span>
                             </button>
                         ))
                     }
@@ -105,7 +115,10 @@ const allCategories = Array.from(
 
             <!-- Projects Grid -->
             <section class="projects-section">
-                <h2 class="section-title">Portfolio</h2>
+                <div class="section-header">
+                    <span class="section-marker">>></span>
+                    <h2 class="section-title">ACTIVE_DEPLOYMENTS</h2>
+                </div>
                 <div class="projects-grid">
                     {
                         allProjects.map((project: Project) => (
@@ -117,7 +130,21 @@ const allCategories = Array.from(
                                         .join(' ') || ''
                                 }
                             >
-                                <div class="project-image">
+                                <div class="card-header-line">
+                                    <span class="card-id">
+                                        ID:
+                                        {Math.random()
+                                            .toString(36)
+                                            .substr(2, 6)
+                                            .toUpperCase()}
+                                    </span>
+                                    <div class="card-status">
+                                        <span class="status-indicator" />
+                                        ONLINE
+                                    </div>
+                                </div>
+
+                                <div class="project-image-container">
                                     {project.imgSrc &&
                                     imageMap[project.imgSrc] ? (
                                         <Image
@@ -130,43 +157,14 @@ const allCategories = Array.from(
                                         />
                                     ) : (
                                         <div class="placeholder-image">
-                                            <span class="placeholder-icon">
-                                                ⚡
+                                            <span class="placeholder-text">
+                                                [NO_VISUAL_DATA]
                                             </span>
                                         </div>
                                     )}
-                                    <div class="project-overlay">
-                                        <div class="overlay-content">
-                                            {project.isOpenSource &&
-                                                project.repoUrl && (
-                                                    <a
-                                                        href={project.repoUrl}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        class="overlay-link repo-link"
-                                                    >
-                                                        <span class="link-icon">
-                                                            📂
-                                                        </span>
-                                                        <span>Source Code</span>
-                                                    </a>
-                                                )}
-                                            {project.href && (
-                                                <a
-                                                    href={project.href}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    class="overlay-link demo-link"
-                                                >
-                                                    <span class="link-icon">
-                                                        �
-                                                    </span>
-                                                    <span>Live Demo</span>
-                                                </a>
-                                            )}
-                                        </div>
-                                    </div>
+                                    <div class="scan-line" />
                                 </div>
+
                                 <div class="project-content">
                                     <div class="project-header">
                                         <h3 class="project-title">
@@ -175,36 +173,62 @@ const allCategories = Array.from(
                                         <div class="project-badges">
                                             {project.isOpenSource ? (
                                                 <span class="badge open-source">
-                                                    <span class="badge-icon">
-                                                        🔓
-                                                    </span>
-                                                    Open Source
+                                                    OPEN_SRC
                                                 </span>
                                             ) : (
                                                 <span class="badge closed-source">
-                                                    <span class="badge-icon">
-                                                        🔒
-                                                    </span>
-                                                    Private
+                                                    PROPRIETARY
                                                 </span>
                                             )}
                                         </div>
                                     </div>
+
                                     <p class="project-description">
                                         {project.description}
                                     </p>
+
                                     {project.categories &&
                                         project.categories.length > 0 && (
                                             <div class="project-categories">
                                                 {project.categories.map(
                                                     (category: string) => (
                                                         <span class="category-tag">
-                                                            {category}
+                                                            #{category}
                                                         </span>
                                                     )
                                                 )}
                                             </div>
                                         )}
+
+                                    <div class="project-actions">
+                                        {project.isOpenSource &&
+                                            project.repoUrl && (
+                                                <a
+                                                    href={project.repoUrl}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    class="action-link"
+                                                >
+                                                    <span>SOURCE_CODE</span>
+                                                    <span class="link-arrow">
+                                                        →
+                                                    </span>
+                                                </a>
+                                            )}
+                                        {project.href && (
+                                            <a
+                                                href={project.href}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="action-link primary"
+                                            >
+                                                <span>LIVE_DEMO</span>
+                                                <span class="link-arrow">
+                                                    →
+                                                </span>
+                                            </a>
+                                        )}
+                                    </div>
                                 </div>
                             </article>
                         ))
@@ -214,32 +238,33 @@ const allCategories = Array.from(
 
             <!-- Technologies Overview -->
             <section class="technologies-section">
-                <h2 class="section-title">Technologies & Domains</h2>
+                <div class="section-header">
+                    <span class="section-marker">>></span>
+                    <h2 class="section-title">TECH_STACK_ANALYSIS</h2>
+                </div>
                 <div class="technologies-overview">
-                    <p class="technologies-description">
-                        Exploring diverse technologies across multiple domains -
-                        from systems programming to data engineering.
-                    </p>
-                    <div class="technologies-grid">
+                    <div class="tech-grid-header">
+                        <span>DOMAIN</span>
+                        <span>COUNT</span>
+                        <span>STATUS</span>
+                    </div>
+                    <div class="technologies-list">
                         {
                             allCategories.map((category: string) => (
-                                <div class="technology-card">
-                                    <span class="technology-name">
-                                        {category}
+                                <div class="tech-row">
+                                    <span class="tech-name">
+                                        {category.toUpperCase()}
                                     </span>
-                                    <span class="technology-count">
+                                    <span class="tech-count">
+                                        [
                                         {
                                             allProjects.filter((p) =>
                                                 p.categories?.includes(category)
                                             ).length
-                                        }{' '}
-                                        project
-                                        {allProjects.filter((p) =>
-                                            p.categories?.includes(category)
-                                        ).length !== 1
-                                            ? 's'
-                                            : ''}
+                                        }
+                                        ]
                                     </span>
+                                    <span class="tech-status">ACTIVE</span>
                                 </div>
                             ))
                         }
@@ -267,15 +292,19 @@ const allCategories = Array.from(
 
                         // Filter projects
                         projectCards.forEach((card) => {
+                            const htmlCard = card as HTMLElement;
                             if (category === 'all') {
-                                card.style.display = 'flex';
+                                htmlCard.style.display = 'flex';
                             } else {
                                 const cardCategories =
                                     card.getAttribute('data-categories') || '';
-                                if (cardCategories.includes(category)) {
-                                    card.style.display = 'flex';
+                                if (
+                                    category &&
+                                    cardCategories.includes(category)
+                                ) {
+                                    htmlCard.style.display = 'flex';
                                 } else {
-                                    card.style.display = 'none';
+                                    htmlCard.style.display = 'none';
                                 }
                             }
                         });
@@ -288,24 +317,18 @@ const allCategories = Array.from(
 
 <style>
     .container {
-        max-width: 1400px;
+        max-width: 1200px;
         margin: 0 auto;
         padding: 2rem;
     }
 
+    /* Hero Section */
     .hero-section {
-        text-align: center;
         margin-bottom: 4rem;
-        padding: 4rem 0;
-        background: linear-gradient(
-            135deg,
-            var(--bg-primary) 0%,
-            var(--bg-secondary) 100%
-        );
-        border: 2px solid var(--border-color);
-        border-radius: 8px;
+        padding: 3rem;
+        border: 1px solid var(--border-color);
+        background: var(--bg-secondary);
         position: relative;
-        overflow: hidden;
     }
 
     .hero-section::before {
@@ -313,272 +336,240 @@ const allCategories = Array.from(
         position: absolute;
         top: 0;
         left: 0;
-        right: 0;
-        bottom: 0;
-        background: repeating-linear-gradient(
-            45deg,
-            transparent,
-            transparent 10px,
-            rgba(0, 255, 255, 0.02) 10px,
-            rgba(0, 255, 255, 0.02) 20px
-        );
-        pointer-events: none;
+        width: 4px;
+        height: 100%;
+        background: var(--accent-active);
     }
 
-    .hero-content {
-        position: relative;
-        z-index: 1;
-        margin-bottom: 3rem;
+    .system-status {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+    }
+
+    .status-dot {
+        width: 8px;
+        height: 8px;
+        background-color: var(--accent-active);
+        border-radius: 50%;
+        box-shadow: 0 0 5px var(--accent-active);
     }
 
     .hero-title {
-        font-family: 'Orbitron', monospace;
-        font-size: 4rem;
-        font-weight: 900;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 3.5rem;
+        font-weight: 700;
         margin-bottom: 1rem;
-        background: linear-gradient(
-            135deg,
-            var(--accent-cyan),
-            var(--accent-crimson)
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        text-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        color: var(--text-primary);
+        letter-spacing: -0.05em;
     }
 
     .hero-subtitle {
-        font-size: 1.5rem;
-        color: var(--accent-cyan);
-        margin-bottom: 2rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 1rem;
+        color: var(--accent-active);
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
     }
 
     .hero-description {
-        font-size: 1.1rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 1rem;
         color: var(--text-secondary);
-        max-width: 800px;
-        margin: 0 auto;
-        line-height: 1.8;
+        max-width: 700px;
+        line-height: 1.6;
+        border-left: 2px solid var(--border-color);
+        padding-left: 1rem;
     }
 
-    .filter-section {
-        margin-bottom: 3rem;
-        text-align: center;
+    /* Section Headers */
+    .section-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 0.5rem;
+    }
+
+    .section-marker {
+        color: var(--accent-active);
+        font-family: 'JetBrains Mono', monospace;
+        font-weight: 700;
     }
 
     .section-title {
-        font-family: 'Orbitron', monospace;
-        font-size: 2.5rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 1.5rem;
         font-weight: 700;
-        margin-bottom: 2rem;
         color: var(--text-primary);
-        position: relative;
-        display: inline-block;
+        margin: 0;
+        text-transform: uppercase;
     }
 
-    .section-title::after {
-        content: '';
-        position: absolute;
-        bottom: -8px;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: linear-gradient(
-            90deg,
-            var(--accent-cyan),
-            var(--accent-crimson)
-        );
+    /* Filter Section */
+    .filter-section {
+        margin-bottom: 3rem;
     }
 
     .categories-filter {
         display: flex;
         flex-wrap: wrap;
         gap: 1rem;
-        justify-content: center;
-        margin-top: 2rem;
     }
 
     .filter-btn {
-        background: var(--bg-primary);
-        border: 2px solid var(--border-color);
+        background: transparent;
+        border: 1px solid var(--border-color);
         color: var(--text-secondary);
-        padding: 0.75rem 1.5rem;
-        border-radius: 4px;
-        font-family: 'Orbitron', monospace;
-        font-weight: 600;
+        padding: 0.5rem 1rem;
+        font-family: 'JetBrains Mono', monospace;
         font-size: 0.9rem;
         cursor: pointer;
-        transition: all 0.3s ease;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.2rem;
+    }
+
+    .btn-marker {
+        color: var(--text-muted);
+        opacity: 0;
+        transition: opacity 0.2s ease;
     }
 
     .filter-btn:hover {
-        border-color: var(--accent-cyan);
-        color: var(--accent-cyan);
-        transform: translateY(-2px);
+        border-color: var(--accent-active);
+        color: var(--accent-active);
+    }
+
+    .filter-btn:hover .btn-marker {
+        opacity: 1;
     }
 
     .filter-btn.active {
-        background: var(--accent-cyan);
-        border-color: var(--accent-cyan);
+        background: var(--accent-active);
+        border-color: var(--accent-active);
         color: var(--bg-primary);
-        box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
     }
 
+    .filter-btn.active .btn-marker {
+        color: var(--bg-primary);
+        opacity: 1;
+    }
+
+    /* Projects Grid */
     .projects-section {
         margin-bottom: 4rem;
     }
 
     .projects-grid {
         display: grid;
-        gap: 2.5rem;
-        grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+        gap: 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     }
 
     .project-card {
-        background: var(--surface-color);
-        border: 2px solid var(--border-color);
-        border-radius: 8px;
-        overflow: hidden;
-        transition: all 0.4s ease;
+        background: var(--bg-primary);
+        border: 1px solid var(--border-color);
         display: flex;
         flex-direction: column;
-        position: relative;
-    }
-
-    .project-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: linear-gradient(
-            90deg,
-            var(--accent-cyan),
-            var(--accent-crimson)
-        );
-        transform: scaleX(0);
-        transition: transform 0.4s ease;
-    }
-
-    .project-card:hover::before {
-        transform: scaleX(1);
+        transition: all 0.2s ease;
     }
 
     .project-card:hover {
-        border-color: var(--accent-cyan);
-        box-shadow: 0 8px 30px rgba(0, 255, 255, 0.15);
-        transform: translateY(-5px);
+        border-color: var(--accent-active);
+        transform: translateY(-2px);
+        box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
     }
 
-    .project-image {
-        position: relative;
-        height: 240px;
-        overflow: hidden;
-        background: var(--bg-tertiary);
+    .card-header-line {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 1rem;
+        background: var(--bg-secondary);
+        border-bottom: 1px solid var(--border-color);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.7rem;
+        color: var(--text-muted);
+    }
+
+    .card-status {
         display: flex;
         align-items: center;
-        justify-content: center;
+        gap: 0.4rem;
+        color: var(--accent-active);
     }
 
-    .project-image img,
-    .project-image :global(img) {
+    .status-indicator {
+        width: 6px;
+        height: 6px;
+        background-color: var(--accent-active);
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+    }
+
+    .project-image-container {
+        position: relative;
+        height: 200px;
+        overflow: hidden;
+        background: var(--bg-tertiary);
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .project-img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 0.4s ease;
+        filter: grayscale(100%) contrast(1.1);
+        transition: filter 0.3s ease;
     }
 
-    .project-card:hover .project-image img,
-    .project-card:hover .project-image :global(img) {
-        transform: scale(1.1);
+    .project-card:hover .project-img {
+        filter: grayscale(0%) contrast(1);
     }
 
     .placeholder-image {
+        width: 100%;
+        height: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 100%;
-        background: linear-gradient(
-            135deg,
+        background: repeating-linear-gradient(
+            45deg,
             var(--bg-secondary),
-            var(--bg-tertiary)
+            var(--bg-secondary) 10px,
+            var(--bg-tertiary) 10px,
+            var(--bg-tertiary) 20px
         );
     }
 
-    .placeholder-icon {
-        font-size: 4rem;
-        background: linear-gradient(
-            135deg,
-            var(--accent-cyan),
-            var(--accent-crimson)
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+    .placeholder-text {
+        font-family: 'JetBrains Mono', monospace;
+        color: var(--text-muted);
+        font-size: 0.8rem;
+        background: var(--bg-primary);
+        padding: 0.5rem;
+        border: 1px solid var(--border-color);
     }
 
-    .project-overlay {
+    .scan-line {
         position: absolute;
         top: 0;
         left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(
-            135deg,
-            rgba(0, 0, 0, 0.8),
-            rgba(0, 0, 0, 0.9)
-        );
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        transition: opacity 0.4s ease;
-    }
-
-    .project-card:hover .project-overlay {
-        opacity: 1;
-    }
-
-    .overlay-content {
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .overlay-link {
-        background: var(--accent-cyan);
-        color: var(--bg-primary);
-        padding: 0.75rem 1.5rem;
-        border-radius: 4px;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 0.9rem;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-    }
-
-    .overlay-link:hover {
-        background: var(--accent-crimson);
-        transform: scale(1.05);
-    }
-
-    .link-icon {
-        font-size: 1.1rem;
+        width: 100%;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.1);
+        animation: scan 3s linear infinite;
+        pointer-events: none;
     }
 
     .project-content {
-        padding: 2.5rem;
+        padding: 1.5rem;
         flex: 1;
         display: flex;
         flex-direction: column;
@@ -588,141 +579,161 @@ const allCategories = Array.from(
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-        margin-bottom: 1.5rem;
-        flex-wrap: wrap;
+        margin-bottom: 1rem;
         gap: 1rem;
     }
 
     .project-title {
-        font-family: 'Orbitron', monospace;
-        font-size: 1.5rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 1.2rem;
+        font-weight: 700;
         color: var(--text-primary);
         margin: 0;
-        flex: 1;
-        font-weight: 700;
-    }
-
-    .project-badges {
-        display: flex;
-        gap: 0.75rem;
-        flex-wrap: wrap;
     }
 
     .badge {
-        padding: 0.4rem 1rem;
-        border-radius: 4px;
-        font-size: 0.8rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        display: flex;
-        align-items: center;
-        gap: 0.4rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.7rem;
+        padding: 0.2rem 0.5rem;
+        border: 1px solid var(--border-color);
+        color: var(--text-secondary);
     }
 
     .badge.open-source {
-        background: var(--accent-cyan);
-        color: var(--bg-primary);
-    }
-
-    .badge.closed-source {
-        background: var(--accent-crimson);
-        color: var(--bg-primary);
-    }
-
-    .badge-icon {
-        font-size: 0.9rem;
+        border-color: var(--accent-active);
+        color: var(--accent-active);
     }
 
     .project-description {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.9rem;
         color: var(--text-secondary);
-        line-height: 1.7;
-        margin-bottom: 2rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
         flex: 1;
-        font-size: 1rem;
     }
 
     .project-categories {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.75rem;
-        margin-top: auto;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
     }
 
     .category-tag {
-        background: var(--bg-primary);
-        border: 2px solid var(--border-color);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+    }
+
+    .project-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: auto;
+    }
+
+    .action-link {
+        flex: 1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem;
+        border: 1px solid var(--border-color);
         color: var(--text-secondary);
-        padding: 0.4rem 1rem;
-        border-radius: 4px;
+        text-decoration: none;
+        font-family: 'JetBrains Mono', monospace;
         font-size: 0.8rem;
-        transition: all 0.3s ease;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
+        transition: all 0.2s ease;
     }
 
-    .category-tag:hover {
-        border-color: var(--accent-cyan);
-        color: var(--accent-cyan);
-        transform: translateY(-1px);
+    .action-link:hover {
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        border-color: var(--text-primary);
     }
 
-    .technologies-section {
-        margin-bottom: 4rem;
+    .action-link.primary {
+        background: var(--bg-secondary);
+        border-color: var(--text-muted);
     }
 
+    .action-link.primary:hover {
+        background: var(--accent-active);
+        border-color: var(--accent-active);
+        color: var(--bg-primary);
+    }
+
+    /* Technologies Overview */
     .technologies-overview {
-        background: var(--surface-color);
-        border: 2px solid var(--border-color);
-        padding: 3rem;
-        border-radius: 8px;
-        text-align: center;
-    }
-
-    .technologies-description {
-        color: var(--text-secondary);
-        margin-bottom: 2rem;
-        font-size: 1.2rem;
-        line-height: 1.6;
-    }
-
-    .technologies-grid {
-        display: grid;
-        gap: 1.5rem;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-
-    .technology-card {
+        border: 1px solid var(--border-color);
         background: var(--bg-primary);
-        border: 2px solid var(--border-color);
-        padding: 1.5rem;
-        border-radius: 6px;
-        transition: all 0.3s ease;
-        text-align: center;
     }
 
-    .technology-card:hover {
-        border-color: var(--accent-cyan);
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(0, 255, 255, 0.1);
-    }
-
-    .technology-name {
-        display: block;
-        font-family: 'Orbitron', monospace;
+    .tech-grid-header {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        padding: 1rem;
+        background: var(--bg-secondary);
+        border-bottom: 1px solid var(--border-color);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.8rem;
+        color: var(--text-muted);
         font-weight: 700;
-        color: var(--accent-cyan);
-        font-size: 1.1rem;
-        margin-bottom: 0.5rem;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
     }
 
-    .technology-count {
-        color: var(--text-secondary);
+    .technologies-list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tech-row {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        padding: 1rem;
+        border-bottom: 1px solid var(--border-color);
+        font-family: 'JetBrains Mono', monospace;
         font-size: 0.9rem;
-        font-weight: 600;
+        color: var(--text-secondary);
+        transition: background 0.2s ease;
+    }
+
+    .tech-row:last-child {
+        border-bottom: none;
+    }
+
+    .tech-row:hover {
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+    }
+
+    .tech-name {
+        color: var(--accent-active);
+    }
+
+    .tech-status {
+        color: var(--text-muted);
+        font-size: 0.8rem;
+    }
+
+    @keyframes pulse {
+        0% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.5;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes scan {
+        0% {
+            transform: translateY(0);
+        }
+        100% {
+            transform: translateY(200px);
+        }
     }
 
     @media (max-width: 768px) {
@@ -734,40 +745,18 @@ const allCategories = Array.from(
             font-size: 2.5rem;
         }
 
-        .section-title {
-            font-size: 1.8rem;
-        }
-
         .projects-grid {
             grid-template-columns: 1fr;
         }
 
-        .project-header {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 1rem;
+        .tech-grid-header,
+        .tech-row {
+            grid-template-columns: 1fr auto;
         }
 
-        .overlay-content {
-            flex-direction: column;
-        }
-
-        .categories-filter {
-            gap: 0.75rem;
-        }
-
-        .filter-btn {
-            padding: 0.6rem 1rem;
-            font-size: 0.8rem;
-        }
-
-        .technologies-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .project-overlay {
-            opacity: 1;
-            background: rgba(0, 0, 0, 0.6);
+        .tech-grid-header span:last-child,
+        .tech-row span:last-child {
+            display: none;
         }
     }
 </style>

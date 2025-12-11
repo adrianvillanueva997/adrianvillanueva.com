@@ -1,401 +1,220 @@
 ---
-import BaseHead from '@/components/BaseHead.astro';
-import Footer from '@/components/Footer.astro';
-import Header from '@/components/Header.astro';
-import { SITE_TITLE, SOCIAL_LINKS } from '@/consts';
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import Icon from "../components/Icon.astro";
+import { SITE_TITLE, SOCIAL_LINKS } from "../consts";
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead
-			title={`Contact - ${SITE_TITLE}`}
-			description="Let's build something extraordinary together. Get in touch for collaborations, consultations, or just to discuss the future of creative technology."
-		/>
-	</head>
-	<body>
-		<Header />
+    <head>
+        <BaseHead
+            title={`Contact - ${SITE_TITLE}`}
+            description="Establish connection with Adrian Villanueva Martinez. Open for collaborations and technical discourse."
+        />
+    </head>
+    <body>
+        <Header />
+        <main class="container">
+            <div class="contact-grid">
+                <!-- Email Card -->
+                <a href={`mailto:${SOCIAL_LINKS.email}`} class="bento-item contact-card">
+                    <div class="module-header">
+                        <Icon name="mdi:email" size={16} />
+                        <span class="module-title">EMAIL</span>
+                    </div>
+                    <div class="card-content">
+                        <p class="card-desc">
+                            Best for project inquiries and professional discussions.
+                        </p>
+                        <span class="contact-value">{SOCIAL_LINKS.email}</span>
+                    </div>
+                    <div class="card-arrow">
+                        <Icon name="mdi:arrow-right" size={20} />
+                    </div>
+                </a>
 
-		<main class="contact-container">
-			<!-- Hero Section -->
-			<section class="hero-section">
-				<h1>Contact</h1>
-				<p class="hero-description">
-					Let's build something together. I'm interested in
-					collaborations, open source projects, and innovative tech
-					challenges.
-				</p>
-			</section>
+                <!-- LinkedIn Card -->
+                <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" class="bento-item contact-card">
+                    <div class="module-header">
+                        <Icon name="mdi:linkedin" size={16} />
+                        <span class="module-title">LINKEDIN</span>
+                    </div>
+                    <div class="card-content">
+                        <p class="card-desc">
+                            Connect for professional networking and opportunities.
+                        </p>
+                        <span class="contact-value">@adrian-villanueva-martinez</span>
+                    </div>
+                    <div class="card-arrow">
+                        <Icon name="mdi:arrow-right" size={20} />
+                    </div>
+                </a>
 
-			<!-- Contact Methods -->
-			<section class="contact-methods">
-				<h2>Get In Touch</h2>
-				<div class="methods-grid">
-					<!-- Email -->
-					<div class="contact-card">
-						<div class="card-icon">
-							<svg
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<path
-									d="M3 7L9 13L15 7H3Z"
-									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"></path>
-								<path
-									d="M21 7V17C21 17.5304 20.7893 18.0391 20.4142 18.4142C20.0391 18.7893 19.5304 19 19 19H5C4.46957 19 3.96086 18.7893 3.58579 18.4142C3.21071 18.0391 3 17.5304 3 17V7"
-									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"></path>
-							</svg>
-						</div>
-						<h3>Email</h3>
-						<p>For project inquiries and collaborations</p>
-						<a
-							href={`mailto:${SOCIAL_LINKS.email}`}
-							class="contact-link"
-						>
-							{SOCIAL_LINKS.email}
-						</a>
-					</div>
+                <!-- GitHub Card -->
+                <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer" class="bento-item contact-card">
+                    <div class="module-header">
+                        <Icon name="mdi:github" size={16} />
+                        <span class="module-title">GITHUB</span>
+                    </div>
+                    <div class="card-content">
+                        <p class="card-desc">
+                            Check out my open source projects and contributions.
+                        </p>
+                        <span class="contact-value">@adrianvillanueva997</span>
+                    </div>
+                    <div class="card-arrow">
+                        <Icon name="mdi:arrow-right" size={20} />
+                    </div>
+                </a>
 
-					<!-- LinkedIn -->
-					<div class="contact-card">
-						<div class="card-icon card-icon-crimson">
-							<svg
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<path
-									d="M16 8C17.5913 8 19.1174 8.63214 20.2426 9.75736C21.3679 10.8826 22 12.4087 22 14V21H18V14C18 13.4696 17.7893 12.9609 17.4142 12.5858C17.0391 12.2107 16.5304 12 16 12C15.4696 12 14.9609 12.2107 14.5858 12.5858C14.2107 12.9609 14 13.4696 14 14V21H10V14C10 12.4087 10.6321 10.8826 11.7574 9.75736C12.8826 8.63214 14.4087 8 16 8V8Z"
-									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"></path>
-								<path
-									d="M6 9H2V21H6V9Z"
-									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"></path>
-								<path
-									d="M4 6C5.10457 6 6 5.10457 6 4C6 2.89543 5.10457 2 4 2C2.89543 2 2 2.89543 2 4C2 5.10457 2.89543 6 4 6Z"
-									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"></path>
-							</svg>
-						</div>
-						<h3>LinkedIn</h3>
-						<p>Professional networking and opportunities</p>
-						<a
-							href={SOCIAL_LINKS.linkedin}
-							target="_blank"
-							class="contact-link"
-						>
-							Connect on LinkedIn
-						</a>
-					</div>
-
-					<!-- GitHub -->
-					<div class="contact-card">
-						<div class="card-icon">
-							<svg
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<path
-									d="M9 19C4 20.5 4 16.5 2 16M16 22V18.13C16.0375 17.6532 15.9731 17.1738 15.811 16.7238C15.6489 16.2738 15.3929 15.8634 15.06 15.52C18.2 15.17 21.5 13.98 21.5 8.52C21.4997 7.12383 20.9627 5.7812 20 4.77C20.4559 3.54851 20.4236 2.19835 19.91 1C19.91 1 18.73 0.650001 16 2.48C13.708 1.85882 11.292 1.85882 9 2.48C6.27 0.650001 5.09 1 5.09 1C4.57638 2.19835 4.54414 3.54851 5 4.77C4.03013 5.7887 3.49252 7.14346 3.5 8.55C3.5 13.97 6.8 15.16 9.94 15.55C9.611 15.89 9.35726 16.2954 9.19531 16.7399C9.03335 17.1844 8.96681 17.6581 9 18.13V22"
-									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"></path>
-							</svg>
-						</div>
-						<h3>GitHub</h3>
-						<p>Open source contributions and projects</p>
-						<a
-							href={SOCIAL_LINKS.github}
-							target="_blank"
-							class="contact-link"
-						>
-							View GitHub Profile
-						</a>
-					</div>
-				</div>
-			</section>
-
-			<!-- What I Work On -->
-			<section class="work-section">
-				<h2>What I Work On</h2>
-				<ul class="work-list">
-					<li>
-						<span class="work-title">Web Applications</span>
-						<span class="work-desc"
-							>Full-stack development, progressive web apps,
-							real-time applications</span
-						>
-					</li>
-					<li>
-						<span class="work-title">Creative Tech</span>
-						<span class="work-desc"
-							>Interactive installations, AR/VR experiences,
-							digital art</span
-						>
-					</li>
-					<li>
-						<span class="work-title">AI & ML</span>
-						<span class="work-desc"
-							>Machine learning applications, AI-powered tools,
-							intelligent UX</span
-						>
-					</li>
-					<li>
-						<span class="work-title">Open Source</span>
-						<span class="work-desc"
-							>Developer tools, frameworks, libraries, community
-							projects</span
-						>
-					</li>
-				</ul>
-			</section>
-		</main>
-
-		<Footer />
-
-		<style>
-			.contact-container {
-				max-width: 900px;
-				margin: 0 auto;
-				padding: 2rem 1rem;
-			}
-
-			/* Hero Section */
-			.hero-section {
-				padding: 3rem 0;
-				border-bottom: 1px solid var(--bg-tertiary);
-				margin-bottom: 3rem;
-			}
-
-			.hero-section h1 {
-				font-size: clamp(2.5rem, 6vw, 4rem);
-				margin-bottom: 1.5rem;
-				color: var(--text-primary);
-			}
-
-			.hero-description {
-				font-size: 1.125rem;
-				line-height: 1.7;
-				color: var(--text-secondary);
-				max-width: 700px;
-			}
-
-			/* Contact Methods */
-			.contact-methods {
-				margin-bottom: 4rem;
-			}
-
-			.contact-methods h2 {
-				font-size: 1.75rem;
-				margin-bottom: 2rem;
-				color: var(--accent-cyan);
-			}
-
-			.methods-grid {
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-				gap: 1.5rem;
-			}
-
-			.contact-card {
-				background: var(--bg-secondary);
-				border: 1px solid var(--bg-tertiary);
-				padding: 2rem;
-				transition: all 0.3s ease;
-			}
-
-			.contact-card:hover {
-				border-color: var(--accent-cyan);
-				box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
-				transform: translateY(-2px);
-			}
-
-			.contact-card:nth-child(2):hover {
-				border-color: var(--accent-crimson);
-				box-shadow: 0 0 15px rgba(255, 0, 127, 0.1);
-			}
-
-			.card-icon {
-				width: 50px;
-				height: 50px;
-				background: var(--bg-tertiary);
-				border: 2px solid var(--accent-cyan);
-				border-radius: 50%;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				margin-bottom: 1rem;
-				color: var(--accent-cyan);
-			}
-
-			.card-icon-crimson {
-				border-color: var(--accent-crimson);
-				color: var(--accent-crimson);
-			}
-
-			.contact-card h3 {
-				font-size: 1.25rem;
-				margin-bottom: 0.75rem;
-				color: var(--text-primary);
-			}
-
-			.contact-card p {
-				font-size: 0.95rem;
-				color: var(--text-secondary);
-				margin-bottom: 1rem;
-				line-height: 1.6;
-			}
-
-			.contact-link {
-				display: inline-block;
-				color: var(--accent-cyan);
-				text-decoration: none;
-				font-size: 0.95rem;
-				border-bottom: 1px solid transparent;
-				transition: border-color 0.2s ease;
-			}
-
-			.contact-link:hover {
-				border-bottom-color: var(--accent-cyan);
-			}
-
-			/* Work Section */
-			.work-section {
-				margin-bottom: 3rem;
-			}
-
-			.work-section h2 {
-				font-size: 1.75rem;
-				margin-bottom: 2rem;
-				color: var(--accent-crimson);
-			}
-
-			.work-list {
-				list-style: none;
-				padding: 0;
-				margin: 0;
-			}
-
-			.work-list li {
-				padding: 1.5rem 0;
-				border-bottom: 1px solid var(--bg-tertiary);
-				display: flex;
-				flex-direction: column;
-				gap: 0.5rem;
-			}
-
-			.work-list li:last-child {
-				border-bottom: none;
-			}
-
-			.work-title {
-				font-size: 1.125rem;
-				font-weight: 600;
-				color: var(--accent-cyan);
-			}
-
-			.work-desc {
-				font-size: 0.95rem;
-				color: var(--text-secondary);
-				line-height: 1.6;
-			}
-
-			/* Responsive */
-			@media (max-width: 768px) {
-				.contact-container {
-					padding: 1.5rem 1rem;
-				}
-
-				.hero-section {
-					padding: 2rem 0;
-					margin-bottom: 2rem;
-				}
-
-				.hero-section h1 {
-					font-size: 2.5rem;
-				}
-
-				.hero-description {
-					font-size: 1rem;
-				}
-
-				.methods-grid {
-					grid-template-columns: 1fr;
-					gap: 1rem;
-				}
-
-				.contact-card {
-					padding: 1.5rem;
-				}
-
-				.contact-methods,
-				.work-section {
-					margin-bottom: 3rem;
-				}
-
-				.contact-methods h2,
-				.work-section h2 {
-					font-size: 1.5rem;
-					margin-bottom: 1.5rem;
-				}
-
-				.work-list li {
-					padding: 1.25rem 0;
-				}
-			}
-
-			@media (max-width: 480px) {
-				.hero-section h1 {
-					font-size: 2rem;
-				}
-
-				.hero-description {
-					font-size: 0.95rem;
-				}
-
-				.contact-card {
-					padding: 1.25rem;
-				}
-
-				.card-icon {
-					width: 45px;
-					height: 45px;
-				}
-
-				.contact-card h3 {
-					font-size: 1.125rem;
-				}
-
-				.work-title {
-					font-size: 1rem;
-				}
-
-				.work-desc {
-					font-size: 0.9rem;
-				}
-			}
-		</style>
-	</body>
+                <!-- Interests Panel -->
+                <div class="bento-item interests-panel">
+                    <div class="module-header">
+                        <Icon name="mdi:lightbulb-outline" size={16} />
+                        <span class="module-title">OPEN TO DISCUSS</span>
+                    </div>
+                    <div class="interests-content">
+                        <div class="interest-item">
+                            <Icon name="mdi:cloud" size={18} />
+                            <span>Cloud-native data platforms & architecture</span>
+                        </div>
+                        <div class="interest-item">
+                            <Icon name="mdi:database" size={18} />
+                            <span>Data engineering & MLOps</span>
+                        </div>
+                        <div class="interest-item">
+                            <Icon name="mdi:code-braces" size={18} />
+                            <span>Open source contributions</span>
+                        </div>
+                        <div class="interest-item">
+                            <Icon name="mdi:briefcase" size={18} />
+                            <span>Technical consulting & collaboration</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <Footer />
+    </body>
 </html>
+
+<style>
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+    }
+
+    .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+    }
+
+    .bento-item {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-md);
+        padding: 1.5rem;
+        transition: all 0.2s ease;
+        position: relative;
+    }
+
+    .bento-item:hover {
+        border-color: var(--border-light);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .module-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        letter-spacing: 0.05em;
+    }
+
+    /* Contact Cards */
+    .contact-card {
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-content {
+        flex: 1;
+    }
+
+    .card-desc {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+
+    .contact-value {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.85rem;
+        color: var(--accent-active);
+        word-break: break-all;
+    }
+
+    .card-arrow {
+        position: absolute;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        color: var(--accent-active);
+        opacity: 0;
+        transform: translateX(-10px);
+        transition: all 0.2s ease;
+    }
+
+    .contact-card:hover .card-arrow {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    /* Interests Panel */
+    .interests-panel {
+        grid-column: 1 / -1;
+    }
+
+    .interests-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+    }
+
+    .interest-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        background: var(--bg-tertiary);
+        border-radius: 4px;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+    }
+
+    .interest-item :global(svg) {
+        color: var(--accent-active);
+        flex-shrink: 0;
+    }
+
+    @media (max-width: 640px) {
+        .contact-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .interests-content {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
