@@ -1,6 +1,6 @@
 services:
   adrianvillanueva:
-    image: ghcr.io/adrianvillanueva997/adrianvillanueva.com:latest
+    image: ghcr.io/adrianvillanueva997/adrianvillanueva.com:v5.1.0
     networks:
       - proxy
       - otlp
@@ -24,7 +24,7 @@ services:
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
       - OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
       - OTEL_SERVICE_NAME=adrianvillanueva-com
-      - OTEL_RESOURCE_ATTRIBUTES=deployment.environment=production,service.version=3.4.0
+      - OTEL_RESOURCE_ATTRIBUTES=deployment.environment=production,service.version=5.1.0
       - OTEL_TRACES_SAMPLER=parentbased_always_on
       - OTEL_TRACES_SAMPLER_ARG=1.0
       - OTEL_EXPORTER_OTLP_TIMEOUT=10000
