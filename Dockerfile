@@ -1,5 +1,5 @@
-FROM node:24.4.0-bookworm-slim AS builder
-
+FROM node:22-bookworm-slim AS builder
+ENV NODE_OPTIONS="--max-old-space-size=6144"
 # 1. Enable Corepack
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
@@ -21,7 +21,6 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 # 5. Install with increased memory
 RUN pnpm install --frozen-lockfile
-
 COPY . .
 RUN pnpm build
 
