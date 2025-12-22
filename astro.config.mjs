@@ -8,7 +8,7 @@ import d2 from 'astro-d2';
 import expressiveCode from 'astro-expressive-code';
 import icon from 'astro-icon';
 import { defineConfig } from 'astro/config';
-
+import { pluginLanguageBadge } from 'expressive-code-language-badge';
 import robotsTxt from 'astro-robots-txt';
 
 // https://astro.build/config
@@ -17,6 +17,7 @@ export default defineConfig({
 		assets: 'static/assets'
 	},
 	site: 'https://adrianvillanueva.com',
+
 	integrations: [
 		expressiveCode(),
 		mdx(),
@@ -26,6 +27,6 @@ export default defineConfig({
 		icon()
 	],
 	vite: {
-		plugins: [tailwindcss(), pluginLineNumbers()],
+		plugins: [tailwindcss(), pluginLineNumbers(), pluginLanguageBadge(),],
 	}
 });
