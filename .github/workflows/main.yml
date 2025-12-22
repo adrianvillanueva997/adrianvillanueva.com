@@ -3,7 +3,7 @@ name: Build and push Docker image to GitHub Packages and create release
 on:
   push:
     tags:
-      - '*'
+      - "*"
 
 env:
   REGISTRY: ghcr.io
@@ -21,7 +21,7 @@ jobs:
       - name: Set up CD
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
-          submodules: 'true'
+          submodules: "true"
       - name: Set up Docker Qemu
         uses: docker/setup-qemu-action@29109295f81e9208d7d86ff1c6c12d2833863392 # v3.6.0
       - name: Setup Docker Buildx
@@ -45,13 +45,15 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
       - name: Build and push
-        uses: docker/build-push-action@471d1dc4e07e5cdedd4c2171150001c434f0b7a4 # v6.15.0
+        uses: docker/build-push-action@v6
         with:
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new
           context: .
           file: ./Dockerfile
-          platforms: ${{ matrix.architectures }}
           push: true
-          tags: ${{env.REGISTRY}}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.tags }}
+          platforms: ${{ matrix.architectures }}
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            NODE_OPTIONS=--max-old-space-size=6144
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
