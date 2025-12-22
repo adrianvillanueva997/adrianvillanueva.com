@@ -1,71 +1,101 @@
 ---
+import { Image } from "astro:assets";
+
 const { image } = Astro.props;
-const imageUrl = image?.src ?? image;
+const URL = "https://x.com/Manz/status/1893709639125987637";
 ---
-<script define:vars={{ imageUrl }}>
-  const bannerDisabled = localStorage.getItem("bloqueo_closed") === "true";
 
-  if (!bannerDisabled) {
-    const URL = "https://x.com/Manz/status/1893709639125987637";
-    const IMAGE_URL = imageUrl || "/assets/images/bloqueo.avif";
+<div class="spain-block-wrapper" id="spain-block-wrapper">
+  <div class="spain-block">
+    <button class="close-btn" aria-label="Close banner">✕</button>
+    <a href={URL} target="_blank" rel="noopener noreferrer" class="image-link">
+      <Image src={image} alt="Este sitio web es bloqueado en España cuando hay fútbol" />
+    </a>
+  </div>
+</div>
 
-    const html = `<div class="spain-block">
-      <button>✕</button>
-      <a href="${URL}" target="_blank" rel="noopener noreferrer"><img src="${IMAGE_URL}" alt="Este sitio web es bloqueado en España cuando hay fútbol" /></a>
-    </div>`;
-
-    document.body.insertAdjacentHTML("beforeend", html);
-    const bloqueo = document.querySelector(".spain-block");
-
-    if (bloqueo) {
-        bloqueo.querySelector("button")?.addEventListener("click", () => {
-            localStorage.setItem("bloqueo_closed", "true");
-            bloqueo.remove();
-        });
-    }
+<script>
+  const wrapper = document.getElementById('spain-block-wrapper');
+  const closeBtn = wrapper?.querySelector('.close-btn');
+  
+  // Use a new key to reset visibility for the new design
+  const STORAGE_KEY = "spain_block_footer_dismissed";
+  const isClosed = localStorage.getItem(STORAGE_KEY) === "true";
+  
+  if (isClosed && wrapper) {
+    wrapper.style.display = 'none';
   }
+
+  closeBtn?.addEventListener('click', () => {
+    localStorage.setItem(STORAGE_KEY, "true");
+    if (wrapper) wrapper.style.display = 'none';
+  });
 </script>
 
-<style is:global>
+<style>
+  .spain-block-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px dashed var(--border-color);
+    width: 100%;
+  }
+
   .spain-block {
-    width: 200px;
-    height: 101px;
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-    z-index: 9999;
+    position: relative;
+    display: inline-block;
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    padding: 0.5rem;
+    border-radius: var(--radius-sm);
     transition: all 0.3s ease;
   }
 
   .spain-block:hover {
-    border: 2px solid white;
-    rotate: 3deg;
-    scale: 1.05;
-    top: 1.25rem;
-    right: 1.25rem;
+    border-color: var(--text-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  }
+
+  .image-link {
+    display: block;
+    line-height: 0;
   }
 
   .spain-block img {
-    max-width: 100%;
+    max-width: 200px;
+    height: auto;
     display: block;
+    border-radius: 2px;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
   }
 
-  .spain-block button {
-    border: 0;
-    background: none;
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: white;
+  .spain-block:hover img {
+    opacity: 1;
+  }
+
+  .close-btn {
     position: absolute;
-    z-index: 5;
-    top: 0;
-    right: 0; /* Ensure button is accessible */
+    top: -10px;
+    right: -10px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    padding: 5px;
-    text-shadow: 0 0 2px black;
+    font-size: 12px;
+    z-index: 10;
+    transition: all 0.2s ease;
   }
 
-  .spain-block button:hover {
-    color: #ddd;
-  }
+  .close-btn:hover {
+    color: var(--accent-error);
+    border-color: var(--accent-error);
 </style>
