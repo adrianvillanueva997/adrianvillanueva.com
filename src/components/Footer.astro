@@ -4,6 +4,7 @@ import badge from "@/assets/footer/Written-By-a-Human-Not-By-AI-Badge-black.svg"
 import SpainBlock from "@/components/SpainBlock.astro";
 import { SITE_TITLE, SOCIAL_LINKS } from "@/consts";
 
+import blockedPhoto from "@/assets/files/blocked.png";
 import bloqueoPhoto from "@/assets/files/bloqueo.png";
 
 const today = new Date();
@@ -94,7 +95,7 @@ const today = new Date();
 			</button>
 		</div>
 	</div>
-	<SpainBlock image={bloqueoPhoto} />
+	<SpainBlock imageEs={bloqueoPhoto} imageEn={blockedPhoto} />
 </footer>
 
 <script>

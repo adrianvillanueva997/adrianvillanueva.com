@@ -1,25 +1,37 @@
 ---
 import { Image } from "astro:assets";
 
-const { image } = Astro.props;
+const { imageEs, imageEn } = Astro.props;
 const URL = "https://x.com/Manz/status/1893709639125987637";
+
+// Get src strings for client-side use
+const srcEs = imageEs?.src ?? imageEs;
+const srcEn = imageEn?.src ?? imageEn;
 ---
 
 <div class="spain-block-wrapper" id="spain-block-wrapper">
   <div class="spain-block">
     <button class="close-btn" aria-label="Close banner">✕</button>
     <a href={URL} target="_blank" rel="noopener noreferrer" class="image-link">
-      <Image src={image} alt="Este sitio web es bloqueado en España cuando hay fútbol" />
+      <img id="spain-block-img" src={srcEn} alt="This website is blocked in Spain when there is football." />
     </a>
   </div>
 </div>
 
-<script>
+<script define:vars={{ srcEs, srcEn }}>
   const wrapper = document.getElementById('spain-block-wrapper');
   const closeBtn = wrapper?.querySelector('.close-btn');
+  const img = document.getElementById('spain-block-img');
   
+  // Language detection
+  const isSpanish = navigator.language.startsWith('es');
+  if (isSpanish && img) {
+    img.src = srcEs;
+    img.alt = "Este sitio web es bloqueado en España cuando hay fútbol";
+  }
+
   // Use a new key to reset visibility for the new design
-  const STORAGE_KEY = "spain_block_footer_dismissed";
+  const STORAGE_KEY = "spain_block_footer_dismissed_v3";
   const isClosed = localStorage.getItem(STORAGE_KEY) === "true";
   
   if (isClosed && wrapper) {
@@ -98,4 +110,5 @@ const URL = "https://x.com/Manz/status/1893709639125987637";
   .close-btn:hover {
     color: var(--accent-error);
     border-color: var(--accent-error);
+  }
 </style>
