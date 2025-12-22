@@ -1,0 +1,71 @@
+---
+const { image } = Astro.props;
+const imageUrl = image?.src ?? image;
+---
+<script define:vars={{ imageUrl }}>
+  const bannerDisabled = localStorage.getItem("bloqueo_closed") === "true";
+
+  if (!bannerDisabled) {
+    const URL = "https://x.com/Manz/status/1893709639125987637";
+    const IMAGE_URL = imageUrl || "/assets/images/bloqueo.avif";
+
+    const html = `<div class="spain-block">
+      <button>✕</button>
+      <a href="${URL}" target="_blank" rel="noopener noreferrer"><img src="${IMAGE_URL}" alt="Este sitio web es bloqueado en España cuando hay fútbol" /></a>
+    </div>`;
+
+    document.body.insertAdjacentHTML("beforeend", html);
+    const bloqueo = document.querySelector(".spain-block");
+
+    if (bloqueo) {
+        bloqueo.querySelector("button")?.addEventListener("click", () => {
+            localStorage.setItem("bloqueo_closed", "true");
+            bloqueo.remove();
+        });
+    }
+  }
+</script>
+
+<style is:global>
+  .spain-block {
+    width: 200px;
+    height: 101px;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 9999;
+    transition: all 0.3s ease;
+  }
+
+  .spain-block:hover {
+    border: 2px solid white;
+    rotate: 3deg;
+    scale: 1.05;
+    top: 1.25rem;
+    right: 1.25rem;
+  }
+
+  .spain-block img {
+    max-width: 100%;
+    display: block;
+  }
+
+  .spain-block button {
+    border: 0;
+    background: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: white;
+    position: absolute;
+    z-index: 5;
+    top: 0;
+    right: 0; /* Ensure button is accessible */
+    cursor: pointer;
+    padding: 5px;
+    text-shadow: 0 0 2px black;
+  }
+
+  .spain-block button:hover {
+    color: #ddd;
+  }
+</style>
