@@ -40,7 +40,7 @@ I went for the second option to avoid duplicated content in my repository and be
 If we take a look at the Dockerfile:
 <Details summary="Dockerfile">
 
-```Dockerfile
+```docker
 # Base stage for shared settings
 FROM node:23.9.0-alpine AS base
 ENV NEXT_TELEMETRY_DISABLED=1
@@ -123,7 +123,7 @@ In the builder stage, the D2 integration happens. The installation is done throu
 
 I found the  [svgo](https://github.com/svg/svgo) tool quite useful to optimise the size of the generated svgs.
 
-```Dockerfile
+```docker
 RUN  curl -fsSL https://d2lang.com/install.sh -o /tmp/d2install.sh \
     && sh /tmp/d2install.sh \
     && rm /tmp/d2install.sh

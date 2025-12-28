@@ -1,41 +1,41 @@
 ---
-type CalloutType = 'info' | 'warning' | 'note' | 'tip';
+type CalloutType = "info" | "warning" | "note" | "tip";
 
 interface Props {
-    type: CalloutType;
-    title?: string;
+	type: CalloutType;
+	title?: string;
 }
 
 const { type, title } = Astro.props;
 
 const styles: Record<
-    CalloutType,
-    { bg: string; border: string; icon: string; title: string }
+	CalloutType,
+	{ bg: string; border: string; icon: string; title: string }
 > = {
-    info: {
-        bg: 'var(--bg-secondary)',
-        border: 'var(--accent-cyan)',
-        icon: '💡',
-        title: 'SYSTEM_INFO',
-    },
-    warning: {
-        bg: 'var(--bg-secondary)',
-        border: 'var(--accent-crimson)',
-        icon: '⚠️',
-        title: 'CRITICAL_WARNING',
-    },
-    note: {
-        bg: 'var(--bg-secondary)',
-        border: 'var(--text-muted)',
-        icon: '📝',
-        title: 'DATA_NOTE',
-    },
-    tip: {
-        bg: 'var(--bg-secondary)',
-        border: '#00ff00',
-        icon: '💪',
-        title: 'OPTIMIZATION_TIP',
-    },
+	info: {
+		bg: "var(--bg-secondary)",
+		border: "var(--accent-cyan)",
+		icon: "💡",
+		title: "SYSTEM_INFO",
+	},
+	warning: {
+		bg: "var(--bg-secondary)",
+		border: "var(--accent-crimson)",
+		icon: "⚠️",
+		title: "CRITICAL_WARNING",
+	},
+	note: {
+		bg: "var(--bg-secondary)",
+		border: "var(--text-muted)",
+		icon: "📝",
+		title: "DATA_NOTE",
+	},
+	tip: {
+		bg: "var(--bg-secondary)",
+		border: "#00ff00",
+		icon: "💪",
+		title: "OPTIMIZATION_TIP",
+	},
 };
 
 const currentStyle = styles[type];

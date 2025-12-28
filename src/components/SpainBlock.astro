@@ -22,7 +22,7 @@ const srcEn = imageEn?.src ?? imageEn;
   const wrapper = document.getElementById('spain-block-wrapper');
   const closeBtn = wrapper?.querySelector('.close-btn');
   const img = document.getElementById('spain-block-img');
-  
+
   // Language detection
   const isSpanish = navigator.language.startsWith('es');
   if (isSpanish && img) {
@@ -33,7 +33,7 @@ const srcEn = imageEn?.src ?? imageEn;
   // Use a new key to reset visibility for the new design
   const STORAGE_KEY = "spain_block_footer_dismissed_v3";
   const isClosed = localStorage.getItem(STORAGE_KEY) === "true";
-  
+
   if (isClosed && wrapper) {
     wrapper.style.display = 'none';
   }

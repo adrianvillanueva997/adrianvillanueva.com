@@ -1,31 +1,31 @@
 ---
 interface TerminalCommand {
-    command: string;
-    output?: string;
-    error?: boolean;
-    timing?: string;
-    prompt?: string;
+	command: string;
+	output?: string;
+	error?: boolean;
+	timing?: string;
+	prompt?: string;
 }
 
 interface Props {
-    commands: TerminalCommand[];
-    shell?: 'bash' | 'zsh' | 'fish' | 'powershell';
-    title?: string;
-    className?: string;
+	commands: TerminalCommand[];
+	shell?: "bash" | "zsh" | "fish" | "powershell";
+	title?: string;
+	className?: string;
 }
 
 const {
-    commands,
-    shell = 'zsh',
-    title = 'TERMINAL',
-    className = '',
+	commands,
+	shell = "zsh",
+	title = "TERMINAL",
+	className = "",
 } = Astro.props;
 
 const shellPrompts = {
-    bash: '$',
-    zsh: '❯',
-    fish: '~>',
-    powershell: '>',
+	bash: "$",
+	zsh: "❯",
+	fish: "~>",
+	powershell: ">",
 };
 ---
 

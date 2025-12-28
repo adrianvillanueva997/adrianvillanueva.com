@@ -1,25 +1,23 @@
 ---
 interface Props {
-  variant?: 'primary' | 'secondary' | 'outline';
-  size?: 'small' | 'medium' | 'large';
-  disabled?: boolean;
-  type?: 'button' | 'submit' | 'reset';
-  href?: string;
+	variant?: "primary" | "secondary" | "outline";
+	size?: "small" | "medium" | "large";
+	disabled?: boolean;
+	type?: "button" | "submit" | "reset";
+	href?: string;
 }
 
 const {
-  variant = 'primary',
-  size = 'medium',
-  disabled = false,
-  type = 'button',
-  href,
-  ...rest
+	variant = "primary",
+	size = "medium",
+	disabled = false,
+	type = "button",
+	href,
+	...rest
 } = Astro.props;
 
-const Element = href ? 'a' : 'button';
-const elementProps = href
-  ? { href, ...rest }
-  : { type, disabled, ...rest };
+const Element = href ? "a" : "button";
+const elementProps = href ? { href, ...rest } : { type, disabled, ...rest };
 ---
 
 <Element

@@ -1,72 +1,72 @@
 ---
-import { Icon } from 'astro-icon/components';
+import { Icon } from "astro-icon/components";
 
 interface Props {
-    technologies: string[];
-    showLabels?: boolean;
+	technologies: string[];
+	showLabels?: boolean;
 }
 
 const { technologies, showLabels = true } = Astro.props;
 
 // Map technology names to Simple Icons (mdi or simple-icons)
 const techIcons: Record<string, string> = {
-    // Frontend
-    React: 'simple-icons:react',
-    'Next.js': 'simple-icons:nextdotjs',
-    TypeScript: 'simple-icons:typescript',
-    JavaScript: 'simple-icons:javascript',
-    Tailwind: 'simple-icons:tailwindcss',
-    'Tailwind CSS': 'simple-icons:tailwindcss',
+	// Frontend
+	React: "simple-icons:react",
+	"Next.js": "simple-icons:nextdotjs",
+	TypeScript: "simple-icons:typescript",
+	JavaScript: "simple-icons:javascript",
+	Tailwind: "simple-icons:tailwindcss",
+	"Tailwind CSS": "simple-icons:tailwindcss",
 
-    // Backend
-    Prisma: 'simple-icons:prisma',
-    'Node.js': 'simple-icons:nodedotjs',
-    Python: 'simple-icons:python',
-    Rust: 'simple-icons:rust',
-    Go: 'simple-icons:go',
-    Django: 'simple-icons:django',
-    FastAPI: 'simple-icons:fastapi',
-    Flask: 'simple-icons:flask',
+	// Backend
+	Prisma: "simple-icons:prisma",
+	"Node.js": "simple-icons:nodedotjs",
+	Python: "simple-icons:python",
+	Rust: "simple-icons:rust",
+	Go: "simple-icons:go",
+	Django: "simple-icons:django",
+	FastAPI: "simple-icons:fastapi",
+	Flask: "simple-icons:flask",
 
-    // Databases
-    PostgreSQL: 'simple-icons:postgresql',
-    MongoDB: 'simple-icons:mongodb',
-    Redis: 'simple-icons:redis',
-    GraphQL: 'simple-icons:graphql',
+	// Databases
+	PostgreSQL: "simple-icons:postgresql",
+	MongoDB: "simple-icons:mongodb",
+	Redis: "simple-icons:redis",
+	GraphQL: "simple-icons:graphql",
 
-    // DevOps & Cloud
-    Git: 'simple-icons:git',
-    Docker: 'simple-icons:docker',
-    Kubernetes: 'simple-icons:kubernetes',
-    GCP: 'simple-icons:googlecloud',
-    Terraform: 'simple-icons:terraform',
-    Vercel: 'simple-icons:vercel',
+	// DevOps & Cloud
+	Git: "simple-icons:git",
+	Docker: "simple-icons:docker",
+	Kubernetes: "simple-icons:kubernetes",
+	GCP: "simple-icons:googlecloud",
+	Terraform: "simple-icons:terraform",
+	Vercel: "simple-icons:vercel",
 
-    // Additional common techs
-    Astro: 'simple-icons:astro',
-    Vue: 'simple-icons:vuedotjs',
-    Svelte: 'simple-icons:svelte',
-    Angular: 'simple-icons:angular',
-    AWS: 'simple-icons:amazonaws',
-    Azure: 'simple-icons:microsoftazure',
-    Linux: 'simple-icons:linux',
-    MySQL: 'simple-icons:mysql',
+	// Additional common techs
+	Astro: "simple-icons:astro",
+	Vue: "simple-icons:vuedotjs",
+	Svelte: "simple-icons:svelte",
+	Angular: "simple-icons:angular",
+	AWS: "simple-icons:amazonaws",
+	Azure: "simple-icons:microsoftazure",
+	Linux: "simple-icons:linux",
+	MySQL: "simple-icons:mysql",
 };
 
 // Process the tech names to handle case variations
 const processedTechs = technologies.map((tech) => {
-    // Find a case-insensitive match in our icons
-    const key =
-        Object.keys(techIcons).find(
-            (iconKey) => iconKey.toLowerCase() === tech.toLowerCase()
-        ) || tech;
+	// Find a case-insensitive match in our icons
+	const key =
+		Object.keys(techIcons).find(
+			(iconKey) => iconKey.toLowerCase() === tech.toLowerCase(),
+		) || tech;
 
-    return {
-        name: tech,
-        iconKey: key,
-        hasIcon: !!techIcons[key],
-        icon: techIcons[key],
-    };
+	return {
+		name: tech,
+		iconKey: key,
+		hasIcon: !!techIcons[key],
+		icon: techIcons[key],
+	};
 });
 ---
 
