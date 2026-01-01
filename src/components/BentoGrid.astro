@@ -4,15 +4,10 @@ import Icon from "./Icon.astro";
 
 interface Props {
 	mePhoto: ImageMetadata;
-	latestPost: {
-		title: string;
-		date: Date;
-		slug: string;
-	};
 	nowStatus: string;
 }
 
-const { mePhoto, latestPost, nowStatus } = Astro.props;
+const { mePhoto, nowStatus } = Astro.props;
 
 const techStack = [
 	{ name: "Rust", icon: "mdi:language-rust", color: "#dea584" },
@@ -122,26 +117,6 @@ const techStack = [
     updateUptime();
 </script>
 
-    <!-- Latest Log -->
-    <a href={`/blog/${latestPost.slug}`} class="bento-item latest-log">
-        <div class="module-header">
-            <Icon name="mdi:file-document-outline" size={16} />
-            <span class="module-title">LATEST LOG</span>
-        </div>
-        <h3 class="log-title">{latestPost.title}</h3>
-        <p class="log-date">
-            {
-                latestPost.date.toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric',
-                })
-            }
-        </p>
-        <div class="log-arrow">
-            <Icon name="mdi:arrow-right" size={20} />
-        </div>
-    </a>
 
     <!-- Tech Stack -->
     <div class="bento-item tech-stack">
@@ -331,45 +306,6 @@ const techStack = [
         font-size: 0.8rem;
         color: var(--accent-active);
         text-align: right;
-    }
-
-    /* Latest Log - Spans 1x1 */
-    .latest-log {
-        grid-column: span 1;
-        text-decoration: none;
-        color: inherit;
-    }
-
-    .latest-log:hover .log-title {
-        color: var(--accent-info);
-    }
-
-    .log-title {
-        font-size: 1rem;
-        margin: 0.5rem 0;
-        line-height: 1.4;
-        flex-grow: 1;
-    }
-
-    .log-date {
-        font-size: 0.8rem;
-        color: var(--text-muted);
-        font-family: 'JetBrains Mono', monospace;
-    }
-
-    .log-arrow {
-        position: absolute;
-        bottom: 1.5rem;
-        right: 1.5rem;
-        opacity: 0;
-        transform: translateX(-10px);
-        transition: all 0.2s ease;
-        color: var(--accent-info);
-    }
-
-    .latest-log:hover .log-arrow {
-        opacity: 1;
-        transform: translateX(0);
     }
 
     /* Tech Stack - Spans 1x1 */

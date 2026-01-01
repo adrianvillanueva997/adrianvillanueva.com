@@ -1,31 +1,10 @@
 ---
-import { getCollection } from "astro:content";
 import mePhoto from "@/assets/me/me.jpg";
 import BaseHead from "@/components/BaseHead.astro";
 import BentoGrid from "@/components/BentoGrid.astro";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
-
-// Fetch latest blog post
-const posts = (
-	await getCollection("blog", ({ data }) => {
-		return import.meta.env.PROD ? data.draft !== true : true;
-	})
-).sort((a, b) => {
-	const dateA = a.data.date || a.data.pubDate;
-	const dateB = b.data.date || b.data.pubDate;
-	return dateB.valueOf() - dateA.valueOf();
-});
-
-const latestPost = posts[0];
-
-// Prepare data for BentoGrid
-const latestPostData = {
-	title: latestPost.data.title,
-	date: latestPost.data.date || latestPost.data.pubDate || new Date(),
-	slug: latestPost.id,
-};
 
 const nowStatus = "Learning Zig & Boxing";
 ---
@@ -41,7 +20,6 @@ const nowStatus = "Learning Zig & Boxing";
 		<main class="container">
 			<BentoGrid
 				mePhoto={mePhoto}
-				latestPost={latestPostData}
 				nowStatus={nowStatus}
 			/>
 		</main>
