@@ -1,7 +1,7 @@
 export const SITE_TITLE = "Adrian Villanueva Martinez";
 export const SITE_DESCRIPTION =
 	"Senior Software Engineer specializing in cloud-native data platforms, data engineering, and MLOps. Based in Tokyo, delivering European engineering excellence and driving large-scale adoption of high-impact systems.";
-export const SITE_URL = "https://example.com"; // TODO: Update with your actual domain
+export const SITE_URL = "https://adrianvillanueva.com";
 export const SITE_AUTHOR = "Adrian Villanueva Martinez";
 export const SITE_KEYWORDS = [
 	"Software Engineer",
@@ -26,7 +26,7 @@ export const HERO_TAGLINE =
 
 // Navigation
 export const NAV_ITEMS = [
-	{ label: "Blog", href: "/blog" },
+	{ label: "Blog", href: "https://metalops.dev" },
 	{ label: "Now", href: "/now" },
 	{ label: "Contact", href: "/contact" },
 	{ label: "Resume", href: "https://resume.adrianvillanueva.com" },
