@@ -14,11 +14,6 @@ export const SITE_KEYWORDS = [
 	"DevOps",
 ];
 
-// Analytics
-export const PLAUSIBLE_DOMAIN = "adrianvillanueva.com";
-export const PLAUSIBLE_SCRIPT_URL =
-	"https://analytics.thexiao77.com/js/script.file-downloads.hash.outbound-links.pageview-props.revenue.tagged-events.js";
-
 // Hero section content
 export const HERO_TITLE = "SENIOR SOFTWARE ENGINEER";
 export const HERO_TAGLINE =

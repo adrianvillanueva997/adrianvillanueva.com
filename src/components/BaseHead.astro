@@ -4,8 +4,6 @@ import type { ImageMetadata } from "astro";
 // all pages through the use of the <BaseHead /> component.
 import FallbackImage from "@/assets/logo.png";
 import {
-	PLAUSIBLE_DOMAIN,
-	PLAUSIBLE_SCRIPT_URL,
 	SITE_AUTHOR,
 	SITE_KEYWORDS,
 	SITE_TITLE,
@@ -186,7 +184,8 @@ const fullTitle =
 />
 
 <!-- Plausible Analytics -->
-<script defer data-domain="adrianvillanueva.com" src="https://analytics.thexiao77.com/js/script.file-downloads.hash.outbound-links.pageview-props.revenue.tagged-events.js"></script>
-<script is:inline>
-	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
-</script>
+<script
+    src="https://analytics.thexiao77.com/api/script.js"
+    data-site-id="56ec6e7a6be2"
+    defer
+></script>
