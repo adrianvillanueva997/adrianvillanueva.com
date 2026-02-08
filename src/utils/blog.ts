@@ -1,31 +1,21 @@
 export interface BlogPost {
 	title: string;
-	link: string;
 	pubDate?: string;
+	description?: string;
 }
 
 export async function getLatestBlogPost(): Promise<BlogPost | null> {
 	try {
-		const response = await fetch('https://metalops.dev/rss.xml');
-		if (!response.ok) throw new Error('Failed to fetch RSS feed');
+		const response = await fetch('https://metalops.dev/api/v1/blog/latest');
+		if (!response.ok) throw new Error('Failed to fetch latest blog post');
 		
-		const xml = await response.text();
+		const data = await response.json();
 		
-		// Extract first item (latest post)
-		const itemMatch = xml.match(/<item>([\s\S]*?)<\/item>/);
-		if (!itemMatch) return null;
-		
-		const itemContent = itemMatch[1];
-		
-		const titleMatch = itemContent.match(/<title>([\s\S]*?)<\/title>/);
-		const linkMatch = itemContent.match(/<link>([\s\S]*?)<\/link>/);
-		const pubDateMatch = itemContent.match(/<pubDate>([\s\S]*?)<\/pubDate>/);
-		
-		if (titleMatch && linkMatch) {
+		if (data && data.title) {
 			return {
-				title: titleMatch[1].trim(),
-				link: linkMatch[1].trim(),
-				pubDate: pubDateMatch ? pubDateMatch[1].trim() : undefined,
+				title: data.title,
+				pubDate: data.pubDate,
+				description: data.description,
 			};
 		}
 	} catch (error) {
