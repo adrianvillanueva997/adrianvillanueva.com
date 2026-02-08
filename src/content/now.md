@@ -1,15 +1,15 @@
 ---
 title: 'NOW'
-lastUpdated: '2025-12-11'
+lastUpdated: '2025-02-08'
 ---
 
 ## PRIMARY FOCUS
 
-I am writing this from my room in Tokyo.
+Improving my japanese.
 
 ### PHYSICAL TRAINING
 
-I have commited to boxing and tried kickboxing, turns out I enjoy both of them. However I want to fix my training schedule to make it more consistent.
+Kickboxing is very fun, I want to increase my strength.
 
 ### LEARNING OBJECTIVES
 
@@ -21,4 +21,4 @@ I have replaced my thinkpad t480s ram, keyboard (JP to English) and the battery.
 
 ### CURRENT THOUGHTS
 
-Looking for an apartment in Tokyo is tough, so many alternatives and interesting areas. For now Kagurazaka caught my attention.
+Snowy Tokyo is so beautiful and photogenic.
