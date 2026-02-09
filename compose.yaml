@@ -1,6 +1,6 @@
 services:
   adrianvillanueva:
-    image: ghcr.io/adrianvillanueva997/adrianvillanueva.com:v5.2.1
+    image: ghcr.io/adrianvillanueva997/adrianvillanueva.com:latest
     networks:
       - proxy
 
