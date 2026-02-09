@@ -5,6 +5,7 @@ import BentoGrid from "@/components/BentoGrid.astro";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
+import Icon from "@/components/Icon.astro";
 
 const nowStatus = "Learning Zig & Boxing";
 ---
@@ -23,6 +24,28 @@ const nowStatus = "Learning Zig & Boxing";
 				nowStatus={nowStatus}
 			/>
 		</main>
+
+		<section class="other-projects">
+			<h2>Online Presence</h2>
+			<div class="projects-grid">
+				<a href="https://metalops.dev" target="_blank" rel="noopener noreferrer" class="project-card">
+					<div class="project-header">
+						<Icon name="mdi:laptop" size={24} />
+						<span class="badge">Technical Blog</span>
+					</div>
+					<h3>metalops.dev</h3>
+					<p>Systems engineering and cloud infrastructure insights</p>
+				</a>
+				<a href="https://avm.photography" target="_blank" rel="noopener noreferrer" class="project-card">
+					<div class="project-header">
+						<Icon name="mdi:camera" size={24} />
+						<span class="badge">Photography</span>
+					</div>
+					<h3>avm.photography</h3>
+					<p>Photography portfolio and visual storytelling</p>
+				</a>
+			</div>
+		</section>
 
 		<Footer />
 

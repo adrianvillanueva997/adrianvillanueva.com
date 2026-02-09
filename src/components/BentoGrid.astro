@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import Icon from "./Icon.astro";
+import { getLatestBlogPost, formatDate } from "@/utils/blog";
 
 interface Props {
 	mePhoto: ImageMetadata;
@@ -17,6 +18,21 @@ const techStack = [
 	{ name: "Zig", icon: "mdi:flash", color: "#ec915c" },
 	{ name: "PostgreSQL", icon: "mdi:database", color: "#336791" },
 ];
+
+const interests = [
+	{ name: "Systems Design", icon: "mdi:database-cog" },
+	{ name: "Photography", icon: "mdi:camera" },
+	{ name: "Boxing", icon: "mdi:dumbbell" },
+	{ name: "Open Source", icon: "mdi:github" },
+];
+
+const openTo = [
+	{ name: "Consulting", icon: "mdi:briefcase" },
+	{ name: "Speaking", icon: "mdi:microphone" },
+	{ name: "Collaborations", icon: "mdi:handshake" },
+];
+
+const latestPost = await getLatestBlogPost();
 ---
 
 <section class="bento-grid">
@@ -95,6 +111,33 @@ const techStack = [
         <a href="/about" class="status-link">View Full Report &rarr;</a>
     </div>
 
+    <!-- Latest Blog Post -->
+    <div class="bento-item latest-blog">
+        <div class="module-header">
+            <Icon name="mdi:pencil" size={16} />
+            <span class="module-title">LATEST POST</span>
+        </div>
+        <div class="blog-content">
+            {latestPost ? (
+                <>
+                    <h3 class="blog-title">{latestPost.title}</h3>
+                    {latestPost.pubDate && (
+                        <span class="blog-date">{formatDate(latestPost.pubDate)}</span>
+                    )}
+                    {latestPost.description && (
+                        <p class="blog-description">{latestPost.description}</p>
+                    )}
+                    <a href="https://metalops.dev" target="_blank" rel="noopener noreferrer" class="read-more">Visit metalops.dev &rarr;</a>
+                </>
+            ) : (
+                <>
+                    <p class="blog-fallback">Check back soon for new articles on systems engineering and cloud infrastructure.</p>
+                    <a href="https://metalops.dev" target="_blank" rel="noopener noreferrer" class="read-more">Visit metalops.dev &rarr;</a>
+                </>
+            )}
+        </div>
+    </div>
+
 <script>
     function updateUptime() {
         // System start date (Birth date: Jan 1, 1997)
@@ -135,6 +178,42 @@ const techStack = [
             }
         </div>
     </div>
+
+    <!-- Interests -->
+    <div class="bento-item interests">
+        <div class="module-header">
+            <Icon name="mdi:heart" size={16} />
+            <span class="module-title">INTERESTS</span>
+        </div>
+        <div class="interests-list">
+            {
+                interests.map((interest) => (
+                    <div class="interest-item">
+                        <Icon name={interest.icon} size={18} />
+                        <span>{interest.name}</span>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+
+    <!-- Open To -->
+    <div class="bento-item open-to">
+        <div class="module-header">
+            <Icon name="mdi:star" size={16} class="text-active" />
+            <span class="module-title">OPEN TO</span>
+        </div>
+        <div class="open-to-list">
+            {
+                openTo.map((item) => (
+                    <div class="open-to-item">
+                        <Icon name={item.icon} size={18} />
+                        <span>{item.name}</span>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
 </section>
 
 <style>
@@ -164,22 +243,31 @@ const techStack = [
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
-    /* Profile Card - Spans 2x2 */
+    /* Profile Card - Spans 1x2 */
     .profile-card {
-        grid-column: span 2;
+        grid-column: span 1;
         grid-row: span 2;
-        justify-content: space-between;
+        justify-content: flex-start;
     }
 
     .profile-header {
         display: flex;
-        gap: 1.5rem;
-        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: center;
+        text-align: center;
     }
 
     .avatar {
         border-radius: 50%;
-        border: 2px solid var(--bg-tertiary);
+        border: 2px solid var(--border-color);
+        transition: transform 0.3s ease;
+        width: 64px;
+        height: 64px;
+    }
+
+    .bento-item:hover .avatar {
+        transform: scale(1.05);
     }
 
     .avatar-container {
@@ -188,8 +276,8 @@ const techStack = [
 
     .status-indicator {
         position: absolute;
-        bottom: 5px;
-        right: 5px;
+        bottom: 0;
+        right: 0;
         width: 12px;
         height: 12px;
         background-color: var(--accent-active);
@@ -198,37 +286,45 @@ const techStack = [
         box-shadow: 0 0 8px var(--accent-active);
     }
 
+    .profile-info {
+        width: 100%;
+    }
+
     .name {
-        font-size: 1.5rem;
-        margin: 0 0 0.25rem 0;
+        font-size: 1.1rem;
+        margin: 0 0 0.2rem 0;
         line-height: 1.2;
     }
 
     .role {
-        color: var(--text-secondary);
-        font-size: 0.9rem;
-        margin-bottom: 0.5rem;
+        color: var(--accent-active);
+        font-size: 0.75rem;
+        margin-bottom: 0.4rem;
+        font-weight: 500;
+        letter-spacing: 0.05em;
     }
 
     .location {
         display: flex;
         align-items: center;
+        justify-content: center;
         gap: 0.25rem;
-        font-size: 0.8rem;
+        font-size: 0.7rem;
         color: var(--text-muted);
         font-family: 'JetBrains Mono', monospace;
     }
 
     .bio {
-        margin: 1.5rem 0;
-        font-size: 0.95rem;
+        margin: 1rem 0 0.75rem 0;
+        font-size: 0.8rem;
         color: var(--text-secondary);
-        line-height: 1.6;
+        line-height: 1.4;
     }
 
     .social-links {
         display: flex;
-        gap: 1rem;
+        gap: 0.75rem;
+        justify-content: center;
     }
 
     .social-links a {
@@ -237,7 +333,7 @@ const techStack = [
     }
 
     .social-links a:hover {
-        color: var(--text-primary);
+        color: var(--accent-active);
     }
 
     /* Status Monitor - Spans 2x1 */
@@ -308,6 +404,72 @@ const techStack = [
         text-align: right;
     }
 
+    /* Latest Blog Post - Spans 1x1 */
+    .latest-blog {
+        grid-column: span 1;
+    }
+
+    .blog-content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        flex: 1;
+    }
+
+    .blog-link {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .blog-title {
+        margin: 0;
+        font-size: 0.95rem;
+        border: none;
+        padding: 0;
+        line-height: 1.3;
+        color: var(--text-primary);
+        font-weight: 600;
+        transition: color 0.2s ease;
+    }
+
+    .blog-title:hover {
+        color: var(--accent-active);
+    }
+
+    .blog-description {
+        margin: 0;
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        line-height: 1.4;
+    }
+
+    .blog-fallback {
+        margin: 0;
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        line-height: 1.4;
+    }
+
+    .blog-date {
+        font-size: 0.7rem;
+        color: var(--text-muted);
+        font-family: 'JetBrains Mono', monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .read-more {
+        margin-top: auto;
+        font-size: 0.75rem;
+        color: var(--accent-active);
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .read-more:hover {
+        color: var(--text-primary);
+    }
+
     /* Tech Stack - Spans 1x1 */
     .tech-stack {
         grid-column: span 1;
@@ -320,6 +482,46 @@ const techStack = [
     }
 
     .tech-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Interests - Spans 1x1 */
+    .interests {
+        grid-column: span 1;
+    }
+
+    .interests-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .interest-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Open To - Spans 1x1 */
+    .open-to {
+        grid-column: span 1;
+    }
+
+    .open-to-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .open-to-item {
         display: flex;
         align-items: center;
         gap: 0.5rem;
