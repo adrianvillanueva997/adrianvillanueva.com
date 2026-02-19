@@ -145,17 +145,37 @@ const timeline = [
     }
 
     .bento-item {
-        background: var(--bg-secondary);
+        background: var(--glass-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
         border: 1px solid var(--border-color);
         border-radius: var(--radius-md);
         padding: 1.5rem;
-        transition: all 0.2s ease;
+        transition: all var(--transition-base);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .bento-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--gradient-primary);
+        opacity: 0;
+        transition: opacity var(--transition-base);
     }
 
     .bento-item:hover {
-        border-color: var(--border-light);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        border-color: var(--border-glow);
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-glow), var(--shadow-md);
+    }
+
+    .bento-item:hover::before {
+        opacity: 1;
     }
 
     .module-header {
@@ -191,7 +211,8 @@ const timeline = [
 
     .avatar {
         border-radius: 50%;
-        border: 2px solid var(--bg-tertiary);
+        border: 2px solid var(--accent-active);
+        box-shadow: 0 0 20px var(--accent-active-glow);
     }
 
     .status-indicator {
@@ -203,13 +224,17 @@ const timeline = [
         background-color: var(--accent-active);
         border-radius: 50%;
         border: 2px solid var(--bg-secondary);
-        box-shadow: 0 0 8px var(--accent-active);
+        animation: pulse-glow 2s ease-in-out infinite;
     }
 
     .name {
         font-size: 1.5rem;
         margin: 0 0 0.5rem 0;
         line-height: 1.2;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
 
     .role {
@@ -235,11 +260,15 @@ const timeline = [
 
     .social-links a {
         color: var(--text-muted);
-        transition: color 0.2s ease;
+        transition: all var(--transition-base);
+        padding: 0.4rem;
+        border-radius: var(--radius-sm);
     }
 
     .social-links a:hover {
-        color: var(--text-primary);
+        color: var(--accent-active);
+        background: var(--accent-active-subtle);
+        transform: translateY(-2px);
     }
 
     /* Bio Panel */
@@ -316,13 +345,15 @@ const timeline = [
         position: relative;
         z-index: 1;
         flex-shrink: 0;
+        box-shadow: 0 0 8px var(--accent-active-glow);
     }
 
     .marker-line {
         width: 2px;
         flex: 1;
-        background: var(--border-color);
+        background: linear-gradient(180deg, var(--accent-active), transparent);
         margin-top: 0.5rem;
+        opacity: 0.4;
     }
 
     .timeline-content {
@@ -363,8 +394,11 @@ const timeline = [
         font-size: 0.9rem;
         color: var(--accent-active);
         padding: 0.25rem 0.5rem;
-        border: 1px solid var(--accent-active);
+        border: 1px solid rgba(0, 230, 138, 0.3);
+        border-radius: var(--radius-sm);
+        background: var(--accent-active-subtle);
         margin-left: auto;
+        text-shadow: 0 0 8px var(--accent-active-glow);
     }
 
     .timeline-period {

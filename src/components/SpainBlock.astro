@@ -48,26 +48,26 @@ const srcEn = imageEn?.src ?? imageEn;
   .spain-block-wrapper {
     display: flex;
     justify-content: center;
-    margin-top: 2rem;
+    margin-top: 2.5rem;
     padding-top: 2rem;
-    border-top: 1px dashed var(--border-color);
+    border-top: 1px solid var(--border-color);
     width: 100%;
   }
 
   .spain-block {
     position: relative;
     display: inline-block;
-    border: 1px solid var(--border-color);
-    background: var(--bg-secondary);
-    padding: 0.5rem;
-    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-light);
+    background: var(--bg-tertiary);
+    padding: 0.75rem;
+    border-radius: var(--radius-md);
     transition: all 0.3s ease;
   }
 
   .spain-block:hover {
-    border-color: var(--text-secondary);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    border-color: var(--accent-active);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 20px var(--accent-active-glow);
   }
 
   .image-link {
@@ -76,16 +76,17 @@ const srcEn = imageEn?.src ?? imageEn;
   }
 
   .spain-block img {
-    max-width: 200px;
+    max-width: 300px;
     height: auto;
     display: block;
-    border-radius: 2px;
-    opacity: 0.8;
-    transition: opacity 0.2s ease;
+    border-radius: var(--radius-sm);
+    opacity: 1;
+    transition: all 0.3s ease;
+    border: none;
   }
 
   .spain-block:hover img {
-    opacity: 1;
+    transform: scale(1.02);
   }
 
   .close-btn {

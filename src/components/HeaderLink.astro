@@ -17,27 +17,29 @@ const isActive = href === pathname || href === "/" + (subpath?.[0] || "");
 		display: inline-block;
 		text-decoration: none;
 		color: var(--text-secondary);
-		font-family: "Orbitron", monospace;
-		font-weight: 600;
+		font-family: 'JetBrains Mono', monospace;
+		font-weight: 500;
 		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		font-size: 0.875rem;
-		padding: 0.5rem 1rem;
+		letter-spacing: 0.05em;
+		font-size: 0.8rem;
+		padding: 0.5rem 0.75rem;
 		border: 1px solid transparent;
-		transition: all 0.3s ease;
+		border-radius: var(--radius-sm);
+		transition: all var(--transition-base);
 		position: relative;
 	}
 
 	a:hover {
-		color: var(--accent-cyan);
-		border-color: var(--accent-cyan);
-		box-shadow: 0 0 8px var(--accent-cyan-glow);
+		color: var(--accent-active);
+		background: var(--accent-active-subtle);
+		border-color: rgba(0, 230, 138, 0.15);
+		text-shadow: none;
 	}
 
 	a.active {
 		color: var(--text-primary);
-		border-color: var(--accent-crimson);
 		background: var(--bg-tertiary);
+		border-color: var(--border-light);
 	}
 
 	a.active::before {
@@ -47,6 +49,7 @@ const isActive = href === pathname || href === "/" + (subpath?.[0] || "");
 		left: 0;
 		right: 0;
 		height: 2px;
-		background: var(--accent-crimson);
+		background: var(--gradient-primary);
+		border-radius: var(--radius-sm) var(--radius-sm) 0 0;
 	}
 </style>

@@ -63,9 +63,22 @@ import { NAV_ITEMS, SITE_TITLE } from "@/consts";
 		left: 0;
 		right: 0;
 		z-index: 1000;
-		background: var(--bg-primary);
-		border-bottom: 1px solid var(--bg-tertiary);
+		background: rgba(8, 9, 10, 0.8);
+		backdrop-filter: blur(20px) saturate(180%);
+		-webkit-backdrop-filter: blur(20px) saturate(180%);
+		border-bottom: 1px solid var(--border-color);
 		padding: 0;
+	}
+
+	header::after {
+		content: '';
+		position: absolute;
+		bottom: -1px;
+		left: 0;
+		right: 0;
+		height: 1px;
+		background: linear-gradient(90deg, transparent, var(--accent-active), var(--accent-info), transparent);
+		opacity: 0.4;
 	}
 
 	nav {
@@ -88,11 +101,16 @@ import { NAV_ITEMS, SITE_TITLE } from "@/consts";
 	.logo a {
 		color: var(--text-primary);
 		text-decoration: none;
-		transition: color 0.2s ease;
+		transition: all var(--transition-base);
+		background: linear-gradient(135deg, var(--text-primary), var(--accent-active));
+		-webkit-background-clip: text;
+		background-clip: text;
 	}
 
 	.logo a:hover {
-		color: var(--accent-active);
+		-webkit-text-fill-color: transparent;
+		text-shadow: none;
+		filter: brightness(1.2);
 	}
 
 	.nav-menu {
