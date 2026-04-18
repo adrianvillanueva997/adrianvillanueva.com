@@ -12,7 +12,7 @@ WORKDIR /app
 COPY package.json bun.lock ./
 
 # 5. Install with increased memory
-RUN bun install --frozen-lockfile --production
+RUN bun install --frozen-lockfile 
 COPY . .
 RUN bun run build
 
