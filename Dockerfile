@@ -1,4 +1,6 @@
 FROM oven/bun:1.3.12-debian as BASE
+
+FROM BASE as builder 
 RUN apt-get update && apt-get install --no-install-recommends curl make ca-certificates -y
 
 RUN curl -fsSL https://d2lang.com/install.sh -o /tmp/d2install.sh && \
@@ -17,6 +19,7 @@ RUN bun run build
 RUN find /app/dist -type f -name "*.svg" -exec chmod 644 {} \;
 
 FROM nginx:1.29-bookworm AS production
+
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY --from=builder /app/dist /usr/share/nginx/html
 EXPOSE 80
