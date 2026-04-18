@@ -1,6 +1,6 @@
-FROM oven/bun:1.3.12-debian as BASE
+FROM oven/bun:1.3.12-debian as base 
 
-FROM BASE as builder 
+FROM base as builder 
 RUN apt-get update && apt-get install --no-install-recommends curl make ca-certificates -y
 
 RUN curl -fsSL https://d2lang.com/install.sh -o /tmp/d2install.sh && \
