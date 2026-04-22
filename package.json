@@ -22,7 +22,7 @@
 		"@tailwindcss/vite": "4.1.18",
 		"astro": "6.1.6",
 		"astro-d2": "0.8.1",
-		"astro-expressive-code": "0.41.3",
+		"astro-expressive-code": "0.41.7",
 		"astro-icon": "1.1.5",
 		"astro-robots-txt": "1.0.0",
 		"expressive-code-language-badge": "1.1.0",
