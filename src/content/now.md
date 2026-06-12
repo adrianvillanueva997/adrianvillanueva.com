@@ -1,6 +1,7 @@
 ---
 title: 'NOW'
 lastUpdated: '2025-02-08'
+# Preview card in src/data/current.ts — keep in sync
 ---
 
 ## PRIMARY FOCUS
