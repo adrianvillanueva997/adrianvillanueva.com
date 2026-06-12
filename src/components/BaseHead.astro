@@ -38,6 +38,20 @@ const {
 // Create full title for non-homepage
 const fullTitle =
 	Astro.url.pathname === "/" ? title : `${title} | ${SITE_TITLE}`;
+
+// Derive OG image path from current page
+const PAGE_OG_MAP: Record<string, string> = {
+	"/": "index",
+	"/about/": "about",
+	"/contact/": "contact",
+	"/now/": "now",
+	"/projects/": "projects",
+	"/resume/": "resume",
+};
+const ogSlug = PAGE_OG_MAP[Astro.url.pathname];
+const ogImage = ogSlug
+	? new URL(`/og/${ogSlug}.png`, Astro.url)
+	: new URL(image.src, Astro.url);
 ---
 
 <!-- Global Metadata -->
@@ -98,7 +112,7 @@ const fullTitle =
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image.src, Astro.url)} />
+<meta property="og:image" content={ogImage} />
 <meta property="og:site_name" content={SITE_TITLE} />
 <meta property="og:locale" content="en_US" />
 
@@ -131,7 +145,7 @@ const fullTitle =
 <meta name="twitter:url" content={Astro.url} />
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={new URL(image.src, Astro.url)} />
+<meta name="twitter:image" content={ogImage} />
 <meta name="twitter:creator" content="@adrianv5x" />
 <meta name="twitter:site" content="@adrianv5x" />
 
@@ -160,7 +174,7 @@ const fullTitle =
 					headline: title,
 					datePublished: article.publishedTime,
 					dateModified: article.modifiedTime || article.publishedTime,
-					image: new URL(image.src, Astro.url).href,
+					image: ogImage.href,
 					keywords: article.tags?.join(', '),
 				}
 			: {
