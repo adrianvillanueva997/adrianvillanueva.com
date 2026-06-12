@@ -14,7 +14,7 @@ const today = new Date();
 	<div class="footer-container">
 		<!-- Logo / Brand -->
 		<div class="footer-brand">
-			<span class="brand-name">{SITE_TITLE}</span>
+			<span class="brand-name"><span class="monogram">AVM/</span> {SITE_TITLE}</span>
 			<span class="brand-tagline">Senior Systems Engineer · Tokyo, JP</span>
 		</div>
 
@@ -23,6 +23,7 @@ const today = new Date();
 			<a
 				href={`mailto:${SOCIAL_LINKS.email}`}
 				title="Email"
+				aria-label="Send email to Adrian Villanueva Martinez"
 				target="_blank"
 				rel="noopener noreferrer"
 			>
@@ -32,6 +33,7 @@ const today = new Date();
 			<a
 				href={SOCIAL_LINKS.github}
 				title="GitHub"
+				aria-label="View Adrian Villanueva Martinez's GitHub profile"
 				target="_blank"
 				rel="noopener noreferrer"
 			>
@@ -41,6 +43,7 @@ const today = new Date();
 			<a
 				href={SOCIAL_LINKS.linkedin}
 				title="LinkedIn"
+				aria-label="View Adrian Villanueva Martinez's LinkedIn profile"
 				target="_blank"
 				rel="noopener noreferrer"
 			>
@@ -50,6 +53,7 @@ const today = new Date();
 			<a
 				href="/rss.xml"
 				title="RSS Feed"
+				aria-label="Subscribe to RSS feed"
 				target="_blank"
 				rel="noopener noreferrer"
 			>
@@ -77,6 +81,8 @@ const today = new Date();
 						<Icon name="mdi:code-tags" size={14} />
 						Source
 					</a>
+					<span class="link-separator">·</span>
+					<a href="https://metalops.dev" target="_blank" rel="noopener noreferrer" class="footer-link footer-link-blog">Blog</a>
 					<span class="link-separator">·</span>
 					<a href="https://notbyai.fyi/" target="_blank" rel="noopener noreferrer" class="footer-link badge-link">
 						<img
@@ -169,6 +175,10 @@ const today = new Date();
 		color: var(--text-muted);
 		letter-spacing: 0.05em;
 		text-transform: uppercase;
+	}
+
+	.monogram {
+		font-weight: 700;
 	}
 
 	/* Social Icons */
@@ -270,6 +280,15 @@ const today = new Date();
 	.footer-link:hover {
 		color: var(--accent-active);
 		text-shadow: none;
+	}
+
+	.footer-link-blog {
+		color: var(--accent-blog);
+	}
+
+	.footer-link-blog:hover {
+		color: var(--accent-blog);
+		filter: brightness(1.3);
 	}
 
 	.link-separator {

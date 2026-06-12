@@ -1,8 +1,8 @@
 ---
-import BaseHead from "@/components/BaseHead.astro";
-import Footer from "@/components/Footer.astro";
-import Header from "@/components/Header.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
+		import BaseHead from "@/components/BaseHead.astro";
+		import Footer from "@/components/Footer.astro";
+		import Header from "@/components/Header.astro";
+		import { NAV_ITEMS, SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
 ---
 
 <!doctype html>
@@ -27,6 +27,23 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
 					RETURN_HOME
 					<span class="btn-bracket">]</span>
 				</a>
+				<div class="nav-links">
+					<a href="/about" class="nav-btn">
+						<span class="btn-bracket">[</span>
+						ABOUT
+						<span class="btn-bracket">]</span>
+					</a>
+					<a href="/projects" class="nav-btn">
+						<span class="btn-bracket">[</span>
+						PROJECTS
+						<span class="btn-bracket">]</span>
+					</a>
+					<a href="/contact" class="nav-btn">
+						<span class="btn-bracket">[</span>
+						CONTACT
+						<span class="btn-bracket">]</span>
+					</a>
+				</div>
 			</div>
 		</main>
 		<Footer />
@@ -47,6 +64,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
 	}
 
 	.error-code {
+		font-family: "Cinzel", "JetBrains Mono", monospace;
 		font-size: 8rem;
 		font-weight: bold;
 		line-height: 1;
@@ -113,5 +131,32 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
 	.btn-bracket {
 		color: var(--accent-active);
 		margin: 0 0.5rem;
+	}
+
+	.nav-links {
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.nav-btn {
+		display: inline-block;
+		text-decoration: none;
+		color: var(--text-secondary);
+		font-size: 1rem;
+		transition: all var(--transition-base);
+		padding: 0.5rem 1rem;
+		border: 1px solid var(--border-color);
+		border-radius: var(--radius-sm);
+		background: transparent;
+		font-family: 'JetBrains Mono', monospace;
+	}
+
+	.nav-btn:hover {
+		color: var(--accent-active);
+		border-color: var(--border-glow);
+		box-shadow: 0 0 20px var(--accent-active-glow);
+		text-shadow: none;
 	}
 </style>

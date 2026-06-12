@@ -6,7 +6,7 @@ import { NAV_ITEMS, SITE_TITLE } from "@/consts";
 <header>
 	<nav>
 		<div class="logo">
-			<a href="/">{SITE_TITLE}</a>
+			<a href="/"><span class="monogram">AVM/</span> {SITE_TITLE}</a>
 		</div>
 
 		<!-- Mobile Menu Toggle -->
@@ -54,6 +54,35 @@ import { NAV_ITEMS, SITE_TITLE } from "@/consts";
 			body.classList.remove('menu-open');
 			menuToggle?.setAttribute('aria-expanded', 'false');
 		});
+	});
+
+	// Close menu on Escape key
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape' && navMenu?.classList.contains('active')) {
+			menuToggle?.classList.remove('active');
+			navMenu?.classList.remove('active');
+			body.classList.remove('menu-open');
+			menuToggle?.setAttribute('aria-expanded', 'false');
+			menuToggle?.focus();
+		}
+	});
+
+	// Trap focus within mobile menu when open
+	navMenu?.addEventListener('keydown', (e) => {
+		if (e.key !== 'Tab' || !navMenu?.classList.contains('active')) return;
+		const focusable = navMenu.querySelectorAll<HTMLElement>(
+			'a, button, [tabindex]:not([tabindex="-1"])'
+		);
+		if (focusable.length === 0) return;
+		const first = focusable[0];
+		const last = focusable[focusable.length - 1];
+		if (e.shiftKey && document.activeElement === first) {
+			e.preventDefault();
+			last.focus();
+		} else if (!e.shiftKey && document.activeElement === last) {
+			e.preventDefault();
+			first.focus();
+		}
 	});
 </script>
 <style>
@@ -113,6 +142,10 @@ import { NAV_ITEMS, SITE_TITLE } from "@/consts";
 		filter: brightness(1.2);
 	}
 
+	.monogram {
+		font-weight: 700;
+	}
+
 	.nav-menu {
 		display: flex;
 		gap: 2rem;
@@ -158,6 +191,16 @@ import { NAV_ITEMS, SITE_TITLE } from "@/consts";
 
 	:global(body.menu-open) {
 		overflow: hidden;
+	}
+
+	:global(body.menu-open::after) {
+		content: '';
+		position: fixed;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.5);
+		backdrop-filter: blur(4px);
+		-webkit-backdrop-filter: blur(4px);
+		z-index: 999;
 	}
 
 	@media (max-width: 768px) {

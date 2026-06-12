@@ -76,7 +76,6 @@ const { Content, frontmatter } = now;
         right: 0;
         height: 2px;
         background: var(--gradient-primary);
-        opacity: 0;
         transition: opacity var(--transition-base);
     }
 
@@ -84,10 +83,6 @@ const { Content, frontmatter } = now;
         border-color: var(--border-glow);
         transform: translateY(-3px);
         box-shadow: var(--shadow-glow), var(--shadow-md);
-    }
-
-    .bento-item:hover::before {
-        opacity: 1;
     }
 
     .module-header {

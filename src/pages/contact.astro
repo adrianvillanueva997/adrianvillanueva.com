@@ -134,7 +134,6 @@ import { SITE_TITLE, SOCIAL_LINKS } from "../consts";
         right: 0;
         height: 2px;
         background: var(--gradient-primary);
-        opacity: 0;
         transition: opacity var(--transition-base);
     }
 
@@ -142,10 +141,6 @@ import { SITE_TITLE, SOCIAL_LINKS } from "../consts";
         border-color: var(--border-glow);
         transform: translateY(-3px);
         box-shadow: var(--shadow-glow), var(--shadow-md);
-    }
-
-    .bento-item:hover::before {
-        opacity: 1;
     }
 
     .module-header {

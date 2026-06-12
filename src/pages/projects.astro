@@ -121,23 +121,20 @@ const allCategories = Array.from(
                 </div>
                 <div class="projects-grid">
                     {
-                        allProjects.map((project: Project) => (
-                            <article
-                                class="project-card"
-                                data-categories={
-                                    project.categories
-                                        ?.map((c) => c.toLowerCase())
-                                        .join(' ') || ''
-                                }
-                            >
-                                <div class="card-header-line">
-                                    <span class="card-id">
-                                        ID:
-                                        {Math.random()
-                                            .toString(36)
-                                            .substr(2, 6)
-                                            .toUpperCase()}
-                                    </span>
+						allProjects.map((project: Project, index: number) => (
+							<article
+								class="project-card"
+								data-categories={
+									project.categories
+										?.map((c) => c.toLowerCase())
+										.join(' ') || ''
+								}
+							>
+								<div class="card-header-line">
+									<span class="card-id">
+										ID:
+										{`PRJ-${String(index + 1).padStart(4, '0')}`}
+									</span>
                                     <div class="card-status">
                                         <span class="status-indicator" />
                                         ONLINE
@@ -375,7 +372,7 @@ const allCategories = Array.from(
     }
 
     .hero-title {
-        font-family: 'JetBrains Mono', monospace;
+        font-family: "Cinzel", "JetBrains Mono", monospace;
         font-size: 3.5rem;
         font-weight: 700;
         margin-bottom: 1rem;

@@ -164,7 +164,6 @@ const timeline = [
         right: 0;
         height: 2px;
         background: var(--gradient-primary);
-        opacity: 0;
         transition: opacity var(--transition-base);
     }
 
@@ -172,10 +171,6 @@ const timeline = [
         border-color: var(--border-glow);
         transform: translateY(-3px);
         box-shadow: var(--shadow-glow), var(--shadow-md);
-    }
-
-    .bento-item:hover::before {
-        opacity: 1;
     }
 
     .module-header {
@@ -228,6 +223,7 @@ const timeline = [
     }
 
     .name {
+        font-family: "Cinzel", serif;
         font-size: 1.5rem;
         margin: 0 0 0.5rem 0;
         line-height: 1.2;

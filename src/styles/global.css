@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Cinzel:wght@400;600;700&display=swap");
 
 /*
   System.Zen Aesthetic
@@ -21,10 +21,24 @@
 	--accent-active: #00e68a;
 	--accent-active-glow: rgba(0, 230, 138, 0.15);
 	--accent-active-subtle: rgba(0, 230, 138, 0.08);
+	--accent-blog: #9b59b6;
+	--accent-blog-glow: rgba(155, 89, 182, 0.15);
+	--accent-blog-subtle: rgba(155, 89, 182, 0.08);
 	--accent-warning: #ffb347;
 	--accent-info: #6C7CFF;
 	--accent-info-glow: rgba(108, 124, 255, 0.15);
 	--accent-error: #ff5c5c;
+
+	/* Extended palette */
+	--accent-cyan: #00e6e6;
+	--accent-cyan-glow: rgba(0, 230, 230, 0.15);
+	--accent-cyan-subtle: rgba(0, 230, 230, 0.08);
+	--accent-crimson: #e63946;
+	--accent-crimson-glow: rgba(230, 57, 70, 0.15);
+	--accent-crimson-subtle: rgba(230, 57, 70, 0.08);
+
+	/* Special effects */
+	--shadow-brutal: 4px 4px 0px rgba(0, 0, 0, 0.5);
 
 	/* Gradient Accents */
 	--gradient-primary: linear-gradient(135deg, #00e68a, #6C7CFF);
@@ -86,8 +100,9 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	background-image:
-		radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-	background-size: 24px 24px;
+		radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+		repeating-conic-gradient(#0003 0.0001%, transparent 0.0002%);
+	background-size: 24px 24px, 400px 400px;
 	background-attachment: fixed;
 }
 
@@ -119,8 +134,18 @@ h1 {
 h2 {
 	font-size: clamp(1.5rem, 3vw, 2.25rem);
 	font-weight: 600;
-	border-bottom: 1px solid var(--border-color);
 	padding-bottom: 0.5rem;
+	position: relative;
+}
+
+h2::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 1px;
+	background: var(--gradient-primary);
 }
 
 h3 {
@@ -353,7 +378,7 @@ a:hover {
 }
 
 .hero-title {
-	font-family: "JetBrains Mono", monospace;
+	font-family: "Cinzel", "JetBrains Mono", monospace;
 	font-size: clamp(2rem, 6vw, 4rem);
 	font-weight: 700;
 	margin-bottom: 1rem;
@@ -459,11 +484,18 @@ code {
 pre {
 	background: var(--bg-tertiary);
 	border: 1px solid var(--border-color);
+	border-left: 3px solid var(--accent-active-subtle);
 	padding: 1.5rem;
 	overflow-x: auto;
 	margin: 2rem 0;
 	border-radius: var(--radius-md);
 	box-shadow: var(--shadow-md);
+	transition: border-left-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+pre:hover {
+	border-left-color: var(--accent-active);
+	box-shadow: var(--shadow-md), var(--shadow-glow);
 }
 
 pre code {
@@ -474,8 +506,8 @@ pre code {
 }
 
 blockquote {
-	border-left: 3px solid var(--accent-info);
-	background: linear-gradient(90deg, var(--accent-info-glow), transparent);
+	border-left: 3px solid var(--accent-active);
+	background: linear-gradient(90deg, var(--accent-active-subtle), transparent);
 	padding: 1.5rem;
 	margin: 2rem 0;
 	border-radius: 0 var(--radius-md) var(--radius-md) 0;
@@ -492,7 +524,7 @@ img {
 }
 
 img:hover {
-	box-shadow: var(--shadow-md);
+	box-shadow: var(--shadow-md), var(--shadow-glow);
 }
 
 /* Tables */
@@ -524,6 +556,19 @@ hr {
 	height: 1px;
 	background: linear-gradient(90deg, transparent, var(--border-light), var(--accent-active-subtle), var(--border-light), transparent);
 	margin: 3rem 0;
+	position: relative;
+}
+
+hr::before {
+	content: '†';
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	color: var(--text-muted);
+	font-size: 0.7rem;
+	background: var(--bg-primary);
+	padding: 0 1rem;
 }
 
 /* Responsive design */
@@ -591,9 +636,17 @@ a:focus-visible {
 	border-radius: var(--radius-sm);
 }
 
+button:focus-visible {
+	box-shadow: 0 0 0 4px var(--accent-blog-glow);
+}
+
+a:focus-visible {
+	box-shadow: 0 0 0 4px var(--accent-blog-glow);
+}
+
 /* Selection styling */
 ::selection {
-	background: rgba(0, 230, 138, 0.25);
+	background: linear-gradient(135deg, rgba(0, 230, 138, 0.25), rgba(155, 89, 182, 0.15));
 	color: var(--text-primary);
 }
 
@@ -614,6 +667,7 @@ a:focus-visible {
 
 ::-webkit-scrollbar-thumb:hover {
 	background: var(--accent-active);
+	box-shadow: 0 0 12px var(--accent-active-glow);
 }
 
 /* Smooth entrance animations */
@@ -794,9 +848,55 @@ a:focus-visible {
 	line-height: 1.5;
 }
 
+/* metalops.dev project card uses blog accent */
+.project-card-metalops:hover {
+	border-color: var(--accent-blog-glow);
+	box-shadow: 0 0 30px var(--accent-blog-glow), var(--shadow-md);
+}
+
+.project-card-metalops .project-header {
+	color: var(--accent-blog);
+}
+
+.project-card-metalops:hover .project-header {
+	color: var(--accent-blog);
+}
+
 /* Responsive projects grid */
 @media (max-width: 640px) {
 	.projects-grid {
 		grid-template-columns: 1fr;
+	}
+}
+
+/* Mobile menu backdrop overlay */
+body.menu-open::after {
+	content: '';
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.5);
+	backdrop-filter: blur(4px);
+	-webkit-backdrop-filter: blur(4px);
+	z-index: 999;
+}
+
+/* Card accent bar always visible at 30% */
+.bento-item::before {
+	opacity: 0.3 !important;
+}
+
+.bento-item:hover::before {
+	opacity: 1 !important;
+}
+
+/* prefers-reduced-motion: disable all animations */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
 	}
 }

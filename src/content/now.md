@@ -5,7 +5,7 @@ lastUpdated: '2025-02-08'
 
 ## PRIMARY FOCUS
 
-Improving my japanese.
+Improving my Japanese.
 
 ### PHYSICAL TRAINING
 
@@ -17,7 +17,7 @@ Create a proxmox cluster with kubernetes using Talos and bootstrap it with terra
 
 I am reading `Deep work` by Cal Newport.
 
-I have replaced my thinkpad t480s ram, keyboard (JP to English) and the battery. It is a great machine and i am happy with the purchase. However, I wanted to upgrade my gaming laptop RAM but nope. It is too expensive. Thank you AI bubble.
+I have replaced my thinkpad t480s ram, keyboard (JP to English) and the battery. It is a great machine and I am happy with the purchase. However, I wanted to upgrade my gaming laptop RAM but nope. It is too expensive. Thank you AI bubble.
 
 ### CURRENT THOUGHTS
 
