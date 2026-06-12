@@ -24,7 +24,7 @@ export const NAV_ITEMS = [
 	{ label: "Blog", href: "https://metalops.dev" },
 	{ label: "Now", href: "/now" },
 	{ label: "Contact", href: "/contact" },
-	{ label: "Resume", href: "https://resume.adrianvillanueva.com" },
+	{ label: "Resume", href: "/resume" },
 	{ label: "Digital Garden", href: "https://brain.adrianvillanueva.com" },
 ];
 

@@ -1,0 +1,586 @@
+---
+import { readFileSync } from "fs";
+import { join } from "path";
+import avatar from "@/assets/resume/avatar.png";
+import BaseHead from "@/components/BaseHead.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import Icon from "@/components/Icon.astro";
+import { SITE_TITLE } from "@/consts";
+
+const resumePath = join(process.cwd(), "src/data/resume.yaml");
+const resumeContent = readFileSync(resumePath, "utf8");
+const { load } = await import("js-yaml");
+const { personal, experience, education, skills, languages: langList } = load(resumeContent) as any;
+
+function formatDate(dateStr: string): string {
+	if (dateStr === "Present") return "Present";
+	const [y, m] = dateStr.split("-");
+	const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+	return m ? `${months[parseInt(m) - 1]} ${y}` : y;
+}
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title={`Resume - ${SITE_TITLE}`}
+			description="Download my CV or view my professional experience, skills, and education."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main class="container">
+			<!-- Hero -->
+			<div class="bento-item hero-card">
+				<div class="hero-content">
+					<div class="avatar-wrapper">
+						<img src={avatar.src} alt={personal.name} class="avatar" width={120} height={120} />
+						<div class="status-indicator"></div>
+					</div>
+					<div class="hero-text">
+						<h1 class="name">{personal.name}</h1>
+						<p class="title">{personal.title}</p>
+						<div class="hero-meta">
+							<span class="meta-item">
+								<Icon name="mdi:map-marker" size={14} />
+								{personal.location}
+							</span>
+							<span class="meta-sep">|</span>
+							<span class="meta-item">
+								<Icon name="mdi:email" size={14} />
+								{personal.email}
+							</span>
+						</div>
+						<p class="summary">{personal.summary}</p>
+						<a href="/resume.pdf" class="download-btn" download>
+							<span class="btn-bracket">[</span>
+							DOWNLOAD CV
+							<span class="btn-bracket">]</span>
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Experience -->
+			<div class="bento-item section-card">
+				<div class="module-header">
+					<Icon name="mdi:briefcase" size={16} />
+					<span class="module-title">EXPERIENCE</span>
+				</div>
+				<div class="timeline-container">
+					{experience.map((job, i) => (
+						<div class="timeline-entry">
+							<div class="timeline-marker">
+								<div class="marker-dot"></div>
+								{i < experience.length - 1 && <div class="marker-line"></div>}
+							</div>
+							<div class="timeline-content">
+								<div class="timeline-header">
+									<div>
+										<h3 class="job-title">{job.position}</h3>
+										<p class="job-company">{job.company}</p>
+									</div>
+									<span class="job-date">{formatDate(job.startDate)} — {formatDate(job.endDate)}</span>
+								</div>
+								<div class="job-location">
+									<Icon name="mdi:map-marker" size={12} />
+									{job.location}
+								</div>
+								<ul class="job-highlights">
+									{job.highlights.map((h) => (
+										<li>{h}</li>
+									))}
+								</ul>
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+
+			<!-- Skills -->
+			<div class="bento-item section-card">
+				<div class="module-header">
+					<Icon name="mdi:code-tags" size={16} />
+					<span class="module-title">SKILLS</span>
+				</div>
+				<div class="skills-grid">
+					{Object.entries(skills).map(([group, items]) => (
+						<div class="skill-group">
+							<h4 class="skill-group-title">{group}</h4>
+							<div class="skill-tags">
+								{items.map((skill) => (
+									<span class="skill-tag">{skill}</span>
+								))}
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+
+			<!-- Education + Languages row -->
+			<div class="row-grid">
+				<div class="bento-item section-card">
+					<div class="module-header">
+						<Icon name="mdi:school" size={16} />
+						<span class="module-title">EDUCATION</span>
+					</div>
+					{education.map((edu) => (
+						<div class="edu-entry">
+							<h3 class="edu-degree">{edu.degree}</h3>
+							<p class="edu-institution">{edu.institution}</p>
+							<div class="edu-meta">
+								<span>{edu.location}</span>
+								<span class="edu-date">{edu.startDate} — {edu.endDate}</span>
+							</div>
+						</div>
+					))}
+				</div>
+
+				<div class="bento-item section-card">
+					<div class="module-header">
+						<Icon name="mdi:translate" size={16} />
+						<span class="module-title">LANGUAGES</span>
+					</div>
+					<div class="lang-list">
+						{langList.map((lang) => (
+							<div class="lang-entry">
+								<span class="lang-name">{lang.name}</span>
+								<span class="lang-level">{lang.level}</span>
+							</div>
+						))}
+					</div>
+				</div>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.container {
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 2rem 1rem;
+	}
+
+	.bento-item {
+		background: var(--glass-bg);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		border: 1px solid var(--border-color);
+		border-radius: var(--radius-md);
+		padding: 1.5rem;
+		transition: all var(--transition-base);
+		position: relative;
+		overflow: hidden;
+		margin-bottom: 1.5rem;
+	}
+
+	.bento-item::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 2px;
+		background: var(--gradient-primary);
+		opacity: 0.3;
+		transition: opacity var(--transition-base);
+	}
+
+	.bento-item:hover {
+		border-color: var(--border-glow);
+		transform: translateY(-3px);
+		box-shadow: var(--shadow-glow), var(--shadow-md);
+	}
+
+	.bento-item:hover::before {
+		opacity: 1;
+	}
+
+	.module-header {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		margin-bottom: 1.5rem;
+		font-family: 'JetBrains Mono', monospace;
+		font-size: 0.75rem;
+		color: var(--text-muted);
+		letter-spacing: 0.05em;
+	}
+
+	/* Hero */
+	.hero-content {
+		display: flex;
+		gap: 2rem;
+		align-items: flex-start;
+	}
+
+	.avatar-wrapper {
+		position: relative;
+		flex-shrink: 0;
+	}
+
+	.avatar {
+		border-radius: 50%;
+		border: 2px solid var(--accent-active);
+		box-shadow: 0 0 20px var(--accent-active-glow);
+	}
+
+	.status-indicator {
+		position: absolute;
+		bottom: 5px;
+		right: 5px;
+		width: 12px;
+		height: 12px;
+		background-color: var(--accent-active);
+		border-radius: 50%;
+		border: 2px solid var(--bg-secondary);
+		animation: pulse-glow 2s ease-in-out infinite;
+	}
+
+	.hero-text {
+		flex: 1;
+		min-width: 0;
+	}
+
+	.name {
+		font-family: "Cinzel", serif;
+		font-size: 1.75rem;
+		margin: 0 0 0.25rem 0;
+		background: var(--gradient-primary);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	.title {
+		font-family: 'JetBrains Mono', monospace;
+		font-size: 1rem;
+		color: var(--accent-active);
+		margin: 0 0 0.75rem 0;
+	}
+
+	.hero-meta {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: 0.8rem;
+		color: var(--text-muted);
+		font-family: 'JetBrains Mono', monospace;
+		margin-bottom: 1rem;
+		flex-wrap: wrap;
+	}
+
+	.meta-item {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.25rem;
+	}
+
+	.meta-sep {
+		color: var(--border-color);
+	}
+
+	.summary {
+		font-size: 0.9rem;
+		color: var(--text-secondary);
+		line-height: 1.7;
+		margin: 0 0 1.25rem 0;
+	}
+
+	.download-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.25rem;
+		padding: 0.6rem 1.25rem;
+		font-family: 'JetBrains Mono', monospace;
+		font-size: 0.85rem;
+		color: var(--text-secondary);
+		text-decoration: none;
+		border: 1px solid var(--border-color);
+		border-radius: var(--radius-sm);
+		transition: all var(--transition-base);
+	}
+
+	.download-btn:hover {
+		color: var(--accent-active);
+		border-color: var(--border-glow);
+		box-shadow: 0 0 20px var(--accent-active-glow);
+	}
+
+	.btn-bracket {
+		color: var(--accent-active);
+	}
+
+	/* Timeline */
+	.timeline-container {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.timeline-entry {
+		display: flex;
+		gap: 1.5rem;
+		position: relative;
+	}
+
+	.timeline-marker {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		position: relative;
+	}
+
+	.marker-dot {
+		width: 12px;
+		height: 12px;
+		border-radius: 50%;
+		border: 2px solid var(--accent-active);
+		background: var(--bg-secondary);
+		position: relative;
+		z-index: 1;
+		flex-shrink: 0;
+		box-shadow: 0 0 8px var(--accent-active-glow);
+	}
+
+	.marker-line {
+		width: 2px;
+		flex: 1;
+		background: linear-gradient(180deg, var(--accent-active), transparent);
+		margin-top: 0.5rem;
+		opacity: 0.4;
+	}
+
+	.timeline-content {
+		flex: 1;
+		padding-bottom: 2rem;
+	}
+
+	.timeline-entry:last-child .timeline-content {
+		padding-bottom: 0;
+	}
+
+	.timeline-entry:last-child .marker-line {
+		display: none;
+	}
+
+	.timeline-header {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 1rem;
+		margin-bottom: 0.25rem;
+		flex-wrap: wrap;
+	}
+
+	.job-title {
+		font-family: 'JetBrains Mono', monospace;
+		font-size: 1.1rem;
+		color: var(--text-primary);
+		margin: 0;
+	}
+
+	.job-company {
+		font-size: 0.9rem;
+		color: var(--accent-active);
+		margin: 0.15rem 0 0 0;
+	}
+
+	.job-date {
+		font-family: 'JetBrains Mono', monospace;
+		font-size: 0.8rem;
+		color: var(--text-muted);
+		white-space: nowrap;
+		padding: 0.2rem 0.5rem;
+		border: 1px solid var(--border-color);
+		border-radius: var(--radius-sm);
+		flex-shrink: 0;
+	}
+
+	.job-location {
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+		font-size: 0.8rem;
+		color: var(--text-muted);
+		font-family: 'JetBrains Mono', monospace;
+		margin-bottom: 0.75rem;
+	}
+
+	.job-highlights {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.job-highlights li {
+		position: relative;
+		padding-left: 1.25rem;
+		margin-bottom: 0.4rem;
+		font-size: 0.88rem;
+		color: var(--text-secondary);
+		line-height: 1.55;
+	}
+
+	.job-highlights li::before {
+		content: '>';
+		position: absolute;
+		left: 0;
+		color: var(--accent-active);
+		font-family: 'JetBrains Mono', monospace;
+		font-weight: 700;
+	}
+
+	/* Skills */
+	.skills-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+		gap: 1.25rem;
+	}
+
+	.skill-group {
+		break-inside: avoid;
+	}
+
+	.skill-group-title {
+		font-family: 'JetBrains Mono', monospace;
+		font-size: 0.7rem;
+		color: var(--text-muted);
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		margin: 0 0 0.6rem 0;
+		padding-bottom: 0.4rem;
+		border-bottom: 1px solid var(--border-color);
+	}
+
+	.skill-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem;
+	}
+
+	.skill-tag {
+		font-family: 'JetBrains Mono', monospace;
+		font-size: 0.75rem;
+		padding: 0.25rem 0.6rem;
+		border: 1px solid var(--border-color);
+		border-radius: var(--radius-sm);
+		color: var(--text-secondary);
+		background: var(--bg-secondary);
+		transition: all var(--transition-base);
+	}
+
+	.skill-tag:hover {
+		border-color: var(--accent-active);
+		color: var(--accent-active);
+		box-shadow: 0 0 10px var(--accent-active-glow);
+	}
+
+	/* Row grid for education + languages */
+	.row-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1.5rem;
+	}
+
+	.row-grid .bento-item {
+		margin-bottom: 0;
+	}
+
+	/* Education */
+	.edu-entry {
+		padding: 0.5rem 0;
+	}
+
+	.edu-degree {
+		font-family: 'JetBrains Mono', monospace;
+		font-size: 1rem;
+		color: var(--text-primary);
+		margin: 0 0 0.15rem 0;
+	}
+
+	.edu-institution {
+		font-size: 0.88rem;
+		color: var(--accent-active);
+		margin: 0 0 0.4rem 0;
+	}
+
+	.edu-meta {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		font-family: 'JetBrains Mono', monospace;
+		font-size: 0.78rem;
+		color: var(--text-muted);
+	}
+
+	.edu-date {
+		color: var(--accent-active);
+		padding: 0.1rem 0.4rem;
+		border: 1px solid rgba(0, 230, 138, 0.3);
+		border-radius: var(--radius-sm);
+		background: var(--accent-active-subtle);
+	}
+
+	/* Languages */
+	.lang-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.6rem;
+	}
+
+	.lang-entry {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0.4rem 0;
+		border-bottom: 1px solid var(--border-color);
+	}
+
+	.lang-entry:last-child {
+		border-bottom: none;
+	}
+
+	.lang-name {
+		font-family: 'JetBrains Mono', monospace;
+		font-size: 0.9rem;
+		color: var(--text-primary);
+	}
+
+	.lang-level {
+		font-size: 0.8rem;
+		color: var(--accent-active);
+		padding: 0.15rem 0.5rem;
+		border: 1px solid rgba(0, 230, 138, 0.3);
+		border-radius: var(--radius-sm);
+		background: var(--accent-active-subtle);
+	}
+
+	/* Responsive */
+	@media (max-width: 768px) {
+		.container {
+			padding: 1rem;
+		}
+
+		.hero-content {
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+		}
+
+		.hero-meta {
+			justify-content: center;
+		}
+
+		.row-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.skills-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

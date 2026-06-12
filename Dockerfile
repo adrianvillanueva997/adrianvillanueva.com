@@ -1,6 +1,11 @@
-FROM oven/bun:1.3.12-debian as base 
+FROM ghcr.io/typst/typst:0.14.2 AS resume-builder
+WORKDIR /resume
+COPY resume/ .
+RUN typst compile cv.typ cv.pdf
 
-FROM base as builder 
+FROM oven/bun:1.3.12-debian as base
+
+FROM base as builder
 RUN apt-get update && apt-get install --no-install-recommends curl make ca-certificates -y
 
 RUN curl -fsSL https://d2lang.com/install.sh -o /tmp/d2install.sh && \
@@ -14,6 +19,7 @@ COPY package.json bun.lock ./
 # 5. Install with increased memory
 RUN bun install --frozen-lockfile 
 COPY . .
+COPY --from=resume-builder /resume/cv.pdf public/resume.pdf
 RUN bun run build
 
 RUN find /app/dist -type f -name "*.svg" -exec chmod 644 {} \;
