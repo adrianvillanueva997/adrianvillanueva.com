@@ -1,6 +1,11 @@
 FROM ghcr.io/typst/typst:0.14.2 AS resume-builder
 WORKDIR /resume
 COPY resume/ .
+RUN apk add --no-cache fontconfig
+# Install custom fonts to system fonts directory
+RUN mkdir -p /usr/share/fonts/truetype/custom && \
+  cp fonts/*.otf /usr/share/fonts/truetype/custom/ && \
+  fc-cache -fv
 RUN typst compile cv.typ cv.pdf
 
 FROM oven/bun:1.3.12-debian as base
@@ -9,8 +14,8 @@ FROM base as builder
 RUN apt-get update && apt-get install --no-install-recommends curl make ca-certificates -y
 
 RUN curl -fsSL https://d2lang.com/install.sh -o /tmp/d2install.sh && \
-    sh /tmp/d2install.sh && \
-    rm /tmp/d2install.sh
+  sh /tmp/d2install.sh && \
+  rm /tmp/d2install.sh
 
 WORKDIR /app
 
