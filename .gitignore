@@ -24,3 +24,6 @@ pnpm-debug.log*
 .idea/
 
 public/diagrams/**
+
+# compiled PDFs (built during Docker)
+*.pdf
