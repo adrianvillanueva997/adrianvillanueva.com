@@ -1,8 +1,8 @@
 ---
 import { Image } from "astro:assets";
-import Icon from "./Icon.astro";
-import { getLatestBlogPost, formatDate } from "@/utils/blog";
 import { NOW_PREVIEW } from "@/data/current";
+import { formatDate, getLatestBlogPost } from "@/utils/blog";
+import Icon from "./Icon.astro";
 
 interface Props {
 	mePhoto: ImageMetadata;
@@ -42,14 +42,36 @@ const nowItems = [
 
 const creativeItems = [
 	{ name: "Music", icon: "mdi:music", desc: "Synthwave + doom metal" },
-	{ name: "Photography", icon: "mdi:camera", desc: "Tokyo streets and beyond", href: "https://avm.photography" },
-	{ name: "Open Source", icon: "mdi:github", desc: "Data platforms & tooling", href: "https://github.com/adrianvillanueva997" },
+	{
+		name: "Photography",
+		icon: "mdi:camera",
+		desc: "Tokyo streets and beyond",
+		href: "/photography",
+	},
+	{
+		name: "Open Source",
+		icon: "mdi:github",
+		desc: "Data platforms & tooling",
+		href: "https://github.com/adrianvillanueva997",
+	},
 ];
 
 const connectItems = [
-	{ name: "Email", icon: "mdi:email", href: "mailto:adrian.villanueva.martinez@outlook.com" },
-	{ name: "LinkedIn", icon: "mdi:linkedin", href: "https://linkedin.com/in/adrian-villanueva-martinez" },
-	{ name: "GitHub", icon: "mdi:github", href: "https://github.com/adrianvillanueva997" },
+	{
+		name: "Email",
+		icon: "mdi:email",
+		href: "mailto:adrian.villanueva.martinez@outlook.com",
+	},
+	{
+		name: "LinkedIn",
+		icon: "mdi:linkedin",
+		href: "https://linkedin.com/in/adrian-villanueva-martinez",
+	},
+	{
+		name: "GitHub",
+		icon: "mdi:github",
+		href: "https://github.com/adrianvillanueva997",
+	},
 ];
 
 const latestPost = await getLatestBlogPost();
@@ -154,12 +176,12 @@ const latestPost = await getLatestBlogPost();
                     {latestPost.description && (
                         <p class="blog-description">{latestPost.description}</p>
                     )}
-                    <a href="https://metalops.dev" target="_blank" rel="noopener noreferrer" class="read-more">Visit metalops.dev &rarr;</a>
+                    <a href="/blog" class="read-more">Read more &rarr;</a>
                 </>
             ) : (
                 <>
                     <p class="blog-fallback">Check back soon for new articles on systems engineering and cloud infrastructure.</p>
-                    <a href="https://metalops.dev" target="_blank" rel="noopener noreferrer" class="read-more">Visit metalops.dev &rarr;</a>
+                    <a href="/blog" class="read-more">Read more &rarr;</a>
                 </>
             )}
         </div>
@@ -192,8 +214,8 @@ const latestPost = await getLatestBlogPost();
             {creativeItems.map((item) => (
                 <a
                     href={item.href || "#"}
-                    target={item.href ? "_blank" : undefined}
-                    rel={item.href ? "noopener noreferrer" : undefined}
+                    target={item.href?.startsWith("http") ? "_blank" : undefined}
+                    rel={item.href?.startsWith("http") ? "noopener noreferrer" : undefined}
                     class="creative-item"
                 >
                     <Icon name={item.icon} size={18} />

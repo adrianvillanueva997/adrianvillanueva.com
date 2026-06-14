@@ -21,10 +21,11 @@ export const HERO_TAGLINE =
 
 // Navigation
 export const NAV_ITEMS = [
-	{ label: "Blog", href: "https://metalops.dev" },
+	{ label: "Blog", href: "/blog" },
 	{ label: "Now", href: "/now" },
 	{ label: "Contact", href: "/contact" },
 	{ label: "Resume", href: "/resume" },
+	{ label: "Photography", href: "/photography" },
 	{ label: "Digital Garden", href: "https://brain.adrianvillanueva.com" },
 ];
 

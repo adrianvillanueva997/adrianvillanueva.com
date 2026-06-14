@@ -1,7 +1,10 @@
+import { existsSync } from "node:fs";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import path from "node:path";
+import { Resvg } from "@resvg/resvg-js";
 import type { APIRoute, GetStaticPaths } from "astro";
 import type { ReactNode } from "react";
 import satori from "satori";
-import { Resvg } from "@resvg/resvg-js";
 
 interface OGSettings {
 	title: string;
@@ -39,22 +42,35 @@ export const getStaticPaths: GetStaticPaths = async () => {
 	return Object.keys(OG_PAGES).map((slug) => ({ params: { slug } }));
 };
 
-let _jetBrainsMono: ArrayBuffer | null = null;
-let _cinzel: ArrayBuffer | null = null;
+const FONT_CACHE = path.join(process.cwd(), "node_modules", ".og-font-cache");
 
 async function loadFont(name: string, weight: number): Promise<ArrayBuffer> {
+	const cacheKey = name.replace(/\s+/g, "_") + "-" + weight;
+	const cacheFile = path.join(FONT_CACHE, cacheKey);
+
+	if (existsSync(cacheFile)) {
+		return readFile(cacheFile);
+	}
+
 	const family = name.replace(/\s+/g, "+");
 	const url = `https://fonts.googleapis.com/css2?family=${family}:wght@${weight}&display=swap`;
 	const css = await fetch(url).then((r) => r.text());
 	const match = css.match(/url\(([^)]+)\)/);
 	if (!match) throw new Error(`Could not resolve font URL for ${name}`);
-	return fetch(match[1]).then((r) => r.arrayBuffer());
+	const data = await fetch(match[1]).then((r) => r.arrayBuffer());
+
+	await mkdir(FONT_CACHE, { recursive: true });
+	await writeFile(cacheFile, Buffer.from(data));
+
+	return data;
 }
 
 async function getFonts() {
-	if (!_jetBrainsMono) _jetBrainsMono = await loadFont("JetBrains Mono", 700);
-	if (!_cinzel) _cinzel = await loadFont("Cinzel", 700);
-	return { jetBrainsMono: _jetBrainsMono, cinzel: _cinzel };
+	const [jetBrainsMono, cinzel] = await Promise.all([
+		loadFont("JetBrains Mono", 700),
+		loadFont("Cinzel", 700),
+	]);
+	return { jetBrainsMono, cinzel };
 }
 
 export const GET: APIRoute = async ({ params }) => {
@@ -156,7 +172,12 @@ export const GET: APIRoute = async ({ params }) => {
 			width: 1200,
 			height: 630,
 			fonts: [
-				{ name: "JetBrains Mono", data: fonts.jetBrainsMono, weight: 700, style: "normal" },
+				{
+					name: "JetBrains Mono",
+					data: fonts.jetBrainsMono,
+					weight: 700,
+					style: "normal",
+				},
 				{ name: "Cinzel", data: fonts.cinzel, weight: 700, style: "normal" },
 			],
 		},
