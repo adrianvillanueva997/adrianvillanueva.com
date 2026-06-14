@@ -1,0 +1,22 @@
+---
+const BLOG_URL = "https://metalops.dev";
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="robots" content="noindex, follow" />
+		<meta http-equiv="refresh" content="0; url={BLOG_URL}" />
+		<title>Redirecting to Blog...</title>
+	</head>
+	<body>
+		<p>
+			Redirecting to
+			<a href={BLOG_URL} target="_blank" rel="noopener noreferrer">metalops.dev</a>...
+		</p>
+		<script>
+			window.location.replace("https://metalops.dev");
+		</script>
+	</body>
+</html>
