@@ -7,7 +7,7 @@
 #cv-section("Professional Experience")
 
 #cv-entry(
-  title: [Data Engineer],
+  title: [Software Engineer (Data Infrastructure)],
   logo: image("../src/logos/woven_by_toyota.jpg"),
   society: [Woven by Toyota],
   date: [2024 - Present],
@@ -39,7 +39,7 @@
 )
 
 #cv-entry(
-  title: [Data Engineer],
+  title: [Software Engineer (Data Platform)],
   society: [Albert Heijn],
   logo: image("../src/logos/albert_heijn.png"),
   date: [2022 - 2024],
@@ -64,7 +64,7 @@
 )
 
 #cv-entry(
-  title: [Data Engineer],
+  title: [Software Engineer (Infrastructure & Data)],
   society: [Dashmote],
   date: [2021 - 2022],
   logo: image("../src/logos/dashmote.png"),

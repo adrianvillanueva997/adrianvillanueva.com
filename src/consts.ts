@@ -1,6 +1,6 @@
 export const SITE_TITLE = "Adrian Villanueva Martinez";
 export const SITE_DESCRIPTION =
-	"Senior Software Engineer specializing in cloud-native data platforms, data engineering, and MLOps. Based in Tokyo, delivering European engineering excellence and driving large-scale adoption of high-impact systems.";
+	"Software Engineer specializing in cloud-native data platforms, data engineering, and MLOps. Based in Tokyo, delivering European engineering excellence and driving large-scale adoption of high-impact systems.";
 export const SITE_URL = "https://adrianvillanueva.com";
 export const SITE_AUTHOR = "Adrian Villanueva Martinez";
 export const SITE_KEYWORDS = [
@@ -15,7 +15,7 @@ export const SITE_KEYWORDS = [
 ];
 
 // Hero section content
-export const HERO_TITLE = "SENIOR SOFTWARE ENGINEER";
+export const HERO_TITLE = "SOFTWARE ENGINEER";
 export const HERO_TAGLINE =
 	"Experienced Software Engineer with deep expertise in cloud-native data platforms, data engineering, and MLOps. Based in Tokyo, delivering European engineering excellence and driving large-scale adoption of high-impact systems across organizations.";
 

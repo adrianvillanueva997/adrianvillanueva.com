@@ -123,7 +123,7 @@ extraInfo = "Japan (Engineering Visa). Available immediately"
 # i.e. [[lang.ru]]
 # each section must contains the following fields
 [lang.en]
-header_quote = "Senior Software Engineer with a successful track record in delivering high-quality solutions. Experienced leader skilled in driving projects from concept to completion. Passionate about optimizing processes through technology."
+header_quote = "Software Engineer with a successful track record in delivering high-quality solutions. Experienced leader skilled in driving projects from concept to completion. Passionate about optimizing processes through technology."
 cv_footer = "Curriculum vitae"
 letter_footer = "Cover letter"
 # For languages that are not written in Latin script

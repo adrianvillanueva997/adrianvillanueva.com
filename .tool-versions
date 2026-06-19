@@ -1,3 +1,4 @@
 pre-commit 4.2.0
 typos      latest
 bun        latest
+typst      0.14.2

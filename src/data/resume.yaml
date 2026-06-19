@@ -1,6 +1,6 @@
 personal:
   name: "Adrian Villanueva Martinez"
-  title: "Senior Software Engineer"
+  title: "Software Engineer"
   nationality: "Spain 🇪🇸"
   location: "Tokyo, Japan 🇯🇵"
   summary: "Experienced Software Engineer with deep expertise in cloud-native data platforms, data engineering, and MLOps. Based in Tokyo, delivering European engineering excellence and driving large-scale adoption of high-impact systems across organizations. Skilled in designing resilient infrastructure, building powerful SDKs, and enabling company-wide platform usability."
@@ -8,7 +8,7 @@ personal:
 
 experience:
   - company: "Woven by Toyota"
-    position: "Data Engineer"
+    position: "Software Engineer (Data Infrastructure)"
     location: "Tokyo, Japan"
     startDate: "2024-08"
     endDate: "Present"
@@ -21,7 +21,7 @@ experience:
       - "Created platform documentation, naming conventions, and onboarding guides to support self-serve adoption by engineers, analysts, and ML practitioners"
 
   - company: "Albert Heijn"
-    position: "Data Platform Engineer"
+    position: "Software Engineer (Data Platform)"
     location: "Amsterdam, Netherlands"
     startDate: "2022-03"
     endDate: "2024-06"
@@ -33,7 +33,7 @@ experience:
       - "Worked closely with analysts and data scientists to productionize ML pipelines and deploy feature engineering workflows"
 
   - company: "Dashmote"
-    position: "Data Engineer"
+    position: "Software Engineer (Infrastructure & Data)"
     location: "Amsterdam, Netherlands"
     startDate: "2021-09"
     endDate: "2022-03"
@@ -44,7 +44,7 @@ experience:
       - "Collaborated with data scientists to automate training data pipelines and streamline model experimentation"
 
   - company: "Ernst & Young (EY)"
-    position: "Software Developer (Faas Tech)"
+    position: "Software Engineer"
     location: "Madrid, Spain"
     startDate: "2019-06"
     endDate: "2020-06"
