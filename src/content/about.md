@@ -1,7 +1,7 @@
 ---
 name: Adrian Villanueva Martinez
 avatar: /static/images/me/me.jpeg
-occupation: Software Engineer & Systems Designer
+occupation: Software Engineer
 email: adrian.villanueva.martinez@outlook.com
 linkedin: https://linkedin.com/in/adrian-villanueva-martinez
 github: https://github.com/adrianvillanueva997
@@ -9,7 +9,7 @@ github: https://github.com/adrianvillanueva997
 
 **Origin**: Spain 🇪🇸 → **Current**: Tokyo, Japan 🇯🇵
 
-**Role**: Senior Software Engineer
+**Role**: Software Engineer
 
 **Specialty**: Software Engineering & Data Platform Architecture
 
