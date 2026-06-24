@@ -25,7 +25,7 @@
 	--accent-blog-glow: rgba(155, 89, 182, 0.15);
 	--accent-blog-subtle: rgba(155, 89, 182, 0.08);
 	--accent-warning: #ffb347;
-	--accent-info: #6C7CFF;
+	--accent-info: #6c7cff;
 	--accent-info-glow: rgba(108, 124, 255, 0.15);
 	--accent-error: #ff5c5c;
 
@@ -41,9 +41,17 @@
 	--shadow-brutal: 4px 4px 0px rgba(0, 0, 0, 0.5);
 
 	/* Gradient Accents */
-	--gradient-primary: linear-gradient(135deg, #00e68a, #6C7CFF);
-	--gradient-glow: linear-gradient(135deg, rgba(0, 230, 138, 0.2), rgba(108, 124, 255, 0.2));
-	--gradient-surface: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 100%);
+	--gradient-primary: linear-gradient(135deg, #00e68a, #6c7cff);
+	--gradient-glow: linear-gradient(
+		135deg,
+		rgba(0, 230, 138, 0.2),
+		rgba(108, 124, 255, 0.2)
+	);
+	--gradient-surface: linear-gradient(
+		180deg,
+		rgba(255, 255, 255, 0.03) 0%,
+		rgba(255, 255, 255, 0) 100%
+	);
 
 	/* UI Elements */
 	--border-color: rgba(255, 255, 255, 0.06);
@@ -102,7 +110,9 @@ body {
 	background-image:
 		radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
 		repeating-conic-gradient(#0003 0.0001%, transparent 0.0002%);
-	background-size: 24px 24px, 400px 400px;
+	background-size:
+		24px 24px,
+		400px 400px;
 	background-attachment: fixed;
 }
 
@@ -139,7 +149,7 @@ h2 {
 }
 
 h2::after {
-	content: '';
+	content: "";
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -310,64 +320,6 @@ a:hover {
 	text-shadow: 0 0 20px var(--accent-active-glow);
 }
 
-.btn-primary {
-	background: var(--bg-tertiary);
-	color: var(--text-primary);
-	border: 1px solid var(--border-light);
-	padding: 0.75rem 1.5rem;
-	font-family: "JetBrains Mono", monospace;
-	font-weight: 500;
-	font-size: 0.9rem;
-	border-radius: var(--radius-sm);
-	cursor: pointer;
-	transition: all var(--transition-base);
-	display: inline-flex;
-	align-items: center;
-	gap: 0.5rem;
-	position: relative;
-	overflow: hidden;
-}
-
-.btn-primary::before {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: -100%;
-	width: 100%;
-	height: 100%;
-	background: linear-gradient(90deg, transparent, rgba(0, 230, 138, 0.1), transparent);
-	transition: left 0.5s ease;
-}
-
-.btn-primary:hover {
-	background: var(--bg-secondary);
-	border-color: var(--accent-active);
-	color: var(--accent-active);
-	box-shadow: 0 0 20px var(--accent-active-glow), inset 0 1px 0 rgba(255,255,255,0.05);
-}
-
-.btn-primary:hover::before {
-	left: 100%;
-}
-
-.btn-secondary {
-	background: transparent;
-	color: var(--text-secondary);
-	border: 1px solid var(--border-color);
-	padding: 0.75rem 1.5rem;
-	font-family: "JetBrains Mono", monospace;
-	font-weight: 500;
-	font-size: 0.9rem;
-	border-radius: var(--radius-sm);
-	cursor: pointer;
-	transition: all 0.2s ease;
-}
-
-.btn-secondary:hover {
-	border-color: var(--text-primary);
-	color: var(--text-primary);
-}
-
 /* Hero section styling - Dashboard style */
 .hero {
 	min-height: 80vh;
@@ -490,7 +442,9 @@ pre {
 	margin: 2rem 0;
 	border-radius: var(--radius-md);
 	box-shadow: var(--shadow-md);
-	transition: border-left-color var(--transition-base), box-shadow var(--transition-base);
+	transition:
+		border-left-color var(--transition-base),
+		box-shadow var(--transition-base);
 }
 
 pre:hover {
@@ -520,7 +474,9 @@ img {
 	height: auto;
 	border-radius: var(--radius-md);
 	border: 1px solid var(--border-color);
-	transition: transform var(--transition-base), box-shadow var(--transition-base);
+	transition:
+		transform var(--transition-base),
+		box-shadow var(--transition-base);
 }
 
 img:hover {
@@ -554,13 +510,20 @@ th {
 hr {
 	border: none;
 	height: 1px;
-	background: linear-gradient(90deg, transparent, var(--border-light), var(--accent-active-subtle), var(--border-light), transparent);
+	background: linear-gradient(
+		90deg,
+		transparent,
+		var(--border-light),
+		var(--accent-active-subtle),
+		var(--border-light),
+		transparent
+	);
 	margin: 3rem 0;
 	position: relative;
 }
 
 hr::before {
-	content: '†';
+	content: "†";
 	position: absolute;
 	left: 50%;
 	top: 50%;
@@ -646,7 +609,11 @@ a:focus-visible {
 
 /* Selection styling */
 ::selection {
-	background: linear-gradient(135deg, rgba(0, 230, 138, 0.25), rgba(155, 89, 182, 0.15));
+	background: linear-gradient(
+		135deg,
+		rgba(0, 230, 138, 0.25),
+		rgba(155, 89, 182, 0.15)
+	);
 	color: var(--text-primary);
 }
 
@@ -683,8 +650,12 @@ a:focus-visible {
 }
 
 @keyframes fadeIn {
-	from { opacity: 0; }
-	to { opacity: 1; }
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }
 
 @keyframes slideInLeft {
@@ -699,14 +670,29 @@ a:focus-visible {
 }
 
 @keyframes pulse-glow {
-	0%, 100% { box-shadow: 0 0 6px var(--accent-active), 0 0 12px var(--accent-active-glow); }
-	50% { box-shadow: 0 0 12px var(--accent-active), 0 0 24px var(--accent-active-glow); }
+	0%,
+	100% {
+		box-shadow:
+			0 0 6px var(--accent-active),
+			0 0 12px var(--accent-active-glow);
+	}
+	50% {
+		box-shadow:
+			0 0 12px var(--accent-active),
+			0 0 24px var(--accent-active-glow);
+	}
 }
 
 @keyframes gradient-shift {
-	0% { background-position: 0% 50%; }
-	50% { background-position: 100% 50%; }
-	100% { background-position: 0% 50%; }
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 /* Mobile-specific utilities */
@@ -747,10 +733,9 @@ a:focus-visible {
 	}
 }
 
-
 /* Mobile menu backdrop overlay */
 body.menu-open::after {
-	content: '';
+	content: "";
 	position: fixed;
 	inset: 0;
 	background: rgba(0, 0, 0, 0.5);

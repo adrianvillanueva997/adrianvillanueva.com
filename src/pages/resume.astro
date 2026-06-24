@@ -1,22 +1,41 @@
 ---
+import { Icon } from "astro-icon/components";
 import { readFileSync } from "fs";
 import { join } from "path";
 import avatar from "@/assets/resume/avatar.png";
 import BaseHead from "@/components/BaseHead.astro";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
-import Icon from "@/components/Icon.astro";
 import { SITE_TITLE } from "@/consts";
 
 const resumePath = join(process.cwd(), "src/data/resume.yaml");
 const resumeContent = readFileSync(resumePath, "utf8");
 const { load } = await import("js-yaml");
-const { personal, experience, education, skills, languages: langList } = load(resumeContent) as any;
+const {
+	personal,
+	experience,
+	education,
+	skills,
+	languages: langList,
+} = load(resumeContent) as any;
 
 function formatDate(dateStr: string): string {
 	if (dateStr === "Present") return "Present";
 	const [y, m] = dateStr.split("-");
-	const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+	const months = [
+		"Jan",
+		"Feb",
+		"Mar",
+		"Apr",
+		"May",
+		"Jun",
+		"Jul",
+		"Aug",
+		"Sep",
+		"Oct",
+		"Nov",
+		"Dec",
+	];
 	return m ? `${months[parseInt(m) - 1]} ${y}` : y;
 }
 ---
