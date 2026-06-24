@@ -27,3 +27,6 @@ public/diagrams/**
 
 # compiled PDFs (built during Docker)
 *.pdf
+
+# Husky internal scaffolding
+.husky/_/
