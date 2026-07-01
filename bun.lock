@@ -5,14 +5,13 @@
     "": {
       "name": "adrianvillanueva.com",
       "dependencies": {
-        "@astrojs/check": "0.9.8",
         "@astrojs/mdx": "4.3.14",
         "@astrojs/rss": "4.0.18",
         "@astrojs/sitemap": "3.6.1",
         "@expressive-code/plugin-collapsible-sections": "0.41.7",
         "@expressive-code/plugin-line-numbers": "0.41.3",
         "@iconify-json/mdi": "1.2.3",
-        "@iconify-json/simple-icons": "1.2.86",
+        "@iconify-json/simple-icons": "1.2.87",
         "@resvg/resvg-js": "^2.6.2",
         "@tailwindcss/forms": "0.5.11",
         "@tailwindcss/typography": "0.5.19",
@@ -29,7 +28,7 @@
         "tailwindcss": "4.1.18",
       },
       "devDependencies": {
-        "@types/js-yaml": "4.0.9",
+        "@astrojs/check": "0.9.8",
         "typescript": "5.9.3",
         "vite": ">=7.0.0 <8.0.0",
         "vite-plugin-compression": "0.5.1",
@@ -164,7 +163,7 @@
 
     "@iconify-json/mdi": ["@iconify-json/mdi@1.2.3", "", { "dependencies": { "@iconify/types": "2.0.0" } }, "sha512-O3cLwbDOK7NNDf2ihaQOH5F9JglnulNDFV7WprU2dSoZu3h3cWH//h74uQAB87brHmvFVxIOkuBX2sZSzYhScg=="],
 
-    "@iconify-json/simple-icons": ["@iconify-json/simple-icons@1.2.86", "", { "dependencies": { "@iconify/types": "2.0.0" } }, "sha512-t3jck5qPQuK1qy+bRn9eCoDQhIB7XSazKz1Fjp8hcan3XOAsTI5Mq/s3F0ekOKSvMQqkVORYK6ns6o6T9f5EMA=="],
+    "@iconify-json/simple-icons": ["@iconify-json/simple-icons@1.2.87", "", { "dependencies": { "@iconify/types": "*" } }, "sha512-8YciStObhSji3OZFmWAWK6kBujyqO5bLCxeDwLxf3CR3F4PVelq7keC2LBvgTqviWzSTysj5/g4PCFLiAMVGsw=="],
 
     "@iconify/tools": ["@iconify/tools@4.2.0", "", { "dependencies": { "@iconify/types": "2.0.0", "@iconify/utils": "2.3.0", "cheerio": "1.2.0", "domhandler": "5.0.3", "extract-zip": "2.0.1", "local-pkg": "1.2.1", "pathe": "2.0.3", "svgo": "3.3.3", "tar": "7.5.16" } }, "sha512-WRxPva/ipxYkqZd1+CkEAQmd86dQmrwH0vwK89gmp2Kh2WyyVw57XbPng0NehP3x4V1LzLsXUneP1uMfTMZmUA=="],
 
