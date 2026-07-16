@@ -30,17 +30,15 @@ const isActive = href === pathname || href === "/" + (subpath?.[0] || "");
 	}
 
 	a:hover {
-		color: var(--accent-active);
-		background: var(--accent-active-subtle);
+		color: var(--accent-primary);
+		background: var(--accent-primary-subtle);
 		border-color: rgba(0, 230, 138, 0.15);
-		text-shadow: none;
 	}
 
 	a.active {
 		color: var(--text-primary);
 		background: var(--bg-tertiary);
 		border-color: var(--border-light);
-		text-shadow: 0 0 10px var(--accent-active-glow);
 	}
 
 	a.active::before {

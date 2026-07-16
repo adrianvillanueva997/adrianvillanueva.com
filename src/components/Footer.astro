@@ -95,6 +95,15 @@ const today = new Date();
 			</div>
 		</div>
 
+		<!-- Colophon -->
+		<div class="colophon">
+			Built with <a href="https://astro.build" target="_blank" rel="noopener">Astro</a>
+			<span class="colophon-sep">·</span>
+			<a href="https://tailwindcss.com" target="_blank" rel="noopener">Tailwind</a>
+			<span class="colophon-sep">·</span>
+			Inter + JetBrains Mono
+		</div>
+
 		<!-- Disclaimer -->
 		<div class="disclaimer">
 			<span class="disclaimer-label">Disclaimer:</span> Any and all opinions
@@ -126,7 +135,7 @@ const today = new Date();
 		left: 0;
 		right: 0;
 		height: 1px;
-		background: linear-gradient(90deg, transparent, var(--accent-active), var(--accent-info), transparent);
+		background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
 		opacity: 0.5;
 	}
 
@@ -137,7 +146,7 @@ const today = new Date();
 		transform: translateX(-50%);
 		width: 600px;
 		height: 240px;
-		background: radial-gradient(ellipse, var(--accent-active-glow) 0%, transparent 70%);
+		background: radial-gradient(ellipse, var(--accent-primary-glow) 0%, transparent 70%);
 		pointer-events: none;
 		opacity: 0.4;
 	}
@@ -212,11 +221,11 @@ const today = new Date();
 	}
 
 	.social-icons a:hover {
-		color: var(--accent-active);
-		background: var(--accent-active-subtle);
+		color: var(--accent-primary);
+		background: var(--accent-primary-subtle);
 		border-color: rgba(0, 230, 138, 0.15);
 		transform: translateY(-2px);
-		box-shadow: 0 4px 16px var(--accent-active-glow);
+		box-shadow: 0 4px 16px var(--accent-primary-glow);
 	}
 
 	.social-icons a:hover .social-label {
@@ -255,7 +264,7 @@ const today = new Date();
 	}
 
 	.copyright-symbol {
-		color: var(--accent-active);
+		color: var(--accent-primary);
 	}
 
 	/* Footer Links */
@@ -278,8 +287,7 @@ const today = new Date();
 	}
 
 	.footer-link:hover {
-		color: var(--accent-active);
-		text-shadow: none;
+		color: var(--accent-primary);
 	}
 
 	.footer-link-blog {
@@ -332,6 +340,30 @@ const today = new Date();
 		color: var(--text-secondary);
 		font-weight: 600;
 		text-transform: uppercase;
+	}
+
+	/* Colophon */
+	.colophon {
+		text-align: center;
+		font-size: 0.65rem;
+		color: var(--text-muted);
+		font-family: 'JetBrains Mono', monospace;
+		margin-bottom: 1rem;
+		opacity: 0.5;
+	}
+
+	.colophon a {
+		color: var(--text-muted);
+		text-decoration: none;
+	}
+
+	.colophon a:hover {
+		color: var(--accent-primary);
+	}
+
+	.colophon-sep {
+		margin: 0 0.4rem;
+		opacity: 0.3;
 	}
 
 	/* Responsive */

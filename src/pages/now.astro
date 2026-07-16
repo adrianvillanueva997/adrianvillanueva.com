@@ -18,148 +18,77 @@ const { Content, frontmatter } = now;
         />
     </head>
     <body>
+        <a href="#main-content" class="skip-link">Skip to content</a>
         <Header />
-        <main class="container">
-            <div class="now-grid">
-                <!-- Now Panel -->
-                <div class="bento-item now-panel">
-                    <div class="module-header">
-                        <Icon name="mdi:clock-outline" size={16} />
-                        <span class="module-title">NOW</span>
-                        <span class="update-date">Updated: {frontmatter.lastUpdated}</span>
-                    </div>
-                    <div class="now-content">
-                        <Content />
-                    </div>
-                </div>
+        <main id="main-content" class="now-page" transition:name="page">
+            <header class="now-header">
+                <span class="now-label">NOW</span>
+                <span class="now-date">{frontmatter.lastUpdated}</span>
+            </header>
+            <h1 class="now-title">What I'm focused on</h1>
+            <div class="prose">
+                <Content />
             </div>
-
-            <!-- Now Movement Footer -->
-            <div class="now-footer">
+            <footer class="now-footer">
                 <p>
-                    This page follows the <a href="https://nownownow.com/about" target="_blank" rel="noopener noreferrer">/now movement</a> - a way to share what you're focused on at this point in your life.
+                    This page follows the
+                    <a href="https://nownownow.com/about" target="_blank" rel="noopener noreferrer">/now movement</a>
+                    — a way to share what you're focused on at this point in your life.
                 </p>
-            </div>
+            </footer>
         </main>
         <Footer />
     </body>
 </html>
 
 <style>
-    .container {
-        max-width: 900px;
+    .now-page {
+        max-width: 640px;
         margin: 0 auto;
-        padding: 2rem 1rem;
+        padding: 3rem 1.5rem;
+        animation: fadeInUp 0.6s ease-out;
     }
 
-    .now-grid {
-        margin: 2rem 0;
-    }
-
-    .bento-item {
-        background: var(--glass-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid var(--border-color);
-        border-radius: var(--radius-md);
-        padding: 2rem;
-        transition: all var(--transition-base);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .bento-item::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: var(--gradient-primary);
-        transition: opacity var(--transition-base);
-    }
-
-    .bento-item:hover {
-        border-color: var(--border-glow);
-        transform: translateY(-3px);
-        box-shadow: var(--shadow-glow), var(--shadow-md);
-    }
-
-    .module-header {
+    .now-header {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: 1rem;
         margin-bottom: 1.5rem;
+    }
+
+    .now-label {
         font-family: 'JetBrains Mono', monospace;
-        font-size: 0.75rem;
+        font-size: 0.65rem;
+        color: var(--accent-primary);
+        letter-spacing: 0.15em;
+    }
+
+    .now-date {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.65rem;
         color: var(--text-muted);
-        letter-spacing: 0.05em;
-    }
-
-    .update-date {
         margin-left: auto;
-        font-size: 0.7rem;
-        color: var(--accent-active);
-        background: var(--accent-active-subtle);
         padding: 0.15rem 0.5rem;
+        border: 1px solid var(--border-color);
         border-radius: var(--radius-sm);
-        border: 1px solid rgba(0, 230, 138, 0.15);
     }
 
-    .now-content {
-        font-family: 'Inter', sans-serif;
-        line-height: 1.7;
-        color: var(--text-secondary);
-        font-size: 0.95rem;
-    }
-
-    .now-content :global(h2) {
-        font-size: 1.2rem;
-        margin: 1.5rem 0 1rem 0;
-        color: var(--text-primary);
-        border: none;
-        padding: 0;
-    }
-
-    .now-content :global(h3) {
-        font-size: 1rem;
-        margin: 1.25rem 0 0.75rem 0;
-        color: var(--accent-active);
-    }
-
-    .now-content :global(p) {
-        margin-bottom: 1rem;
-    }
-
-    .now-content :global(strong) {
+    .now-title {
+        font-size: clamp(1.5rem, 4vw, 2rem);
+        margin: 0 0 2rem 0;
+        background: none;
+        -webkit-text-fill-color: initial;
+        background-clip: initial;
         color: var(--text-primary);
     }
 
-    .now-content :global(ul) {
-        list-style: none;
-        padding: 0;
-    }
-
-    .now-content :global(li) {
-        position: relative;
-        padding-left: 1.5rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .now-content :global(li::before) {
-        content: '>';
-        position: absolute;
-        left: 0;
-        color: var(--accent-active);
-        font-family: 'JetBrains Mono', monospace;
+    .prose h3 {
+        color: var(--accent-primary);
     }
 
     .now-footer {
-        margin: 3rem 0 2rem 0;
-        padding: 1.5rem;
-        background: var(--glass-bg);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
+        margin-top: 3rem;
+        padding: 1.25rem;
         border: 1px solid var(--border-color);
         border-radius: var(--radius-md);
         text-align: center;
@@ -167,18 +96,22 @@ const { Content, frontmatter } = now;
 
     .now-footer p {
         margin: 0;
-        font-size: 0.9rem;
+        font-size: 0.8rem;
         color: var(--text-muted);
         line-height: 1.6;
     }
 
     .now-footer a {
-        color: var(--accent-active);
-        text-decoration: none;
-        transition: color 0.2s ease;
+        color: var(--accent-primary);
     }
 
     .now-footer a:hover {
         color: var(--text-primary);
+    }
+
+    @media (max-width: 640px) {
+        .now-page {
+            padding: 2rem 1rem;
+        }
     }
 </style>

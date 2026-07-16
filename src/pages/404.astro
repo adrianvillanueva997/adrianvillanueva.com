@@ -1,8 +1,8 @@
 ---
-		import BaseHead from "@/components/BaseHead.astro";
-		import Footer from "@/components/Footer.astro";
-		import Header from "@/components/Header.astro";
-		import { NAV_ITEMS, SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
+import BaseHead from "@/components/BaseHead.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import { NAV_ITEMS, SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
 ---
 
 <!doctype html>
@@ -73,7 +73,7 @@
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		background-clip: text;
-		filter: drop-shadow(0 0 30px var(--accent-active-glow));
+		filter: drop-shadow(0 0 30px var(--accent-primary-glow));
 	}
 
 	.error-message {
@@ -105,7 +105,7 @@
 	}
 
 	.terminal-output .error {
-		color: var(--accent-error);
+		color: #ff5c5c;
 		text-shadow: 0 0 8px rgba(255, 92, 92, 0.3);
 	}
 
@@ -122,14 +122,14 @@
 	}
 
 	.home-btn:hover {
-		color: var(--accent-active);
+		color: var(--accent-primary);
 		border-color: var(--border-glow);
-		box-shadow: 0 0 20px var(--accent-active-glow);
+		box-shadow: 0 0 20px var(--accent-primary-glow);
 		text-shadow: none;
 	}
 
 	.btn-bracket {
-		color: var(--accent-active);
+		color: var(--accent-primary);
 		margin: 0 0.5rem;
 	}
 
@@ -154,9 +154,9 @@
 	}
 
 	.nav-btn:hover {
-		color: var(--accent-active);
+		color: var(--accent-primary);
 		border-color: var(--border-glow);
-		box-shadow: 0 0 20px var(--accent-active-glow);
+		box-shadow: 0 0 20px var(--accent-primary-glow);
 		text-shadow: none;
 	}
 </style>

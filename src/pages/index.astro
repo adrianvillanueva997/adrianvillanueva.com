@@ -13,9 +13,10 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
+		<a href="#main-content" class="skip-link">Skip to content</a>
 		<Header />
 
-		<main class="container">
+		<main id="main-content" class="container" transition:name="page">
 			<BentoGrid mePhoto={mePhoto} />
 		</main>
 
