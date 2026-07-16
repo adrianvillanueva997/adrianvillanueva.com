@@ -30,3 +30,6 @@ public/diagrams/**
 
 # Husky internal scaffolding
 .husky/_/
+
+.skills
+.agents
