@@ -1,6 +1,6 @@
 ---
 title: Uses
-lastUpdated: 2025-02-08
+lastUpdated: 2026-07-17
 hardware:
   - name: MacBook Pro M4
     icon: mdi:laptop-mac
@@ -28,18 +28,18 @@ hardware:
 
   - name: Steam Deck OLED
     icon: mdi:controller-classic
-    desc: Handheld gaming — from indie darlings to AAA on the go
+    desc: Handheld gaming
     specs: 1TB + 1TB microSD
     tags: [Gaming, Linux, Handheld]
 
   - name: HP Omen 15
     icon: mdi:laptop
-    desc: Secondary gaming machine
+    desc: Secondary gaming machine for more intense games
     specs: Ryzen 5880H, 16GB RAM, RTX 3060
     tags: [Gaming, NVIDIA, Ryzen]
 
 peripherals:
-  - name: Philips 2K 24" Display
+  - name: LG 4K 32" Display
     icon: mdi:monitor
 
   - name: Mechanical Keyboard
@@ -63,10 +63,10 @@ software:
     category: Shell
     icon: mdi:bash
 
-  - name: VS Code + Vim
+  - name: NeoVim
     category: Editor
     icon: mdi:code-tags
-    note: Transitioning to Neovim
+    note: Love it
 
   - name: Firefox
     category: Browser

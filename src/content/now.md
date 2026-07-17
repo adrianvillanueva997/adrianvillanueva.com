@@ -1,10 +1,10 @@
 ---
-title: 'NOW'
-lastUpdated: '2025-02-08'
+title: "NOW"
+lastUpdated: "2026-07-17"
 preview:
-  learning: Zig, Japanese, Kickboxing
-  reading: Deep Work by Cal Newport
-  building: Proxmox + Talos + K8s + LLM
+  learning: Improving my Rust, Japanese, Kickboxing
+  reading: Designing Data Intensive Applications 2nd edition
+  building: Talos + K8s + LLM
   focus: Improving my Japanese
   training: Kickboxing
 ---
@@ -19,10 +19,8 @@ Kickboxing is very fun, I want to increase my strength.
 
 ### LEARNING OBJECTIVES
 
-Create a proxmox cluster with kubernetes using Talos and bootstrap it with terraform and deploy a LLM in my cluster for learning purposes.
-
-I am reading `Deep work` by Cal Newport.
+Playing around with Mlops and some ink displays i got for my esp32s
 
 ### CURRENT THOUGHTS
 
-Snowy Tokyo is so beautiful and photogenic.
+I hate the rainy season in Tokyo.
