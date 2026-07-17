@@ -2,7 +2,6 @@
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
 import * as now from "@/content/now.md";
-import { formatDate, getLatestBlogPost } from "@/utils/blog";
 
 const { frontmatter: nowFm } = now;
 
@@ -75,8 +74,6 @@ const connectItems = [
 		href: "https://github.com/adrianvillanueva997",
 	},
 ];
-
-const latestPost = await getLatestBlogPost();
 ---
 
 <section class="bento-grid">
@@ -168,24 +165,9 @@ const latestPost = await getLatestBlogPost();
             <Icon name="mdi:pencil" size={16} />
             <span class="module-title">LATEST POST</span>
         </div>
-        <div class="blog-content">
-            {latestPost ? (
-                <>
-                    <h3 class="blog-title">{latestPost.title}</h3>
-                    {latestPost.pubDate && (
-                        <span class="blog-date">{formatDate(latestPost.pubDate)}</span>
-                    )}
-                    {latestPost.description && (
-                        <p class="blog-description">{latestPost.description}</p>
-                    )}
-                    <a href="/blog" class="read-more">Read more &rarr;</a>
-                </>
-            ) : (
-                <>
-                    <p class="blog-fallback">Check back soon for new articles on systems engineering and cloud infrastructure.</p>
-                    <a href="/blog" class="read-more">Read more &rarr;</a>
-                </>
-            )}
+        <div class="blog-content" id="latest-blog-content">
+            <p class="blog-fallback">Checking latest post...</p>
+            <a href="/blog" class="read-more">Read more &rarr;</a>
         </div>
     </div>
 
@@ -823,3 +805,38 @@ const latestPost = await getLatestBlogPost();
         }
     }
 </style>
+
+<script>
+    (async () => {
+        const container = document.getElementById('latest-blog-content');
+        if (!container) return;
+        try {
+            const res = await fetch('https://metalops.dev/api/v1/blog/latest');
+            if (!res.ok) throw new Error('fetch failed');
+            const data = await res.json();
+            if (!data?.title) throw new Error('no data');
+            const date = data.pubDate
+                ? new Date(data.pubDate).toLocaleDateString('en-US', {
+                      year: 'numeric', month: 'short', day: 'numeric',
+                  })
+                : '';
+            container.innerHTML = `
+                <h3 class="blog-title">${esc(data.title)}</h3>
+                ${date ? `<span class="blog-date">${esc(date)}</span>` : ''}
+                ${data.description ? `<p class="blog-description">${esc(data.description)}</p>` : ''}
+                <a href="/blog" class="read-more">Read more &rarr;</a>
+            `;
+        } catch {
+            container.innerHTML = `
+                <p class="blog-fallback">Check back soon for new articles on systems engineering and cloud infrastructure.</p>
+                <a href="/blog" class="read-more">Read more &rarr;</a>
+            `;
+        }
+    })();
+
+    function esc(s) {
+        const div = document.createElement('div');
+        div.textContent = s;
+        return div.innerHTML;
+    }
+</script>

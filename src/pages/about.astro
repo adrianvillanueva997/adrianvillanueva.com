@@ -168,9 +168,9 @@ const timeline = [
     }
 
     .bento-item:hover {
-        border-color: var(--border-glow);
+        border-color: color-mix(in srgb, var(--accent-blog) 40%, transparent);
         transform: translateY(-3px);
-        box-shadow: var(--shadow-glow), var(--shadow-md);
+        box-shadow: 0 0 30px color-mix(in srgb, var(--accent-blog) 10%, transparent), var(--shadow-md);
     }
 
     .module-header {
@@ -182,6 +182,10 @@ const timeline = [
         font-size: 0.75rem;
         color: var(--text-muted);
         letter-spacing: 0.05em;
+    }
+
+    .module-header :global(svg) {
+        color: var(--accent-blog);
     }
 
     /* Profile Card */
@@ -206,8 +210,8 @@ const timeline = [
 
     .avatar {
         border-radius: 50%;
-        border: 2px solid var(--accent-active);
-        box-shadow: 0 0 20px var(--accent-active-glow);
+        border: 2px solid var(--accent-blog);
+        box-shadow: 0 0 20px var(--accent-blog-glow);
     }
 
     .status-indicator {
@@ -216,9 +220,10 @@ const timeline = [
         right: 5px;
         width: 12px;
         height: 12px;
-        background-color: var(--accent-active);
+        background-color: var(--accent-blog);
         border-radius: 50%;
         border: 2px solid var(--bg-secondary);
+        box-shadow: 0 0 8px var(--accent-blog-glow);
         animation: pulse-glow 2s ease-in-out infinite;
     }
 
@@ -262,8 +267,8 @@ const timeline = [
     }
 
     .social-links a:hover {
-        color: var(--accent-active);
-        background: var(--accent-active-subtle);
+        color: var(--accent-blog);
+        background: color-mix(in srgb, var(--accent-blog) 10%, transparent);
         transform: translateY(-2px);
     }
 
@@ -284,10 +289,21 @@ const timeline = [
     }
 
     .bio-content :global(h2) {
+        font-family: 'Cinzel', serif;
         font-size: 1.1rem;
         margin: 1.5rem 0 1rem 0;
         border: none;
         padding: 0;
+        color: var(--text-primary);
+        letter-spacing: 0.02em;
+    }
+
+    .bio-content :global(h3) {
+        font-family: 'Cinzel', serif;
+        font-size: 0.95rem;
+        color: var(--accent-blog);
+        margin: 1.25rem 0 0.75rem 0;
+        letter-spacing: 0.02em;
     }
 
     .bio-content :global(ul) {
@@ -302,11 +318,30 @@ const timeline = [
     }
 
     .bio-content :global(li::before) {
-        content: '>';
+        content: '>>';
         position: absolute;
         left: 0;
-        color: var(--accent-active);
+        color: var(--accent-blog);
         font-family: 'JetBrains Mono', monospace;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-shadow: 0 0 6px var(--accent-blog-glow);
+    }
+
+    .bio-content :global(code) {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.85rem;
+        color: var(--accent-blog);
+        background: color-mix(in srgb, var(--accent-blog) 10%, transparent);
+        padding: 0.1rem 0.4rem;
+        border-radius: 3px;
+    }
+
+    .bio-content :global(hr) {
+        border: none;
+        height: 1px;
+        background: linear-gradient(to right, transparent, color-mix(in srgb, var(--accent-blog) 30%, transparent), transparent);
+        margin: 1.5rem 0;
     }
 
     /* Timeline Panel */
@@ -336,18 +371,18 @@ const timeline = [
         width: 12px;
         height: 12px;
         border-radius: 50%;
-        border: 2px solid var(--accent-active);
+        border: 2px solid var(--accent-blog);
         background: var(--bg-secondary);
         position: relative;
         z-index: 1;
         flex-shrink: 0;
-        box-shadow: 0 0 8px var(--accent-active-glow);
+        box-shadow: 0 0 8px var(--accent-blog-glow);
     }
 
     .marker-line {
         width: 2px;
         flex: 1;
-        background: linear-gradient(180deg, var(--accent-active), transparent);
+        background: linear-gradient(180deg, var(--accent-blog), transparent);
         margin-top: 0.5rem;
         opacity: 0.4;
     }
@@ -388,13 +423,13 @@ const timeline = [
     .timeline-years {
         font-family: 'JetBrains Mono', monospace;
         font-size: 0.9rem;
-        color: var(--accent-active);
+        color: var(--accent-blog);
         padding: 0.25rem 0.5rem;
-        border: 1px solid rgba(0, 230, 138, 0.3);
+        border: 1px solid color-mix(in srgb, var(--accent-blog) 20%, transparent);
         border-radius: var(--radius-sm);
-        background: var(--accent-active-subtle);
+        background: color-mix(in srgb, var(--accent-blog) 10%, transparent);
         margin-left: auto;
-        text-shadow: 0 0 8px var(--accent-active-glow);
+        text-shadow: 0 0 8px var(--accent-blog-glow);
     }
 
     .timeline-period {
@@ -408,6 +443,16 @@ const timeline = [
         font-size: 0.9rem;
         color: var(--text-secondary);
         line-height: 1.6;
+    }
+
+    /* ── Override global pulse-glow for purple theme ── */
+    @keyframes pulse-glow {
+        0%, 100% {
+            box-shadow: 0 0 6px var(--accent-blog), 0 0 12px var(--accent-blog-glow);
+        }
+        50% {
+            box-shadow: 0 0 12px var(--accent-blog), 0 0 24px var(--accent-blog-glow);
+        }
     }
 
     @media (max-width: 768px) {
