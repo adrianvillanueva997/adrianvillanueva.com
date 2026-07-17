@@ -2,8 +2,12 @@ name: Build and push Docker image to GitHub Packages and create release
 
 on:
   push:
-    tags:
-      - "*"
+    branches:
+      - main
+
+permissions:
+  contents: read
+  packages: write
 
 env:
   REGISTRY: ghcr.io
@@ -31,7 +35,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.PACKAGES_TOKEN }}
+          password: ${{ github.token }}
       - name: Cache Docker layers
         uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb # v5
         with:
