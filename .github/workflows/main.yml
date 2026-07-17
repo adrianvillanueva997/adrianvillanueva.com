@@ -3,7 +3,7 @@ name: Build and push Docker image to GitHub Packages and create release
 on:
   push:
     branches:
-      - main
+      - master
 
 permissions:
   contents: read
