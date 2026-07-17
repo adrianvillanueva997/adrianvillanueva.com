@@ -38,6 +38,10 @@ function formatDate(dateStr: string): string {
 	];
 	return m ? `${months[parseInt(m) - 1]} ${y}` : y;
 }
+
+function initial(name: string): string {
+	return name.charAt(0).toUpperCase();
+}
 ---
 
 <!doctype html>
@@ -50,126 +54,153 @@ function formatDate(dateStr: string): string {
 	</head>
 	<body>
 		<Header />
-		<main class="container">
-			<!-- Hero -->
-			<div class="bento-item hero-card">
-				<div class="hero-content">
-					<div class="avatar-wrapper">
-						<img src={avatar.src} alt={personal.name} class="avatar" width={120} height={120} />
-						<div class="status-indicator"></div>
-					</div>
-					<div class="hero-text">
-						<h1 class="name">{personal.name}</h1>
-						<p class="title">{personal.title}</p>
-						<div class="hero-meta">
-							<span class="meta-item">
+		<main class="layout">
+			<div class="split">
+				<!-- Sidebar -->
+				<aside class="sidebar">
+					<div class="sidebar-card">
+						<div class="sidebar-avatar">
+							<img
+								src={avatar.src}
+								alt={personal.name}
+								width={96}
+								height={96}
+							/>
+							<div class="status-dot"></div>
+						</div>
+
+						<div class="sidebar-name">{personal.name}</div>
+						<div class="sidebar-title">{personal.title}</div>
+
+						<div class="sidebar-meta">
+							<span class="sidebar-meta-item">
 								<Icon name="mdi:map-marker" size={14} />
 								{personal.location}
 							</span>
-							<span class="meta-sep">|</span>
-							<span class="meta-item">
+							<span class="sidebar-meta-item">
 								<Icon name="mdi:email" size={14} />
 								{personal.email}
 							</span>
 						</div>
-						<p class="summary">{personal.summary}</p>
+
 						<a href="/resume.pdf" class="download-btn" download>
-							<span class="btn-bracket">[</span>
-							DOWNLOAD CV
-							<span class="btn-bracket">]</span>
+							<Icon name="mdi:download" size={16} />
+							Download CV
 						</a>
-					</div>
-				</div>
-			</div>
 
-			<!-- Experience -->
-			<div class="bento-item section-card">
-				<div class="module-header">
-					<Icon name="mdi:briefcase" size={16} />
-					<span class="module-title">EXPERIENCE</span>
-				</div>
-				<div class="timeline-container">
-					{experience.map((job, i) => (
-						<div class="timeline-entry">
-							<div class="timeline-marker">
-								<div class="marker-dot"></div>
-								{i < experience.length - 1 && <div class="marker-line"></div>}
+						<div class="sidebar-divider"></div>
+
+						<!-- Skills -->
+						<div class="sidebar-section">
+							<div class="sidebar-section-head">
+								<Icon name="mdi:code-tags" size={14} />
+								SKILLS
 							</div>
-							<div class="timeline-content">
-								<div class="timeline-header">
-									<div>
-										<h3 class="job-title">{job.position}</h3>
-										<p class="job-company">{job.company}</p>
+							{Object.entries(skills).map(([group, items]) => (
+								<div class="sidebar-skill-group">
+									<div class="sidebar-skill-label">{group}</div>
+									<div class="sidebar-skill-tags">
+										{items.map((skill) => (
+											<span class="sidebar-skill-tag">{skill}</span>
+										))}
 									</div>
-									<span class="job-date">{formatDate(job.startDate)} — {formatDate(job.endDate)}</span>
 								</div>
-								<div class="job-location">
-									<Icon name="mdi:map-marker" size={12} />
-									{job.location}
-								</div>
-								<ul class="job-highlights">
-									{job.highlights.map((h) => (
-										<li>{h}</li>
-									))}
-								</ul>
-							</div>
+							))}
 						</div>
-					))}
-				</div>
-			</div>
 
-			<!-- Skills -->
-			<div class="bento-item section-card">
-				<div class="module-header">
-					<Icon name="mdi:code-tags" size={16} />
-					<span class="module-title">SKILLS</span>
-				</div>
-				<div class="skills-grid">
-					{Object.entries(skills).map(([group, items]) => (
-						<div class="skill-group">
-							<h4 class="skill-group-title">{group}</h4>
-							<div class="skill-tags">
-								{items.map((skill) => (
-									<span class="skill-tag">{skill}</span>
+						<div class="sidebar-divider"></div>
+
+						<!-- Education -->
+						<div class="sidebar-section">
+							<div class="sidebar-section-head">
+								<Icon name="mdi:school" size={14} />
+								EDUCATION
+							</div>
+							{education.map((edu) => (
+								<div class="sidebar-edu-entry">
+									<div class="sidebar-edu-degree">{edu.degree}</div>
+									<div class="sidebar-edu-school">{edu.institution}</div>
+									<div class="sidebar-edu-meta">
+										<span>{edu.location}</span>
+										<span>
+											{edu.startDate} — {edu.endDate}
+										</span>
+									</div>
+								</div>
+							))}
+						</div>
+
+						<div class="sidebar-divider"></div>
+
+						<!-- Languages -->
+						<div class="sidebar-section">
+							<div class="sidebar-section-head">
+								<Icon name="mdi:translate" size={14} />
+								LANGUAGES
+							</div>
+							<div class="sidebar-lang-list">
+								{langList.map((lang) => (
+									<div class="sidebar-lang-entry">
+										<span class="sidebar-lang-name">{lang.name}</span>
+										<span class="sidebar-lang-level">{lang.level}</span>
+									</div>
 								))}
 							</div>
 						</div>
-					))}
-				</div>
-			</div>
-
-			<!-- Education + Languages row -->
-			<div class="row-grid">
-				<div class="bento-item section-card">
-					<div class="module-header">
-						<Icon name="mdi:school" size={16} />
-						<span class="module-title">EDUCATION</span>
 					</div>
-					{education.map((edu) => (
-						<div class="edu-entry">
-							<h3 class="edu-degree">{edu.degree}</h3>
-							<p class="edu-institution">{edu.institution}</p>
-							<div class="edu-meta">
-								<span>{edu.location}</span>
-								<span class="edu-date">{edu.startDate} — {edu.endDate}</span>
-							</div>
+				</aside>
+
+				<!-- Main -->
+				<div class="main">
+					<!-- Summary -->
+					<section class="main-card">
+						<p class="main-summary">{personal.summary}</p>
+					</section>
+
+					<!-- Experience -->
+					<section class="main-card">
+						<div class="section-head">
+							<Icon name="mdi:briefcase" size={16} />
+							<span>EXPERIENCE</span>
 						</div>
-					))}
-				</div>
-
-				<div class="bento-item section-card">
-					<div class="module-header">
-						<Icon name="mdi:translate" size={16} />
-						<span class="module-title">LANGUAGES</span>
-					</div>
-					<div class="lang-list">
-						{langList.map((lang) => (
-							<div class="lang-entry">
-								<span class="lang-name">{lang.name}</span>
-								<span class="lang-level">{lang.level}</span>
-							</div>
-						))}
-					</div>
+						<div class="timeline">
+							{experience.map((job, i) => (
+								<div class="timeline-entry">
+									<div class="timeline-side">
+										<div class="timeline-marker">
+											<span class="marker-letter">
+												{initial(job.company)}
+											</span>
+										</div>
+										{i < experience.length - 1 && (
+											<div class="timeline-line"></div>
+										)}
+									</div>
+									<div class="timeline-main">
+										<div class="timeline-head">
+											<div>
+												<h3 class="job-title">{job.position}</h3>
+												<p class="job-company">{job.company}</p>
+											</div>
+											<span class="job-date">
+												{formatDate(job.startDate)} —{" "}
+												{formatDate(job.endDate)}
+											</span>
+										</div>
+										<p class="job-location">
+											<Icon name="mdi:map-marker" size={12} />
+											{job.location}
+										</p>
+										<ul class="job-highlights">
+											{job.highlights.map((h) => (
+												<li>{h}</li>
+											))}
+										</ul>
+									</div>
+								</div>
+							))}
+						</div>
+					</section>
 				</div>
 			</div>
 		</main>
@@ -178,27 +209,38 @@ function formatDate(dateStr: string): string {
 </html>
 
 <style>
-	.container {
-		max-width: 900px;
+	/* Hallmark · macrostructure: Split Studio · genre: editorial
+	 * pre-emit critique: P5 H4 E5 S5 R5 V4
+	 */
+
+	.layout {
+		max-width: 1000px;
 		margin: 0 auto;
 		padding: 2rem 1rem;
 	}
 
-	.bento-item {
+	/* ── Split Layout ── */
+	.split {
+		display: grid;
+		grid-template-columns: 300px 1fr;
+		gap: 1.5rem;
+		align-items: start;
+	}
+
+	/* ── Sidebar ── */
+	.sidebar-card {
 		background: var(--glass-bg);
 		backdrop-filter: blur(12px);
 		-webkit-backdrop-filter: blur(12px);
 		border: 1px solid var(--border-color);
 		border-radius: var(--radius-md);
 		padding: 1.5rem;
-		transition: all var(--transition-base);
 		position: relative;
 		overflow: hidden;
-		margin-bottom: 1.5rem;
 	}
 
-	.bento-item::before {
-		content: '';
+	.sidebar-card::before {
+		content: "";
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -209,195 +251,347 @@ function formatDate(dateStr: string): string {
 		transition: opacity var(--transition-base);
 	}
 
-	.bento-item:hover {
-		border-color: var(--border-glow);
-		transform: translateY(-3px);
-		box-shadow: var(--shadow-glow), var(--shadow-md);
-	}
-
-	.bento-item:hover::before {
+	.sidebar-card:hover::before {
 		opacity: 1;
 	}
 
-	.module-header {
+	/* Avatar */
+	.sidebar-avatar {
+		position: relative;
+		width: fit-content;
+		margin: 0 auto 1rem;
+	}
+
+	.sidebar-avatar img {
+		border-radius: 50%;
+		border: 2px solid var(--accent-active);
+		box-shadow: 0 0 24px var(--accent-active-glow);
+		display: block;
+	}
+
+	.status-dot {
+		position: absolute;
+		bottom: 4px;
+		right: 4px;
+		width: 14px;
+		height: 14px;
+		background: var(--accent-active);
+		border-radius: 50%;
+		border: 2px solid var(--bg-secondary);
+		box-shadow: 0 0 8px var(--accent-active-glow);
+	}
+
+	.sidebar-name {
+		font-family: "Cinzel", serif;
+		font-size: 1.25rem;
+		font-weight: 700;
+		text-align: center;
+		background: var(--gradient-primary);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		margin-bottom: 0.25rem;
+		line-height: 1.3;
+	}
+
+	.sidebar-title {
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.8rem;
+		color: var(--accent-active);
+		text-align: center;
+		margin-bottom: 1rem;
+	}
+
+	.sidebar-meta {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.4rem;
+		margin-bottom: 1.25rem;
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.72rem;
+		color: var(--text-muted);
+	}
+
+	.sidebar-meta-item {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.3rem;
+	}
+
+	.download-btn {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.4rem;
+		padding: 0.55rem 1rem;
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.78rem;
+		color: var(--text-primary);
+		text-decoration: none;
+		border: 1px solid var(--accent-active);
+		border-radius: 100px;
+		background: var(--accent-active-subtle);
+		transition: all var(--transition-base);
+		margin-bottom: 0.25rem;
+	}
+
+	.download-btn:hover {
+		background: var(--accent-active);
+		color: var(--bg-primary);
+		box-shadow: 0 0 24px var(--accent-active-glow);
+	}
+
+	.sidebar-divider {
+		height: 1px;
+		background: linear-gradient(
+			90deg,
+			transparent,
+			var(--border-light),
+			transparent
+		);
+		margin: 1.25rem 0;
+	}
+
+	/* Sidebar sections */
+	.sidebar-section-head {
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.65rem;
+		color: var(--text-muted);
+		letter-spacing: 0.05em;
+		margin-bottom: 0.75rem;
+	}
+
+	/* Skills in sidebar */
+	.sidebar-skill-group {
+		margin-bottom: 0.75rem;
+	}
+
+	.sidebar-skill-group:last-child {
+		margin-bottom: 0;
+	}
+
+	.sidebar-skill-label {
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.6rem;
+		color: var(--accent-active);
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		margin-bottom: 0.35rem;
+	}
+
+	.sidebar-skill-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.3rem;
+	}
+
+	.sidebar-skill-tag {
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.62rem;
+		padding: 0.15rem 0.45rem;
+		border: 1px solid var(--border-color);
+		border-radius: 100px;
+		color: var(--text-secondary);
+		background: var(--bg-secondary);
+		transition: all var(--transition-base);
+	}
+
+	.sidebar-skill-tag:hover {
+		border-color: var(--accent-active);
+		color: var(--accent-active);
+		box-shadow: 0 0 8px var(--accent-active-glow);
+	}
+
+	/* Education in sidebar */
+	.sidebar-edu-entry {
+		margin-bottom: 0.75rem;
+	}
+
+	.sidebar-edu-entry:last-child {
+		margin-bottom: 0;
+	}
+
+	.sidebar-edu-degree {
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.78rem;
+		font-weight: 700;
+		color: var(--text-primary);
+		margin-bottom: 0.05rem;
+	}
+
+	.sidebar-edu-school {
+		font-size: 0.72rem;
+		color: var(--accent-active);
+		margin-bottom: 0.2rem;
+	}
+
+	.sidebar-edu-meta {
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.62rem;
+		color: var(--text-muted);
+		display: flex;
+		gap: 0.5rem;
+	}
+
+	/* Languages in sidebar */
+	.sidebar-lang-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.35rem;
+	}
+
+	.sidebar-lang-entry {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0.25rem 0;
+		border-bottom: 1px solid var(--border-color);
+	}
+
+	.sidebar-lang-entry:last-child {
+		border-bottom: none;
+	}
+
+	.sidebar-lang-name {
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.78rem;
+		color: var(--text-primary);
+	}
+
+	.sidebar-lang-level {
+		font-size: 0.65rem;
+		color: var(--accent-active);
+		padding: 0.05rem 0.4rem;
+		border: 1px solid rgba(0, 230, 138, 0.3);
+		border-radius: 100px;
+		background: var(--accent-active-subtle);
+	}
+
+	/* ── Main Column ── */
+	.main-card {
+		background: var(--glass-bg);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		border: 1px solid var(--border-color);
+		border-radius: var(--radius-md);
+		padding: 1.5rem;
+		position: relative;
+		overflow: hidden;
+		transition: all var(--transition-base);
+		margin-bottom: 1.5rem;
+	}
+
+	.main-card::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 2px;
+		background: var(--gradient-primary);
+		opacity: 0;
+		transition: opacity var(--transition-base);
+	}
+
+	.main-card:hover::before {
+		opacity: 1;
+	}
+
+	/* Summary */
+	.main-summary {
+		font-size: 0.9rem;
+		color: var(--text-secondary);
+		line-height: 1.7;
+		margin: 0;
+	}
+
+	/* Section head */
+	.section-head {
 		display: flex;
 		align-items: center;
 		gap: 0.5rem;
-		margin-bottom: 1.5rem;
-		font-family: 'JetBrains Mono', monospace;
+		margin-bottom: 1.25rem;
+		font-family: "JetBrains Mono", monospace;
 		font-size: 0.75rem;
 		color: var(--text-muted);
 		letter-spacing: 0.05em;
 	}
 
-	/* Hero */
-	.hero-content {
-		display: flex;
-		gap: 2rem;
-		align-items: flex-start;
-	}
-
-	.avatar-wrapper {
-		position: relative;
-		flex-shrink: 0;
-	}
-
-	.avatar {
-		border-radius: 50%;
-		border: 2px solid var(--accent-active);
-		box-shadow: 0 0 20px var(--accent-active-glow);
-	}
-
-	.status-indicator {
-		position: absolute;
-		bottom: 5px;
-		right: 5px;
-		width: 12px;
-		height: 12px;
-		background-color: var(--accent-active);
-		border-radius: 50%;
-		border: 2px solid var(--bg-secondary);
-		animation: pulse-glow 2s ease-in-out infinite;
-	}
-
-	.hero-text {
-		flex: 1;
-		min-width: 0;
-	}
-
-	.name {
-		font-family: "Cinzel", serif;
-		font-size: 1.75rem;
-		margin: 0 0 0.25rem 0;
-		background: var(--gradient-primary);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
-	}
-
-	.title {
-		font-family: 'JetBrains Mono', monospace;
-		font-size: 1rem;
-		color: var(--accent-active);
-		margin: 0 0 0.75rem 0;
-	}
-
-	.hero-meta {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		font-size: 0.8rem;
-		color: var(--text-muted);
-		font-family: 'JetBrains Mono', monospace;
-		margin-bottom: 1rem;
-		flex-wrap: wrap;
-	}
-
-	.meta-item {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.25rem;
-	}
-
-	.meta-sep {
-		color: var(--border-color);
-	}
-
-	.summary {
-		font-size: 0.9rem;
-		color: var(--text-secondary);
-		line-height: 1.7;
-		margin: 0 0 1.25rem 0;
-	}
-
-	.download-btn {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.25rem;
-		padding: 0.6rem 1.25rem;
-		font-family: 'JetBrains Mono', monospace;
-		font-size: 0.85rem;
-		color: var(--text-secondary);
-		text-decoration: none;
-		border: 1px solid var(--border-color);
-		border-radius: var(--radius-sm);
-		transition: all var(--transition-base);
-	}
-
-	.download-btn:hover {
-		color: var(--accent-active);
-		border-color: var(--border-glow);
-		box-shadow: 0 0 20px var(--accent-active-glow);
-	}
-
-	.btn-bracket {
-		color: var(--accent-active);
-	}
-
-	/* Timeline */
-	.timeline-container {
+	/* ── Timeline ── */
+	.timeline {
 		display: flex;
 		flex-direction: column;
 	}
 
 	.timeline-entry {
 		display: flex;
-		gap: 1.5rem;
-		position: relative;
+		gap: 1.25rem;
 	}
 
-	.timeline-marker {
+	.timeline-side {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		position: relative;
+		width: 36px;
+		flex-shrink: 0;
 	}
 
-	.marker-dot {
-		width: 12px;
-		height: 12px;
+	.timeline-marker {
+		width: 36px;
+		height: 36px;
 		border-radius: 50%;
-		border: 2px solid var(--accent-active);
 		background: var(--bg-secondary);
+		border: 2px solid var(--accent-active);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
 		position: relative;
 		z-index: 1;
-		flex-shrink: 0;
-		box-shadow: 0 0 8px var(--accent-active-glow);
+		box-shadow: 0 0 12px var(--accent-active-glow);
 	}
 
-	.marker-line {
+	.marker-letter {
+		font-family: "JetBrains Mono", monospace;
+		font-weight: 700;
+		font-size: 0.85rem;
+		color: var(--accent-active);
+	}
+
+	.timeline-line {
 		width: 2px;
 		flex: 1;
 		background: linear-gradient(180deg, var(--accent-active), transparent);
-		margin-top: 0.5rem;
-		opacity: 0.4;
+		opacity: 0.25;
+		margin-top: 0.25rem;
 	}
 
-	.timeline-content {
+	.timeline-main {
 		flex: 1;
 		padding-bottom: 2rem;
 	}
 
-	.timeline-entry:last-child .timeline-content {
+	.timeline-entry:last-child .timeline-main {
 		padding-bottom: 0;
 	}
 
-	.timeline-entry:last-child .marker-line {
-		display: none;
-	}
-
-	.timeline-header {
+	.timeline-head {
 		display: flex;
-		align-items: flex-start;
 		justify-content: space-between;
+		align-items: flex-start;
 		gap: 1rem;
-		margin-bottom: 0.25rem;
+		margin-bottom: 0.15rem;
 		flex-wrap: wrap;
 	}
 
 	.job-title {
-		font-family: 'JetBrains Mono', monospace;
-		font-size: 1.1rem;
+		font-family: "JetBrains Mono", monospace;
+		font-size: 1.05rem;
+		font-weight: 700;
 		color: var(--text-primary);
 		margin: 0;
 	}
@@ -405,28 +599,28 @@ function formatDate(dateStr: string): string {
 	.job-company {
 		font-size: 0.9rem;
 		color: var(--accent-active);
-		margin: 0.15rem 0 0 0;
+		margin: 0.1rem 0 0;
 	}
 
 	.job-date {
-		font-family: 'JetBrains Mono', monospace;
-		font-size: 0.8rem;
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.72rem;
 		color: var(--text-muted);
 		white-space: nowrap;
-		padding: 0.2rem 0.5rem;
+		padding: 0.2rem 0.55rem;
 		border: 1px solid var(--border-color);
-		border-radius: var(--radius-sm);
+		border-radius: 100px;
 		flex-shrink: 0;
 	}
 
 	.job-location {
 		display: flex;
 		align-items: center;
-		gap: 0.25rem;
-		font-size: 0.8rem;
+		gap: 0.3rem;
+		font-size: 0.75rem;
 		color: var(--text-muted);
-		font-family: 'JetBrains Mono', monospace;
-		margin-bottom: 0.75rem;
+		font-family: "JetBrains Mono", monospace;
+		margin: 0.3rem 0 0.7rem;
 	}
 
 	.job-highlights {
@@ -438,168 +632,48 @@ function formatDate(dateStr: string): string {
 	.job-highlights li {
 		position: relative;
 		padding-left: 1.25rem;
-		margin-bottom: 0.4rem;
-		font-size: 0.88rem;
+		margin-bottom: 0.35rem;
+		font-size: 0.85rem;
 		color: var(--text-secondary);
 		line-height: 1.55;
 	}
 
 	.job-highlights li::before {
-		content: '>';
+		content: "\203A";
 		position: absolute;
 		left: 0;
 		color: var(--accent-active);
-		font-family: 'JetBrains Mono', monospace;
 		font-weight: 700;
+		font-size: 1.1rem;
 	}
 
-	/* Skills */
-	.skills-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-		gap: 1.25rem;
-	}
-
-	.skill-group {
-		break-inside: avoid;
-	}
-
-	.skill-group-title {
-		font-family: 'JetBrains Mono', monospace;
-		font-size: 0.7rem;
-		color: var(--text-muted);
-		letter-spacing: 0.05em;
-		text-transform: uppercase;
-		margin: 0 0 0.6rem 0;
-		padding-bottom: 0.4rem;
-		border-bottom: 1px solid var(--border-color);
-	}
-
-	.skill-tags {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.4rem;
-	}
-
-	.skill-tag {
-		font-family: 'JetBrains Mono', monospace;
-		font-size: 0.75rem;
-		padding: 0.25rem 0.6rem;
-		border: 1px solid var(--border-color);
-		border-radius: var(--radius-sm);
-		color: var(--text-secondary);
-		background: var(--bg-secondary);
-		transition: all var(--transition-base);
-	}
-
-	.skill-tag:hover {
-		border-color: var(--accent-active);
-		color: var(--accent-active);
-		box-shadow: 0 0 10px var(--accent-active-glow);
-	}
-
-	/* Row grid for education + languages */
-	.row-grid {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 1.5rem;
-	}
-
-	.row-grid .bento-item {
-		margin-bottom: 0;
-	}
-
-	/* Education */
-	.edu-entry {
-		padding: 0.5rem 0;
-	}
-
-	.edu-degree {
-		font-family: 'JetBrains Mono', monospace;
-		font-size: 1rem;
-		color: var(--text-primary);
-		margin: 0 0 0.15rem 0;
-	}
-
-	.edu-institution {
-		font-size: 0.88rem;
-		color: var(--accent-active);
-		margin: 0 0 0.4rem 0;
-	}
-
-	.edu-meta {
-		display: flex;
-		align-items: center;
-		gap: 0.75rem;
-		font-family: 'JetBrains Mono', monospace;
-		font-size: 0.78rem;
-		color: var(--text-muted);
-	}
-
-	.edu-date {
-		color: var(--accent-active);
-		padding: 0.1rem 0.4rem;
-		border: 1px solid rgba(0, 230, 138, 0.3);
-		border-radius: var(--radius-sm);
-		background: var(--accent-active-subtle);
-	}
-
-	/* Languages */
-	.lang-list {
-		display: flex;
-		flex-direction: column;
-		gap: 0.6rem;
-	}
-
-	.lang-entry {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding: 0.4rem 0;
-		border-bottom: 1px solid var(--border-color);
-	}
-
-	.lang-entry:last-child {
-		border-bottom: none;
-	}
-
-	.lang-name {
-		font-family: 'JetBrains Mono', monospace;
-		font-size: 0.9rem;
-		color: var(--text-primary);
-	}
-
-	.lang-level {
-		font-size: 0.8rem;
-		color: var(--accent-active);
-		padding: 0.15rem 0.5rem;
-		border: 1px solid rgba(0, 230, 138, 0.3);
-		border-radius: var(--radius-sm);
-		background: var(--accent-active-subtle);
-	}
-
-	/* Responsive */
+	/* ── Responsive ── */
 	@media (max-width: 768px) {
-		.container {
+		.layout {
 			padding: 1rem;
 		}
 
-		.hero-content {
+		.split {
+			grid-template-columns: 1fr;
+		}
+
+		.sidebar {
+			max-width: 400px;
+			margin: 0 auto;
+		}
+
+		.timeline-head {
 			flex-direction: column;
-			align-items: center;
-			text-align: center;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.main-card {
+			padding: 1.25rem;
 		}
 
-		.hero-meta {
-			justify-content: center;
-		}
-
-		.row-grid {
-			grid-template-columns: 1fr;
-		}
-
-		.skills-grid {
-			grid-template-columns: 1fr;
+		.sidebar-card {
+			padding: 1.25rem;
 		}
 	}
 </style>

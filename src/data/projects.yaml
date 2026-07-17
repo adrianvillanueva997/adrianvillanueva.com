@@ -8,7 +8,7 @@ projects:
 
   - title: "Zenthos"
     description: "A work in progress IOT, mlops, firmware and data platform."
-    imgSrc: "avatar.png"
+    imgSrc: "logo.png"
     categories: ["iot", "rust", "mlops"]
     isOpenSource: true
     repoUrl: "https://github.com/adrianvillanueva997/zenthos"

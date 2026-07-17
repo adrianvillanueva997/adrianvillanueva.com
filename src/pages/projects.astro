@@ -7,12 +7,10 @@ import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import { SITE_TITLE } from "../consts";
 
-// Glob import all project images from assets folder
 const images = import.meta.glob("@/assets/**/*.{png,jpg,jpeg,webp,svg}", {
 	eager: true,
 });
 
-// Create a mapping of filename to image module
 const imageMap: Record<string, any> = {};
 for (const path in images) {
 	const filename = path.split("/").pop();
@@ -21,7 +19,6 @@ for (const path in images) {
 	}
 }
 
-// Define types for the projects data
 interface Project {
 	title: string;
 	description: string;
@@ -36,16 +33,13 @@ interface ProjectsData {
 	projects: Project[];
 }
 
-// Read and parse the projects YAML file
 const projectsPath = join(process.cwd(), "src/data/projects.yaml");
 const projectsContent = readFileSync(projectsPath, "utf8");
 const { load } = await import("js-yaml");
 const projectsData = load(projectsContent) as ProjectsData;
 
-// Get all projects
 const allProjects = projectsData.projects;
 
-// Get all unique categories
 const allCategories = Array.from(
 	new Set(
 		projectsData.projects
@@ -57,738 +51,657 @@ const allCategories = Array.from(
 
 <!doctype html>
 <html lang="en">
-    <head>
-        <BaseHead
-            title={`Projects - ${SITE_TITLE}`}
-            description="Projects and work by Adrian Villanueva Martinez - exploring data engineering, IoT, and innovative software solutions."
-        />
-    </head>
-    <body>
-        <Header />
-        <main class="container">
-            <!-- Hero Section -->
-            <section class="hero-section">
-                <div class="hero-content">
-                    <div class="system-status">
-                        <span class="status-dot"></span>
-                        <span class="status-text">SYSTEM.PROJECTS.INDEX</span>
-                    </div>
-                    <h1 class="hero-title">PROJECT_LOG</h1>
-                    <p class="hero-subtitle">
-                        // ARCHIVE_ACCESS: GRANTED<br />
-                        // LOADING_MODULES: COMPLETED
-                    </p>
-                    <p class="hero-description">
-                        [SYSTEM_NOTE]: Accessing project database. Displaying
-                        records of engineering solutions, data architectures,
-                        and experimental systems.
-                    </p>
-                </div>
-            </section>
+	<head>
+		<BaseHead
+			title={`Projects - ${SITE_TITLE}`}
+			description="Projects and work by Adrian Villanueva Martinez — data engineering, IoT, and software infrastructure."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main class="layout">
+			<!-- Hero -->
+			<section class="hero-card">
+				<div class="hero-tagline">
+					<span class="hero-marker">>></span>
+					<span class="hero-label">PROJECTS</span>
+				</div>
+				<h1 class="hero-title">Selected Work</h1>
+				<p class="hero-description">
+					Engineering solutions across data platforms, IoT, and software
+					infrastructure. Open-source and production systems built for scale.
+				</p>
+			</section>
 
-            <!-- Categories Filter -->
-            <section class="filter-section">
-                <div class="section-header">
-                    <span class="section-marker">>></span>
-                    <h2 class="section-title">FILTER_PROTOCOL</h2>
-                </div>
-                <div class="categories-filter">
-                    <button class="filter-btn active" data-category="all">
-                        <span class="btn-marker">[</span>
-                        ALL_SYSTEMS
-                        <span class="btn-marker">]</span>
-                    </button>
-                    {
-                        allCategories.map((category: string) => (
-                            <button
-                                class="filter-btn"
-                                data-category={category.toLowerCase()}
-                            >
-                                <span class="btn-marker">[</span>
-                                {category.toUpperCase()}
-                                <span class="btn-marker">]</span>
-                            </button>
-                        ))
-                    }
-                </div>
-            </section>
+			<!-- Filter -->
+			<section class="section-block">
+				<div class="section-head">
+					<span class="section-marker">>></span>
+					<h2 class="section-title">INDEX</h2>
+				</div>
+				<div class="filter-bar">
+					<button class="filter-btn active" data-category="all">All</button>
+					{allCategories.map((c) => (
+						<button class="filter-btn" data-category={c.toLowerCase()}>
+							{c}
+						</button>
+					))}
+				</div>
+			</section>
 
-            <!-- Projects Grid -->
-            <section class="projects-section">
-                <div class="section-header">
-                    <span class="section-marker">>></span>
-                    <h2 class="section-title">ACTIVE_DEPLOYMENTS</h2>
-                </div>
-                <div class="projects-grid">
-                    {
-						allProjects.map((project: Project, index: number) => (
-							<article
-								class="project-card"
-								data-categories={
-									project.categories
-										?.map((c) => c.toLowerCase())
-										.join(' ') || ''
-								}
-							>
-								<div class="card-header-line">
-									<span class="card-id">
-										ID:
-										{`PRJ-${String(index + 1).padStart(4, '0')}`}
-									</span>
-                                    <div class="card-status">
-                                        <span class="status-indicator" />
-                                        ONLINE
-                                    </div>
-                                </div>
+			<!-- Projects -->
+			<section class="section-block">
+				<div class="section-head">
+					<span class="section-marker">>></span>
+					<h2 class="section-title">DEPLOYMENTS</h2>
+				</div>
+				<div class="projects-grid">
+					{allProjects.map((project, index) => (
+						<article
+							class="project-card"
+							data-categories={
+								project.categories
+									?.map((c) => c.toLowerCase())
+									.join(" ") || ""
+							}
+						>
+							<div class="card-header-line">
+								<span class="card-id">
+									PRJ-{String(index + 1).padStart(4, "0")}
+								</span>
+								<span class="card-status">
+									<span class="status-dot"></span>
+									ONLINE
+								</span>
+							</div>
+							<div class="card-media">
+								{project.imgSrc && imageMap[project.imgSrc] ? (
+									<Image
+										src={imageMap[project.imgSrc]}
+										alt={project.title}
+										width={600}
+										height={400}
+										loading="lazy"
+									/>
+								) : (
+									<div class="card-media-fallback">
+										<span>{project.title.charAt(0)}</span>
+									</div>
+								)}
+							</div>
+							<div class="card-content">
+								<div class="card-header">
+									<h3 class="card-title">{project.title}</h3>
+									{project.isOpenSource !== undefined && (
+										<span
+											class={`card-badge ${project.isOpenSource ? "open" : "closed"}`}
+										>
+											{project.isOpenSource ? "OPEN_SRC" : "PROPRIETARY"}
+										</span>
+									)}
+								</div>
+								<p class="card-description">{project.description}</p>
+								{project.categories && project.categories.length > 0 && (
+									<div class="card-tags">
+										{project.categories.map((cat) => (
+											<span class="tag">#{cat}</span>
+										))}
+									</div>
+								)}
+								<div class="card-actions">
+									{project.isOpenSource && project.repoUrl && (
+										<a
+											href={project.repoUrl}
+											target="_blank"
+											rel="noopener noreferrer"
+											class="action-link"
+										>
+											<span>SOURCE_CODE</span>
+											<span class="action-arrow">→</span>
+										</a>
+									)}
+									{project.href && (
+										<a
+											href={project.href}
+											target="_blank"
+											rel="noopener noreferrer"
+											class="action-link primary"
+										>
+											<span>LIVE_DEMO</span>
+											<span class="action-arrow">→</span>
+										</a>
+									)}
+								</div>
+							</div>
+						</article>
+					))}
+				</div>
+			</section>
 
-                                <div class="project-image-container">
-                                    {project.imgSrc &&
-                                    imageMap[project.imgSrc] ? (
-                                        <Image
-                                            src={imageMap[project.imgSrc]}
-                                            alt={project.title}
-                                            width={600}
-                                            height={400}
-                                            loading="lazy"
-                                            class="project-img"
-                                        />
-                                    ) : (
-                                        <div class="placeholder-image">
-                                            <span class="placeholder-text">
-                                                [NO_VISUAL_DATA]
-                                            </span>
-                                        </div>
-                                    )}
-                                    <div class="scan-line" />
-                                </div>
+			<!-- Technologies Overview -->
+			<section class="section-block">
+				<div class="section-head">
+					<span class="section-marker">>></span>
+					<h2 class="section-title">TECH_STACK</h2>
+				</div>
+				<div class="tech-table">
+					<div class="tech-table-header">
+						<span>DOMAIN</span>
+						<span>COUNT</span>
+						<span>STATUS</span>
+					</div>
+					<div class="tech-table-body">
+						{allCategories.map((category) => (
+							<div class="tech-row">
+								<span class="tech-name">{category.toUpperCase()}</span>
+								<span class="tech-count">
+									{String(
+										allProjects.filter((p) =>
+											p.categories?.includes(category),
+										).length,
+									).padStart(2, "0")}
+								</span>
+								<span class="tech-status">ACTIVE</span>
+							</div>
+						))}
+					</div>
+				</div>
+			</section>
+		</main>
+		<Footer />
 
-                                <div class="project-content">
-                                    <div class="project-header">
-                                        <h3 class="project-title">
-                                            {project.title}
-                                        </h3>
-                                        <div class="project-badges">
-                                            {project.isOpenSource ? (
-                                                <span class="badge open-source">
-                                                    OPEN_SRC
-                                                </span>
-                                            ) : (
-                                                <span class="badge closed-source">
-                                                    PROPRIETARY
-                                                </span>
-                                            )}
-                                        </div>
-                                    </div>
+		<script>
+			document.addEventListener("DOMContentLoaded", () => {
+				const buttons = document.querySelectorAll(".filter-btn");
+				const cards = document.querySelectorAll(".project-card");
 
-                                    <p class="project-description">
-                                        {project.description}
-                                    </p>
+				buttons.forEach((btn) => {
+					btn.addEventListener("click", () => {
+						const cat = btn.getAttribute("data-category");
+						buttons.forEach((b) => b.classList.remove("active"));
+						btn.classList.add("active");
 
-                                    {project.categories &&
-                                        project.categories.length > 0 && (
-                                            <div class="project-categories">
-                                                {project.categories.map(
-                                                    (category: string) => (
-                                                        <span class="category-tag">
-                                                            #{category}
-                                                        </span>
-                                                    )
-                                                )}
-                                            </div>
-                                        )}
-
-                                    <div class="project-actions">
-                                        {project.isOpenSource &&
-                                            project.repoUrl && (
-                                                <a
-                                                    href={project.repoUrl}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    class="action-link"
-                                                >
-                                                    <span>SOURCE_CODE</span>
-                                                    <span class="link-arrow">
-                                                        →
-                                                    </span>
-                                                </a>
-                                            )}
-                                        {project.href && (
-                                            <a
-                                                href={project.href}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                class="action-link primary"
-                                            >
-                                                <span>LIVE_DEMO</span>
-                                                <span class="link-arrow">
-                                                    →
-                                                </span>
-                                            </a>
-                                        )}
-                                    </div>
-                                </div>
-                            </article>
-                        ))
-                    }
-                </div>
-            </section>
-
-            <!-- Technologies Overview -->
-            <section class="technologies-section">
-                <div class="section-header">
-                    <span class="section-marker">>></span>
-                    <h2 class="section-title">TECH_STACK_ANALYSIS</h2>
-                </div>
-                <div class="technologies-overview">
-                    <div class="tech-grid-header">
-                        <span>DOMAIN</span>
-                        <span>COUNT</span>
-                        <span>STATUS</span>
-                    </div>
-                    <div class="technologies-list">
-                        {
-                            allCategories.map((category: string) => (
-                                <div class="tech-row">
-                                    <span class="tech-name">
-                                        {category.toUpperCase()}
-                                    </span>
-                                    <span class="tech-count">
-                                        [
-                                        {
-                                            allProjects.filter((p) =>
-                                                p.categories?.includes(category)
-                                            ).length
-                                        }
-                                        ]
-                                    </span>
-                                    <span class="tech-status">ACTIVE</span>
-                                </div>
-                            ))
-                        }
-                    </div>
-                </div>
-            </section>
-        </main>
-        <Footer />
-
-        <script>
-            // Project filtering functionality
-            document.addEventListener('DOMContentLoaded', () => {
-                const filterButtons = document.querySelectorAll('.filter-btn');
-                const projectCards = document.querySelectorAll('.project-card');
-
-                filterButtons.forEach((button) => {
-                    button.addEventListener('click', () => {
-                        const category = button.getAttribute('data-category');
-
-                        // Update active button
-                        filterButtons.forEach((btn) =>
-                            btn.classList.remove('active')
-                        );
-                        button.classList.add('active');
-
-                        // Filter projects
-                        projectCards.forEach((card) => {
-                            const htmlCard = card as HTMLElement;
-                            if (category === 'all') {
-                                htmlCard.style.display = 'flex';
-                            } else {
-                                const cardCategories =
-                                    card.getAttribute('data-categories') || '';
-                                if (
-                                    category &&
-                                    cardCategories.includes(category)
-                                ) {
-                                    htmlCard.style.display = 'flex';
-                                } else {
-                                    htmlCard.style.display = 'none';
-                                }
-                            }
-                        });
-                    });
-                });
-            });
-        </script>
-    </body>
+						cards.forEach((card) => {
+							const el = card;
+							if (cat === "all") {
+								el.style.display = "flex";
+							} else {
+								const cats = el.getAttribute("data-categories") || "";
+								el.style.display = cats.includes(cat) ? "flex" : "none";
+							}
+						});
+					});
+				});
+			});
+		</script>
+	</body>
 </html>
 
 <style>
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 2rem;
-    }
+	/* Hallmark · macrostructure: Portfolio Grid (tech accents) · genre: editorial
+	 * pre-emit critique: P5 H4 E5 S5 R5 V4
+	 */
 
-    /* Hero Section */
-    .hero-section {
-        margin-bottom: 4rem;
-        padding: 3rem;
-        border: 1px solid var(--border-color);
-        background: var(--glass-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        position: relative;
-        border-radius: var(--radius-md);
-        overflow: hidden;
-    }
+	.layout {
+		max-width: 960px;
+		margin: 0 auto;
+		padding: 2rem;
+	}
 
-    .hero-section::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 4px;
-        height: 100%;
-        background: var(--gradient-primary);
-    }
+	/* ── Hero ── */
+	.hero-card {
+		margin-bottom: 3rem;
+		background: var(--glass-bg);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		border: 1px solid var(--border-color);
+		border-radius: var(--radius-md);
+		padding: 2.5rem;
+		position: relative;
+		overflow: hidden;
+	}
 
-    .hero-section::after {
-        content: '';
-        position: absolute;
-        top: -50%;
-        right: -20%;
-        width: 400px;
-        height: 400px;
-        background: radial-gradient(circle, var(--accent-active-glow) 0%, transparent 70%);
-        pointer-events: none;
-    }
+	.hero-card::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 4px;
+		height: 100%;
+		background: var(--gradient-primary);
+	}
 
-    .system-status {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        margin-bottom: 1.5rem;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.8rem;
-        color: var(--text-muted);
-    }
+	.hero-tagline {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		margin-bottom: 1rem;
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.8rem;
+	}
 
-    .status-dot {
-        width: 8px;
-        height: 8px;
-        background-color: var(--accent-active);
-        border-radius: 50%;
-        animation: pulse-glow 2s ease-in-out infinite;
-    }
+	.hero-marker {
+		color: var(--accent-active);
+		font-weight: 700;
+	}
 
-    .hero-title {
-        font-family: "Cinzel", "JetBrains Mono", monospace;
-        font-size: 3.5rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        letter-spacing: -0.05em;
-        background: var(--gradient-primary);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
+	.hero-label {
+		color: var(--text-muted);
+		letter-spacing: 0.05em;
+	}
 
-    .hero-subtitle {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 1rem;
-        color: var(--accent-active);
-        margin-bottom: 1.5rem;
-        line-height: 1.6;
-    }
+	.hero-title {
+		font-family: "JetBrains Mono", monospace;
+		font-size: 2rem;
+		font-weight: 700;
+		margin: 0 0 1rem;
+		background: var(--gradient-primary);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
 
-    .hero-description {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 1rem;
-        color: var(--text-secondary);
-        max-width: 700px;
-        line-height: 1.6;
-        border-left: 2px solid var(--border-color);
-        padding-left: 1rem;
-    }
+	.hero-description {
+		font-size: 0.95rem;
+		color: var(--text-secondary);
+		line-height: 1.7;
+		max-width: 600px;
+		margin: 0;
+	}
 
-    /* Section Headers */
-    .section-header {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        margin-bottom: 2rem;
-        border-bottom: 1px solid var(--border-color);
-        padding-bottom: 0.5rem;
-    }
+	/* ── Section block ── */
+	.section-block {
+		margin-bottom: 3rem;
+	}
 
-    .section-marker {
-        color: var(--accent-active);
-        font-family: 'JetBrains Mono', monospace;
-        font-weight: 700;
-    }
+	.section-head {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		margin-bottom: 1.25rem;
+		padding-bottom: 0.5rem;
+		border-bottom: 1px solid var(--border-color);
+	}
 
-    .section-title {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: var(--text-primary);
-        margin: 0;
-        text-transform: uppercase;
-    }
+	.section-marker {
+		color: var(--accent-active);
+		font-family: "JetBrains Mono", monospace;
+		font-weight: 700;
+		font-size: 0.9rem;
+	}
 
-    /* Filter Section */
-    .filter-section {
-        margin-bottom: 3rem;
-    }
+	.section-title {
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.85rem;
+		font-weight: 700;
+		color: var(--text-muted);
+		letter-spacing: 0.05em;
+		margin: 0;
+	}
 
-    .categories-filter {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-    }
+	/* ── Filter ── */
+	.filter-bar {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
 
-    .filter-btn {
-        background: transparent;
-        border: 1px solid var(--border-color);
-        color: var(--text-secondary);
-        padding: 0.5rem 1rem;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.9rem;
-        cursor: pointer;
-        transition: all var(--transition-base);
-        display: flex;
-        align-items: center;
-        gap: 0.2rem;
-        border-radius: var(--radius-sm);
-    }
+	.filter-btn {
+		background: transparent;
+		border: 1px solid var(--border-color);
+		color: var(--text-secondary);
+		padding: 0.4rem 1rem;
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.8rem;
+		cursor: pointer;
+		border-radius: 100px;
+		transition: all var(--transition-base);
+	}
 
-    .btn-marker {
-        color: var(--text-muted);
-        opacity: 0;
-        transition: opacity 0.2s ease;
-    }
+	.filter-btn:hover {
+		border-color: var(--accent-active);
+		color: var(--accent-active);
+	}
 
-    .filter-btn:hover {
-        border-color: var(--accent-active);
-        color: var(--accent-active);
-    }
+	.filter-btn.active {
+		background: var(--accent-active);
+		border-color: var(--accent-active);
+		color: var(--bg-primary);
+		box-shadow: 0 0 20px var(--accent-active-glow);
+	}
 
-    .filter-btn:hover .btn-marker {
-        opacity: 1;
-    }
+	/* ── Projects ── */
+	.projects-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+		gap: 1.25rem;
+	}
 
-    .filter-btn.active {
-        background: var(--accent-active);
-        border-color: var(--accent-active);
-        color: var(--bg-primary);
-        box-shadow: 0 0 20px var(--accent-active-glow);
-    }
+	.project-card {
+		background: var(--glass-bg);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		border: 1px solid var(--border-color);
+		border-radius: var(--radius-md);
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		transition: all var(--transition-base);
+		position: relative;
+	}
 
-    .filter-btn.active .btn-marker {
-        color: var(--bg-primary);
-        opacity: 1;
-    }
+	.project-card:hover {
+		border-color: var(--border-glow);
+		transform: translateY(-3px);
+		box-shadow: var(--shadow-glow), var(--shadow-md);
+	}
 
-    /* Projects Grid */
-    .projects-section {
-        margin-bottom: 4rem;
-    }
+	.card-header-line {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0.4rem 1rem;
+		background: var(--bg-secondary);
+		border-bottom: 1px solid var(--border-color);
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.65rem;
+		color: var(--text-muted);
+	}
 
-    .projects-grid {
-        display: grid;
-        gap: 2rem;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    }
+	.card-id {
+		color: var(--accent-active);
+		font-weight: 500;
+	}
 
-    .project-card {
-        background: var(--glass-bg);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        border: 1px solid var(--border-color);
-        display: flex;
-        flex-direction: column;
-        transition: all var(--transition-base);
-        border-radius: var(--radius-md);
-        overflow: hidden;
-    }
+	.card-status {
+		display: flex;
+		align-items: center;
+		gap: 0.35rem;
+		color: var(--accent-active);
+	}
 
-    .project-card:hover {
-        border-color: var(--border-glow);
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-glow), var(--shadow-lg);
-    }
+	.status-dot {
+		width: 6px;
+		height: 6px;
+		background: var(--accent-active);
+		border-radius: 50%;
+		box-shadow: 0 0 6px var(--accent-active);
+		animation: pulse-dot 2s ease-in-out infinite;
+	}
 
-    .card-header-line {
-        display: flex;
-        justify-content: space-between;
-        padding: 0.5rem 1rem;
-        background: var(--bg-secondary);
-        border-bottom: 1px solid var(--border-color);
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.7rem;
-        color: var(--text-muted);
-    }
+	.card-media {
+		width: 100%;
+		height: 200px;
+		flex-shrink: 0;
+		background: var(--bg-tertiary);
+		overflow: hidden;
+		position: relative;
+	}
 
-    .card-status {
-        display: flex;
-        align-items: center;
-        gap: 0.4rem;
-        color: var(--accent-active);
-    }
+	.card-media img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		border: none;
+		border-radius: 0;
+		transition: transform 0.4s ease, filter 0.4s ease;
+		filter: grayscale(30%) contrast(1.05);
+	}
 
-    .status-indicator {
-        width: 6px;
-        height: 6px;
-        background-color: var(--accent-active);
-        border-radius: 50%;
-        animation: pulse 2s infinite;
-    }
+	.project-card:hover .card-media img {
+		transform: scale(1.03);
+		filter: grayscale(0%) contrast(1) brightness(1.1);
+	}
 
-    .project-image-container {
-        position: relative;
-        height: 200px;
-        overflow: hidden;
-        background: var(--bg-tertiary);
-        border-bottom: 1px solid var(--border-color);
-    }
+	.card-media-fallback {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: linear-gradient(
+			135deg,
+			var(--bg-secondary),
+			var(--bg-tertiary)
+		);
+		font-family: "Cinzel", serif;
+		font-size: 2.5rem;
+		color: var(--text-muted);
+	}
 
-    .project-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        filter: grayscale(50%) contrast(1.05) brightness(0.95);
-        transition: filter 0.4s ease;
-    }
+	.card-content {
+		flex: 1;
+		padding: 1.25rem 1.5rem;
+		display: flex;
+		flex-direction: column;
+		min-width: 0;
+	}
 
-    .project-card:hover .project-img {
-        filter: grayscale(0%) contrast(1) brightness(1);
-    }
+	.card-header {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 1rem;
+		margin-bottom: 0.6rem;
+	}
 
-    .placeholder-image {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: repeating-linear-gradient(
-            45deg,
-            var(--bg-secondary),
-            var(--bg-secondary) 10px,
-            var(--bg-tertiary) 10px,
-            var(--bg-tertiary) 20px
-        );
-    }
+	.card-title {
+		font-family: "JetBrains Mono", monospace;
+		font-size: 1.1rem;
+		font-weight: 700;
+		color: var(--text-primary);
+		margin: 0;
+	}
 
-    .placeholder-text {
-        font-family: 'JetBrains Mono', monospace;
-        color: var(--text-muted);
-        font-size: 0.8rem;
-        background: var(--bg-primary);
-        padding: 0.5rem;
-        border: 1px solid var(--border-color);
-    }
+	.card-badge {
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.6rem;
+		padding: 0.15rem 0.45rem;
+		border-radius: 100px;
+		white-space: nowrap;
+		flex-shrink: 0;
+		letter-spacing: 0.03em;
+	}
 
-    .scan-line {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background: rgba(255, 255, 255, 0.1);
-        animation: scan 3s linear infinite;
-        pointer-events: none;
-    }
+	.card-badge.open {
+		color: var(--accent-active);
+		border: 1px solid rgba(0, 230, 138, 0.3);
+		background: var(--accent-active-subtle);
+	}
 
-    .project-content {
-        padding: 1.5rem;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-    }
+	.card-badge.closed {
+		color: var(--text-muted);
+		border: 1px solid var(--border-color);
+	}
 
-    .project-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 1rem;
-        gap: 1rem;
-    }
+	.card-description {
+		font-size: 0.86rem;
+		color: var(--text-secondary);
+		line-height: 1.6;
+		margin: 0 0 0.75rem;
+		flex: 1;
+	}
 
-    .project-title {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: var(--text-primary);
-        margin: 0;
-    }
+	.card-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.3rem;
+		margin-bottom: 1rem;
+	}
 
-    .badge {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.7rem;
-        padding: 0.2rem 0.5rem;
-        border: 1px solid var(--border-color);
-        color: var(--text-secondary);
-        border-radius: var(--radius-sm);
-    }
+	.tag {
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.65rem;
+		color: var(--text-muted);
+		padding: 0.1rem 0.45rem;
+		border: 1px solid var(--border-color);
+		border-radius: 100px;
+		background: var(--bg-secondary);
+	}
 
-    .badge.open-source {
-        border-color: rgba(0, 230, 138, 0.3);
-        color: var(--accent-active);
-        background: var(--accent-active-subtle);
-    }
+	.card-actions {
+		display: flex;
+		gap: 0.75rem;
+	}
 
-    .project-description {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.9rem;
-        color: var(--text-secondary);
-        line-height: 1.6;
-        margin-bottom: 1.5rem;
-        flex: 1;
-    }
+	.action-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		padding: 0.45rem 0.9rem;
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.7rem;
+		color: var(--text-secondary);
+		text-decoration: none;
+		border: 1px solid var(--border-color);
+		border-radius: 100px;
+		transition: all var(--transition-base);
+	}
 
-    .project-categories {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        margin-bottom: 1.5rem;
-    }
+	.action-link:hover {
+		color: var(--accent-active);
+		border-color: var(--accent-active);
+		box-shadow: 0 0 12px var(--accent-active-glow);
+	}
 
-    .category-tag {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.75rem;
-        color: var(--text-muted);
-    }
+	.action-link.primary {
+		background: var(--bg-secondary);
+	}
 
-    .project-actions {
-        display: flex;
-        gap: 1rem;
-        margin-top: auto;
-    }
+	.action-link.primary:hover {
+		background: var(--accent-active);
+		border-color: var(--accent-active);
+		color: var(--bg-primary);
+		box-shadow: 0 0 20px var(--accent-active-glow);
+	}
 
-    .action-link {
-        flex: 1;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0.75rem;
-        border: 1px solid var(--border-color);
-        color: var(--text-secondary);
-        text-decoration: none;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.8rem;
-        transition: all var(--transition-base);
-        border-radius: var(--radius-sm);
-    }
+	/* ── Tech table ── */
+	.tech-table {
+		border: 1px solid var(--border-color);
+		border-radius: var(--radius-md);
+		overflow: hidden;
+		background: var(--glass-bg);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
+	}
 
-    .action-link:hover {
-        background: var(--bg-secondary);
-        color: var(--text-primary);
-        border-color: var(--text-primary);
-        text-shadow: none;
-    }
+	.tech-table-header {
+		display: grid;
+		grid-template-columns: 2fr 1fr 1fr;
+		padding: 0.75rem 1rem;
+		background: var(--bg-secondary);
+		border-bottom: 1px solid var(--border-color);
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.7rem;
+		color: var(--text-muted);
+		font-weight: 700;
+		letter-spacing: 0.05em;
+	}
 
-    .action-link.primary {
-        background: var(--bg-secondary);
-        border-color: var(--text-muted);
-    }
+	.tech-table-body {
+		display: flex;
+		flex-direction: column;
+	}
 
-    .action-link.primary:hover {
-        background: var(--accent-active);
-        border-color: var(--accent-active);
-        color: var(--bg-primary);
-        box-shadow: 0 0 20px var(--accent-active-glow);
-        text-shadow: none;
-    }
+	.tech-row {
+		display: grid;
+		grid-template-columns: 2fr 1fr 1fr;
+		padding: 0.7rem 1rem;
+		border-bottom: 1px solid var(--border-color);
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.8rem;
+		color: var(--text-secondary);
+		transition: background 0.2s ease;
+		align-items: center;
+	}
 
-    /* Technologies Overview */
-    .technologies-overview {
-        border: 1px solid var(--border-color);
-        background: var(--glass-bg);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        border-radius: var(--radius-md);
-        overflow: hidden;
-    }
+	.tech-row:last-child {
+		border-bottom: none;
+	}
 
-    .tech-grid-header {
-        display: grid;
-        grid-template-columns: 2fr 1fr 1fr;
-        padding: 1rem;
-        background: var(--bg-secondary);
-        border-bottom: 1px solid var(--border-color);
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.8rem;
-        color: var(--text-muted);
-        font-weight: 700;
-    }
+	.tech-row:hover {
+		background: var(--accent-active-subtle);
+	}
 
-    .technologies-list {
-        display: flex;
-        flex-direction: column;
-    }
+	.tech-name {
+		color: var(--accent-active);
+		font-weight: 500;
+	}
 
-    .tech-row {
-        display: grid;
-        grid-template-columns: 2fr 1fr 1fr;
-        padding: 1rem;
-        border-bottom: 1px solid var(--border-color);
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.9rem;
-        color: var(--text-secondary);
-        transition: background 0.2s ease;
-    }
+	.tech-count {
+		color: var(--text-primary);
+		font-variant-numeric: tabular-nums;
+	}
 
-    .tech-row:last-child {
-        border-bottom: none;
-    }
+	.tech-status {
+		color: var(--accent-active);
+		font-size: 0.7rem;
+		width: fit-content;
+		padding: 0.1rem 0.5rem;
+		border: 1px solid rgba(0, 230, 138, 0.2);
+		border-radius: 100px;
+	}
 
-    .tech-row:hover {
-        background: var(--accent-active-subtle);
-        color: var(--text-primary);
-    }
+	/* ── Animations ── */
+	@keyframes pulse-dot {
+		0%,
+		100% {
+			opacity: 1;
+		}
+		50% {
+			opacity: 0.4;
+		}
+	}
 
-    .tech-name {
-        color: var(--accent-active);
-        text-shadow: 0 0 8px var(--accent-active-glow);
-    }
+	/* ── Responsive ── */
+	@media (max-width: 768px) {
+		.layout {
+			padding: 1rem;
+		}
 
-    .tech-status {
-        color: var(--text-muted);
-        font-size: 0.8rem;
-    }
+		.hero-card {
+			padding: 1.5rem;
+		}
 
-    @keyframes pulse {
-        0% {
-            opacity: 1;
-        }
-        50% {
-            opacity: 0.5;
-        }
-        100% {
-            opacity: 1;
-        }
-    }
+		.hero-title {
+			font-size: 1.5rem;
+		}
 
-    @keyframes scan {
-        0% {
-            transform: translateY(0);
-        }
-        100% {
-            transform: translateY(200px);
-        }
-    }
+		.card-media {
+			height: 180px;
+		}
 
-    @media (max-width: 768px) {
-        .container {
-            padding: 1rem;
-        }
+		.tech-table-header,
+		.tech-row {
+			grid-template-columns: 1fr auto auto;
+		}
+	}
 
-        .hero-title {
-            font-size: 2.5rem;
-        }
+	@media (max-width: 480px) {
+		.hero-card {
+			padding: 1.25rem;
+		}
 
-        .projects-grid {
-            grid-template-columns: 1fr;
-        }
+		.hero-title {
+			font-size: 1.3rem;
+		}
 
-        .tech-grid-header,
-        .tech-row {
-            grid-template-columns: 1fr auto;
-        }
+		.card-header {
+			flex-direction: column;
+			gap: 0.5rem;
+		}
 
-        .tech-grid-header span:last-child,
-        .tech-row span:last-child {
-            display: none;
-        }
-    }
+		.card-content {
+			padding: 1rem 1.25rem;
+		}
+
+		.card-actions {
+			flex-direction: column;
+		}
+
+		.tech-table-header span:last-child,
+		.tech-row span:last-child {
+			display: none;
+		}
+	}
 </style>
