@@ -510,8 +510,9 @@ const allCategories = Array.from(
 	}
 
 	.card-badge.closed {
-		color: var(--text-muted);
-		border: 1px solid var(--border-color);
+		color: var(--accent-blog);
+		border: 1px solid var(--accent-blog);
+		background: var(--accent-blog-subtle);
 	}
 
 	.card-description {
@@ -537,6 +538,13 @@ const allCategories = Array.from(
 		border: 1px solid var(--border-color);
 		border-radius: 100px;
 		background: var(--bg-secondary);
+		transition: all var(--transition-base);
+	}
+
+	.tag:hover {
+		border-color: var(--accent-blog);
+		color: var(--accent-blog);
+		box-shadow: 0 0 8px var(--accent-blog-glow);
 	}
 
 	.card-actions {

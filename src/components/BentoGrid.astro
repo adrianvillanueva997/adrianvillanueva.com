@@ -1,8 +1,10 @@
 ---
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
-import { NOW_PREVIEW } from "@/data/current";
+import * as now from "@/content/now.md";
 import { formatDate, getLatestBlogPost } from "@/utils/blog";
+
+const { frontmatter: nowFm } = now;
 
 interface Props {
 	mePhoto: ImageMetadata;
@@ -35,9 +37,9 @@ const timeline = [
 ];
 
 const nowItems = [
-	{ label: "Learning", detail: NOW_PREVIEW.learning },
-	{ label: "Reading", detail: NOW_PREVIEW.reading },
-	{ label: "Building", detail: NOW_PREVIEW.building },
+	{ label: "Learning", detail: nowFm.preview.learning },
+	{ label: "Reading", detail: nowFm.preview.reading },
+	{ label: "Building", detail: nowFm.preview.building },
 ];
 
 const creativeItems = [
@@ -287,10 +289,20 @@ const latestPost = await getLatestBlogPost();
         transition: opacity var(--transition-base);
     }
 
+    /* ── Override global pulse-glow for purple theme ── */
+    @keyframes pulse-glow {
+        0%, 100% {
+            box-shadow: 0 0 6px var(--accent-blog), 0 0 12px var(--accent-blog-glow);
+        }
+        50% {
+            box-shadow: 0 0 12px var(--accent-blog), 0 0 24px var(--accent-blog-glow);
+        }
+    }
+
     .bento-item:hover {
-        border-color: var(--border-glow);
+        border-color: var(--accent-blog);
         transform: translateY(-3px);
-        box-shadow: var(--shadow-glow), var(--shadow-md);
+        box-shadow: 0 0 30px var(--accent-blog-glow), var(--shadow-md);
     }
 
     .module-header {
@@ -326,8 +338,8 @@ const latestPost = await getLatestBlogPost();
 
     .avatar {
         border-radius: 50%;
-        border: 2px solid var(--accent-active);
-        box-shadow: 0 0 20px var(--accent-active-glow);
+        border: 2px solid var(--accent-blog);
+        box-shadow: 0 0 20px var(--accent-blog-glow);
         transition: all 0.3s ease;
         width: 64px;
         height: 64px;
@@ -335,7 +347,7 @@ const latestPost = await getLatestBlogPost();
 
     .bento-item:hover .avatar {
         transform: scale(1.08);
-        box-shadow: 0 0 30px var(--accent-active-glow);
+        box-shadow: 0 0 30px var(--accent-blog-glow);
     }
 
     .avatar-container {
@@ -348,7 +360,7 @@ const latestPost = await getLatestBlogPost();
         right: 0;
         width: 12px;
         height: 12px;
-        background-color: var(--accent-active);
+        background-color: var(--accent-blog);
         border-radius: 50%;
         border: 2px solid var(--bg-secondary);
         animation: pulse-glow 2s ease-in-out infinite;
@@ -370,7 +382,7 @@ const latestPost = await getLatestBlogPost();
     }
 
     .role {
-        color: var(--accent-active);
+        color: var(--accent-blog);
         font-size: 0.75rem;
         margin-bottom: 0.4rem;
         font-weight: 500;
@@ -409,8 +421,8 @@ const latestPost = await getLatestBlogPost();
     }
 
     .social-links a:hover {
-        color: var(--accent-active);
-        background: var(--accent-active-subtle);
+        color: var(--accent-blog);
+        background: var(--accent-blog-subtle);
         transform: translateY(-2px);
     }
 
@@ -431,13 +443,13 @@ const latestPost = await getLatestBlogPost();
     }
 
     .about-btn:hover {
-        color: var(--accent-active);
-        border-color: var(--border-glow);
-        box-shadow: 0 0 20px var(--accent-active-glow);
+        color: var(--accent-blog);
+        border-color: var(--accent-blog);
+        box-shadow: 0 0 20px var(--accent-blog-glow);
     }
 
     .btn-bracket {
-        color: var(--accent-active);
+        color: var(--accent-blog);
     }
 
     /* Journey Card - Cols 2-3, Row 1 */
@@ -468,16 +480,16 @@ const latestPost = await getLatestBlogPost();
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        border: 2px solid var(--accent-active);
+        border: 2px solid var(--accent-blog);
         background: var(--bg-secondary);
         flex-shrink: 0;
-        box-shadow: 0 0 8px var(--accent-active-glow);
+        box-shadow: 0 0 8px var(--accent-blog-glow);
     }
 
     .marker-line {
         width: 2px;
         flex: 1;
-        background: linear-gradient(180deg, var(--accent-active), transparent);
+        background: linear-gradient(180deg, var(--accent-blog), transparent);
         margin-top: 0.4rem;
         opacity: 0.3;
         min-height: 2rem;
@@ -519,11 +531,11 @@ const latestPost = await getLatestBlogPost();
     .journey-years {
         font-family: 'JetBrains Mono', monospace;
         font-size: 0.65rem;
-        color: var(--accent-active);
+        color: var(--accent-blog);
         padding: 0.1rem 0.4rem;
-        border: 1px solid rgba(0, 230, 138, 0.25);
+        border: 1px solid rgba(155, 89, 182, 0.25);
         border-radius: var(--radius-sm);
-        background: var(--accent-active-subtle);
+        background: var(--accent-blog-subtle);
         margin-left: auto;
     }
 
@@ -654,7 +666,7 @@ const latestPost = await getLatestBlogPost();
     .card-link {
         margin-top: auto;
         font-size: 0.75rem;
-        color: var(--accent-active);
+        color: var(--accent-blog);
         text-decoration: none;
         transition: all var(--transition-base);
         display: inline-flex;
@@ -692,8 +704,8 @@ const latestPost = await getLatestBlogPost();
     }
 
     .creative-item:hover {
-        background: var(--accent-active-subtle);
-        color: var(--accent-active);
+        background: var(--accent-blog-subtle);
+        color: var(--accent-blog);
     }
 
     .creative-info {
@@ -710,7 +722,7 @@ const latestPost = await getLatestBlogPost();
     }
 
     .creative-item:hover .creative-name {
-        color: var(--accent-active);
+        color: var(--accent-blog);
     }
 
     .creative-desc {
@@ -759,8 +771,8 @@ const latestPost = await getLatestBlogPost();
     }
 
     .connect-item:hover {
-        background: var(--accent-active-subtle);
-        color: var(--accent-active);
+        background: var(--accent-blog-subtle);
+        color: var(--accent-blog);
     }
 
     /* Responsive */

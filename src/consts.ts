@@ -19,10 +19,21 @@ export const HERO_TITLE = "SOFTWARE ENGINEER";
 export const HERO_TAGLINE =
 	"Experienced Software Engineer with deep expertise in cloud-native data platforms, data engineering, and MLOps. Based in Tokyo, delivering European engineering excellence and driving large-scale adoption of high-impact systems across organizations.";
 
-// Navigation
-export const NAV_ITEMS = [
+// Navigation — flat links or dropdown groups with children
+export type NavItem =
+	| { label: string; href: string }
+	| { label: string; children: { label: string; href: string }[] };
+
+export const NAV_ITEMS: NavItem[] = [
 	{ label: "Blog", href: "/blog" },
-	{ label: "Now", href: "/now" },
+	{ label: "Projects", href: "/projects" },
+	{
+		label: "Personal",
+		children: [
+			{ label: "Now", href: "/now" },
+			{ label: "Uses", href: "/uses" },
+		],
+	},
 	{ label: "Contact", href: "/contact" },
 	{ label: "Resume", href: "/resume" },
 	{ label: "Photography", href: "/photography" },

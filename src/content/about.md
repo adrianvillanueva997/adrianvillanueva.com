@@ -31,50 +31,6 @@ I believe in building systems that are resilient, elegant, and meaningful. My ap
 
 ---
 
-## HARDWARE & SOFTWARE STACK
-
-### Primary Workstation
-
-**MacBook Pro M4** • 48GB RAM • 2TB SSD
-
-### Display & Peripherals
-
-**Monitor**: Philips 2K 24" display
-
-**Input**: Mechanical keyboard + precision mouse
-
-**Audio**: Studio-grade headphones for development and music production
-
-**Mobile**: iPhone 15 Pro Max
-
-### Secondary Systems
-
-**Thinkpad T480s**: 42GB RAM, 2TB storage with Arch Linux
-
-**MINISFORUM UM780 Pro**: Ryzen 7880H, 64GB RAM, 1TB storage with Arch Linux
-
-**Nipogi N100**: Intel N100, 16GB RAM, 500GB storage with Proxmox
-
-### Gaming & Entertainment
-
-**Steam Deck OLED**: 1TB + 1TB microSD
-
-**HP Omen 15**: Ryzen 5880H, 16GB RAM, RTX 3060
-
-### Development Environment
-
-**Terminal**: Ghostty + Zsh + Starship + Rust CLI tools
-
-**Editor**: VS Code + Vim bindings (transitioning to Neovim)
-
-**Browser**: Firefox
-
-**Containers**: OrbStack (macOS), Docker (Linux)
-
-**Version Control**: Git
-
----
-
 ## CURRENT INTERESTS
 
 **Research Areas**: Audio synthesis • AI agents • Rust systems programming • Self-hosted infrastructure
