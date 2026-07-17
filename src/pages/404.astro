@@ -1,8 +1,8 @@
 ---
-		import BaseHead from "@/components/BaseHead.astro";
-		import Footer from "@/components/Footer.astro";
-		import Header from "@/components/Header.astro";
-		import { NAV_ITEMS, SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
+import BaseHead from "@/components/BaseHead.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
 ---
 
 <!doctype html>
@@ -12,151 +12,169 @@
 	</head>
 	<body>
 		<Header />
-		<main class="container">
-			<div class="error-content">
-				<div class="error-code">404</div>
-				<div class="error-message">SYSTEM_ERROR: RESOURCE_NOT_FOUND</div>
-				<div class="terminal-output">
-					<p>> initiating_search_protocol...</p>
-					<p>> scanning_directories...</p>
-					<p class="error">> error: target_file_missing</p>
-					<p>> suggestion: return_to_base</p>
-				</div>
-				<a href="/" class="home-btn">
-					<span class="btn-bracket">[</span>
-					RETURN_HOME
-					<span class="btn-bracket">]</span>
-				</a>
-				<div class="nav-links">
-					<a href="/about" class="nav-btn">
-						<span class="btn-bracket">[</span>
-						ABOUT
-						<span class="btn-bracket">]</span>
-					</a>
-					<a href="/projects" class="nav-btn">
-						<span class="btn-bracket">[</span>
-						PROJECTS
-						<span class="btn-bracket">]</span>
-					</a>
-					<a href="/contact" class="nav-btn">
-						<span class="btn-bracket">[</span>
-						CONTACT
-						<span class="btn-bracket">]</span>
-					</a>
-				</div>
+		<main class="scene">
+			<div class="void">
+				<div class="ring"></div>
+				<div class="ring ring-delayed"></div>
+				<div class="code">404</div>
 			</div>
+			<h1 class="title">Lost in the Void</h1>
+			<p class="subtitle">The page you seek does not exist here.</p>
+			<a href="/" class="return">Return Home →</a>
 		</main>
 		<Footer />
 	</body>
 </html>
 
 <style>
-	.container {
-		min-height: 60vh;
+	.scene {
+		min-height: 70vh;
 		display: flex;
+		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-	}
-
-	.error-content {
+		padding: 2rem;
 		text-align: center;
-		font-family: "JetBrains Mono", monospace;
+		position: relative;
+		overflow: hidden;
 	}
 
-	.error-code {
-		font-family: "Cinzel", "JetBrains Mono", monospace;
-		font-size: 8rem;
-		font-weight: bold;
+	/* Void glow */
+	.scene::before {
+		content: "";
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 500px;
+		height: 500px;
+		background: radial-gradient(circle, var(--accent-blog-glow) 0%, transparent 60%);
+		pointer-events: none;
+		animation: breathe 6s ease-in-out infinite;
+	}
+
+	/* Rings */
+	.void {
+		position: relative;
+		margin-bottom: 1.5rem;
+	}
+
+	.ring {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 160px;
+		height: 160px;
+		border: 1px solid var(--accent-blog);
+		border-radius: 50%;
+		opacity: 0.15;
+		animation: expand-ring 4s ease-out infinite;
+	}
+
+	.ring-delayed {
+		animation-delay: 2s;
+	}
+
+	.code {
+		font-family: "Cinzel", serif;
+		font-size: 7rem;
+		font-weight: 700;
 		line-height: 1;
-		margin-bottom: 1rem;
-		background: var(--gradient-primary);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
-		filter: drop-shadow(0 0 30px var(--accent-active-glow));
-	}
-
-	.error-message {
-		font-size: 1.5rem;
 		color: var(--text-primary);
-		margin-bottom: 2rem;
-		letter-spacing: 2px;
+		text-shadow:
+			0 0 40px var(--accent-blog-glow),
+			0 0 80px var(--accent-blog-glow);
+		position: relative;
+		z-index: 1;
+		animation: fade-in 1.5s ease-out;
 	}
 
-	.terminal-output {
-		background: var(--glass-bg);
-		backdrop-filter: blur(12px);
-		-webkit-backdrop-filter: blur(12px);
-		border: 1px solid var(--border-color);
-		padding: 1.5rem;
-		text-align: left;
-		margin-bottom: 2rem;
-		border-radius: var(--radius-md);
-		max-width: 400px;
-		margin-left: auto;
-		margin-right: auto;
-		box-shadow: var(--shadow-md);
-	}
-
-	.terminal-output p {
-		margin: 0.5rem 0;
-		color: var(--text-muted);
-		font-size: 0.9rem;
-	}
-
-	.terminal-output .error {
-		color: var(--accent-error);
-		text-shadow: 0 0 8px rgba(255, 92, 92, 0.3);
-	}
-
-	.home-btn {
-		display: inline-block;
-		text-decoration: none;
+	.title {
+		font-family: "Cinzel", serif;
+		font-size: clamp(1.5rem, 3vw, 2rem);
+		font-weight: 600;
 		color: var(--text-primary);
-		font-size: 1.2rem;
-		transition: all var(--transition-base);
-		padding: 0.75rem 1.5rem;
-		border: 1px solid var(--border-color);
-		border-radius: var(--radius-sm);
-		background: transparent;
+		margin: 0 0 0.75rem;
+		animation: fade-in 2s ease-out 0.3s both;
 	}
 
-	.home-btn:hover {
-		color: var(--accent-active);
-		border-color: var(--border-glow);
-		box-shadow: 0 0 20px var(--accent-active-glow);
-		text-shadow: none;
-	}
-
-	.btn-bracket {
-		color: var(--accent-active);
-		margin: 0 0.5rem;
-	}
-
-	.nav-links {
-		display: flex;
-		gap: 1rem;
-		justify-content: center;
-		flex-wrap: wrap;
-	}
-
-	.nav-btn {
-		display: inline-block;
-		text-decoration: none;
+	.subtitle {
+		font-size: 0.95rem;
 		color: var(--text-secondary);
-		font-size: 1rem;
-		transition: all var(--transition-base);
-		padding: 0.5rem 1rem;
-		border: 1px solid var(--border-color);
-		border-radius: var(--radius-sm);
-		background: transparent;
-		font-family: 'JetBrains Mono', monospace;
+		margin: 0 0 2rem;
+		animation: fade-in 2s ease-out 0.6s both;
 	}
 
-	.nav-btn:hover {
-		color: var(--accent-active);
-		border-color: var(--border-glow);
-		box-shadow: 0 0 20px var(--accent-active-glow);
-		text-shadow: none;
+	.return {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.7rem 1.5rem;
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.85rem;
+		color: var(--text-primary);
+		text-decoration: none;
+		border: 1px solid var(--accent-blog);
+		border-radius: 100px;
+		background: var(--accent-blog-subtle);
+		transition: all var(--transition-base);
+		animation: fade-in 2s ease-out 0.9s both;
+	}
+
+	.return:hover {
+		background: var(--accent-blog);
+		color: var(--bg-primary);
+		box-shadow: 0 0 30px var(--accent-blog-glow);
+	}
+
+	@keyframes breathe {
+		0%,
+		100% {
+			opacity: 0.5;
+			transform: translate(-50%, -50%) scale(1);
+		}
+		50% {
+			opacity: 1;
+			transform: translate(-50%, -50%) scale(1.15);
+		}
+	}
+
+	@keyframes expand-ring {
+		0% {
+			opacity: 0.25;
+			transform: translate(-50%, -50%) scale(0.8);
+		}
+		100% {
+			opacity: 0;
+			transform: translate(-50%, -50%) scale(1.5);
+		}
+	}
+
+	@keyframes fade-in {
+		from {
+			opacity: 0;
+			transform: translateY(10px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@media (max-width: 480px) {
+		.code {
+			font-size: 5rem;
+		}
+
+		.scene::before {
+			width: 300px;
+			height: 300px;
+		}
+
+		.ring {
+			width: 120px;
+			height: 120px;
+		}
 	}
 </style>

@@ -40,7 +40,8 @@ const isActive = href === pathname || href === "/" + (subpath?.[0] || "");
 		color: var(--text-primary);
 		background: var(--bg-tertiary);
 		border-color: var(--border-light);
-		text-shadow: 0 0 10px var(--accent-active-glow);
+		text-shadow: 0 0 10px var(--accent-blog-glow);
+		box-shadow: 0 0 20px var(--accent-blog-glow);
 	}
 
 	a.active::before {
@@ -50,7 +51,19 @@ const isActive = href === pathname || href === "/" + (subpath?.[0] || "");
 		left: 0;
 		right: 0;
 		height: 2px;
-		background: var(--gradient-primary);
+		background: linear-gradient(90deg, var(--accent-blog), var(--accent-active));
 		border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+	}
+
+	a.active::after {
+		content: '';
+		position: absolute;
+		bottom: -1px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 60%;
+		height: 1px;
+		background: linear-gradient(90deg, transparent, var(--accent-blog), transparent);
+		opacity: 0.3;
 	}
 </style>

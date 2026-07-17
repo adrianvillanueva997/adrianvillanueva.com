@@ -1,5 +1,6 @@
 ---
 const targetUrl = "https://avm.photography";
+const TARGET_URL = targetUrl;
 ---
 
 <!doctype html>
@@ -7,11 +8,87 @@ const targetUrl = "https://avm.photography";
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Redirecting to avm.photography</title>
-		<meta http-equiv="refresh" content={"0;url=" + targetUrl} />
+		<meta http-equiv="refresh" content="0; url={targetUrl}" />
 		<link rel="canonical" href={targetUrl} />
+		<title>Redirecting to Photography — Adrian Villanueva</title>
+		<style>
+			* { margin: 0; padding: 0; box-sizing: border-box; }
+			body {
+				background: #08090a;
+				color: #b0b3b8;
+				font-family: 'Inter', system-ui, sans-serif;
+				min-height: 100vh;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			.container { text-align: center; padding: 2rem; }
+			.label {
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 0.65rem;
+				letter-spacing: 0.2em;
+				color: #9b59b6;
+				margin-bottom: 0.75rem;
+			}
+			.title {
+				font-family: 'Cinzel', serif;
+				font-size: 2.5rem;
+				color: #e4e6e9;
+				margin-bottom: 0.5rem;
+				animation: breathe 3s ease-in-out infinite;
+				text-shadow: 0 0 40px rgba(155,89,182,0.4), 0 0 80px rgba(155,89,182,0.2);
+			}
+			@keyframes breathe {
+				0%, 100% { text-shadow: 0 0 20px rgba(155,89,182,0.4), 0 0 40px rgba(155,89,182,0.2); }
+				50% { text-shadow: 0 0 40px rgba(155,89,182,0.6), 0 0 80px rgba(155,89,182,0.3); }
+			}
+			.divider {
+				display: flex; align-items: center; justify-content: center;
+				gap: 1rem; margin: 1rem 0; color: #9b59b6; opacity: 0.5;
+				font-size: 1rem; user-select: none;
+			}
+			.divider::before, .divider::after {
+				content: '';
+				flex: 1; height: 1px;
+				background: linear-gradient(to right, transparent, rgba(155,89,182,0.3), transparent);
+			}
+			.redirect-text {
+				font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem;
+			}
+			.redirect-text a {
+				color: #9b59b6; text-decoration: none; font-weight: 600;
+				transition: color 0.2s ease;
+			}
+			.redirect-text a:hover { color: #e4e6e9; }
+			.dots span {
+				display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+				background: #9b59b6; margin: 0 3px;
+				animation: dot-pulse 1.5s ease-in-out infinite;
+			}
+			.dots span:nth-child(2) { animation-delay: 0.3s; }
+			.dots span:nth-child(3) { animation-delay: 0.6s; }
+			@keyframes dot-pulse {
+				0%, 100% { opacity: 0.2; box-shadow: 0 0 4px rgba(155,89,182,0.2); }
+				50% { opacity: 1; box-shadow: 0 0 12px rgba(155,89,182,0.6); }
+			}
+		</style>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Inter:wght@400;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
 	</head>
 	<body>
-		<p>Redirecting to <a href={targetUrl}>avm.photography</a>…</p>
+		<div class="container">
+			<p class="label">REDIRECTING</p>
+			<h1 class="title">Photography</h1>
+			<div class="divider"><span>✠</span></div>
+			<p class="redirect-text">
+				You are being redirected to<br />
+				<a href={targetUrl} rel="noopener noreferrer">{targetUrl}</a>
+			</p>
+			<div class="dots">
+				<span></span><span></span><span></span>
+			</div>
+		</div>
+		<script define:vars={{ TARGET_URL }}>window.location.replace(TARGET_URL);</script>
 	</body>
 </html>

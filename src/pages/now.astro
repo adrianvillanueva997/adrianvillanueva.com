@@ -7,6 +7,7 @@ import { SITE_TITLE } from "../consts";
 import * as now from "../content/now.md";
 
 const { Content, frontmatter } = now;
+const p = frontmatter.preview;
 ---
 
 <!doctype html>
@@ -20,24 +21,76 @@ const { Content, frontmatter } = now;
     <body>
         <Header />
         <main class="container">
-            <div class="now-grid">
-                <!-- Now Panel -->
-                <div class="bento-item now-panel">
-                    <div class="module-header">
-                        <Icon name="mdi:clock-outline" size={16} />
-                        <span class="module-title">NOW</span>
-                        <span class="update-date">Updated: {frontmatter.lastUpdated}</span>
+            <!-- Hero -->
+            <div class="page-hero">
+                <p class="hero-label">CURRENT STATUS</p>
+                <h1 class="page-title">NOW</h1>
+                <p class="page-subtitle">What I'm currently focused on</p>
+                <span class="update-badge">Updated: {frontmatter.lastUpdated}</span>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <Icon name="mdi:book-open-variant" size={14} />
+                        LEARNING
                     </div>
-                    <div class="now-content">
-                        <Content />
+                    <div class="stat-value">{p.learning}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <Icon name="mdi:book" size={14} />
+                        READING
                     </div>
+                    <div class="stat-value">{p.reading}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <Icon name="mdi:code-tags" size={14} />
+                        BUILDING
+                    </div>
+                    <div class="stat-value">{p.building}</div>
+                </div>
+            </div>
+
+            <!-- Details -->
+            <div class="details-grid">
+                <div class="detail-card">
+                    <div class="detail-header">
+                        <Icon name="mdi:target" size={14} />
+                        FOCUS
+                    </div>
+                    <div class="detail-value">{p.focus}</div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-header">
+                        <Icon name="mdi:arm-flex" size={14} />
+                        TRAINING
+                    </div>
+                    <div class="detail-value">{p.training}</div>
+                </div>
+            </div>
+
+            <!-- ✠ Divider -->
+            <div class="doom-divider"><span>✠</span></div>
+
+            <!-- Full Content -->
+            <div class="bento-item content-panel">
+                <div class="module-header">
+                    <Icon name="mdi:clock-outline" size={16} />
+                    <span class="module-title">DETAILS</span>
+                    <span class="module-line"></span>
+                </div>
+                <div class="now-content">
+                    <Content />
                 </div>
             </div>
 
             <!-- Now Movement Footer -->
             <div class="now-footer">
                 <p>
-                    This page follows the <a href="https://nownownow.com/about" target="_blank" rel="noopener noreferrer">/now movement</a> - a way to share what you're focused on at this point in your life.
+                    Part of the <a href="https://nownownow.com/about" target="_blank" rel="noopener noreferrer">/now movement</a> — sharing what I'm focused on at this point in my life.
                 </p>
             </div>
         </main>
@@ -47,15 +100,196 @@ const { Content, frontmatter } = now;
 
 <style>
     .container {
-        max-width: 900px;
+        max-width: 960px;
         margin: 0 auto;
         padding: 2rem 1rem;
     }
 
-    .now-grid {
-        margin: 2rem 0;
+    /* ── Hero ── */
+    .page-hero {
+        text-align: center;
+        margin: 1rem 0 2.5rem;
     }
 
+    .hero-label {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.2em;
+        color: var(--accent-blog);
+        margin-bottom: 0.5rem;
+    }
+
+    .page-title {
+        font-family: 'Cinzel', serif;
+        font-size: 3rem;
+        margin: 0;
+        color: var(--text-primary);
+        line-height: 1.1;
+        animation: breathe 3s ease-in-out infinite;
+        text-shadow: 0 0 40px var(--accent-blog-glow), 0 0 80px var(--accent-blog-glow);
+    }
+
+    @keyframes breathe {
+        0%, 100% { text-shadow: 0 0 20px var(--accent-blog-glow), 0 0 40px var(--accent-blog-glow); }
+        50% { text-shadow: 0 0 40px var(--accent-blog-glow), 0 0 80px var(--accent-blog-glow); }
+    }
+
+    .page-subtitle {
+        font-size: 1rem;
+        color: var(--text-muted);
+        margin: 0.5rem 0 1rem;
+    }
+
+    .update-badge {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.7rem;
+        color: var(--accent-blog);
+        background: color-mix(in srgb, var(--accent-blog) 12%, transparent);
+        padding: 0.2rem 0.75rem;
+        border-radius: var(--radius-sm);
+        border: 1px solid color-mix(in srgb, var(--accent-blog) 20%, transparent);
+    }
+
+    /* ── Stat Cards ── */
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .stat-card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-md);
+        padding: 1.25rem;
+        position: relative;
+        overflow: hidden;
+        transition: all var(--transition-base);
+    }
+
+    .stat-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--gradient-primary);
+        transition: opacity var(--transition-base);
+    }
+
+    .stat-card:hover {
+        border-color: color-mix(in srgb, var(--accent-blog) 40%, transparent);
+        transform: translateY(-2px);
+        box-shadow: 0 0 20px color-mix(in srgb, var(--accent-blog) 10%, transparent), var(--shadow-md);
+    }
+
+    .stat-header {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
+        color: var(--accent-blog);
+        margin-bottom: 0.75rem;
+    }
+
+    .stat-header :global(svg) {
+        color: var(--accent-blog);
+    }
+
+    .stat-value {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: var(--text-secondary);
+    }
+
+    /* ── Detail Cards ── */
+    .details-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .detail-card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-md);
+        padding: 1.25rem;
+        position: relative;
+        overflow: hidden;
+        transition: all var(--transition-base);
+    }
+
+    .detail-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--gradient-primary);
+        transition: opacity var(--transition-base);
+    }
+
+    .detail-card:hover {
+        border-color: color-mix(in srgb, var(--accent-blog) 40%, transparent);
+        transform: translateY(-2px);
+        box-shadow: 0 0 20px color-mix(in srgb, var(--accent-blog) 10%, transparent), var(--shadow-md);
+    }
+
+    .detail-header {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
+        color: var(--accent-blog);
+        margin-bottom: 0.75rem;
+    }
+
+    .detail-header :global(svg) {
+        color: var(--accent-blog);
+    }
+
+    .detail-value {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        color: var(--text-primary);
+    }
+
+    /* ── Doom Divider ✠ ── */
+    .doom-divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        margin: 2rem 0;
+        color: var(--accent-blog);
+        font-size: 1rem;
+        opacity: 0.5;
+        user-select: none;
+    }
+
+    .doom-divider::before,
+    .doom-divider::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(to right, transparent, color-mix(in srgb, var(--accent-blog) 30%, transparent), transparent);
+    }
+
+    /* ── Content Panel ── */
     .bento-item {
         background: var(--glass-bg);
         backdrop-filter: blur(12px);
@@ -80,9 +314,9 @@ const { Content, frontmatter } = now;
     }
 
     .bento-item:hover {
-        border-color: var(--border-glow);
+        border-color: color-mix(in srgb, var(--accent-blog) 40%, transparent);
         transform: translateY(-3px);
-        box-shadow: var(--shadow-glow), var(--shadow-md);
+        box-shadow: 0 0 30px color-mix(in srgb, var(--accent-blog) 10%, transparent), var(--shadow-md);
     }
 
     .module-header {
@@ -96,14 +330,10 @@ const { Content, frontmatter } = now;
         letter-spacing: 0.05em;
     }
 
-    .update-date {
-        margin-left: auto;
-        font-size: 0.7rem;
-        color: var(--accent-active);
-        background: var(--accent-active-subtle);
-        padding: 0.15rem 0.5rem;
-        border-radius: var(--radius-sm);
-        border: 1px solid rgba(0, 230, 138, 0.15);
+    .module-line {
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(to right, color-mix(in srgb, var(--accent-blog) 30%, transparent), transparent);
     }
 
     .now-content {
@@ -114,17 +344,21 @@ const { Content, frontmatter } = now;
     }
 
     .now-content :global(h2) {
-        font-size: 1.2rem;
+        font-family: 'Cinzel', serif;
+        font-size: 1.1rem;
         margin: 1.5rem 0 1rem 0;
         color: var(--text-primary);
         border: none;
         padding: 0;
+        letter-spacing: 0.02em;
     }
 
     .now-content :global(h3) {
-        font-size: 1rem;
+        font-family: 'Cinzel', serif;
+        font-size: 0.95rem;
         margin: 1.25rem 0 0.75rem 0;
-        color: var(--accent-active);
+        color: var(--accent-blog);
+        letter-spacing: 0.02em;
     }
 
     .now-content :global(p) {
@@ -142,20 +376,33 @@ const { Content, frontmatter } = now;
 
     .now-content :global(li) {
         position: relative;
-        padding-left: 1.5rem;
+        padding-left: 1.8rem;
         margin-bottom: 0.5rem;
     }
 
     .now-content :global(li::before) {
-        content: '>';
+        content: '>>';
         position: absolute;
         left: 0;
-        color: var(--accent-active);
+        color: var(--accent-blog);
         font-family: 'JetBrains Mono', monospace;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-shadow: 0 0 6px var(--accent-blog-glow);
     }
 
+    .now-content :global(code) {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.85rem;
+        color: var(--accent-blog);
+        background: color-mix(in srgb, var(--accent-blog) 10%, transparent);
+        padding: 0.1rem 0.4rem;
+        border-radius: 3px;
+    }
+
+    /* ── Footer ── */
     .now-footer {
-        margin: 3rem 0 2rem 0;
+        margin: 3rem 0 2rem;
         padding: 1.5rem;
         background: var(--glass-bg);
         backdrop-filter: blur(8px);
@@ -173,12 +420,27 @@ const { Content, frontmatter } = now;
     }
 
     .now-footer a {
-        color: var(--accent-active);
+        color: var(--accent-blog);
         text-decoration: none;
-        transition: color 0.2s ease;
+        transition: color var(--transition-fast);
     }
 
     .now-footer a:hover {
         color: var(--text-primary);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+        .stats-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .details-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .page-title {
+            font-size: 2.25rem;
+        }
     }
 </style>
