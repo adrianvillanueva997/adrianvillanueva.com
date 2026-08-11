@@ -1,92 +1,249 @@
 ---
+import { Icon } from "astro-icon/components";
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import { SITE_TITLE } from "../consts";
+
 const BLOG_URL = "https://metalops.dev";
+const RSS_URL = `${BLOG_URL}/rss.xml`;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<meta charset="utf-8" />
-		<meta name="robots" content="noindex, follow" />
-		<meta http-equiv="refresh" content="0; url={BLOG_URL}" />
-		<title>Redirecting to Blog — Adrian Villanueva</title>
-		<style>
-			* { margin: 0; padding: 0; box-sizing: border-box; }
-			body {
-				background: #08090a;
-				color: #b0b3b8;
-				font-family: 'Inter', system-ui, sans-serif;
-				min-height: 100vh;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-			}
-			.container { text-align: center; padding: 2rem; }
-			.label {
-				font-family: 'JetBrains Mono', monospace;
-				font-size: 0.65rem;
-				letter-spacing: 0.2em;
-				color: #9b59b6;
-				margin-bottom: 0.75rem;
-			}
-			.title {
-				font-family: 'Cinzel', serif;
-				font-size: 2.5rem;
-				color: #e4e6e9;
-				margin-bottom: 0.5rem;
-				animation: breathe 3s ease-in-out infinite;
-				text-shadow: 0 0 40px rgba(155,89,182,0.4), 0 0 80px rgba(155,89,182,0.2);
-			}
-			@keyframes breathe {
-				0%, 100% { text-shadow: 0 0 20px rgba(155,89,182,0.4), 0 0 40px rgba(155,89,182,0.2); }
-				50% { text-shadow: 0 0 40px rgba(155,89,182,0.6), 0 0 80px rgba(155,89,182,0.3); }
-			}
-			.divider {
-				display: flex; align-items: center; justify-content: center;
-				gap: 1rem; margin: 1rem 0; color: #9b59b6; opacity: 0.5;
-				font-size: 1rem; user-select: none;
-			}
-			.divider::before, .divider::after {
-				content: '';
-				flex: 1; height: 1px;
-				background: linear-gradient(to right, transparent, rgba(155,89,182,0.3), transparent);
-			}
-			.redirect-text {
-				font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem;
-			}
-			.redirect-text a {
-				color: #9b59b6; text-decoration: none; font-weight: 600;
-				transition: color 0.2s ease;
-			}
-			.redirect-text a:hover { color: #e4e6e9; }
-			.dots span {
-				display: inline-block; width: 8px; height: 8px; border-radius: 50%;
-				background: #9b59b6; margin: 0 3px;
-				animation: dot-pulse 1.5s ease-in-out infinite;
-			}
-			.dots span:nth-child(2) { animation-delay: 0.3s; }
-			.dots span:nth-child(3) { animation-delay: 0.6s; }
-			@keyframes dot-pulse {
-				0%, 100% { opacity: 0.2; box-shadow: 0 0 4px rgba(155,89,182,0.2); }
-				50% { opacity: 1; box-shadow: 0 0 12px rgba(155,89,182,0.6); }
-			}
-		</style>
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Inter:wght@400;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+		<BaseHead
+			title={`Blog - ${SITE_TITLE}`}
+			description="Technical writing on software, systems engineering, infrastructure and DevOps by Adrian Villanueva."
+		/>
 	</head>
 	<body>
-		<div class="container">
-			<p class="label">REDIRECTING</p>
-			<h1 class="title">Blog</h1>
-			<div class="divider"><span>✠</span></div>
-			<p class="redirect-text">
-				You are being redirected to<br />
-				<a href={BLOG_URL} rel="noopener noreferrer">{BLOG_URL}</a>
-			</p>
-			<div class="dots">
-				<span></span><span></span><span></span>
+		<Header />
+		<main class="layout">
+			<header class="page-hero">
+				<p class="hero-label">TECHNICAL WRITING</p>
+				<h1 class="page-title">BLOG</h1>
+				<p class="page-subtitle">
+					Software, systems engineering, infrastructure and DevOps. Full posts
+					live on <a href={BLOG_URL}>{BLOG_URL}</a>.
+				</p>
+			</header>
+
+			<div class="blog-list" id="blog-list">
+				<p class="blog-fallback">Loading posts from {BLOG_URL}…</p>
 			</div>
-		</div>
-		<script define:vars={{ BLOG_URL }}>window.location.replace(BLOG_URL);</script>
+
+			<p class="rss-note">
+				<a href={RSS_URL} target="_blank" rel="noopener noreferrer">
+					<Icon name="mdi:rss" size={14} />
+					Subscribe via RSS
+				</a>
+			</p>
+		</main>
+		<Footer />
+
+		<style>
+			.layout {
+				max-width: 880px;
+				margin: 0 auto;
+				padding: 2.5rem 1rem 1rem;
+			}
+
+			.page-hero {
+				text-align: center;
+				margin: 0.5rem 0 3rem;
+			}
+
+			.hero-label {
+				font-family: "JetBrains Mono", monospace;
+				font-size: 0.65rem;
+				letter-spacing: 0.2em;
+				color: var(--accent-blog);
+				margin-bottom: 0.75rem;
+			}
+
+			.page-title {
+				font-family: "Cinzel", serif;
+				font-size: clamp(2.25rem, 6vw, 3rem);
+				margin: 0;
+				line-height: 1.1;
+				text-shadow: 0 0 40px var(--accent-blog-glow), 0 0 80px var(--accent-blog-glow);
+			}
+
+			.page-subtitle {
+				font-size: 0.95rem;
+				color: var(--text-secondary);
+				line-height: 1.6;
+				max-width: 520px;
+				margin: 0.75rem auto 0;
+			}
+
+			.page-subtitle a {
+				color: var(--accent-blog);
+			}
+
+			.blog-list :global(a) {
+				display: flex;
+				align-items: baseline;
+				gap: 1.25rem;
+				padding: 0.9rem 0.75rem;
+				border-radius: var(--radius-sm);
+				transition: background-color var(--transition-fast);
+			}
+
+			.blog-list :global(a + a) {
+				border-top: 1px solid var(--border-color);
+			}
+
+			.blog-list :global(a:hover),
+			.blog-list :global(a:focus-visible) {
+				background-color: var(--accent-blog-subtle);
+			}
+
+			.blog-list :global(time) {
+				flex-shrink: 0;
+				min-width: 6rem;
+				font-family: "JetBrains Mono", monospace;
+				font-size: 0.75rem;
+				color: var(--text-muted);
+				font-variant-numeric: tabular-nums;
+			}
+
+			.blog-list :global(a:hover time) {
+				color: var(--accent-blog);
+			}
+
+			.blog-list :global(span) {
+				flex: 1;
+				min-width: 0;
+				font-size: 1rem;
+				font-weight: 500;
+				line-height: 1.5;
+				color: var(--text-primary);
+				overflow-wrap: anywhere;
+			}
+
+			.blog-list :global(a:hover span) {
+				color: var(--accent-blog);
+			}
+
+			.blog-fallback {
+				margin: 0;
+				padding: 1rem 0.5rem;
+				font-size: 0.9rem;
+				color: var(--text-secondary);
+				line-height: 1.6;
+			}
+
+			.blog-fallback a {
+				color: var(--accent-blog);
+			}
+
+			.rss-note {
+				text-align: center;
+				margin: 4rem 0 1rem;
+			}
+
+			.rss-note a {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				font-family: "JetBrains Mono", monospace;
+				font-size: 0.7rem;
+				letter-spacing: 0.15em;
+				color: var(--text-muted);
+				padding: 0.5rem 1.25rem;
+				border: 1px solid var(--border-color);
+				border-radius: 999px;
+				white-space: nowrap;
+				transition:
+					color var(--transition-fast),
+					border-color var(--transition-fast);
+			}
+
+			.rss-note a:hover {
+				color: var(--accent-blog);
+				border-color: color-mix(in srgb, var(--accent-blog) 40%, transparent);
+			}
+
+			.rss-note :global(svg) {
+				color: var(--accent-blog);
+			}
+
+			@media (max-width: 768px) {
+				.layout {
+					padding: 1.5rem 1rem 1rem;
+				}
+
+				.blog-list a {
+					gap: 0.75rem;
+					padding: 0.75rem 0.25rem;
+				}
+
+				.blog-list time {
+					min-width: 0;
+				}
+			}
+		</style>
+
+		<script define:vars={{ RSS_URL }}>
+			(async () => {
+				const container = document.getElementById("blog-list");
+				if (!container) return;
+				try {
+					const res = await fetch(RSS_URL);
+					if (!res.ok) throw new Error("fetch failed");
+					const xml = await res.text();
+					const doc = new DOMParser().parseFromString(xml, "text/xml");
+					const items = Array.from(doc.getElementsByTagName("item"));
+					if (!items.length) throw new Error("no items");
+
+					const posts = items
+						.map((item) => {
+							const text = (tag) =>
+								item.getElementsByTagName(tag)[0]?.textContent?.trim() || "";
+							return {
+								title: text("title"),
+								link: text("link"),
+								date: Date.parse(text("pubDate")),
+							};
+						})
+						.filter((p) => p.title && p.link)
+						.sort((a, b) => b.date - a.date);
+
+					if (!posts.length) throw new Error("no posts");
+
+					container.innerHTML = posts
+						.map(
+							(p) => `
+								<a href="${esc(p.link)}" target="_blank" rel="noopener noreferrer">
+									${p.date ? `<time datetime="${esc(new Date(p.date).toISOString())}">${esc(formatISODate(p.date))}</time>` : ""}
+									<span>${esc(p.title)}</span>
+								</a>
+							`,
+						)
+						.join("");
+				} catch {
+					container.innerHTML = `
+						<p class="blog-fallback">
+							Couldn't load the latest posts from <a href="https://metalops.dev" rel="noopener noreferrer">metalops.dev</a>. The full archive lives there.
+						</p>
+					`;
+				}
+			})();
+
+			function formatISODate(ts) {
+				const d = new Date(ts);
+				const m = String(d.getMonth() + 1).padStart(2, "0");
+				const day = String(d.getDate()).padStart(2, "0");
+				return `${d.getFullYear()}-${m}-${day}`;
+			}
+
+			function esc(s) {
+				const div = document.createElement("div");
+				div.textContent = s;
+				return div.innerHTML;
+			}
+		</script>
 	</body>
 </html>
