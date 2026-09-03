@@ -8,7 +8,7 @@ RUN mkdir -p /usr/share/fonts/truetype/custom && \
   fc-cache -fv
 RUN typst compile cv.typ cv.pdf
 
-FROM oven/bun:1.3.12-debian as base
+FROM oven/bun:1.3.14-debian as base
 
 FROM base as builder
 RUN apt-get update && apt-get install --no-install-recommends curl make ca-certificates -y
