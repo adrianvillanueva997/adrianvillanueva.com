@@ -32,6 +32,7 @@ export const NAV_ITEMS: NavItem[] = [
 		children: [
 			{ label: "Now", href: "/now" },
 			{ label: "Uses", href: "/uses" },
+			{ label: "Music", href: "/music" },
 		],
 	},
 	{ label: "Contact", href: "/contact" },
