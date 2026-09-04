@@ -9,15 +9,21 @@ function tag(item: string, name: string): string {
 	const match = item.match(
 		new RegExp(`<${name}(?:\\s[^>]*)?>([\\s\\S]*?)</${name}>`, "i"),
 	);
-	return (match?.[1] || "")
+	let value = (match?.[1] || "")
 		.replace(/^<!\[CDATA\[|\]\]>$/g, "")
-		.replace(/<[^>]+>/g, "")
 		.replace(/&amp;/g, "&")
 		.replace(/&lt;/g, "<")
 		.replace(/&gt;/g, ">")
 		.replace(/&quot;/g, '"')
-		.replace(/&#39;|&apos;/g, "'")
-		.trim();
+		.replace(/&#39;|&apos;/g, "'");
+
+	let previous: string;
+	do {
+		previous = value;
+		value = value.replace(/<[^>]+>/g, "");
+	} while (value !== previous);
+
+	return value.trim();
 }
 
 export function parseRss(xml: string): BlogPost[] {
