@@ -19,7 +19,7 @@ RUN curl -fsSL https://d2lang.com/install.sh -o /tmp/d2install.sh && \
 
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 # 5. Install with increased memory
 RUN corepack enable && corepack install --global pnpm@11.23.0 && pnpm install --frozen-lockfile
