@@ -1,468 +1,333 @@
 ---
-import { Image } from "astro:assets";
-import { Icon } from "astro-icon/components";
-import mePhoto from "@/assets/me/me.jpg";
-import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
-import { SITE_TITLE } from "../consts";
-import * as about from "../content/about.md";
+import BaseHead from "@/components/BaseHead.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import { SITE_TITLE } from "@/consts";
+import * as about from "@/content/about.md";
 
 const { Content, frontmatter } = about;
 
-// Countries timeline based on work experience
 const timeline = [
 	{
 		country: "Spain",
-		flag: "🇪🇸",
 		period: "1997 - 2021",
-		years: "24 years",
-		description: "Origin • Education • Early Career",
+		note: "Origin, education, early career",
 	},
 	{
 		country: "Netherlands",
-		flag: "🇳🇱",
 		period: "2021 - 2024",
-		years: "3 years",
-		description: "Amsterdam • Data Engineering",
+		note: "Amsterdam, data engineering",
 	},
 	{
 		country: "Japan",
-		flag: "🇯🇵",
-		period: "2024 - Present",
-		years: "Current",
-		description: "Tokyo • Data Platform engineering",
+		period: "2024 - now",
+		note: "Tokyo, data platform engineering",
 	},
 ];
 ---
 
 <!doctype html>
 <html lang="en">
-    <head>
-        <BaseHead
-            title={`About - ${SITE_TITLE}`}
-            description="About Adrian Villanueva Martinez - Software Engineer & Systems Designer"
-        />
-    </head>
-    <body>
-        <Header />
-        <main class="container">
-            <div class="about-grid">
-                <!-- Profile Card -->
-                <div class="bento-item profile-card">
-                    <div class="module-header">
-                        <Icon name="mdi:account" size={16} />
-                        <span class="module-title">PROFILE</span>
-                    </div>
-                    <div class="profile-content">
-                        <div class="avatar-container">
-                            <Image
-                                src={mePhoto}
-                                alt={frontmatter.name}
-                                class="avatar"
-                                width={120}
-                                height={120}
-                            />
-                            <div class="status-indicator"></div>
-                        </div>
-                        <h1 class="name">{frontmatter.name}</h1>
-                        <p class="role">{frontmatter.occupation}</p>
-                        <div class="location-info">
-                            <Icon name="mdi:map-marker" size={14} />
-                            <span>Tokyo, Japan</span>
-                        </div>
-                        <div class="social-links">
-                            <a href={frontmatter.github} target="_blank" aria-label="GitHub">
-                                <Icon name="mdi:github" size={20} />
-                            </a>
-                            <a href={frontmatter.linkedin} target="_blank" aria-label="LinkedIn">
-                                <Icon name="mdi:linkedin" size={20} />
-                            </a>
-                            <a href={`mailto:${frontmatter.email}`} aria-label="Email">
-                                <Icon name="mdi:email" size={20} />
-                            </a>
-                        </div>
-                    </div>
-                </div>
+	<head>
+		<BaseHead
+			title={`About - ${SITE_TITLE}`}
+			description="About Adrian Villanueva Martinez, a software engineer building cloud-native data platforms from Tokyo."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main class="about-page">
+			<header class="about-intro">
+				<div class="intro-copy">
+					<p class="eyebrow"><span>ABOUT / 01</span> PERSONAL DOSSIER</p>
+					<h1>Adrian<br /><em>Villanueva.</em></h1>
+					<p class="intro-lede">
+						Software engineer interested in the systems beneath the surface:
+						data platforms, infrastructure, developer experience, and the small
+						details that make technology feel alive.
+					</p>
+					<div class="intro-links">
+						<a href={`mailto:${frontmatter.email}`}>Email <span>-></span></a>
+						<a href={frontmatter.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn <span>-></span></a>
+						<a href={frontmatter.github} target="_blank" rel="noopener noreferrer">GitHub <span>-></span></a>
+					</div>
+				</div>
+			</header>
 
-                <!-- Bio Panel -->
-                <div class="bento-item bio-panel">
-                    <div class="module-header">
-                        <Icon name="mdi:file-document" size={16} />
-                        <span class="module-title">BIO</span>
-                    </div>
-                    <div class="bio-content">
-                        <Content />
-                    </div>
-                </div>
+			<section class="signal-path" aria-labelledby="signal-title">
+				<div class="section-kicker"><span>02</span><h2 id="signal-title">The signal path</h2></div>
+				<div class="timeline">
+					{timeline.map((entry, index) => (
+						<div class="timeline-entry">
+							<div class="timeline-index">0{index + 1}</div>
+							<div class="timeline-copy">
+								<h3>{entry.country}</h3>
+								<p>{entry.period}</p>
+								<span>{entry.note}</span>
+							</div>
+						</div>
+					))}
+				</div>
+			</section>
 
-                <!-- Timeline Panel -->
-                <div class="bento-item timeline-panel">
-                    <div class="module-header">
-                        <Icon name="mdi:map-marker-path" size={16} />
-                        <span class="module-title">LOCATIONS</span>
-                    </div>
-                    <div class="timeline-container">
-                        {timeline.map((entry, index) => (
-                            <div class="timeline-entry">
-                                <div class="timeline-marker">
-                                    <div class="marker-dot"></div>
-                                    {index < timeline.length - 1 && <div class="marker-line"></div>}
-                                </div>
-                                <div class="timeline-content">
-                                    <div class="timeline-header">
-                                        <span class="country-flag">{entry.flag}</span>
-                                        <h3 class="country-name">{entry.country}</h3>
-                                        <span class="timeline-years">{entry.years}</span>
-                                    </div>
-                                    <div class="timeline-period">{entry.period}</div>
-                                    <div class="timeline-description">{entry.description}</div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+			<section class="about-essay" aria-labelledby="essay-title">
+				<aside class="essay-aside">
+					<span>03</span>
+					<h2 id="essay-title">Notes from<br />the stack</h2>
+				</aside>
+				<article class="essay-content"><Content /></article>
+			</section>
 
-                </div>
-            </div>
-        </main>
-        <Footer />
-    </body>
+			<section class="closing-note" aria-label="Contact invitation">
+				<p class="eyebrow"><span>04</span> OPEN CHANNEL</p>
+				<p class="closing-copy">Difficult infrastructure, interesting data problems, or something slightly weird?</p>
+				<a class="closing-link" href={`mailto:${frontmatter.email}`}>Say hello <span>-></span></a>
+			</section>
+		</main>
+		<Footer />
+	</body>
 </html>
 
 <style>
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 2rem 1rem;
-    }
+	.about-page {
+		max-width: 1120px;
+		margin: 0 auto;
+		padding: 3rem 2rem 1rem;
+	}
 
-    .about-grid {
-        display: grid;
-        grid-template-columns: 300px 1fr;
-        gap: 1.5rem;
-        margin: 2rem 0;
-    }
+	.eyebrow,
+	.section-kicker > span,
+	.timeline-index,
+	.timeline-copy p,
+	.timeline-copy span,
+	.essay-aside > span {
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.68rem;
+		letter-spacing: 0.12em;
+	}
 
-    .bento-item {
-        background: var(--glass-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid var(--border-color);
-        border-radius: var(--radius-md);
-        padding: 1.5rem;
-        transition: all var(--transition-base);
-        position: relative;
-        overflow: hidden;
-    }
+	.eyebrow {
+		color: var(--text-muted);
+	}
 
-    .bento-item::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: var(--gradient-primary);
-        transition: opacity var(--transition-base);
-    }
+	.eyebrow span,
+	.section-kicker > span,
+	.timeline-index,
+	.essay-aside > span {
+		color: var(--accent-blog);
+	}
 
-    .bento-item:hover {
-        border-color: color-mix(in srgb, var(--accent-blog) 40%, transparent);
-        transform: translateY(-3px);
-        box-shadow: 0 0 30px color-mix(in srgb, var(--accent-blog) 10%, transparent), var(--shadow-md);
-    }
+	.about-intro {
+		max-width: 760px;
+		padding: 3rem 0 8rem;
+	}
 
-    .module-header {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        margin-bottom: 1.5rem;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.75rem;
-        color: var(--text-muted);
-        letter-spacing: 0.05em;
-    }
+	.about-intro h1 {
+		margin: 1.5rem 0;
+		font-size: clamp(3rem, 7vw, 5.5rem);
+		line-height: 0.88;
+		letter-spacing: -0.07em;
+	}
 
-    .module-header :global(svg) {
-        color: var(--accent-blog);
-    }
+	.about-intro h1 em {
+		font-style: normal;
+		color: var(--accent-blog);
+	}
 
-    /* Profile Card */
-    .profile-card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
+	.intro-lede {
+		max-width: 500px;
+		color: var(--text-secondary);
+		font-size: 1.05rem;
+		line-height: 1.75;
+	}
 
-    .profile-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-    }
+	.intro-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem 1.5rem;
+		margin-top: 2rem;
+	}
 
-    .avatar-container {
-        position: relative;
-        margin-bottom: 1rem;
-    }
+	.intro-links a,
+	.closing-link {
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.75rem;
+		color: var(--text-secondary);
+	}
 
-    .avatar {
-        border-radius: 50%;
-        border: 2px solid var(--accent-blog);
-        box-shadow: 0 0 20px var(--accent-blog-glow);
-    }
+	.intro-links a span,
+	.closing-link span {
+		margin-left: 0.4rem;
+		color: var(--accent-blog);
+	}
 
-    .status-indicator {
-        position: absolute;
-        bottom: 5px;
-        right: 5px;
-        width: 12px;
-        height: 12px;
-        background-color: var(--accent-blog);
-        border-radius: 50%;
-        border: 2px solid var(--bg-secondary);
-        box-shadow: 0 0 8px var(--accent-blog-glow);
-        animation: pulse-glow 2s ease-in-out infinite;
-    }
+	.section-kicker {
+		display: flex;
+		align-items: baseline;
+		gap: 1rem;
+		margin-bottom: 2rem;
+		border-top: 1px solid var(--border-color);
+		padding-top: 1rem;
+	}
 
-    .name {
-        font-family: "Cinzel", serif;
-        font-size: 1.5rem;
-        margin: 0 0 0.5rem 0;
-        line-height: 1.2;
-        background: var(--gradient-primary);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
+	.section-kicker h2,
+	.essay-aside h2 {
+		margin: 0;
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.9rem;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+	}
 
-    .role {
-        color: var(--text-secondary);
-        font-size: 0.9rem;
-        margin-bottom: 1rem;
-    }
+	.timeline {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		border-bottom: 1px solid var(--border-color);
+	}
 
-    .location-info {
-        display: flex;
-        align-items: center;
-        gap: 0.25rem;
-        font-size: 0.8rem;
-        color: var(--text-muted);
-        font-family: 'JetBrains Mono', monospace;
-        margin-bottom: 1.5rem;
-    }
+	.timeline-entry {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		gap: 1rem;
+		min-height: 180px;
+		padding: 0 1.5rem 1.5rem 0;
+		border-right: 1px solid var(--border-color);
+	}
 
-    .social-links {
-        display: flex;
-        gap: 1rem;
-    }
+	.timeline-entry + .timeline-entry {
+		padding-left: 1.5rem;
+	}
 
-    .social-links a {
-        color: var(--text-muted);
-        transition: all var(--transition-base);
-        padding: 0.4rem;
-        border-radius: var(--radius-sm);
-    }
+	.timeline-entry:last-child {
+		border-right: 0;
+	}
 
-    .social-links a:hover {
-        color: var(--accent-blog);
-        background: color-mix(in srgb, var(--accent-blog) 10%, transparent);
-        transform: translateY(-2px);
-    }
+	.timeline-copy h3 {
+		margin: 0 0 0.5rem;
+		font-family: "Cinzel", serif;
+		font-size: clamp(1.3rem, 3vw, 2rem);
+		font-weight: 600;
+	}
 
-    /* Bio Panel */
-    .bio-panel {
-        grid-column: 2;
-    }
+	.timeline-copy p,
+	.timeline-copy span {
+		display: block;
+		margin: 0;
+		color: var(--text-muted);
+	}
 
-    .bio-content {
-        font-family: 'Inter', sans-serif;
-        line-height: 1.7;
-        color: var(--text-secondary);
-        font-size: 0.95rem;
-    }
+	.timeline-copy span {
+		margin-top: 0.7rem;
+		font-family: "Inter", sans-serif;
+		font-size: 0.82rem;
+		letter-spacing: 0;
+		line-height: 1.5;
+	}
 
-    .bio-content :global(strong) {
-        color: var(--text-primary);
-    }
+	.about-essay {
+		display: grid;
+		grid-template-columns: 0.8fr 1.2fr;
+		gap: clamp(2rem, 10vw, 10rem);
+		margin-top: 8rem;
+	}
 
-    .bio-content :global(h2) {
-        font-family: 'Cinzel', serif;
-        font-size: 1.1rem;
-        margin: 1.5rem 0 1rem 0;
-        border: none;
-        padding: 0;
-        color: var(--text-primary);
-        letter-spacing: 0.02em;
-    }
+	.essay-aside > span {
+		display: block;
+		margin-bottom: 1rem;
+	}
 
-    .bio-content :global(h3) {
-        font-family: 'Cinzel', serif;
-        font-size: 0.95rem;
-        color: var(--accent-blog);
-        margin: 1.25rem 0 0.75rem 0;
-        letter-spacing: 0.02em;
-    }
+	.essay-aside h2 {
+		font-size: clamp(1rem, 2vw, 1.4rem);
+		line-height: 1.4;
+	}
 
-    .bio-content :global(ul) {
-        list-style: none;
-        padding: 0;
-    }
+	.essay-content {
+		max-width: 620px;
+		color: var(--text-secondary);
+		font-size: 1rem;
+		line-height: 1.8;
+	}
 
-    .bio-content :global(li) {
-        position: relative;
-        padding-left: 1.5rem;
-        margin-bottom: 0.5rem;
-    }
+	.essay-content :global(h2) {
+		margin: 3rem 0 1rem;
+		font-family: "Cinzel", serif;
+		font-size: 1.5rem;
+		font-weight: 600;
+		color: var(--text-primary);
+	}
 
-    .bio-content :global(li::before) {
-        content: '>>';
-        position: absolute;
-        left: 0;
-        color: var(--accent-blog);
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.85rem;
-        font-weight: 700;
-        text-shadow: 0 0 6px var(--accent-blog-glow);
-    }
+	.essay-content :global(h2:first-child) {
+		margin-top: 0;
+	}
 
-    .bio-content :global(code) {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.85rem;
-        color: var(--accent-blog);
-        background: color-mix(in srgb, var(--accent-blog) 10%, transparent);
-        padding: 0.1rem 0.4rem;
-        border-radius: 3px;
-    }
+	.essay-content :global(strong) {
+		color: var(--text-primary);
+	}
 
-    .bio-content :global(hr) {
-        border: none;
-        height: 1px;
-        background: linear-gradient(to right, transparent, color-mix(in srgb, var(--accent-blog) 30%, transparent), transparent);
-        margin: 1.5rem 0;
-    }
+	.essay-content :global(ul) {
+		padding-left: 1.2rem;
+	}
 
-    /* Timeline Panel */
-    .timeline-panel {
-        grid-column: 2;
-    }
+	.essay-content :global(li) {
+		margin: 0.5rem 0;
+	}
 
-    .timeline-container {
-        display: flex;
-        flex-direction: column;
-    }
+	.closing-note {
+		max-width: 620px;
+		margin: 8rem 0 2rem auto;
+		border-top: 1px solid var(--border-color);
+		padding-top: 1rem;
+	}
 
-    .timeline-entry {
-        display: flex;
-        gap: 1.5rem;
-        position: relative;
-    }
+	.closing-copy {
+		margin: 1.5rem 0;
+		font-family: "Cinzel", serif;
+		font-size: clamp(1.5rem, 3vw, 2.4rem);
+		line-height: 1.25;
+	}
 
-    .timeline-marker {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: relative;
-    }
+	.closing-link {
+		color: var(--accent-blog);
+	}
 
-    .marker-dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        border: 2px solid var(--accent-blog);
-        background: var(--bg-secondary);
-        position: relative;
-        z-index: 1;
-        flex-shrink: 0;
-        box-shadow: 0 0 8px var(--accent-blog-glow);
-    }
+	@media (max-width: 700px) {
+		.about-page {
+			padding: 1.5rem 1rem 0;
+		}
 
-    .marker-line {
-        width: 2px;
-        flex: 1;
-        background: linear-gradient(180deg, var(--accent-blog), transparent);
-        margin-top: 0.5rem;
-        opacity: 0.4;
-    }
+		.about-intro {
+			padding: 2rem 0 5rem;
+		}
 
-    .timeline-content {
-        flex: 1;
-        padding-bottom: 1.5rem;
-    }
+		.about-intro h1 {
+			font-size: clamp(3.5rem, 18vw, 6rem);
+		}
 
-    .timeline-entry:last-child .timeline-content {
-        padding-bottom: 0;
-    }
+		.timeline {
+			grid-template-columns: 1fr;
+		}
 
-    .timeline-entry:last-child .marker-line {
-        display: none;
-    }
+		.timeline-entry,
+		.timeline-entry + .timeline-entry {
+			min-height: 0;
+			padding: 1rem 0;
+			border-right: 0;
+			border-bottom: 1px solid var(--border-color);
+		}
 
-    .timeline-header {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        margin-bottom: 0.5rem;
-        flex-wrap: wrap;
-    }
+		.timeline-entry:last-child {
+			border-bottom: 0;
+		}
 
-    .country-flag {
-        font-size: 1.5rem;
-        line-height: 1;
-    }
+		.about-essay {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+			margin-top: 5rem;
+		}
 
-    .country-name {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 1.2rem;
-        color: var(--text-primary);
-        margin: 0;
-    }
+		.closing-note {
+			margin-top: 5rem;
+		}
+	}
 
-    .timeline-years {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.9rem;
-        color: var(--accent-blog);
-        padding: 0.25rem 0.5rem;
-        border: 1px solid color-mix(in srgb, var(--accent-blog) 20%, transparent);
-        border-radius: var(--radius-sm);
-        background: color-mix(in srgb, var(--accent-blog) 10%, transparent);
-        margin-left: auto;
-        text-shadow: 0 0 8px var(--accent-blog-glow);
-    }
-
-    .timeline-period {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.9rem;
-        color: var(--text-muted);
-        margin-bottom: 0.5rem;
-    }
-
-    .timeline-description {
-        font-size: 0.9rem;
-        color: var(--text-secondary);
-        line-height: 1.6;
-    }
-
-    /* ── Override global pulse-glow for purple theme ── */
-    @keyframes pulse-glow {
-        0%, 100% {
-            box-shadow: 0 0 6px var(--accent-blog), 0 0 12px var(--accent-blog-glow);
-        }
-        50% {
-            box-shadow: 0 0 12px var(--accent-blog), 0 0 24px var(--accent-blog-glow);
-        }
-    }
-
-    @media (max-width: 768px) {
-        .about-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .profile-card,
-        .bio-panel,
-        .timeline-panel {
-            grid-column: 1;
-        }
-    }
 </style>

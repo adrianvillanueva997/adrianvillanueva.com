@@ -1,10 +1,10 @@
 ---
 import { Icon } from "astro-icon/components";
-import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
-import { SITE_TITLE } from "../consts";
-import * as uses from "../content/uses.md";
+import BaseHead from "@/components/BaseHead.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import { SITE_TITLE } from "@/consts";
+import * as uses from "@/content/uses.md";
 
 const { Content, frontmatter } = uses;
 const { hardware, peripherals, software } = frontmatter;
@@ -12,333 +12,71 @@ const { hardware, peripherals, software } = frontmatter;
 
 <!doctype html>
 <html lang="en">
-    <head>
-        <BaseHead
-            title={`Uses - ${SITE_TITLE}`}
-            description="Hardware and software stack — Adrian Villanueva Martinez"
-        />
-    </head>
-    <body>
-        <Header />
-        <main class="container">
-            <!-- Hero -->
-            <div class="page-hero">
-                <p class="hero-label">TOOLS & INFRASTRUCTURE</p>
-                <h1 class="page-title">USES</h1>
-                <p class="page-subtitle">Hardware, software, and everything in between</p>
-            </div>
+	<head>
+		<BaseHead title={`Uses - ${SITE_TITLE}`} description="The hardware, software, and tools Adrian Villanueva Martinez uses every day." />
+	</head>
+	<body>
+		<Header />
+		<main class="uses-page">
+			<header class="page-intro">
+				<p class="eyebrow"><span>USES / 01</span> TOOLS & ENVIRONMENT</p>
+				<h1>Things I<br /><em>use.</em></h1>
+				<p class="intro-copy">Hardware, software, and small decisions that shape how I work and make things.</p>
+			</header>
 
-            <!-- Hardware -->
-            <div class="section-label">HARDWARE</div>
-            <div class="card-grid">
-                {hardware.map((item) => (
-                    <div class="bento-item">
-                        <div class="card-head">
-                            <Icon name={item.icon} size={20} />
-                            <span class="card-title">{item.name}</span>
-                        </div>
-                        <p class="card-desc">{item.desc}</p>
-                        <p class="card-specs">{item.specs}</p>
-                        <div class="tag-row">
-                            {item.tags?.map((tag: string) => (
-                                <span class="tag">{tag}</span>
-                            ))}
-                        </div>
-                    </div>
-                ))}
-            </div>
+			<section class="uses-section" aria-labelledby="hardware-title">
+				<div class="section-kicker"><span>02</span><h2 id="hardware-title">Hardware</h2></div>
+				<div class="uses-list">
+					{hardware.map((item) => <div class="use-item"><Icon name={item.icon} size={18} /><div><h3>{item.name}</h3><p>{item.desc}</p><small>{item.specs}</small><div class="tags">{item.tags?.map((tag: string) => <span>{tag}</span>)}</div></div></div>)}
+				</div>
+			</section>
 
-            <!-- Peripherals -->
-            <div class="section-label">PERIPHERALS</div>
-            <div class="peripherals-row">
-                {peripherals.map((item) => (
-                    <div class="peripheral-item">
-                        <Icon name={item.icon} size={16} />
-                        <span>{item.name}</span>
-                    </div>
-                ))}
-            </div>
+			<section class="uses-section" aria-labelledby="peripherals-title">
+				<div class="section-kicker"><span>03</span><h2 id="peripherals-title">Peripherals</h2></div>
+				<div class="peripherals-list">{peripherals.map((item) => <span><Icon name={item.icon} size={16} />{item.name}</span>)}</div>
+			</section>
 
-            <!-- ✠ Divider -->
-            <div class="doom-divider"><span>✠</span></div>
+			<section class="uses-section" aria-labelledby="software-title">
+				<div class="section-kicker"><span>04</span><h2 id="software-title">Software & environment</h2></div>
+				<div class="software-list">
+					{software.map((item) => <div class="software-item"><Icon name={item.icon} size={18} /><div><h3>{item.name}</h3><p>{item.category}</p>{item.note && <small>{item.note}</small>}</div></div>)}
+				</div>
+			</section>
 
-            <!-- Software -->
-            <div class="section-label">SOFTWARE & ENVIRONMENT</div>
-            <div class="card-grid">
-                {software.map((item) => (
-                    <div class="bento-item">
-                        <div class="card-head">
-                            <Icon name={item.icon} size={20} />
-                            <span class="card-title">{item.name}</span>
-                        </div>
-                        <p class="card-category">{item.category}</p>
-                        {item.note && <p class="card-note">{item.note}</p>}
-                    </div>
-                ))}
-            </div>
-
-            <!-- Content -->
-            <div class="content-section">
-                <Content />
-            </div>
-
-            <!-- Meta Footer -->
-            <div class="meta-footer">
-                <p>Last updated &mdash; {frontmatter.lastUpdated}. Follows the <a href="https://uses.tech" target="_blank" rel="noopener noreferrer">/uses movement</a>.</p>
-            </div>
-        </main>
-        <Footer />
-    </body>
+			<section class="uses-notes" aria-label="Notes"><Content /></section>
+			<p class="uses-footer">Last updated — {frontmatter.lastUpdated}. Follows the <a href="https://uses.tech" target="_blank" rel="noopener noreferrer">/uses movement</a>.</p>
+		</main>
+		<Footer />
+	</body>
 </html>
 
 <style>
-    .container {
-        max-width: 960px;
-        margin: 0 auto;
-        padding: 2rem 1rem;
-    }
-
-    .page-hero {
-        text-align: center;
-        margin: 1rem 0 2.5rem;
-    }
-
-    .hero-label {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.65rem;
-        letter-spacing: 0.2em;
-        color: var(--accent-blog);
-        margin-bottom: 0.5rem;
-    }
-
-    .page-title {
-        font-family: 'Cinzel', serif;
-        font-size: 3rem;
-        margin: 0;
-        color: var(--text-primary);
-        line-height: 1.1;
-        animation: breathe 3s ease-in-out infinite;
-        text-shadow: 0 0 40px var(--accent-blog-glow), 0 0 80px var(--accent-blog-glow);
-    }
-
-    @keyframes breathe {
-        0%, 100% { text-shadow: 0 0 20px var(--accent-blog-glow), 0 0 40px var(--accent-blog-glow); }
-        50% { text-shadow: 0 0 40px var(--accent-blog-glow), 0 0 80px var(--accent-blog-glow); }
-    }
-
-    .page-subtitle {
-        font-size: 1rem;
-        color: var(--text-muted);
-        margin: 0.5rem 0 0;
-    }
-
-    .section-label {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.7rem;
-        letter-spacing: 0.2em;
-        color: var(--accent-blog);
-        margin-bottom: 1rem;
-    }
-
-    .card-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .bento-item {
-        background: var(--glass-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid var(--border-color);
-        border-radius: var(--radius-md);
-        padding: 1.5rem;
-        transition: all var(--transition-base);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .bento-item::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: var(--gradient-primary);
-        transition: opacity var(--transition-base);
-    }
-
-    .bento-item:hover {
-        border-color: color-mix(in srgb, var(--accent-blog) 40%, transparent);
-        transform: translateY(-3px);
-        box-shadow: 0 0 30px color-mix(in srgb, var(--accent-blog) 10%, transparent), var(--shadow-md);
-    }
-
-    .card-head {
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-        margin-bottom: 0.75rem;
-    }
-
-    .card-head :global(svg) {
-        color: var(--accent-blog);
-        flex-shrink: 0;
-    }
-
-    .card-title {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 1rem;
-        font-weight: 600;
-        color: var(--text-primary);
-    }
-
-    .card-desc {
-        font-size: 0.9rem;
-        color: var(--text-secondary);
-        line-height: 1.6;
-        margin: 0 0 0.5rem;
-    }
-
-    .card-specs {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.75rem;
-        color: var(--text-muted);
-        margin: 0 0 0.75rem;
-    }
-
-    .card-category {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.7rem;
-        letter-spacing: 0.1em;
-        color: var(--accent-blog);
-        margin: 0;
-    }
-
-    .card-note {
-        font-size: 0.8rem;
-        color: var(--text-muted);
-        margin: 0.25rem 0 0;
-    }
-
-    .tag-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.4rem;
-    }
-
-    .tag {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.65rem;
-        letter-spacing: 0.05em;
-        color: var(--accent-blog);
-        background: color-mix(in srgb, var(--accent-blog) 10%, transparent);
-        padding: 0.2rem 0.5rem;
-        border-radius: var(--radius-sm);
-        border: 1px solid color-mix(in srgb, var(--accent-blog) 15%, transparent);
-    }
-
-    .peripherals-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.75rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .peripheral-item {
-        display: flex;
-        align-items: center;
-        gap: 0.4rem;
-        padding: 0.5rem 0.75rem;
-        background: var(--glass-bg);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        border: 1px solid var(--border-color);
-        border-radius: var(--radius-sm);
-        font-size: 0.85rem;
-        color: var(--text-secondary);
-        transition: all var(--transition-fast);
-    }
-
-    .peripheral-item:hover {
-        border-color: color-mix(in srgb, var(--accent-blog) 30%, transparent);
-        color: var(--text-primary);
-    }
-
-    .peripheral-item :global(svg) {
-        color: var(--accent-blog);
-    }
-
-    .doom-divider {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 1rem;
-        margin: 2rem 0;
-        color: var(--accent-blog);
-        font-size: 1rem;
-        opacity: 0.5;
-        user-select: none;
-    }
-
-    .doom-divider::before,
-    .doom-divider::after {
-        content: '';
-        flex: 1;
-        height: 1px;
-        background: linear-gradient(to right, transparent, color-mix(in srgb, var(--accent-blog) 30%, transparent), transparent);
-    }
-
-    .content-section {
-        margin-top: 1.5rem;
-        padding: 1.5rem;
-        background: var(--glass-bg);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        border: 1px solid var(--border-color);
-        border-radius: var(--radius-md);
-        font-size: 0.9rem;
-        color: var(--text-secondary);
-        line-height: 1.7;
-    }
-
-    .meta-footer {
-        margin: 3rem 0 2rem;
-        padding: 1.5rem;
-        background: var(--glass-bg);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        border: 1px solid var(--border-color);
-        border-radius: var(--radius-md);
-        text-align: center;
-    }
-
-    .meta-footer p {
-        margin: 0;
-        font-size: 0.9rem;
-        color: var(--text-muted);
-        line-height: 1.6;
-    }
-
-    .meta-footer a {
-        color: var(--accent-blog);
-        text-decoration: none;
-        transition: color var(--transition-fast);
-    }
-
-    .meta-footer a:hover {
-        color: var(--text-primary);
-    }
-
-    @media (max-width: 768px) {
-        .page-title {
-            font-size: 2.25rem;
-        }
-
-        .card-grid {
-            grid-template-columns: 1fr;
-        }
-    }
+	.uses-page { max-width: 960px; margin: 0 auto; padding: 3rem 2rem 1rem; }
+	.eyebrow, .section-kicker > span, .use-item small, .use-item .tags, .software-item small { font-family: "JetBrains Mono", monospace; font-size: 0.68rem; letter-spacing: 0.12em; }
+	.eyebrow { color: var(--text-muted); }
+	.eyebrow span, .section-kicker > span { color: var(--accent-blog); }
+	.page-intro { max-width: 700px; padding: 3rem 0 8rem; }
+	.page-intro h1 { margin: 1.5rem 0; font-size: clamp(4rem, 10vw, 8rem); line-height: 0.88; letter-spacing: -0.07em; }
+	.page-intro h1 em { font-style: normal; color: var(--accent-blog); }
+	.intro-copy { max-width: 520px; color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7; }
+	.uses-section + .uses-section { margin-top: 7rem; }
+	.section-kicker { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2rem; border-top: 1px solid var(--border-color); padding-top: 1rem; }
+	.section-kicker h2 { margin: 0; font-family: "JetBrains Mono", monospace; font-size: 0.9rem; letter-spacing: 0.04em; text-transform: uppercase; }
+	.uses-list, .software-list { border-top: 1px solid var(--border-color); }
+	.use-item, .software-item { display: grid; grid-template-columns: 2rem 1fr; gap: 1rem; padding: 1.25rem 0; border-bottom: 1px solid var(--border-color); }
+	.use-item > :global(svg), .software-item > :global(svg) { color: var(--accent-blog); margin-top: 0.25rem; }
+	.use-item h3, .software-item h3 { margin: 0; font-family: "Cinzel", serif; font-size: 1.25rem; font-weight: 600; }
+	.use-item p, .software-item p { margin: 0.35rem 0 0; color: var(--text-secondary); line-height: 1.6; }
+	.use-item small, .software-item small { display: block; margin-top: 0.5rem; color: var(--text-muted); letter-spacing: 0; line-height: 1.5; }
+	.tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; color: var(--accent-blog); letter-spacing: 0.04em; }
+	.tags span { border-bottom: 1px solid var(--border-light); padding-bottom: 0.2rem; }
+	.peripherals-list { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; }
+	.peripherals-list span { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); }
+	.peripherals-list :global(svg) { color: var(--accent-blog); }
+	.uses-notes { max-width: 620px; margin: 7rem 0 0 auto; color: var(--text-secondary); font-size: 1rem; line-height: 1.8; }
+	.uses-notes :global(h2), .uses-notes :global(h3) { margin: 3rem 0 1rem; font-family: "Cinzel", serif; color: var(--text-primary); }
+	.uses-notes :global(h2:first-child) { margin-top: 0; }
+	.uses-footer { margin: 7rem 0 2rem; border-top: 1px solid var(--border-color); padding-top: 1rem; color: var(--text-muted); font-size: 0.85rem; }
+	.uses-footer a { color: var(--accent-blog); }
+	@media (max-width: 700px) { .uses-page { padding: 1.5rem 1rem 0; } .page-intro { padding: 2rem 0 5rem; } .page-intro h1 { font-size: clamp(3.5rem, 18vw, 6rem); } .uses-section + .uses-section { margin-top: 5rem; } }
 </style>

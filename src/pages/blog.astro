@@ -4,9 +4,11 @@ import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import { SITE_TITLE } from "../consts";
+import { fetchRssPosts } from "../utils/rss";
 
 const BLOG_URL = "https://metalops.dev";
 const RSS_URL = `${BLOG_URL}/rss.xml`;
+const buildPosts = await fetchRssPosts(RSS_URL);
 ---
 
 <!doctype html>
@@ -22,7 +24,7 @@ const RSS_URL = `${BLOG_URL}/rss.xml`;
 		<main class="layout">
 			<header class="page-hero">
 				<p class="hero-label">TECHNICAL WRITING</p>
-				<h1 class="page-title">BLOG</h1>
+				<h1 class="page-title">Technical notes</h1>
 				<p class="page-subtitle">
 					Software, systems engineering, infrastructure and DevOps. Full posts
 					live on <a href={BLOG_URL}>{BLOG_URL}</a>.
@@ -30,7 +32,19 @@ const RSS_URL = `${BLOG_URL}/rss.xml`;
 			</header>
 
 			<div class="blog-list" id="blog-list">
-				<p class="blog-fallback">Loading posts from {BLOG_URL}…</p>
+				{buildPosts.length ? buildPosts.map((post) => (
+					<a href={post.link} target="_blank" rel="noopener noreferrer">
+						{post.date && <time datetime={new Date(post.date).toISOString()}>{post.date}</time>}
+						<span class="post-copy">
+							<strong>{post.title}</strong>
+							{post.description && <small>{post.description}</small>}
+						</span>
+					</a>
+				)) : (
+					<p class="blog-fallback">
+						The latest posts are available at <a href={BLOG_URL}>{BLOG_URL}</a>.
+					</p>
+				)}
 			</div>
 
 			<p class="rss-note">
@@ -127,6 +141,23 @@ const RSS_URL = `${BLOG_URL}/rss.xml`;
 				color: var(--accent-blog);
 			}
 
+			.blog-list :global(.post-copy strong),
+			.blog-list :global(.post-copy small) {
+				display: block;
+			}
+
+			.blog-list :global(.post-copy strong) {
+				font-weight: 600;
+			}
+
+			.blog-list :global(.post-copy small) {
+				margin-top: 0.25rem;
+				font-size: 0.78rem;
+				font-weight: 400;
+				line-height: 1.5;
+				color: var(--text-muted);
+			}
+
 			.blog-fallback {
 				margin: 0;
 				padding: 1rem 0.5rem;
@@ -205,20 +236,24 @@ const RSS_URL = `${BLOG_URL}/rss.xml`;
 							return {
 								title: text("title"),
 								link: text("link"),
+								description: text("description"),
 								date: Date.parse(text("pubDate")),
 							};
 						})
 						.filter((p) => p.title && p.link)
 						.sort((a, b) => b.date - a.date);
 
-					if (!posts.length) throw new Error("no posts");
+					if (!posts.length) return;
 
 					container.innerHTML = posts
 						.map(
 							(p) => `
 								<a href="${esc(p.link)}" target="_blank" rel="noopener noreferrer">
 									${p.date ? `<time datetime="${esc(new Date(p.date).toISOString())}">${esc(formatISODate(p.date))}</time>` : ""}
-									<span>${esc(p.title)}</span>
+									<span class="post-copy">
+										<strong>${esc(p.title)}</strong>
+										${p.description ? `<small>${esc(p.description)}</small>` : ""}
+									</span>
 								</a>
 							`,
 						)

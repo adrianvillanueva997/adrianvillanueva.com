@@ -1,9 +1,9 @@
 ---
 import mePhoto from "@/assets/me/me.jpg";
 import BaseHead from "@/components/BaseHead.astro";
-import BentoGrid from "@/components/BentoGrid.astro";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
+import HomePage from "@/components/HomePage.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
 ---
 
@@ -15,9 +15,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
 	<body>
 		<Header />
 
-		<main class="container">
-			<BentoGrid mePhoto={mePhoto} />
-		</main>
+		<HomePage mePhoto={mePhoto} />
 
 		<Footer />
 

@@ -1,20 +1,23 @@
 projects:
   - title: "adrianvillanueva.com"
-    description: "This website."
+    description: "The source and working surface for my writing, experiments, and personal projects."
     imgSrc: "logo.png"
+    group: "Experiments & Open Source"
     categories: ["Web"]
     isOpenSource: true
     repoUrl: "https://github.com/adrianvillanueva997/adrianvillanueva.com"
 
   - title: "Zenthos"
-    description: "A work in progress IOT, mlops, firmware and data platform."
+    description: "An ongoing exploration of IoT, firmware, MLOps, and data-platform design, built around Rust and constrained devices."
     imgSrc: "logo.png"
+    group: "Experiments & Open Source"
     categories: ["iot", "rust", "mlops"]
     isOpenSource: true
     repoUrl: "https://github.com/adrianvillanueva997/zenthos"
 
   - title: "Shinigami"
-    description: "Closed-source Telegram bot that automatically converts shared links into referral links. Tracks link performance in a database and visualizes real-time metrics via Grafana dashboards. Supports Amazon, Aliexpress, and other major stores"
+    description: "A referral-link automation service for Telegram with performance tracking, PostgreSQL storage, and Grafana dashboards."
     imgSrc: "shinigami.png"
+    group: "Client Work"
     categories: ["Telegram", "Python", "Postgres", "Freelancing"]
     isOpenSource: false

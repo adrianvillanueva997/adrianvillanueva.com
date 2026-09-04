@@ -8,7 +8,7 @@ RUN mkdir -p /usr/share/fonts/truetype/custom && \
   fc-cache -fv
 RUN typst compile cv.typ cv.pdf
 
-FROM oven/bun:1.3.12-debian as base
+FROM node:22-bookworm-slim AS base
 
 FROM base as builder
 RUN apt-get update && apt-get install --no-install-recommends curl make ca-certificates -y
@@ -19,13 +19,13 @@ RUN curl -fsSL https://d2lang.com/install.sh -o /tmp/d2install.sh && \
 
 WORKDIR /app
 
-COPY package.json bun.lock ./
+COPY package.json pnpm-lock.yaml ./
 
 # 5. Install with increased memory
-RUN bun install --frozen-lockfile 
+RUN corepack enable && corepack install --global pnpm@11.23.0 && pnpm install --frozen-lockfile
 COPY . .
 COPY --from=resume-builder /resume/cv.pdf public/resume.pdf
-RUN bun run build
+RUN pnpm run build
 
 RUN find /app/dist -type f -name "*.svg" -exec chmod 644 {} \;
 

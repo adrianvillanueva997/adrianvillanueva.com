@@ -1,6 +1,6 @@
 export const SITE_TITLE = "Adrian Villanueva Martinez";
 export const SITE_DESCRIPTION =
-	"Software Engineer specializing in cloud-native data platforms, data engineering, and MLOps. Based in Tokyo, delivering European engineering excellence and driving large-scale adoption of high-impact systems.";
+	"Software Engineer building cloud-native data platforms, MLOps infrastructure, and developer tooling from Tokyo.";
 export const SITE_URL = "https://adrianvillanueva.com";
 export const SITE_AUTHOR = "Adrian Villanueva Martinez";
 export const SITE_KEYWORDS = [
@@ -17,7 +17,7 @@ export const SITE_KEYWORDS = [
 // Hero section content
 export const HERO_TITLE = "SOFTWARE ENGINEER";
 export const HERO_TAGLINE =
-	"Experienced Software Engineer with deep expertise in cloud-native data platforms, data engineering, and MLOps. Based in Tokyo, delivering European engineering excellence and driving large-scale adoption of high-impact systems across organizations.";
+	"I build cloud-native data platforms, MLOps infrastructure, and developer tooling, with a focus on reliable systems and good developer experience.";
 
 // Navigation — flat links or dropdown groups with children
 export type NavItem =
@@ -36,7 +36,7 @@ export const NAV_ITEMS: NavItem[] = [
 	},
 	{ label: "Contact", href: "/contact" },
 	{ label: "Resume", href: "/resume" },
-	{ label: "Photography", href: "/photography" },
+	{ label: "Photography", href: "https://avm.photography" },
 	{ label: "Digital Garden", href: "https://brain.adrianvillanueva.com" },
 ];
 
