@@ -55,6 +55,17 @@ function initial(name: string): string {
 	<body>
 		<Header />
 		<main class="layout">
+			<header class="resume-intro">
+				<div>
+					<p class="resume-eyebrow">CAREER / CURRENT SIGNAL</p>
+					<h1>Software Engineer</h1>
+					<p>{personal.summary}</p>
+				</div>
+				<a href="/resume.pdf" class="resume-download" download>
+					<Icon name="mdi:download" size={16} />
+					Download CV
+				</a>
+			</header>
 			<div class="split">
 				<!-- Sidebar -->
 				<aside class="sidebar">
@@ -82,11 +93,6 @@ function initial(name: string): string {
 								{personal.email}
 							</span>
 						</div>
-
-						<a href="/resume.pdf" class="download-btn" download>
-							<Icon name="mdi:download" size={16} />
-							Download CV
-						</a>
 
 						<div class="sidebar-divider"></div>
 
@@ -152,11 +158,6 @@ function initial(name: string): string {
 
 				<!-- Main -->
 				<div class="main">
-					<!-- Summary -->
-					<section class="main-card">
-						<p class="main-summary">{personal.summary}</p>
-					</section>
-
 					<!-- Experience -->
 					<section class="main-card">
 						<div class="section-head">
@@ -222,37 +223,18 @@ function initial(name: string): string {
 	/* ── Split Layout ── */
 	.split {
 		display: grid;
-		grid-template-columns: 300px 1fr;
-		gap: 1.5rem;
+		grid-template-columns: 260px minmax(0, 1fr);
+		gap: 3rem;
 		align-items: start;
 	}
 
 	/* ── Sidebar ── */
 	.sidebar-card {
-		background: var(--glass-bg);
-		backdrop-filter: blur(12px);
-		-webkit-backdrop-filter: blur(12px);
-		border: 1px solid var(--border-color);
-		border-radius: var(--radius-md);
-		padding: 1.5rem;
-		position: relative;
-		overflow: hidden;
-	}
-
-	.sidebar-card::before {
-		content: "";
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		height: 2px;
-		background: var(--gradient-primary);
-		opacity: 0.3;
-		transition: opacity var(--transition-base);
-	}
-
-	.sidebar-card:hover::before {
-		opacity: 1;
+		background: transparent;
+		border-top: 1px solid var(--border-color);
+		padding: 1.5rem 0;
+		position: sticky;
+		top: 6rem;
 	}
 
 	/* Avatar */
@@ -309,7 +291,7 @@ function initial(name: string): string {
 		gap: 0.4rem;
 		margin-bottom: 1.25rem;
 		font-family: "JetBrains Mono", monospace;
-		font-size: 0.72rem;
+		font-size: 0.8rem;
 		color: var(--text-muted);
 	}
 
@@ -317,29 +299,6 @@ function initial(name: string): string {
 		display: inline-flex;
 		align-items: center;
 		gap: 0.3rem;
-	}
-
-	.download-btn {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 0.4rem;
-		padding: 0.55rem 1rem;
-		font-family: "JetBrains Mono", monospace;
-		font-size: 0.78rem;
-		color: var(--text-primary);
-		text-decoration: none;
-		border: 1px solid var(--accent-blog);
-		border-radius: 100px;
-		background: var(--accent-blog-subtle);
-		transition: all var(--transition-base);
-		margin-bottom: 0.25rem;
-	}
-
-	.download-btn:hover {
-		background: var(--accent-blog);
-		color: var(--bg-primary);
-		box-shadow: 0 0 24px var(--accent-blog-glow);
 	}
 
 	.sidebar-divider {
@@ -359,7 +318,7 @@ function initial(name: string): string {
 		align-items: center;
 		gap: 0.4rem;
 		font-family: "JetBrains Mono", monospace;
-		font-size: 0.65rem;
+		font-size: 0.72rem;
 		color: var(--text-muted);
 		letter-spacing: 0.05em;
 		margin-bottom: 0.75rem;
@@ -391,7 +350,7 @@ function initial(name: string): string {
 
 	.sidebar-skill-tag {
 		font-family: "JetBrains Mono", monospace;
-		font-size: 0.62rem;
+		font-size: 0.72rem;
 		padding: 0.15rem 0.45rem;
 		border: 1px solid var(--border-color);
 		border-radius: 100px;
@@ -417,7 +376,7 @@ function initial(name: string): string {
 
 	.sidebar-edu-degree {
 		font-family: "JetBrains Mono", monospace;
-		font-size: 0.78rem;
+		font-size: 0.85rem;
 		font-weight: 700;
 		color: var(--text-primary);
 		margin-bottom: 0.05rem;
@@ -463,7 +422,7 @@ function initial(name: string): string {
 	}
 
 	.sidebar-lang-level {
-		font-size: 0.65rem;
+		font-size: 0.72rem;
 		color: var(--accent-blog);
 		padding: 0.05rem 0.4rem;
 		border: 1px solid rgba(155, 89, 182, 0.3);
@@ -473,37 +432,18 @@ function initial(name: string): string {
 
 	/* ── Main Column ── */
 	.main-card {
-		background: var(--glass-bg);
-		backdrop-filter: blur(12px);
-		-webkit-backdrop-filter: blur(12px);
-		border: 1px solid var(--border-color);
-		border-radius: var(--radius-md);
-		padding: 1.5rem;
+		background: transparent;
+		border-bottom: 1px solid var(--border-color);
+		padding: 0 0 3rem;
 		position: relative;
 		overflow: hidden;
 		transition: all var(--transition-base);
-		margin-bottom: 1.5rem;
-	}
-
-	.main-card::before {
-		content: "";
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		height: 2px;
-		background: var(--gradient-primary);
-		opacity: 0;
-		transition: opacity var(--transition-base);
-	}
-
-	.main-card:hover::before {
-		opacity: 1;
+		margin-bottom: 3rem;
 	}
 
 	/* Summary */
 	.main-summary {
-		font-size: 0.9rem;
+		font-size: 1rem;
 		color: var(--text-secondary);
 		line-height: 1.7;
 		margin: 0;
@@ -516,7 +456,7 @@ function initial(name: string): string {
 		gap: 0.5rem;
 		margin-bottom: 1.25rem;
 		font-family: "JetBrains Mono", monospace;
-		font-size: 0.75rem;
+		font-size: 0.8rem;
 		color: var(--text-muted);
 		letter-spacing: 0.05em;
 	}
@@ -590,21 +530,21 @@ function initial(name: string): string {
 
 	.job-title {
 		font-family: "JetBrains Mono", monospace;
-		font-size: 1.05rem;
+		font-size: 1.2rem;
 		font-weight: 700;
 		color: var(--text-primary);
 		margin: 0;
 	}
 
 	.job-company {
-		font-size: 0.9rem;
+		font-size: 1rem;
 		color: var(--accent-active);
 		margin: 0.1rem 0 0;
 	}
 
 	.job-date {
 		font-family: "JetBrains Mono", monospace;
-		font-size: 0.72rem;
+		font-size: 0.8rem;
 		color: var(--text-muted);
 		white-space: nowrap;
 		padding: 0.2rem 0.55rem;
@@ -617,7 +557,7 @@ function initial(name: string): string {
 		display: flex;
 		align-items: center;
 		gap: 0.3rem;
-		font-size: 0.75rem;
+		font-size: 0.82rem;
 		color: var(--text-muted);
 		font-family: "JetBrains Mono", monospace;
 		margin: 0.3rem 0 0.7rem;
@@ -633,9 +573,9 @@ function initial(name: string): string {
 		position: relative;
 		padding-left: 1.25rem;
 		margin-bottom: 0.35rem;
-		font-size: 0.85rem;
+		font-size: 0.95rem;
 		color: var(--text-secondary);
-		line-height: 1.55;
+		line-height: 1.7;
 	}
 
 	.job-highlights li::before {
@@ -647,8 +587,65 @@ function initial(name: string): string {
 		font-size: 1.1rem;
 	}
 
+	.resume-intro {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		gap: 2rem;
+		align-items: end;
+		margin-bottom: 2rem;
+		border-bottom: 1px solid var(--border-color);
+		padding: 1rem 0 2.5rem;
+	}
+
+	.resume-eyebrow {
+		margin: 0 0 0.75rem;
+		color: var(--accent-blog);
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.68rem;
+		letter-spacing: 0.12em;
+	}
+
+	.resume-intro h1 {
+		margin: 0 0 0.75rem;
+		font-family: "Cinzel", serif;
+		font-size: clamp(2rem, 5vw, 3.5rem);
+		font-weight: 600;
+	}
+
+	.resume-intro p:last-child {
+		max-width: 700px;
+		margin: 0;
+		color: var(--text-secondary);
+		font-size: 1rem;
+		line-height: 1.7;
+	}
+
+	.resume-download {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1rem;
+		border: 1px solid var(--accent-blog);
+		border-radius: 100px;
+		background: var(--accent-blog-subtle);
+		color: var(--accent-blog);
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.75rem;
+		white-space: nowrap;
+	}
+
+	.resume-download:hover {
+		background: var(--accent-blog);
+		color: var(--bg-primary);
+	}
+
 	/* ── Responsive ── */
 	@media (max-width: 768px) {
+		.resume-intro {
+			grid-template-columns: 1fr;
+			gap: 1.25rem;
+		}
+
 		.layout {
 			padding: 1rem;
 		}
@@ -662,6 +659,10 @@ function initial(name: string): string {
 			margin: 0 auto;
 		}
 
+		.sidebar-card {
+			position: static;
+		}
+
 		.timeline-head {
 			flex-direction: column;
 		}
@@ -669,11 +670,11 @@ function initial(name: string): string {
 
 	@media (max-width: 480px) {
 		.main-card {
-			padding: 1.25rem;
+			padding: 0 0 2rem;
 		}
 
 		.sidebar-card {
-			padding: 1.25rem;
+			padding: 1rem 0;
 		}
 	}
 </style>

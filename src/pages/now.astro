@@ -1,446 +1,79 @@
 ---
-import { Icon } from "astro-icon/components";
-import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
-import { SITE_TITLE } from "../consts";
-import * as now from "../content/now.md";
+import BaseHead from "@/components/BaseHead.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import { SITE_TITLE } from "@/consts";
+import * as now from "@/content/now.md";
 
 const { Content, frontmatter } = now;
-const p = frontmatter.preview;
+const preview = frontmatter.preview;
 ---
 
 <!doctype html>
 <html lang="en">
-    <head>
-        <BaseHead
-            title={`Now - ${SITE_TITLE}`}
-            description="What I'm doing now - Adrian Villanueva Martinez"
-        />
-    </head>
-    <body>
-        <Header />
-        <main class="container">
-            <!-- Hero -->
-            <div class="page-hero">
-                <p class="hero-label">CURRENT STATUS</p>
-                <h1 class="page-title">NOW</h1>
-                <p class="page-subtitle">What I'm currently focused on</p>
-                <span class="update-badge">Updated: {frontmatter.lastUpdated}</span>
-            </div>
+	<head>
+		<BaseHead title={`Now - ${SITE_TITLE}`} description="What Adrian Villanueva Martinez is learning, reading, and building right now." />
+	</head>
+	<body>
+		<Header />
+		<main class="now-page">
+			<header class="page-intro">
+				<p class="eyebrow"><span>NOW / 01</span> CURRENT FREQUENCIES</p>
+				<h1>What’s<br /><em>happening.</em></h1>
+				<p class="intro-copy">A snapshot of what I’m learning, reading, building, and thinking about at this point in time.</p>
+				<p class="updated">Last updated: {frontmatter.lastUpdated}</p>
+			</header>
 
-            <!-- Quick Stats -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <Icon name="mdi:book-open-variant" size={14} />
-                        LEARNING
-                    </div>
-                    <div class="stat-value">{p.learning}</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <Icon name="mdi:book" size={14} />
-                        READING
-                    </div>
-                    <div class="stat-value">{p.reading}</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-header">
-                        <Icon name="mdi:code-tags" size={14} />
-                        BUILDING
-                    </div>
-                    <div class="stat-value">{p.building}</div>
-                </div>
-            </div>
+			<section class="current-section" aria-labelledby="current-title">
+				<div class="section-kicker"><span>02</span><h2 id="current-title">Currently</h2></div>
+				<div class="current-list">
+					<p><span>LEARNING</span><strong>{preview.learning}</strong></p>
+					<p><span>READING</span><strong>{preview.reading}</strong></p>
+					<p><span>BUILDING</span><strong>{preview.building}</strong></p>
+					<p><span>FOCUS</span><strong>{preview.focus}</strong></p>
+					<p><span>TRAINING</span><strong>{preview.training}</strong></p>
+				</div>
+			</section>
 
-            <!-- Details -->
-            <div class="details-grid">
-                <div class="detail-card">
-                    <div class="detail-header">
-                        <Icon name="mdi:target" size={14} />
-                        FOCUS
-                    </div>
-                    <div class="detail-value">{p.focus}</div>
-                </div>
-                <div class="detail-card">
-                    <div class="detail-header">
-                        <Icon name="mdi:arm-flex" size={14} />
-                        TRAINING
-                    </div>
-                    <div class="detail-value">{p.training}</div>
-                </div>
-            </div>
+			<section class="now-essay" aria-labelledby="essay-title">
+				<aside><span>03</span><h2 id="essay-title">Field notes</h2></aside>
+				<article><Content /></article>
+			</section>
 
-            <!-- ✠ Divider -->
-            <div class="doom-divider"><span>✠</span></div>
-
-            <!-- Full Content -->
-            <div class="bento-item content-panel">
-                <div class="module-header">
-                    <Icon name="mdi:clock-outline" size={16} />
-                    <span class="module-title">DETAILS</span>
-                    <span class="module-line"></span>
-                </div>
-                <div class="now-content">
-                    <Content />
-                </div>
-            </div>
-
-            <!-- Now Movement Footer -->
-            <div class="now-footer">
-                <p>
-                    Part of the <a href="https://nownownow.com/about" target="_blank" rel="noopener noreferrer">/now movement</a> — sharing what I'm focused on at this point in my life.
-                </p>
-            </div>
-        </main>
-        <Footer />
-    </body>
+			<p class="now-footer">Part of the <a href="https://nownownow.com/about" target="_blank" rel="noopener noreferrer">/now movement</a> — sharing what I’m focused on at this point in my life.</p>
+		</main>
+		<Footer />
+	</body>
 </html>
 
 <style>
-    .container {
-        max-width: 960px;
-        margin: 0 auto;
-        padding: 2rem 1rem;
-    }
-
-    /* ── Hero ── */
-    .page-hero {
-        text-align: center;
-        margin: 1rem 0 2.5rem;
-    }
-
-    .hero-label {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.65rem;
-        letter-spacing: 0.2em;
-        color: var(--accent-blog);
-        margin-bottom: 0.5rem;
-    }
-
-    .page-title {
-        font-family: 'Cinzel', serif;
-        font-size: 3rem;
-        margin: 0;
-        color: var(--text-primary);
-        line-height: 1.1;
-        animation: breathe 3s ease-in-out infinite;
-        text-shadow: 0 0 40px var(--accent-blog-glow), 0 0 80px var(--accent-blog-glow);
-    }
-
-    @keyframes breathe {
-        0%, 100% { text-shadow: 0 0 20px var(--accent-blog-glow), 0 0 40px var(--accent-blog-glow); }
-        50% { text-shadow: 0 0 40px var(--accent-blog-glow), 0 0 80px var(--accent-blog-glow); }
-    }
-
-    .page-subtitle {
-        font-size: 1rem;
-        color: var(--text-muted);
-        margin: 0.5rem 0 1rem;
-    }
-
-    .update-badge {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.7rem;
-        color: var(--accent-blog);
-        background: color-mix(in srgb, var(--accent-blog) 12%, transparent);
-        padding: 0.2rem 0.75rem;
-        border-radius: var(--radius-sm);
-        border: 1px solid color-mix(in srgb, var(--accent-blog) 20%, transparent);
-    }
-
-    /* ── Stat Cards ── */
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
-        margin-bottom: 1rem;
-    }
-
-    .stat-card {
-        background: var(--glass-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid var(--border-color);
-        border-radius: var(--radius-md);
-        padding: 1.25rem;
-        position: relative;
-        overflow: hidden;
-        transition: all var(--transition-base);
-    }
-
-    .stat-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: var(--gradient-primary);
-        transition: opacity var(--transition-base);
-    }
-
-    .stat-card:hover {
-        border-color: color-mix(in srgb, var(--accent-blog) 40%, transparent);
-        transform: translateY(-2px);
-        box-shadow: 0 0 20px color-mix(in srgb, var(--accent-blog) 10%, transparent), var(--shadow-md);
-    }
-
-    .stat-header {
-        display: flex;
-        align-items: center;
-        gap: 0.4rem;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.65rem;
-        letter-spacing: 0.1em;
-        color: var(--accent-blog);
-        margin-bottom: 0.75rem;
-    }
-
-    .stat-header :global(svg) {
-        color: var(--accent-blog);
-    }
-
-    .stat-value {
-        font-family: 'Inter', sans-serif;
-        font-size: 0.9rem;
-        line-height: 1.5;
-        color: var(--text-secondary);
-    }
-
-    /* ── Detail Cards ── */
-    .details-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .detail-card {
-        background: var(--glass-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid var(--border-color);
-        border-radius: var(--radius-md);
-        padding: 1.25rem;
-        position: relative;
-        overflow: hidden;
-        transition: all var(--transition-base);
-    }
-
-    .detail-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: var(--gradient-primary);
-        transition: opacity var(--transition-base);
-    }
-
-    .detail-card:hover {
-        border-color: color-mix(in srgb, var(--accent-blog) 40%, transparent);
-        transform: translateY(-2px);
-        box-shadow: 0 0 20px color-mix(in srgb, var(--accent-blog) 10%, transparent), var(--shadow-md);
-    }
-
-    .detail-header {
-        display: flex;
-        align-items: center;
-        gap: 0.4rem;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.65rem;
-        letter-spacing: 0.1em;
-        color: var(--accent-blog);
-        margin-bottom: 0.75rem;
-    }
-
-    .detail-header :global(svg) {
-        color: var(--accent-blog);
-    }
-
-    .detail-value {
-        font-family: 'Inter', sans-serif;
-        font-size: 0.95rem;
-        line-height: 1.5;
-        color: var(--text-primary);
-    }
-
-    /* ── Doom Divider ✠ ── */
-    .doom-divider {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 1rem;
-        margin: 2rem 0;
-        color: var(--accent-blog);
-        font-size: 1rem;
-        opacity: 0.5;
-        user-select: none;
-    }
-
-    .doom-divider::before,
-    .doom-divider::after {
-        content: '';
-        flex: 1;
-        height: 1px;
-        background: linear-gradient(to right, transparent, color-mix(in srgb, var(--accent-blog) 30%, transparent), transparent);
-    }
-
-    /* ── Content Panel ── */
-    .bento-item {
-        background: var(--glass-bg);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid var(--border-color);
-        border-radius: var(--radius-md);
-        padding: 2rem;
-        transition: all var(--transition-base);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .bento-item::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: var(--gradient-primary);
-        transition: opacity var(--transition-base);
-    }
-
-    .bento-item:hover {
-        border-color: color-mix(in srgb, var(--accent-blog) 40%, transparent);
-        transform: translateY(-3px);
-        box-shadow: 0 0 30px color-mix(in srgb, var(--accent-blog) 10%, transparent), var(--shadow-md);
-    }
-
-    .module-header {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        margin-bottom: 1.5rem;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.75rem;
-        color: var(--text-muted);
-        letter-spacing: 0.05em;
-    }
-
-    .module-line {
-        flex: 1;
-        height: 1px;
-        background: linear-gradient(to right, color-mix(in srgb, var(--accent-blog) 30%, transparent), transparent);
-    }
-
-    .now-content {
-        font-family: 'Inter', sans-serif;
-        line-height: 1.7;
-        color: var(--text-secondary);
-        font-size: 0.95rem;
-    }
-
-    .now-content :global(h2) {
-        font-family: 'Cinzel', serif;
-        font-size: 1.1rem;
-        margin: 1.5rem 0 1rem 0;
-        color: var(--text-primary);
-        border: none;
-        padding: 0;
-        letter-spacing: 0.02em;
-    }
-
-    .now-content :global(h3) {
-        font-family: 'Cinzel', serif;
-        font-size: 0.95rem;
-        margin: 1.25rem 0 0.75rem 0;
-        color: var(--accent-blog);
-        letter-spacing: 0.02em;
-    }
-
-    .now-content :global(p) {
-        margin-bottom: 1rem;
-    }
-
-    .now-content :global(strong) {
-        color: var(--text-primary);
-    }
-
-    .now-content :global(ul) {
-        list-style: none;
-        padding: 0;
-    }
-
-    .now-content :global(li) {
-        position: relative;
-        padding-left: 1.8rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .now-content :global(li::before) {
-        content: '>>';
-        position: absolute;
-        left: 0;
-        color: var(--accent-blog);
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.85rem;
-        font-weight: 700;
-        text-shadow: 0 0 6px var(--accent-blog-glow);
-    }
-
-    .now-content :global(code) {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.85rem;
-        color: var(--accent-blog);
-        background: color-mix(in srgb, var(--accent-blog) 10%, transparent);
-        padding: 0.1rem 0.4rem;
-        border-radius: 3px;
-    }
-
-    /* ── Footer ── */
-    .now-footer {
-        margin: 3rem 0 2rem;
-        padding: 1.5rem;
-        background: var(--glass-bg);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        border: 1px solid var(--border-color);
-        border-radius: var(--radius-md);
-        text-align: center;
-    }
-
-    .now-footer p {
-        margin: 0;
-        font-size: 0.9rem;
-        color: var(--text-muted);
-        line-height: 1.6;
-    }
-
-    .now-footer a {
-        color: var(--accent-blog);
-        text-decoration: none;
-        transition: color var(--transition-fast);
-    }
-
-    .now-footer a:hover {
-        color: var(--text-primary);
-    }
-
-    /* ── Responsive ── */
-    @media (max-width: 768px) {
-        .stats-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .details-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .page-title {
-            font-size: 2.25rem;
-        }
-    }
+	.now-page { max-width: 960px; margin: 0 auto; padding: 3rem 2rem 1rem; }
+	.eyebrow, .section-kicker > span, .updated, .current-list span, .now-essay aside > span { font-family: "JetBrains Mono", monospace; font-size: 0.68rem; letter-spacing: 0.12em; }
+	.eyebrow { color: var(--text-muted); }
+	.eyebrow span, .section-kicker > span, .now-essay aside > span { color: var(--accent-blog); }
+	.page-intro { max-width: 700px; padding: 3rem 0 8rem; }
+	.page-intro h1 { margin: 1.5rem 0; font-size: clamp(4rem, 10vw, 8rem); line-height: 0.88; letter-spacing: -0.07em; }
+	.page-intro h1 em { font-style: normal; color: var(--accent-blog); }
+	.intro-copy { max-width: 520px; color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7; }
+	.updated { margin-top: 2rem; color: var(--text-muted); }
+	.section-kicker { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2rem; border-top: 1px solid var(--border-color); padding-top: 1rem; }
+	.section-kicker h2, .now-essay aside h2 { margin: 0; font-family: "JetBrains Mono", monospace; font-size: 0.9rem; letter-spacing: 0.04em; text-transform: uppercase; }
+	.current-list { border-top: 1px solid var(--border-color); }
+	.current-list p { display: grid; grid-template-columns: 7rem 1fr; gap: 1rem; margin: 0; padding: 1rem 0; border-bottom: 1px solid var(--border-color); }
+	.current-list span { color: var(--text-muted); }
+	.current-list strong { color: var(--text-primary); font-size: 1rem; font-weight: 400; }
+	.now-essay { display: grid; grid-template-columns: 0.7fr 1.3fr; gap: clamp(2rem, 10vw, 8rem); margin-top: 8rem; }
+	.now-essay aside > span { display: block; margin-bottom: 1rem; }
+	.now-essay article { max-width: 620px; color: var(--text-secondary); font-size: 1rem; line-height: 1.8; }
+	.now-essay article :global(h2), .now-essay article :global(h3) { margin: 3rem 0 1rem; font-family: "Cinzel", serif; color: var(--text-primary); }
+	.now-essay article :global(h2:first-child) { margin-top: 0; }
+	.now-essay article :global(strong) { color: var(--text-primary); }
+	.now-footer { margin: 8rem 0 2rem; border-top: 1px solid var(--border-color); padding-top: 1rem; color: var(--text-muted); font-size: 0.85rem; }
+	.now-footer a { color: var(--accent-blog); }
+	@media (max-width: 700px) {
+		.now-page { padding: 1.5rem 1rem 0; }
+		.page-intro { padding: 2rem 0 5rem; }
+		.page-intro h1 { font-size: clamp(3.5rem, 18vw, 6rem); }
+		.now-essay { grid-template-columns: 1fr; gap: 2rem; margin-top: 5rem; }
+	}
 </style>

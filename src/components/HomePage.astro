@@ -1,0 +1,315 @@
+---
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import { SITE_TITLE } from "@/consts";
+import * as now from "@/content/now.md";
+
+interface Props {
+	mePhoto: ImageMetadata;
+}
+
+const { mePhoto } = Astro.props;
+const { frontmatter: nowFm } = now;
+---
+
+<main class="field-journal">
+	<section class="hero" aria-labelledby="hero-title">
+		<div class="hero-copy">
+			<p class="eyebrow"><span>AVM/</span> SOFTWARE ENGINEER · TOKYO, JP</p>
+			<h1 id="hero-title">Code, sound,<br /><em>and signal.</em></h1>
+			<p class="hero-statement">
+				I build cloud-native data platforms, MLOps infrastructure, and developer
+				tooling from Tokyo.
+			</p>
+			<div class="hero-links">
+				<a class="hero-link hero-link-primary" href="/contact">Start a conversation <span>-></span></a>
+				<a class="hero-link" href="/resume">View resume <span>-></span></a>
+				<a class="hero-link" href="/about">About me <span>-></span></a>
+			</div>
+		</div>
+
+		<figure class="portrait">
+			<Image src={mePhoto} alt={SITE_TITLE} width={640} height={800} />
+			<figcaption>
+				<span>PORTRAIT / 01</span>
+				<span>35°41'N 139°41'E</span>
+			</figcaption>
+		</figure>
+	</section>
+
+	<section class="lower-grid">
+		<div class="now section-rule" aria-labelledby="now-title">
+			<div class="section-label">
+				<span>01</span>
+				<h2 id="now-title">Now</h2>
+			</div>
+			<div class="now-notes">
+				<p><span>LEARNING</span>{nowFm.preview.learning}</p>
+				<p><span>READING</span>{nowFm.preview.reading}</p>
+				<p><span>BUILDING</span>{nowFm.preview.building}</p>
+			</div>
+			<a class="text-link" href="/now">See current notes <span>-></span></a>
+		</div>
+
+		<div class="creative section-rule" aria-labelledby="creative-title">
+			<div class="section-label">
+				<span>02</span>
+				<h2 id="creative-title">Outside the stack</h2>
+			</div>
+			<p class="creative-line">Data platforms, synths, and metal.</p>
+			<div class="creative-links">
+				<a href="https://avm.photography"><Icon name="mdi:camera-outline" size={16} /> Photography</a>
+				<a href="https://github.com/adrianvillanueva997" target="_blank" rel="noopener noreferrer"><Icon name="mdi:github" size={16} /> Open source</a>
+				<a href="mailto:adrian.villanueva.martinez@outlook.com"><Icon name="mdi:email-outline" size={16} /> Contact</a>
+			</div>
+		</div>
+	</section>
+</main>
+
+<style>
+	.field-journal {
+		max-width: 1120px;
+		margin: 0 auto;
+		padding: 3rem 2rem 1rem;
+	}
+
+	.hero {
+		display: grid;
+		grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+		gap: clamp(2rem, 7vw, 7rem);
+		align-items: end;
+		min-height: 620px;
+		padding: 2rem 0 6rem;
+	}
+
+	.eyebrow,
+	.section-label > span,
+	.now-notes span {
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.68rem;
+		letter-spacing: 0.12em;
+	}
+
+	.eyebrow {
+		color: var(--text-muted);
+	}
+
+	.eyebrow span,
+	.section-label > span {
+		color: var(--accent-blog);
+	}
+
+	.hero h1 {
+		max-width: 700px;
+		margin: 1.5rem 0 1.25rem;
+		font-size: clamp(4rem, 10vw, 8.5rem);
+		line-height: 0.9;
+		letter-spacing: -0.07em;
+	}
+
+	.hero h1 em {
+		font-style: normal;
+		color: var(--accent-blog);
+	}
+
+	.hero-statement {
+		max-width: 480px;
+		color: var(--text-secondary);
+		font-size: 1.05rem;
+		line-height: 1.7;
+	}
+
+	.hero-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin-top: 2rem;
+	}
+
+	.hero-link,
+	.text-link {
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.73rem;
+		letter-spacing: 0.02em;
+	}
+
+	.hero-link {
+		padding: 0.75rem 1rem;
+		border: 1px solid var(--border-light);
+		color: var(--text-secondary);
+	}
+
+	.hero-link-primary {
+		border-color: var(--accent-blog);
+		background: var(--accent-blog-subtle);
+		color: var(--accent-blog);
+	}
+
+	.hero-link span,
+	.text-link span {
+		margin-left: 0.5rem;
+		color: var(--accent-blog);
+	}
+
+	.portrait {
+		position: relative;
+		margin: 0;
+		transform: rotate(2deg);
+	}
+
+	.portrait::before {
+		position: absolute;
+		inset: 1rem -1rem -1rem 1rem;
+		z-index: -1;
+		border: 1px solid var(--accent-blog);
+		content: "";
+		opacity: 0.35;
+	}
+
+	.portrait img {
+		display: block;
+		width: 100%;
+		height: min(65vw, 560px);
+		object-fit: cover;
+		filter: saturate(0.55) contrast(1.05);
+	}
+
+	.portrait figcaption {
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+		padding-top: 0.7rem;
+		color: var(--text-muted);
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.6rem;
+	}
+
+	.section-rule {
+		border-top: 1px solid var(--border-color);
+		padding-top: 1rem;
+	}
+
+	.section-label {
+		display: grid;
+		grid-template-columns: 2.5rem minmax(130px, 0.5fr) 1fr;
+		gap: 1rem;
+		align-items: baseline;
+		margin-bottom: 1.5rem;
+	}
+
+	.section-label h2 {
+		margin: 0;
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.9rem;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+	}
+
+	.section-label p {
+		margin: 0;
+		color: var(--text-muted);
+		font-size: 0.85rem;
+	}
+
+	.text-link {
+		display: inline-block;
+		margin-top: 1.25rem;
+		color: var(--text-secondary);
+	}
+
+	.lower-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: clamp(2rem, 8vw, 8rem);
+		margin-top: 6rem;
+	}
+
+	.now-notes {
+		display: grid;
+		gap: 0.8rem;
+	}
+
+	.now-notes p {
+		display: grid;
+		grid-template-columns: 5.5rem 1fr;
+		gap: 1rem;
+		margin: 0;
+		color: var(--text-secondary);
+		font-size: 0.9rem;
+		line-height: 1.5;
+	}
+
+	.now-notes span {
+		padding-top: 0.2rem;
+		color: var(--text-muted);
+	}
+
+	.creative-line {
+		margin: 0 0 1.25rem;
+		color: var(--text-secondary);
+		font-size: 1.1rem;
+	}
+
+	.creative-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.7rem 1.25rem;
+	}
+
+	.creative-links a {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		color: var(--text-secondary);
+		font-size: 0.85rem;
+	}
+
+	.creative-links a:hover {
+		color: var(--accent-blog);
+	}
+
+	@media (max-width: 700px) {
+		.field-journal {
+			padding: 1.5rem 1rem 0;
+		}
+
+		.hero {
+			grid-template-columns: 1fr;
+			min-height: 0;
+			padding: 2rem 0 4rem;
+		}
+
+		.hero h1 {
+			font-size: clamp(3.5rem, 18vw, 6rem);
+		}
+
+		.portrait {
+			max-width: 360px;
+			margin: 1rem 0 0 auto;
+		}
+
+		.portrait img {
+			height: 420px;
+		}
+
+		.section-label {
+			grid-template-columns: 2.5rem 1fr;
+		}
+
+		.section-label p {
+			grid-column: 2;
+		}
+
+		.lower-grid {
+			grid-template-columns: 1fr;
+			gap: 3rem;
+			margin-top: 4rem;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.portrait {
+			transform: none;
+		}
+	}
+</style>

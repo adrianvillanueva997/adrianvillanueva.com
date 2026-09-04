@@ -1,9 +1,13 @@
 ---
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
+import { HERO_TAGLINE } from "@/consts";
 import * as now from "@/content/now.md";
+import { fetchRssPosts } from "@/utils/rss";
 
 const { frontmatter: nowFm } = now;
+const RSS_URL = "https://metalops.dev/rss.xml";
+const latestPost = (await fetchRssPosts(RSS_URL))[0];
 
 interface Props {
 	mePhoto: ImageMetadata;
@@ -100,8 +104,7 @@ const connectItems = [
             </div>
         </div>
         <p class="bio">
-            Spanish engineer building cloud-native data platforms.
-            <br />Sometimes I make music and punch things.
+            {HERO_TAGLINE}
         </p>
         <div class="social-links">
             <a
@@ -130,6 +133,10 @@ const connectItems = [
             ABOUT ME
             <span class="btn-bracket">]</span>
         </a>
+        <div class="profile-actions">
+            <a href="/blog" class="profile-action">READ MY WRITING</a>
+            <a href="/projects" class="profile-action">VIEW PROJECTS</a>
+        </div>
     </div>
 
     <!-- The Journey -->
@@ -166,7 +173,19 @@ const connectItems = [
             <span class="module-title">LATEST POST</span>
         </div>
         <div class="blog-content" id="latest-blog-content">
-            <p class="blog-fallback">Checking latest post...</p>
+            {latestPost ? (
+                <>
+                    <h3 class="blog-title">
+                        <a href={latestPost.link} target="_blank" rel="noopener noreferrer">
+                            {latestPost.title}
+                        </a>
+                    </h3>
+                    {latestPost.date && <span class="blog-date">{latestPost.date}</span>}
+                    {latestPost.description && <p class="blog-description">{latestPost.description}</p>}
+                </>
+            ) : (
+                <p class="blog-fallback">Technical writing on systems engineering and cloud infrastructure.</p>
+            )}
             <a href="/blog" class="read-more">Read more &rarr;</a>
         </div>
     </div>
@@ -308,6 +327,9 @@ const connectItems = [
         grid-row: 1 / 3;
         justify-content: flex-start;
         text-align: center;
+        border-color: color-mix(in srgb, var(--accent-blog) 35%, var(--border-color));
+        box-shadow: 0 0 30px var(--accent-blog-glow);
+        padding: 2rem;
     }
 
     .profile-header {
@@ -354,7 +376,7 @@ const connectItems = [
 
     .name {
         font-family: "Cinzel", serif;
-        font-size: 1.1rem;
+        font-size: 1.5rem;
         margin: 0 0 0.2rem 0;
         line-height: 1.2;
         background: var(--gradient-primary);
@@ -365,7 +387,7 @@ const connectItems = [
 
     .role {
         color: var(--accent-blog);
-        font-size: 0.75rem;
+        font-size: 0.9rem;
         margin-bottom: 0.4rem;
         font-weight: 500;
         letter-spacing: 0.05em;
@@ -383,9 +405,10 @@ const connectItems = [
 
     .bio {
         margin: 1rem 0 0.75rem 0;
-        font-size: 0.8rem;
+        max-width: 24rem;
+        font-size: 0.95rem;
         color: var(--text-secondary);
-        line-height: 1.4;
+        line-height: 1.55;
     }
 
     .social-links {
@@ -409,7 +432,8 @@ const connectItems = [
     }
 
     .about-btn {
-        margin: auto 0 0 0;
+        order: 2;
+        margin-top: 0.75rem;
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -432,6 +456,35 @@ const connectItems = [
 
     .btn-bracket {
         color: var(--accent-blog);
+    }
+
+    .profile-actions {
+        display: flex;
+        flex-direction: row;
+        order: 1;
+        gap: 0.5rem;
+        width: 100%;
+        margin-top: auto;
+    }
+
+    .profile-action {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid var(--accent-blog);
+        border-radius: var(--radius-sm);
+        color: var(--accent-blog);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.03em;
+        text-align: center;
+    }
+
+    .profile-action:hover {
+        background: var(--accent-blog);
+        color: var(--bg-primary);
     }
 
     /* Journey Card - Cols 2-3, Row 1 */
@@ -800,30 +853,40 @@ const connectItems = [
             flex-direction: column;
         }
 
+        .profile-card {
+            padding: 1.5rem;
+        }
+
+        .profile-actions {
+            flex-direction: column;
+            margin-top: 0.75rem;
+        }
+
         .creative-quote {
             font-size: 0.7rem;
         }
     }
 </style>
 
-<script>
+<script define:vars={{ RSS_URL }}>
     (async () => {
         const container = document.getElementById('latest-blog-content');
         if (!container) return;
         try {
-            const res = await fetch('https://metalops.dev/api/v1/blog/latest');
+            const res = await fetch(RSS_URL);
             if (!res.ok) throw new Error('fetch failed');
-            const data = await res.json();
-            if (!data?.title) throw new Error('no data');
-            const date = data.pubDate
-                ? new Date(data.pubDate).toLocaleDateString('en-US', {
-                      year: 'numeric', month: 'short', day: 'numeric',
-                  })
-                : '';
+            const xml = await res.text();
+            const doc = new DOMParser().parseFromString(xml, 'text/xml');
+            const item = doc.querySelector('item');
+            const text = (tag) => item?.querySelector(tag)?.textContent?.trim() || '';
+            const title = text('title');
+            if (!title) throw new Error('no data');
+            const date = text('pubDate');
+            const description = text('description').replace(/<[^>]+>/g, '');
             container.innerHTML = `
-                <h3 class="blog-title">${esc(data.title)}</h3>
-                ${date ? `<span class="blog-date">${esc(date)}</span>` : ''}
-                ${data.description ? `<p class="blog-description">${esc(data.description)}</p>` : ''}
+                <h3 class="blog-title"><a href="${esc(text('link'))}" target="_blank" rel="noopener noreferrer">${esc(title)}</a></h3>
+                ${date ? `<span class="blog-date">${esc(formatDate(date))}</span>` : ''}
+                ${description ? `<p class="blog-description">${esc(description)}</p>` : ''}
                 <a href="/blog" class="read-more">Read more &rarr;</a>
             `;
         } catch {
@@ -833,6 +896,12 @@ const connectItems = [
             `;
         }
     })();
+
+    function formatDate(date) {
+        return new Date(date).toLocaleDateString('en-US', {
+            year: 'numeric', month: 'short', day: 'numeric',
+        });
+    }
 
     function esc(s) {
         const div = document.createElement('div');

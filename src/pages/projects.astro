@@ -2,10 +2,10 @@
 import { Image } from "astro:assets";
 import { readFileSync } from "fs";
 import { join } from "path";
-import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
-import { SITE_TITLE } from "../consts";
+import BaseHead from "@/components/BaseHead.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import { SITE_TITLE } from "@/consts";
 
 const images = import.meta.glob("@/assets/**/*.{png,jpg,jpeg,webp,svg}", {
 	eager: true,
@@ -14,9 +14,7 @@ const images = import.meta.glob("@/assets/**/*.{png,jpg,jpeg,webp,svg}", {
 const imageMap: Record<string, any> = {};
 for (const path in images) {
 	const filename = path.split("/").pop();
-	if (filename) {
-		imageMap[filename] = (images[path] as any).default;
-	}
+	if (filename) imageMap[filename] = (images[path] as any).default;
 }
 
 interface Project {
@@ -25,28 +23,20 @@ interface Project {
 	href?: string;
 	imgSrc?: string;
 	categories?: string[];
+	group: string;
 	isOpenSource?: boolean;
 	repoUrl?: string;
 }
 
-interface ProjectsData {
-	projects: Project[];
-}
-
 const projectsPath = join(process.cwd(), "src/data/projects.yaml");
-const projectsContent = readFileSync(projectsPath, "utf8");
 const { load } = await import("js-yaml");
-const projectsData = load(projectsContent) as ProjectsData;
-
-const allProjects = projectsData.projects;
-
-const allCategories = Array.from(
-	new Set(
-		projectsData.projects
-			.flatMap((project) => project.categories || [])
-			.filter(Boolean),
-	),
-).sort();
+const { projects } = load(readFileSync(projectsPath, "utf8")) as {
+	projects: Project[];
+};
+const featured =
+	projects.find((project) => project.title === "Zenthos") || projects[0];
+const archive = projects.filter((project) => project !== featured);
+const archiveGroups = [...new Set(archive.map((project) => project.group))];
 ---
 
 <!doctype html>
@@ -54,662 +44,367 @@ const allCategories = Array.from(
 	<head>
 		<BaseHead
 			title={`Projects - ${SITE_TITLE}`}
-			description="Projects and work by Adrian Villanueva Martinez — data engineering, IoT, and software infrastructure."
+			description="A selection of systems, tools, and experiments built by Adrian Villanueva Martinez."
 		/>
 	</head>
 	<body>
 		<Header />
-		<main class="layout">
-			<!-- Hero -->
-			<section class="hero-card">
-				<div class="hero-tagline">
-					<span class="hero-marker">>></span>
-					<span class="hero-label">PROJECTS</span>
-				</div>
-				<h1 class="hero-title">Selected Work</h1>
-				<p class="hero-description">
-					Engineering solutions across data platforms, IoT, and software
-					infrastructure. Open-source and production systems built for scale.
+		<main class="projects-page">
+			<header class="page-intro">
+				<p class="eyebrow"><span>PROJECTS / 01</span> WORKING ARCHIVE</p>
+				<h1>Things I’ve<br /><em>built.</em></h1>
+				<p>
+					A selection of systems, tools, and experiments across data platforms,
+					IoT, infrastructure, and software.
 				</p>
-			</section>
+			</header>
 
-			<!-- Filter -->
-			<section class="section-block">
-				<div class="section-head">
-					<span class="section-marker">>></span>
-					<h2 class="section-title">INDEX</h2>
-				</div>
-				<div class="filter-bar">
-					<button class="filter-btn active" data-category="all">All</button>
-					{allCategories.map((c) => (
-						<button class="filter-btn" data-category={c.toLowerCase()}>
-							{c}
-						</button>
-					))}
-				</div>
-			</section>
-
-			<!-- Projects -->
-			<section class="section-block">
-				<div class="section-head">
-					<span class="section-marker">>></span>
-					<h2 class="section-title">DEPLOYMENTS</h2>
-				</div>
-				<div class="projects-grid">
-					{allProjects.map((project, index) => (
-						<article
-							class="project-card"
-							data-categories={
-								project.categories
-									?.map((c) => c.toLowerCase())
-									.join(" ") || ""
-							}
-						>
-							<div class="card-header-line">
-								<span class="card-id">
-									PRJ-{String(index + 1).padStart(4, "0")}
+			{featured && (
+				<section class="featured-project" aria-labelledby="featured-title">
+					<div class="section-kicker"><span>02</span><h2>Featured work</h2></div>
+					<div class="featured-grid">
+						<div class="featured-media">
+							{featured.imgSrc && imageMap[featured.imgSrc] && (
+								<Image src={imageMap[featured.imgSrc]} alt={featured.title} width={800} height={540} />
+							)}
+							<span class="media-label">WORK / 01</span>
+						</div>
+						<div class="featured-copy">
+							<p class="project-type">ONGOING EXPLORATION</p>
+							<h2 id="featured-title">{featured.title}</h2>
+							<p class="project-description">{featured.description}</p>
+							{featured.isOpenSource !== undefined && (
+								<span class:list={["visibility-badge", featured.isOpenSource ? "public" : "private"]}>
+									{featured.isOpenSource ? "PUBLIC / OPEN SOURCE" : "PRIVATE PROJECT"}
 								</span>
-								<span class="card-status">
-									<span class="status-dot"></span>
-									ONLINE
-								</span>
+							)}
+							<div class="project-tags">
+								{featured.categories?.map((category) => <span>{category}</span>)}
 							</div>
-							<div class="card-media">
-								{project.imgSrc && imageMap[project.imgSrc] ? (
-									<Image
-										src={imageMap[project.imgSrc]}
-										alt={project.title}
-										width={600}
-										height={400}
-										loading="lazy"
-									/>
-								) : (
-									<div class="card-media-fallback">
-										<span>{project.title.charAt(0)}</span>
-									</div>
-								)}
+							<div class="project-links">
+								{featured.repoUrl && <a class="project-link" href={featured.repoUrl} target="_blank" rel="noopener noreferrer">Source code <span>-></span></a>}
+								{featured.href && <a class="project-link" href={featured.href} target="_blank" rel="noopener noreferrer">Live project <span>-></span></a>}
 							</div>
-							<div class="card-content">
-								<div class="card-header">
-									<h3 class="card-title">{project.title}</h3>
-									{project.isOpenSource !== undefined && (
-										<span
-											class={`card-badge ${project.isOpenSource ? "open" : "closed"}`}
-										>
-											{project.isOpenSource ? "OPEN_SRC" : "PROPRIETARY"}
-										</span>
-									)}
-								</div>
-								<p class="card-description">{project.description}</p>
-								{project.categories && project.categories.length > 0 && (
-									<div class="card-tags">
-										{project.categories.map((cat) => (
-											<span class="tag">#{cat}</span>
-										))}
-									</div>
-								)}
-								<div class="card-actions">
-									{project.isOpenSource && project.repoUrl && (
-										<a
-											href={project.repoUrl}
-											target="_blank"
-											rel="noopener noreferrer"
-											class="action-link"
-										>
-											<span>SOURCE_CODE</span>
-											<span class="action-arrow">→</span>
-										</a>
-									)}
-									{project.href && (
-										<a
-											href={project.href}
-											target="_blank"
-											rel="noopener noreferrer"
-											class="action-link primary"
-										>
-											<span>LIVE_DEMO</span>
-											<span class="action-arrow">→</span>
-										</a>
-									)}
-								</div>
-							</div>
-						</article>
-					))}
-				</div>
-			</section>
-
-			<!-- Technologies Overview -->
-			<section class="section-block">
-				<div class="section-head">
-					<span class="section-marker">>></span>
-					<h2 class="section-title">TECH_STACK</h2>
-				</div>
-				<div class="tech-table">
-					<div class="tech-table-header">
-						<span>DOMAIN</span>
-						<span>COUNT</span>
-						<span>STATUS</span>
+						</div>
 					</div>
-					<div class="tech-table-body">
-						{allCategories.map((category) => (
-							<div class="tech-row">
-								<span class="tech-name">{category.toUpperCase()}</span>
-								<span class="tech-count">
-									{String(
-										allProjects.filter((p) =>
-											p.categories?.includes(category),
-										).length,
-									).padStart(2, "0")}
-								</span>
-								<span class="tech-status">ACTIVE</span>
-							</div>
-						))}
-					</div>
+				</section>
+			)}
+
+			{archiveGroups.map((group, groupIndex) => (
+			<section class="archive" aria-labelledby={`archive-${groupIndex}`}>
+				<div class="section-kicker"><span>{String(groupIndex + 3).padStart(2, "0")}</span><h2 id={`archive-${groupIndex}`}>{group}</h2></div>
+				<div class="archive-list">
+					{archive.filter((project) => project.group === group).map((project, index) => {
+						const link = project.href || project.repoUrl;
+						return (
+							<article class="archive-item">
+								<span class="archive-index">{String(index + 2).padStart(2, "0")}</span>
+								<div class="archive-body">
+									<div class="archive-heading">
+										<h3>{project.title}</h3>
+										{project.isOpenSource !== undefined && <span class:list={["visibility-badge", project.isOpenSource ? "public" : "private"]}>{project.isOpenSource ? "PUBLIC / OPEN SOURCE" : "PRIVATE PROJECT"}</span>}
+									</div>
+									<p>{project.description}</p>
+									<div class="project-tags">{project.categories?.map((category) => <span>{category}</span>)}</div>
+								</div>
+								{link && <a class="project-link archive-link" href={link} target="_blank" rel="noopener noreferrer">{project.href ? "View project" : "Source code"} <span>-></span></a>}
+							</article>
+						);
+					})}
 				</div>
+			</section>
+			))}
+
+			<section class="project-note">
+				<p class="eyebrow"><span>{String(archiveGroups.length + 3).padStart(2, "0")}</span> MORE IN THE WORKS</p>
+				<p>Some things are finished, some are still making noise.</p>
+				<a href="/contact">Get in touch <span>-></span></a>
 			</section>
 		</main>
 		<Footer />
-
-		<script>
-			document.addEventListener("DOMContentLoaded", () => {
-				const buttons = document.querySelectorAll(".filter-btn");
-				const cards = document.querySelectorAll(".project-card");
-
-				buttons.forEach((btn) => {
-					btn.addEventListener("click", () => {
-						const cat = btn.getAttribute("data-category");
-						buttons.forEach((b) => b.classList.remove("active"));
-						btn.classList.add("active");
-
-						cards.forEach((card) => {
-							const el = card;
-							if (cat === "all") {
-								el.style.display = "flex";
-							} else {
-								const cats = el.getAttribute("data-categories") || "";
-								el.style.display = cats.includes(cat) ? "flex" : "none";
-							}
-						});
-					});
-				});
-			});
-		</script>
 	</body>
 </html>
 
 <style>
-	/* Hallmark · macrostructure: Portfolio Grid (tech accents) · genre: editorial
-	 * pre-emit critique: P5 H4 E5 S5 R5 V4
-	 */
-
-	.layout {
-		max-width: 960px;
+	.projects-page {
+		max-width: 1120px;
 		margin: 0 auto;
-		padding: 2rem;
+		padding: 3rem 2rem 1rem;
 	}
 
-	/* ── Hero ── */
-	.hero-card {
-		margin-bottom: 3rem;
-		background: var(--glass-bg);
-		backdrop-filter: blur(12px);
-		-webkit-backdrop-filter: blur(12px);
-		border: 1px solid var(--border-color);
-		border-radius: var(--radius-md);
-		padding: 2.5rem;
-		position: relative;
-		overflow: hidden;
-	}
-
-	.hero-card::before {
-		content: "";
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 4px;
-		height: 100%;
-		background: var(--gradient-primary);
-	}
-
-	.hero-tagline {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		margin-bottom: 1rem;
+	.eyebrow,
+	.section-kicker > span,
+	.project-type,
+	.project-tags,
+	.archive-index,
+	.media-label {
 		font-family: "JetBrains Mono", monospace;
-		font-size: 0.8rem;
+		font-size: 0.68rem;
+		letter-spacing: 0.12em;
 	}
 
-	.hero-marker {
-		color: var(--accent-active);
-		font-weight: 700;
-	}
-
-	.hero-label {
+	.eyebrow {
 		color: var(--text-muted);
-		letter-spacing: 0.05em;
 	}
 
-	.hero-title {
+	.eyebrow span,
+	.section-kicker > span,
+	.archive-index {
+		color: var(--accent-blog);
+	}
+
+	.page-intro {
+		max-width: 700px;
+		padding: 3rem 0 8rem;
+	}
+
+	.page-intro h1 {
+		margin: 1.5rem 0;
+		font-size: clamp(4rem, 10vw, 8rem);
+		line-height: 0.88;
+		letter-spacing: -0.07em;
+	}
+
+	.page-intro h1 em {
+		font-style: normal;
+		color: var(--accent-blog);
+	}
+
+	.page-intro > p:last-child {
+		max-width: 520px;
+		color: var(--text-secondary);
+		font-size: 1.05rem;
+		line-height: 1.7;
+	}
+
+	.section-kicker {
+		display: flex;
+		align-items: baseline;
+		gap: 1rem;
+		margin-bottom: 2rem;
+		border-top: 1px solid var(--border-color);
+		padding-top: 1rem;
+	}
+
+	.section-kicker h2 {
+		margin: 0;
 		font-family: "JetBrains Mono", monospace;
-		font-size: 2rem;
-		font-weight: 700;
-		margin: 0 0 1rem;
-		background: var(--gradient-primary);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
+		font-size: 0.9rem;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
 	}
 
-	.hero-description {
-		font-size: 0.95rem;
+	.featured-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+		gap: clamp(2rem, 8vw, 8rem);
+		align-items: center;
+	}
+
+	.featured-media {
+		position: relative;
+		min-height: 360px;
+		background: var(--bg-tertiary);
+	}
+
+	.featured-media img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		min-height: 360px;
+		object-fit: cover;
+		filter: saturate(0.7);
+	}
+
+	.media-label {
+		position: absolute;
+		right: 1rem;
+		bottom: 1rem;
+		padding: 0.4rem 0.6rem;
+		background: var(--bg-primary);
+		color: var(--accent-blog);
+	}
+
+	.featured-copy h2 {
+		margin: 0.75rem 0 1rem;
+		font-family: "Cinzel", serif;
+		font-size: clamp(2rem, 5vw, 4rem);
+		font-weight: 600;
+	}
+
+	.project-type {
+		margin: 0;
+		color: var(--accent-blog);
+	}
+
+	.project-description,
+	.archive-body p {
 		color: var(--text-secondary);
 		line-height: 1.7;
-		max-width: 600px;
-		margin: 0;
 	}
 
-	/* ── Section block ── */
-	.section-block {
-		margin-bottom: 3rem;
-	}
-
-	.section-head {
+	.project-tags {
 		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-top: 1.5rem;
+		color: var(--text-muted);
+		letter-spacing: 0.04em;
+	}
+
+	.project-tags span {
+		border-bottom: 1px solid var(--border-light);
+		padding-bottom: 0.2rem;
+	}
+
+	.project-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem 1.5rem;
+		margin-top: 2rem;
+	}
+
+	.project-link,
+	.project-note a {
+		display: inline-flex;
 		align-items: center;
-		gap: 0.75rem;
-		margin-bottom: 1.25rem;
-		padding-bottom: 0.5rem;
+		gap: 0.5rem;
+		border: 1px solid var(--accent-blog);
+		padding: 0.65rem 0.8rem;
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.75rem;
+		color: var(--accent-blog);
+	}
+
+	.project-link:hover {
+		background: var(--accent-blog);
+		color: var(--bg-primary);
+	}
+
+	.project-note a {
+		border: 0;
+		padding: 0;
+	}
+
+	.visibility-badge {
+		display: inline-block;
+		margin-top: 1.25rem;
+		padding: 0.35rem 0.55rem;
+		font-family: "JetBrains Mono", monospace;
+		font-size: 0.65rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+	}
+
+	.visibility-badge.public {
+		border: 1px solid var(--accent-active);
+		background: var(--accent-active-subtle);
+		color: var(--accent-active);
+	}
+
+	.visibility-badge.private {
+		border: 1px solid var(--accent-warning);
+		background: color-mix(in srgb, var(--accent-warning) 10%, transparent);
+		color: var(--accent-warning);
+	}
+
+	.project-note a span {
+		margin-left: 0.4rem;
+	}
+
+	.archive {
+		margin-top: 8rem;
+	}
+
+	.archive + .archive {
+		margin-top: 5rem;
+	}
+
+	.archive-list {
+		border-top: 1px solid var(--border-color);
+	}
+
+	.archive-item {
+		display: grid;
+		grid-template-columns: 3rem minmax(0, 1fr) auto;
+		gap: 1rem;
+		align-items: start;
+		padding: 1.5rem 0;
 		border-bottom: 1px solid var(--border-color);
 	}
 
-	.section-marker {
-		color: var(--accent-active);
-		font-family: "JetBrains Mono", monospace;
-		font-weight: 700;
+	.archive-heading {
+		display: flex;
+		align-items: baseline;
+		flex-wrap: wrap;
+		gap: 1rem;
+	}
+
+	.archive-heading h3 {
+		margin: 0;
+		font-family: "Cinzel", serif;
+		font-size: clamp(1.3rem, 3vw, 2rem);
+		font-weight: 600;
+	}
+
+	.archive-body p {
+		max-width: 700px;
+		margin: 0.5rem 0 0;
 		font-size: 0.9rem;
 	}
 
-	.section-title {
-		font-family: "JetBrains Mono", monospace;
-		font-size: 0.85rem;
-		font-weight: 700;
-		color: var(--text-muted);
-		letter-spacing: 0.05em;
-		margin: 0;
+	.archive-body .project-tags {
+		margin-top: 0.75rem;
 	}
 
-	/* ── Filter ── */
-	.filter-bar {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-	}
-
-	.filter-btn {
-		background: transparent;
-		border: 1px solid var(--border-color);
-		color: var(--text-secondary);
-		padding: 0.4rem 1rem;
-		font-family: "JetBrains Mono", monospace;
-		font-size: 0.8rem;
-		cursor: pointer;
-		border-radius: 100px;
-		transition: all var(--transition-base);
-	}
-
-	.filter-btn:hover {
-		border-color: var(--accent-active);
-		color: var(--accent-active);
-	}
-
-	.filter-btn.active {
-		background: var(--accent-active);
-		border-color: var(--accent-active);
-		color: var(--bg-primary);
-		box-shadow: 0 0 20px var(--accent-active-glow);
-	}
-
-	/* ── Projects ── */
-	.projects-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-		gap: 1.25rem;
-	}
-
-	.project-card {
-		background: var(--glass-bg);
-		backdrop-filter: blur(12px);
-		-webkit-backdrop-filter: blur(12px);
-		border: 1px solid var(--border-color);
-		border-radius: var(--radius-md);
-		overflow: hidden;
-		display: flex;
-		flex-direction: column;
-		transition: all var(--transition-base);
-		position: relative;
-	}
-
-	.project-card:hover {
-		border-color: var(--border-glow);
-		transform: translateY(-3px);
-		box-shadow: var(--shadow-glow), var(--shadow-md);
-	}
-
-	.card-header-line {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		padding: 0.4rem 1rem;
-		background: var(--bg-secondary);
-		border-bottom: 1px solid var(--border-color);
-		font-family: "JetBrains Mono", monospace;
-		font-size: 0.65rem;
-		color: var(--text-muted);
-	}
-
-	.card-id {
-		color: var(--accent-active);
-		font-weight: 500;
-	}
-
-	.card-status {
-		display: flex;
-		align-items: center;
-		gap: 0.35rem;
-		color: var(--accent-active);
-	}
-
-	.status-dot {
-		width: 6px;
-		height: 6px;
-		background: var(--accent-active);
-		border-radius: 50%;
-		box-shadow: 0 0 6px var(--accent-active);
-		animation: pulse-dot 2s ease-in-out infinite;
-	}
-
-	.card-media {
-		width: 100%;
-		height: 200px;
-		flex-shrink: 0;
-		background: var(--bg-tertiary);
-		overflow: hidden;
-		position: relative;
-	}
-
-	.card-media img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		border: none;
-		border-radius: 0;
-		transition: transform 0.4s ease, filter 0.4s ease;
-		filter: grayscale(30%) contrast(1.05);
-	}
-
-	.project-card:hover .card-media img {
-		transform: scale(1.03);
-		filter: grayscale(0%) contrast(1) brightness(1.1);
-	}
-
-	.card-media-fallback {
-		width: 100%;
-		height: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		background: linear-gradient(
-			135deg,
-			var(--bg-secondary),
-			var(--bg-tertiary)
-		);
-		font-family: "Cinzel", serif;
-		font-size: 2.5rem;
-		color: var(--text-muted);
-	}
-
-	.card-content {
-		flex: 1;
-		padding: 1.25rem 1.5rem;
-		display: flex;
-		flex-direction: column;
-		min-width: 0;
-	}
-
-	.card-header {
-		display: flex;
-		align-items: flex-start;
-		justify-content: space-between;
-		gap: 1rem;
-		margin-bottom: 0.6rem;
-	}
-
-	.card-title {
-		font-family: "JetBrains Mono", monospace;
-		font-size: 1.1rem;
-		font-weight: 700;
-		color: var(--text-primary);
-		margin: 0;
-	}
-
-	.card-badge {
-		font-family: "JetBrains Mono", monospace;
-		font-size: 0.6rem;
-		padding: 0.15rem 0.45rem;
-		border-radius: 100px;
+	.archive-link {
+		align-self: center;
 		white-space: nowrap;
-		flex-shrink: 0;
-		letter-spacing: 0.03em;
 	}
 
-	.card-badge.open {
-		color: var(--accent-active);
-		border: 1px solid rgba(0, 230, 138, 0.3);
-		background: var(--accent-active-subtle);
+	.project-note {
+		max-width: 600px;
+		margin: 8rem 0 2rem auto;
+		border-top: 1px solid var(--border-color);
+		padding-top: 1rem;
 	}
 
-	.card-badge.closed {
-		color: var(--accent-blog);
-		border: 1px solid var(--accent-blog);
-		background: var(--accent-blog-subtle);
+	.project-note > p:nth-child(2) {
+		margin: 1.5rem 0;
+		font-family: "Cinzel", serif;
+		font-size: clamp(1.5rem, 3vw, 2.4rem);
+		line-height: 1.25;
 	}
 
-	.card-description {
-		font-size: 0.86rem;
-		color: var(--text-secondary);
-		line-height: 1.6;
-		margin: 0 0 0.75rem;
-		flex: 1;
-	}
-
-	.card-tags {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.3rem;
-		margin-bottom: 1rem;
-	}
-
-	.tag {
-		font-family: "JetBrains Mono", monospace;
-		font-size: 0.65rem;
-		color: var(--text-muted);
-		padding: 0.1rem 0.45rem;
-		border: 1px solid var(--border-color);
-		border-radius: 100px;
-		background: var(--bg-secondary);
-		transition: all var(--transition-base);
-	}
-
-	.tag:hover {
-		border-color: var(--accent-blog);
-		color: var(--accent-blog);
-		box-shadow: 0 0 8px var(--accent-blog-glow);
-	}
-
-	.card-actions {
-		display: flex;
-		gap: 0.75rem;
-	}
-
-	.action-link {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.4rem;
-		padding: 0.45rem 0.9rem;
-		font-family: "JetBrains Mono", monospace;
-		font-size: 0.7rem;
-		color: var(--text-secondary);
-		text-decoration: none;
-		border: 1px solid var(--border-color);
-		border-radius: 100px;
-		transition: all var(--transition-base);
-	}
-
-	.action-link:hover {
-		color: var(--accent-active);
-		border-color: var(--accent-active);
-		box-shadow: 0 0 12px var(--accent-active-glow);
-	}
-
-	.action-link.primary {
-		background: var(--bg-secondary);
-	}
-
-	.action-link.primary:hover {
-		background: var(--accent-active);
-		border-color: var(--accent-active);
-		color: var(--bg-primary);
-		box-shadow: 0 0 20px var(--accent-active-glow);
-	}
-
-	/* ── Tech table ── */
-	.tech-table {
-		border: 1px solid var(--border-color);
-		border-radius: var(--radius-md);
-		overflow: hidden;
-		background: var(--glass-bg);
-		backdrop-filter: blur(8px);
-		-webkit-backdrop-filter: blur(8px);
-	}
-
-	.tech-table-header {
-		display: grid;
-		grid-template-columns: 2fr 1fr 1fr;
-		padding: 0.75rem 1rem;
-		background: var(--bg-secondary);
-		border-bottom: 1px solid var(--border-color);
-		font-family: "JetBrains Mono", monospace;
-		font-size: 0.7rem;
-		color: var(--text-muted);
-		font-weight: 700;
-		letter-spacing: 0.05em;
-	}
-
-	.tech-table-body {
-		display: flex;
-		flex-direction: column;
-	}
-
-	.tech-row {
-		display: grid;
-		grid-template-columns: 2fr 1fr 1fr;
-		padding: 0.7rem 1rem;
-		border-bottom: 1px solid var(--border-color);
-		font-family: "JetBrains Mono", monospace;
-		font-size: 0.8rem;
-		color: var(--text-secondary);
-		transition: background 0.2s ease;
-		align-items: center;
-	}
-
-	.tech-row:last-child {
-		border-bottom: none;
-	}
-
-	.tech-row:hover {
-		background: var(--accent-active-subtle);
-	}
-
-	.tech-name {
-		color: var(--accent-active);
-		font-weight: 500;
-	}
-
-	.tech-count {
-		color: var(--text-primary);
-		font-variant-numeric: tabular-nums;
-	}
-
-	.tech-status {
-		color: var(--accent-active);
-		font-size: 0.7rem;
-		width: fit-content;
-		padding: 0.1rem 0.5rem;
-		border: 1px solid rgba(0, 230, 138, 0.2);
-		border-radius: 100px;
-	}
-
-	/* ── Animations ── */
-	@keyframes pulse-dot {
-		0%,
-		100% {
-			opacity: 1;
-		}
-		50% {
-			opacity: 0.4;
-		}
-	}
-
-	/* ── Responsive ── */
-	@media (max-width: 768px) {
-		.layout {
-			padding: 1rem;
+	@media (max-width: 700px) {
+		.projects-page {
+			padding: 1.5rem 1rem 0;
 		}
 
-		.hero-card {
-			padding: 1.5rem;
+		.page-intro {
+			padding: 2rem 0 5rem;
 		}
 
-		.hero-title {
-			font-size: 1.5rem;
+		.page-intro h1 {
+			font-size: clamp(3.5rem, 18vw, 6rem);
 		}
 
-		.card-media {
-			height: 180px;
+		.featured-grid {
+			grid-template-columns: 1fr;
+			gap: 2rem;
 		}
 
-		.tech-table-header,
-		.tech-row {
-			grid-template-columns: 1fr auto auto;
-		}
-	}
-
-	@media (max-width: 480px) {
-		.hero-card {
-			padding: 1.25rem;
+		.featured-media {
+			min-height: 280px;
 		}
 
-		.hero-title {
-			font-size: 1.3rem;
+		.featured-media img {
+			min-height: 280px;
 		}
 
-		.card-header {
-			flex-direction: column;
-			gap: 0.5rem;
-		}
-
-		.card-content {
-			padding: 1rem 1.25rem;
-		}
-
-		.card-actions {
-			flex-direction: column;
-		}
-
-		.tech-table-header span:last-child,
-		.tech-row span:last-child {
-			display: none;
+		.archive,
+		.project-note {
+			margin-top: 5rem;
 		}
 	}
 </style>

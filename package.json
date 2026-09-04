@@ -2,6 +2,7 @@
 	"name": "adrianvillanueva.com",
 	"type": "module",
 	"version": "0.0.1",
+	"packageManager": "pnpm@11.23.0",
 	"scripts": {
 		"dev": "bash scripts/build-pdf.sh && astro dev",
 		"build": "bash scripts/build-pdf.sh && astro build",
