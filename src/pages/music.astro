@@ -1,0 +1,168 @@
+---
+import { readFileSync } from "fs";
+import { join } from "path";
+import BaseHead from "@/components/BaseHead.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import { SITE_TITLE } from "@/consts";
+
+interface Artist {
+	name: string;
+	country?: string;
+	flag?: string;
+}
+
+interface Album {
+	title: string;
+	artist: string;
+	href: string;
+	note?: string;
+}
+
+const musicPath = join(process.cwd(), "src/data/music.yaml");
+const { load } = await import("js-yaml");
+const {
+	period,
+	lastUpdated,
+	albums: albumEntries,
+	artists,
+} = load(readFileSync(musicPath, "utf8")) as {
+	period: string;
+	lastUpdated: string;
+	albums: Album[];
+	artists: Artist[];
+};
+
+const albums = await Promise.all(
+	albumEntries.map(async (album) => {
+		try {
+			const response = await fetch(
+				`https://open.spotify.com/oembed?url=${encodeURIComponent(album.href)}`,
+			);
+			if (!response.ok) return { ...album, cover: undefined };
+			const metadata = (await response.json()) as { thumbnail_url?: string };
+			if (!metadata.thumbnail_url) return { ...album, cover: undefined };
+
+			const coverResponse = await fetch(metadata.thumbnail_url);
+			if (!coverResponse.ok) return { ...album, cover: undefined };
+			const contentType =
+				coverResponse.headers.get("content-type") || "image/jpeg";
+			const cover = `data:${contentType};base64,${Buffer.from(await coverResponse.arrayBuffer()).toString("base64")}`;
+			return { ...album, cover };
+		} catch {
+			return { ...album, cover: undefined };
+		}
+	}),
+);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title={`Music - ${SITE_TITLE}`}
+			description="Albums, artists, and sounds Adrian Villanueva Martinez keeps coming back to."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main class="music-page">
+			<header class="page-intro">
+				<p class="eyebrow"><span>MUSIC / 01</span> LISTENING ARCHIVE</p>
+				<h1>Sounds I<br /><em>keep around.</em></h1>
+				<p class="intro-copy">
+					A snapshot of what has been in rotation lately: heavy, slow, loud,
+					and occasionally somewhere else entirely.
+				</p>
+				<p class="updated">{period} · Updated {lastUpdated}</p>
+			</header>
+
+			<section class="albums-section" aria-labelledby="albums-title">
+				<div class="section-kicker"><span>02</span><h2 id="albums-title">Albums I recommend</h2></div>
+				<div class="album-grid">
+					{albums.map((album) => (
+						<div class="album-entry">
+							<article class="album-card">
+								{album.cover && <img src={album.cover} alt={`Cover of ${album.title}`} loading="lazy" />}
+								<div class="album-info">
+									<p class="album-meta">SPOTIFY ALBUM</p>
+									<h3>{album.title}</h3>
+									<p>{album.artist}</p>
+									{album.href && <a href={album.href} target="_blank" rel="noopener noreferrer">Open on Spotify <span>-></span></a>}
+								</div>
+							</article>
+							{album.note && <p class="album-note"><span>LINER NOTE</span>{album.note}</p>}
+						</div>
+					))}
+				</div>
+			</section>
+
+			<section class="rank-section artists-section" aria-labelledby="artists-title">
+				<div class="section-kicker"><span>03</span><h2 id="artists-title">Artists in rotation</h2></div>
+				<div class="artist-grid">
+					{artists.map((artist) => (
+						<div class="artist-card">
+							<strong>{artist.name}</strong>
+							{artist.flag && <span class="artist-flag" role="img" aria-label={artist.country || "Country unknown"} title={artist.country}>{artist.flag}</span>}
+						</div>
+					))}
+				</div>
+			</section>
+
+			<p class="music-footer">A snapshot from personal listening history.</p>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<script>
+	document.querySelectorAll(".album-grid, .artist-grid").forEach((grid) => {
+		const cards = [...grid.children];
+		for (let i = cards.length - 1; i > 0; i -= 1) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[cards[i], cards[j]] = [cards[j], cards[i]];
+		}
+		cards.forEach((card) => grid.append(card));
+	});
+</script>
+
+<style>
+	.music-page { max-width: 960px; margin: 0 auto; padding: 3rem 2rem 1rem; }
+	.eyebrow, .section-kicker > span, .updated { font-family: "JetBrains Mono", monospace; font-size: 0.68rem; letter-spacing: 0.12em; }
+	.eyebrow, .updated { color: var(--text-muted); }
+	.eyebrow span, .section-kicker > span { color: var(--accent-blog); }
+	.page-intro { max-width: 700px; padding: 3rem 0 8rem; }
+	.page-intro h1 { margin: 1.5rem 0; font-size: clamp(4rem, 10vw, 8rem); line-height: 0.88; letter-spacing: -0.07em; }
+	.page-intro h1 em { font-style: normal; color: var(--accent-blog); }
+	.intro-copy { max-width: 520px; color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7; }
+	.updated { margin-top: 2rem; }
+	.section-kicker { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2rem; border-top: 1px solid var(--border-color); padding-top: 1rem; }
+	.section-kicker h2 { margin: 0; font-family: "JetBrains Mono", monospace; font-size: 0.9rem; letter-spacing: 0.04em; text-transform: uppercase; }
+	.artist-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+	.albums-section { margin-bottom: 8rem; }
+	.album-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+	.album-card { display: grid; grid-template-columns: 140px 1fr; gap: 1.25rem; border: 1px solid var(--border-color); padding: 0.75rem; }
+	.album-card img { display: block; width: 140px; aspect-ratio: 1; object-fit: cover; }
+	.album-info { align-self: end; padding-bottom: 0.25rem; }
+	.album-meta { margin: 0 0 0.75rem; color: var(--text-muted); font-family: "JetBrains Mono", monospace; font-size: 0.68rem; letter-spacing: 0.12em; }
+	.album-info h3 { margin: 0; color: var(--text-primary); font-family: "Cinzel", serif; font-size: 1.35rem; font-weight: 600; }
+	.album-info p:not(.album-meta) { margin: 0.35rem 0 0; color: var(--accent-blog); }
+	.album-note { margin: 0.9rem 0 0; border-left: 1px solid var(--accent-blog); padding-left: 0.75rem; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.6; }
+	.album-note span { display: block; margin-bottom: 0.25rem; color: var(--accent-blog); font-family: "JetBrains Mono", monospace; font-size: 0.6rem; letter-spacing: 0.12em; }
+	.album-info a { display: inline-block; margin-top: 1.25rem; color: var(--text-secondary); font-family: "JetBrains Mono", monospace; font-size: 0.68rem; }
+	.album-info a span { margin-left: 0.4rem; color: var(--accent-blog); }
+	.artist-card { display: flex; align-items: flex-end; min-height: 7rem; border: 1px solid var(--border-color); padding: 1rem; transition: border-color var(--transition-base), background var(--transition-base); }
+	.artist-card:hover { border-color: var(--accent-blog); background: var(--accent-blog-subtle); }
+	.artist-card strong { color: var(--text-primary); font-size: 1rem; font-weight: 400; }
+	.artist-flag { margin-left: auto; font-size: 1.15rem; line-height: 1; }
+	.music-footer { margin: 8rem 0 2rem; border-top: 1px solid var(--border-color); padding-top: 1rem; color: var(--text-muted); font-size: 0.85rem; }
+	@media (max-width: 700px) {
+		.music-page { padding: 1.5rem 1rem 0; }
+		.page-intro { padding: 2rem 0 5rem; }
+		.page-intro h1 { font-size: clamp(3.5rem, 18vw, 6rem); }
+		.artist-grid { grid-template-columns: repeat(2, 1fr); }
+		.albums-section { margin-bottom: 5rem; }
+		.album-grid { grid-template-columns: 1fr; }
+	}
+	@media (max-width: 420px) { .artist-grid { grid-template-columns: 1fr; } }
+</style>
