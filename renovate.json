@@ -4,20 +4,19 @@
 		"config:recommended",
 		":dependencyDashboard",
 		":semanticCommits",
-		":enableVulnerabilityAlerts",
-		":separatePatchReleases"
+		":enableVulnerabilityAlerts"
 	],
-	"schedule": ["* * 1 */3 *"],
+	"schedule": ["before 5am on Monday"],
 	"timezone": "Europe/Madrid",
 	"packageRules": [
+		{
+			"groupName": "all dependencies",
+			"matchPackageNames": ["*"]
+		},
 		{
 			"matchUpdateTypes": ["minor", "patch"],
 			"matchCurrentVersion": "!/^0/",
 			"automerge": false
-		},
-		{
-			"groupName": "TypeScript",
-			"matchPackageNames": ["typescript", "@types/*"]
 		}
 	],
 	"labels": ["dependencies"],
