@@ -218,8 +218,8 @@ importers:
         specifier: 2.0.0
         version: 2.0.0(@astrojs/starlight@0.41.3(astro@7.3.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@26.1.1)(jiti@2.7.0)(yaml@2.9.0))(supports-color@7.2.0)(typescript@7.0.2))(@expressive-code/core@0.44.2)
       js-yaml:
-        specifier: 4.1.1
-        version: 4.1.1
+        specifier: 4.3.2
+        version: 4.3.2
       satori:
         specifier: 0.33.4
         version: 0.33.4
