@@ -35,9 +35,7 @@ const {
 	article,
 } = Astro.props;
 
-// Create full title for non-homepage
-const fullTitle =
-	Astro.url.pathname === "/" ? title : `${title} | ${SITE_TITLE}`;
+const fullTitle = title;
 
 // Derive OG image path from current page
 const PAGE_OG_MAP: Record<string, string> = {
@@ -97,7 +95,7 @@ const ogImage = ogSlug
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={article ? 'article' : 'website'} />
-<meta property="og:url" content={Astro.url} />
+<meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={ogImage} />
@@ -130,7 +128,7 @@ const ogImage = ogSlug
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:url" content={Astro.url} />
+<meta name="twitter:url" content={canonicalURL} />
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImage} />

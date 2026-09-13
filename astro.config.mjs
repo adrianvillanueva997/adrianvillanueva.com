@@ -10,14 +10,17 @@ import expressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
 import robotsTxt from "astro-robots-txt";
 import { pluginLanguageBadge } from "expressive-code-language-badge";
-import compression from 'vite-plugin-compression'
-import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
+import compression from "vite-plugin-compression";
+import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 // https://astro.build/config
 export default defineConfig({
 	build: {
 		assets: "static/assets",
 	},
 	site: "https://adrianvillanueva.com",
+	redirects: {
+		"/photography": "https://avm.photography",
+	},
 
 	integrations: [
 		expressiveCode(),
@@ -28,15 +31,18 @@ export default defineConfig({
 		icon(),
 	],
 	vite: {
-		plugins: [tailwindcss(), pluginLineNumbers(), pluginLanguageBadge(), compression({
-			verbose: true,
-			disable: false,
-			threshold: 1024,
-			algorithm: 'gzip',
-			ext: '.gz',
-		}),
-		ViteImageOptimizer(),
-
+		plugins: [
+			tailwindcss(),
+			pluginLineNumbers(),
+			pluginLanguageBadge(),
+			compression({
+				verbose: true,
+				disable: false,
+				threshold: 1024,
+				algorithm: "gzip",
+				ext: ".gz",
+			}),
+			ViteImageOptimizer(),
 		],
 	},
 });
