@@ -1,9 +1,5 @@
 #:schema https://raw.githubusercontent.com/yunanwg/brilliant-CV/main/metadata.toml.schema.json
 
-# Set the output language
-# INFO: value must matches folder suffix; i.e "zh" -> "./modules_zh"
-language = "en"
-
 [layout]
 # Optional values: skyblue, red, nephritis, concrete, darknight
 # You can also use a custom color by hex code i.e. "#1E90FF"
@@ -42,6 +38,10 @@ display_entry_society_first = true
 display_logo = true
 [layout.footer]
 display_page_counter = true
+
+header_quote = "Software Engineer with a successful track record in delivering high-quality solutions. Experienced leader skilled in driving projects from concept to completion. Passionate about optimizing processes through technology."
+cv_footer = "Curriculum vitae"
+letter_footer = "Cover letter"
 
 [inject]
 # Decide if you want to inject AI prompt or not
@@ -117,17 +117,3 @@ extraInfo = "Japan (Engineering Visa). Available immediately"
 # orcid = "0000-0000-0000-0000"
 # researchgate = "John-Doe"
 # extraInfo = "I am a cool kid"
-
-
-# add a new section if you want to include the language of your choice
-# i.e. [[lang.ru]]
-# each section must contains the following fields
-[lang.en]
-header_quote = "Software Engineer with a successful track record in delivering high-quality solutions. Experienced leader skilled in driving projects from concept to completion. Passionate about optimizing processes through technology."
-cv_footer = "Curriculum vitae"
-letter_footer = "Cover letter"
-# For languages that are not written in Latin script
-# Currently supported non-latin language codes: ("zh", "ja", "ko", "ru")
-[lang.non_latin]
-name = "王道尔"
-font = "Heiti SC"

@@ -1,13 +1,13 @@
 // Imports
-#import "@preview/brilliant-cv:3.3.0": letter
+#import "@preview/brilliant-cv:4.1.0": letter
 #let metadata = toml("./metadata.toml")
 
 
 #show: letter.with(
   metadata,
-  myAddress: "Your Address Here",
-  recipientName: "Company Name Here",
-  recipientAddress: "Company Address Here",
+  sender-address: "Your Address Here",
+  recipient-name: "Company Name Here",
+  recipient-address: "Company Address Here",
   date: datetime.today().display(),
   subject: "Subject: Hey!",
 )

@@ -1,5 +1,5 @@
 pre-commit 4.6.2
 typos      latest
-nodejs     v22.23.2
-pnpm       11.25.0
+nodejs     24.21.0
+pnpm       12.4.0
 typst      0.14.2
