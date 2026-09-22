@@ -2,7 +2,7 @@
 	"name": "adrianvillanueva.com",
 	"type": "module",
 	"version": "0.0.1",
-	"packageManager": "pnpm@12.4.1",
+	"packageManager": "pnpm@12.5.1",
 	"scripts": {
 		"dev": "bash scripts/build-pdf.sh && astro dev",
 		"build": "bash scripts/build-pdf.sh && astro build",
@@ -22,7 +22,7 @@
 		"@tailwindcss/forms": "0.5.11",
 		"@tailwindcss/typography": "0.5.20",
 		"@tailwindcss/vite": "4.3.3",
-		"astro": "7.3.2",
+		"astro": "7.3.3",
 		"astro-d2": "0.14.0",
 		"astro-expressive-code": "0.44.2",
 		"astro-icon": "1.2.0",
