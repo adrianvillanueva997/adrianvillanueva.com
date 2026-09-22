@@ -1,30 +1,37 @@
 ---
 title: "NOW"
-lastUpdated: "2026-08-31"
+lastUpdated: "22-09-2026"
 preview:
   learning: Japanese grammar and kanji
-  reading: Designing Data Intensive Applications 2nd edition
+  reading: Practical monitoring and breakneck china's quest to engineer the future
   building: ESP32 ink-screen with rust
-  focus: Work work work
+  focus: Myself
   training: boxing + weights
 ---
 
 ## PRIMARY FOCUS
 
-I have managed to get some bases of Japanese where I am able to have simple conversations and it feels good. Being able to identify kanjis is amazing, specially when friends are visiting you and ask you what the hell does this mean.
+The other day I had issues in a store and i was able to solve everything myself in Japanese without having to translate
+anything from my head. After leaving the store I was shocked at how natural everything felt.
 
-After changing my learning method I need to evaluate if its working...
+Got a small e-reader that fits in my pocket and thanks to it im reading way more than before. A good friend recommended me `breakneck china's quest to engineer the future` and so far it is very interesting. As a history lover its fun to see these kind of patterns in past empires.
 
 ### PHYSICAL TRAINING
 
-Nothing changed here, dropped off a bit in the weights but i need to get back there, summer laziness i guess.
+Thought it would take me longer to get there but i am back
 
 ### LEARNING OBJECTIVES
 
-I noticed I am becoming better with systems and identifying future issues and i take my time to actually understand what is going on instead of just jumping and trying to fix it or propose a technical implementation, i guess im becoming more senior, so i have to prepare myself for that.
+Having a cozy place to read and study makes everything easier and nicer. My persona library is growing and im sort of keeping up with my reading goals
+
+Need to be more consistent with Japanese and balance it with my IT and music stuff
 
 ### CURRENT THOUGHTS
 
-This summer was not as hot as last year, but still, its nice its ending. End of summer is a time to reflect on past experiences, people, kind of emotional, isn't it? I wonder what would had happen if the story would have turned out differently.
+A physical and mental break was really needed and im glad i took such a long one.
 
-My list of books i want to read is growing bigger than I can handle, however, i got a small offline slop-free reader that is small and nice to use when commuting to different places.
+Baldurs Gate 3 is such a nice game 笑
+
+I have also been thinking about how important good friendships with other men are. The kind where you can be honest, support each other, and leave a conversation feeling more grounded than before. Having people around who want you to grow without needing you to perform is something I appreciate more than I used to. Especially where they leave you thinking about what direction to go next in life.
+
+There are still things I do not have answers for, and maybe that’s okay for now. Let's see what the next few months bring.
