@@ -2,7 +2,7 @@
 	"name": "adrianvillanueva.com",
 	"type": "module",
 	"version": "0.0.1",
-	"packageManager": "pnpm@12.6.0",
+	"packageManager": "pnpm@12.8.2",
 	"scripts": {
 		"dev": "bash scripts/build-pdf.sh && astro dev",
 		"build": "bash scripts/build-pdf.sh && astro build",
@@ -17,7 +17,7 @@
 		"@expressive-code/plugin-collapsible-sections": "0.44.2",
 		"@expressive-code/plugin-line-numbers": "0.44.2",
 		"@iconify-json/mdi": "1.2.3",
-		"@iconify-json/simple-icons": "1.2.97",
+		"@iconify-json/simple-icons": "1.2.98",
 		"@resvg/resvg-js": "2.6.2",
 		"@tailwindcss/forms": "0.5.11",
 		"@tailwindcss/typography": "0.5.20",
@@ -30,13 +30,13 @@
 		"expressive-code-language-badge": "2.0.0",
 		"js-yaml": "4.3.2",
 		"satori": "0.33.5",
-		"sharp": "0.35.4",
+		"sharp": "0.35.5",
 		"tailwindcss": "4.3.3"
 	},
 	"devDependencies": {
 		"@astrojs/check": "0.9.10",
 		"typescript": "7.0.2",
-		"vite": "8.3.1",
+		"vite": "8.3.2",
 		"vite-plugin-compression": "0.5.1",
 		"vite-plugin-image-optimizer": "2.0.3"
 	}
