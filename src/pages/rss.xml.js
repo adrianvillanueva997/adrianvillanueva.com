@@ -1,9 +1,9 @@
 import rss from "@astrojs/rss";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
-import { fetchRssPosts } from "../utils/rss";
+import { loadWriting } from "../utils/writing";
 
 export async function GET(context) {
-	const posts = await fetchRssPosts("https://metalops.dev/rss.xml");
+	const posts = await loadWriting();
 
 	return rss({
 		title: SITE_TITLE,

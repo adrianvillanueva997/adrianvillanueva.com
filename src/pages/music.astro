@@ -66,7 +66,7 @@ const albums = await Promise.all(
 	</head>
 	<body>
 		<Header />
-		<main class="music-page">
+		<main id="main-content" class="music-page">
 			<header class="page-intro">
 				<p class="eyebrow"><span>MUSIC / 01</span> LISTENING ARCHIVE</p>
 				<h1>Sounds I<br /><em>keep around.</em></h1>
@@ -128,28 +128,28 @@ const albums = await Promise.all(
 
 <style>
 	.music-page { max-width: 960px; margin: 0 auto; padding: 3rem 2rem 1rem; }
-	.eyebrow, .section-kicker > span, .updated { font-family: "JetBrains Mono", monospace; font-size: 0.68rem; letter-spacing: 0.12em; }
+	.eyebrow, .section-kicker > span, .updated { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.12em; }
 	.eyebrow, .updated { color: var(--text-muted); }
 	.eyebrow span, .section-kicker > span { color: var(--accent-blog); }
 	.page-intro { max-width: 700px; padding: 3rem 0 8rem; }
-	.page-intro h1 { margin: 1.5rem 0; font-size: clamp(4rem, 10vw, 8rem); line-height: 0.88; letter-spacing: -0.07em; }
+	.page-intro h1 { margin: 1.5rem 0; font-size: clamp(4rem, 10vw, 8rem); line-height: 0.88; letter-spacing: -0.035em; }
 	.page-intro h1 em { font-style: normal; color: var(--accent-blog); }
 	.intro-copy { max-width: 520px; color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7; }
 	.updated { margin-top: 2rem; }
 	.section-kicker { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2rem; border-top: 1px solid var(--border-color); padding-top: 1rem; }
-	.section-kicker h2 { margin: 0; font-family: "JetBrains Mono", monospace; font-size: 0.9rem; letter-spacing: 0.04em; text-transform: uppercase; }
+	.section-kicker h2 { margin: 0; font-family: var(--font-mono); font-size: 0.9rem; letter-spacing: 0.04em; text-transform: uppercase; }
 	.artist-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
 	.albums-section { margin-bottom: 8rem; }
 	.album-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
 	.album-card { display: grid; grid-template-columns: 140px 1fr; gap: 1.25rem; border: 1px solid var(--border-color); padding: 0.75rem; }
 	.album-card img { display: block; width: 140px; aspect-ratio: 1; object-fit: cover; }
 	.album-info { align-self: end; padding-bottom: 0.25rem; }
-	.album-meta { margin: 0 0 0.75rem; color: var(--text-muted); font-family: "JetBrains Mono", monospace; font-size: 0.68rem; letter-spacing: 0.12em; }
-	.album-info h3 { margin: 0; color: var(--text-primary); font-family: "Cinzel", serif; font-size: 1.35rem; font-weight: 600; }
+	.album-meta { margin: 0 0 0.75rem; color: var(--text-muted); font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.12em; }
+	.album-info h3 { margin: 0; color: var(--text-primary); font-family: var(--font-body); font-size: 1.35rem; font-weight: 600; }
 	.album-info p:not(.album-meta) { margin: 0.35rem 0 0; color: var(--accent-blog); }
 	.album-note { margin: 0.9rem 0 0; border-left: 1px solid var(--accent-blog); padding-left: 0.75rem; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.6; }
-	.album-note span { display: block; margin-bottom: 0.25rem; color: var(--accent-blog); font-family: "JetBrains Mono", monospace; font-size: 0.6rem; letter-spacing: 0.12em; }
-	.album-info a { display: inline-block; margin-top: 1.25rem; color: var(--text-secondary); font-family: "JetBrains Mono", monospace; font-size: 0.68rem; }
+	.album-note span { display: block; margin-bottom: 0.25rem; color: var(--accent-blog); font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; }
+	.album-info a { display: inline-block; margin-top: 1.25rem; color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.68rem; }
 	.album-info a span { margin-left: 0.4rem; color: var(--accent-blog); }
 	.artist-card { display: flex; align-items: flex-end; min-height: 7rem; border: 1px solid var(--border-color); padding: 1rem; transition: border-color var(--transition-base), background var(--transition-base); }
 	.artist-card:hover { border-color: var(--accent-blog); background: var(--accent-blog-subtle); }

@@ -13,7 +13,7 @@ import { SITE_TITLE, SOCIAL_LINKS } from "@/consts";
 	</head>
 	<body>
 		<Header />
-		<main class="contact-page">
+		<main id="main-content" class="contact-page">
 			<header class="page-intro">
 				<p class="eyebrow"><span>CONTACT / 01</span> OPEN CHANNEL</p>
 				<h1>Let’s make<br /><em>something.</em></h1>
@@ -53,18 +53,18 @@ import { SITE_TITLE, SOCIAL_LINKS } from "@/consts";
 
 <style>
 	.contact-page { max-width: 960px; margin: 0 auto; padding: 3rem 2rem 1rem; }
-	.eyebrow, .section-kicker > span { font-family: "JetBrains Mono", monospace; font-size: 0.68rem; letter-spacing: 0.12em; }
+	.eyebrow, .section-kicker > span { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.12em; }
 	.eyebrow { color: var(--text-muted); }
 	.eyebrow span, .section-kicker > span { color: var(--accent-blog); }
 	.page-intro { max-width: 700px; padding: 3rem 0 8rem; }
-	.page-intro h1 { margin: 1.5rem 0; font-size: clamp(4rem, 10vw, 8rem); line-height: 0.88; letter-spacing: -0.07em; }
+	.page-intro h1 { margin: 1.5rem 0; font-size: clamp(4rem, 10vw, 8rem); line-height: 0.88; letter-spacing: -0.035em; }
 	.page-intro h1 em { font-style: normal; color: var(--accent-blog); }
 	.intro-copy { max-width: 520px; color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7; }
 	.section-kicker { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2rem; border-top: 1px solid var(--border-color); padding-top: 1rem; }
-	.section-kicker h2 { margin: 0; font-family: "JetBrains Mono", monospace; font-size: 0.9rem; letter-spacing: 0.04em; text-transform: uppercase; }
+	.section-kicker h2 { margin: 0; font-family: var(--font-mono); font-size: 0.9rem; letter-spacing: 0.04em; text-transform: uppercase; }
 	.contact-primary, .contact-secondary, .interests { margin-top: 1rem; }
 	.email-link, .contact-links a { display: flex; align-items: center; gap: 1rem; border-bottom: 1px solid var(--border-color); padding: 1.25rem 0; color: var(--text-primary); }
-	.email-link { font-family: "JetBrains Mono", monospace; font-size: clamp(0.9rem, 2vw, 1.2rem); }
+	.email-link { font-family: var(--font-mono); font-size: clamp(0.9rem, 2vw, 1.2rem); }
 	.email-link :global(svg), .contact-links :global(svg) { color: var(--accent-blog); flex-shrink: 0; }
 	.email-link span, .contact-links span { min-width: 0; overflow-wrap: anywhere; }
 	.email-link strong, .contact-links strong { margin-left: auto; color: var(--accent-blog); }
@@ -74,6 +74,6 @@ import { SITE_TITLE, SOCIAL_LINKS } from "@/consts";
 	.interests { max-width: 700px; margin-left: auto; }
 	.interests ul { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--border-color); }
 	.interests li { padding: 1rem 0 1rem 1.5rem; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); font-size: 0.95rem; }
-	.interests li::before { content: ">"; margin-left: -1.5rem; margin-right: 0.75rem; color: var(--accent-blog); font-family: "JetBrains Mono", monospace; }
+	.interests li::before { content: ">"; margin-left: -1.5rem; margin-right: 0.75rem; color: var(--accent-blog); font-family: var(--font-mono); }
 	@media (max-width: 700px) { .contact-page { padding: 1.5rem 1rem 0; } .page-intro { padding: 2rem 0 5rem; } .page-intro h1 { font-size: clamp(3.5rem, 18vw, 6rem); } .contact-links { grid-template-columns: 1fr; gap: 0; } }
 </style>

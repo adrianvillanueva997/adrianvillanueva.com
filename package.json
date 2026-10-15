@@ -8,6 +8,7 @@
 		"build": "bash scripts/build-pdf.sh && astro build",
 		"preview": "astro preview",
 		"build:pdf": "bash scripts/build-pdf.sh",
+		"test": "node --experimental-strip-types --test tests/*.test.ts",
 		"astro": "astro"
 	},
 	"dependencies": {
@@ -35,7 +36,7 @@
 	},
 	"devDependencies": {
 		"@astrojs/check": "0.9.10",
-		"typescript": "7.0.2",
+		"typescript": "6.0.3",
 		"vite": "8.3.4",
 		"vite-plugin-compression": "0.5.1",
 		"vite-plugin-image-optimizer": "2.0.3"

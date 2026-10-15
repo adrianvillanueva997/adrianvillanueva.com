@@ -1,0 +1,28 @@
+---
+import { formatPostDate, loadWriting, METALOPS_RSS } from "@/utils/writing";
+
+const posts = await loadWriting();
+---
+<main id="main-content" class="writing-page shell">
+  <header class="writing-intro"><p class="eyebrow">Writing / Published articles</p><h1>MetalOps.</h1><p class="publication-line">MetalOps — technical writing by Adrian Villanueva.</p><p>Diagrams, observations, experiments, and explanations of the machinery. Full articles live at their canonical home on <a href="https://metalops.dev">MetalOps ↗</a>.</p><a class="text-link" href={METALOPS_RSS}>Subscribe via RSS <span aria-hidden="true">↗</span></a></header>
+  <section aria-label="Published articles" class="writing-list">
+    {posts.map((post) => <article><time datetime={post.date}>{formatPostDate(post.date)}</time><div><h2><a href={post.link}>{post.title} <span aria-hidden="true">↗</span></a></h2><p>{post.description}</p></div></article>)}
+  </section>
+  <aside class="working-notes"><p class="eyebrow">Working notes ≠ Published articles</p><p>Less polished, still in progress: the <a href="https://brain.adrianvillanueva.com">digital garden ↗</a> is a separate collection of working notes.</p></aside>
+</main>
+<style>
+  .writing-intro { max-width: 650px; margin-bottom: 55px; }
+  h1 { margin-top: 22px; font-size: clamp(44px, 7vw, 80px); }
+  .publication-line { color: var(--text-primary); }
+  .writing-intro p:not(.eyebrow) { font-size: 16px; }
+  .writing-intro p a, .working-notes a { text-decoration: underline; }
+  .writing-list article { display: grid; grid-template-columns: 150px 1fr; gap: 35px; border-top: 1px solid var(--border-color); padding: 30px 0; max-width: none !important; }
+  time { font: 11px/1.8 var(--font-mono); color: var(--sand); padding-top: 6px; }
+  .writing-list h2 { font: 500 clamp(23px, 2.5vw, 32px)/1.35 var(--font-body); margin-bottom: 12px; }
+  .writing-list h2 a { text-decoration: none; }
+  .writing-list h2 a:hover { text-decoration: underline; }
+  .writing-list p { margin: 0; max-width: 70ch; font-size: 15px; }
+  .working-notes { margin-top: 35px; border-top: 1px solid var(--border-light); padding-top: 30px; }
+  .working-notes p { font-size: 14px; }
+  @media (max-width: 580px) { .writing-list article { grid-template-columns: 1fr; gap: 12px; } .writing-intro { margin-bottom: 35px; } }
+</style>

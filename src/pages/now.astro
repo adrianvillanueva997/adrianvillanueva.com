@@ -16,7 +16,7 @@ const preview = frontmatter.preview;
 	</head>
 	<body>
 		<Header />
-		<main class="now-page">
+		<main id="main-content" class="now-page">
 			<header class="page-intro">
 				<p class="eyebrow"><span>NOW / 01</span> CURRENT FREQUENCIES</p>
 				<h1>What’s<br /><em>happening.</em></h1>
@@ -48,16 +48,16 @@ const preview = frontmatter.preview;
 
 <style>
 	.now-page { max-width: 960px; margin: 0 auto; padding: 3rem 2rem 1rem; }
-	.eyebrow, .section-kicker > span, .updated, .current-list span, .now-essay aside > span { font-family: "JetBrains Mono", monospace; font-size: 0.68rem; letter-spacing: 0.12em; }
+	.eyebrow, .section-kicker > span, .updated, .current-list span, .now-essay aside > span { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.12em; }
 	.eyebrow { color: var(--text-muted); }
 	.eyebrow span, .section-kicker > span, .now-essay aside > span { color: var(--accent-blog); }
 	.page-intro { max-width: 700px; padding: 3rem 0 8rem; }
-	.page-intro h1 { margin: 1.5rem 0; font-size: clamp(4rem, 10vw, 8rem); line-height: 0.88; letter-spacing: -0.07em; }
+	.page-intro h1 { margin: 1.5rem 0; font-size: clamp(4rem, 10vw, 8rem); line-height: 0.88; letter-spacing: -0.035em; }
 	.page-intro h1 em { font-style: normal; color: var(--accent-blog); }
 	.intro-copy { max-width: 520px; color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7; }
 	.updated { margin-top: 2rem; color: var(--text-muted); }
 	.section-kicker { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2rem; border-top: 1px solid var(--border-color); padding-top: 1rem; }
-	.section-kicker h2, .now-essay aside h2 { margin: 0; font-family: "JetBrains Mono", monospace; font-size: 0.9rem; letter-spacing: 0.04em; text-transform: uppercase; }
+	.section-kicker h2, .now-essay aside h2 { margin: 0; font-family: var(--font-mono); font-size: 0.9rem; letter-spacing: 0.04em; text-transform: uppercase; }
 	.current-list { border-top: 1px solid var(--border-color); }
 	.current-list p { display: grid; grid-template-columns: 7rem 1fr; gap: 1rem; margin: 0; padding: 1rem 0; border-bottom: 1px solid var(--border-color); }
 	.current-list span { color: var(--text-muted); }
@@ -65,7 +65,7 @@ const preview = frontmatter.preview;
 	.now-essay { display: grid; grid-template-columns: 0.7fr 1.3fr; gap: clamp(2rem, 10vw, 8rem); margin-top: 8rem; }
 	.now-essay aside > span { display: block; margin-bottom: 1rem; }
 	.now-essay article { max-width: 620px; color: var(--text-secondary); font-size: 1rem; line-height: 1.8; }
-	.now-essay article :global(h2), .now-essay article :global(h3) { margin: 3rem 0 1rem; font-family: "Cinzel", serif; color: var(--text-primary); }
+	.now-essay article :global(h2), .now-essay article :global(h3) { margin: 3rem 0 1rem; font-family: var(--font-body); color: var(--text-primary); }
 	.now-essay article :global(h2:first-child) { margin-top: 0; }
 	.now-essay article :global(strong) { color: var(--text-primary); }
 	.now-footer { margin: 8rem 0 2rem; border-top: 1px solid var(--border-color); padding-top: 1rem; color: var(--text-muted); font-size: 0.85rem; }
