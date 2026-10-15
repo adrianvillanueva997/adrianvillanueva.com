@@ -1,0 +1,218 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="620" viewBox="0 0 1600 620" fill="none">
+  <defs>
+    <!-- Repeated, obsolete interfaces have been compacted into the cliffs themselves. -->
+    <pattern id="interface-strata" width="88" height="47" patternUnits="userSpaceOnUse" patternTransform="rotate(-4)">
+      <path d="M2 4l80-1 3 38-81 2zM3 13l80-1M20 13l1 28M24 32h52M25 18h49M58 18v18" stroke="#35291f" stroke-width="1.2"/>
+      <path d="M7 8h3m4 0h3M8 20h7m-7 5h8m-7 5h5M27 29l8-6 6 3 5-6 8 9" stroke="#3b3022" stroke-width="1"/>
+      <path d="M4 44l47-2 8 2 26-3M22 45l6-4m42-3 4 4" stroke="#d1a05b" stroke-width="1"/>
+    </pattern>
+    <pattern id="fine-etch" width="19" height="31" patternUnits="userSpaceOnUse" patternTransform="rotate(12)">
+      <path d="M2 0v19m4-14v24m6-25v17m4-2v15" stroke="#382c20" stroke-width=".7" opacity=".6"/>
+    </pattern>
+    <g id="discarded-slab" stroke="#846d45" stroke-width="1">
+      <path d="M0 0l16-3 7 5-17 4z" fill="#aa8b52"/>
+      <path d="M6 6v3l17-4V2M0 0v3l6 6" fill="#8d7347"/>
+    </g>
+    <pattern id="strata" width="35" height="19" patternUnits="userSpaceOnUse" patternTransform="rotate(-8)">
+      <path d="M0 2h35M5 5h18M0 15h29" stroke="#2c2119" stroke-width="1" opacity=".32"/>
+    </pattern>
+    <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(23)">
+      <path d="M0 0v7" stroke="#d2a461" stroke-width="1" opacity=".35"/>
+    </pattern>
+    <pattern id="shadow-ink" width="11" height="13" patternUnits="userSpaceOnUse" patternTransform="rotate(-17)">
+      <path d="M1 0v13M4 2v11M8 0v8" stroke="#201e17" stroke-width="1" opacity=".6"/>
+    </pattern>
+    <pattern id="flecks" width="53" height="41" patternUnits="userSpaceOnUse">
+      <path d="M3 7h2m17 5h1m17-8h3M9 29h1m22 6h2m14-13h1M20 24h2" stroke="#36291d" stroke-width=".8"/>
+      <path d="M8 14h2m34 22h2M29 2h1M17 38h1" stroke="#f1cc86" stroke-width="1"/>
+    </pattern>
+    <filter id="print" x="-1%" y="-1%" width="102%" height="102%">
+      <feTurbulence type="fractalNoise" baseFrequency=".055" numOctaves="3" seed="7" result="roughness"/>
+      <feDisplacementMap in="SourceGraphic" in2="roughness" scale="2.1" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".72" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope=".32"/></feComponentTransfer>
+    </filter>
+    <clipPath id="frame"><path d="M0 0h1600v620H0z"/></clipPath>
+  </defs>
+  <g clip-path="url(#frame)">
+    <g filter="url(#print)">
+    <path fill="#c38c49" d="M0 0h1600v620H0z"/>
+    <circle cx="1193" cy="156" r="100" fill="#e6bf77"/>
+    <!-- A procession of distant eroded forms, not buildings. -->
+    <path d="M0 343l90-21 80 12 60-40 66 7 54-62 20-85 23-9 16 9 8 100 52 34 32-14 35-133 17-8 24 5 12 111 34 45 52-5 35 38 66-20 58 17 38-52 50 5 15-100 20-6 18 13 10 105 45 54 63-20 24 19 49-56 31-6 30-91 20-5 20 12 22 114 49 30 89-16 51 41 70-10 51 16 41-28 73 5v164H0z" fill="#aa733e"/>
+    <path d="M0 389c223-56 347 36 541 5 162-26 278-34 421-4s252-20 388-12 184 3 250-9v251H0z" fill="#c79551"/>
+    <!-- Left escarpment: illuminated face, split shadow, sedimentary engraving. -->
+    <path d="M-55-20H313q-10 36-7 60l-32 14q7 29-1 54l-25 23-9 86-35 33q-14 38-14 62l-37 39-11 53-66 47L0 470z" fill="#483526"/>
+    <path d="M-15-15h210l-9 66-27 34q10 34 6 58l-45 32-13 73-24 22-15 72-29 21-19 61L0 433z" fill="#a66635"/>
+    <path d="M-15-15h210l-9 66-27 34q10 34 6 58l-45 32-13 73-24 22-15 72-29 21-19 61L0 433z" fill="url(#interface-strata)" opacity=".55"/>
+    <path d="M40 0l-6 78 23 26-15 54 16 21-27 48 8 51-24 24M167 0l-31 91 13 20-26 43-7 55-28 18-6 60M-10 49l188 9M-8 66l182 5M0 138l146 4M0 151l143 6M0 230l96-9M0 249l95-10M0 320l63-9" stroke="#3c2c20" stroke-width="3"/>
+    <path d="M-55-20H313l-7 60-32 14-1 54-25 23-9 86-35 33-14 62-37 39-11 53-66 47L0 470z" fill="url(#strata)"/>
+    <path d="M199-10l-10 68 14 23-19 41 6 38-23 50-3 67-37 46-4 53-41 35 57-17 13-53 37-39 14-62 35-33 9-86 25-23 1-54 32-14 7-50z" fill="url(#shadow-ink)"/>
+    <!-- Monumental central mesa. -->
+    <path d="M337 379q22-32 48-58l21-119 31-20 13-120 28-8 7-27q74-6 157 3l19 28 40 14 14 139 25 38 17 84 67 60z" fill="#74472c"/>
+    <path d="M337 379q22-32 48-58l21-119 31-20 13-120 28-8 7-27 81 2-15 33-8 94-22 22-4 107-27 39-20 58z" fill="#a96b35"/>
+    <path d="M337 379q22-32 48-58l21-119 31-20 13-120 28-8 7-27 81 2-15 33-8 94-22 22-4 107-27 39-20 58z" fill="url(#interface-strata)" opacity=".65"/>
+    <path d="M559 32l-8 38 19 51-13 53 10 79-14 29 7 85-39 19h167l-47-47-17-106-30-51-8-111-30-17z" fill="#433326"/>
+    <path d="M337 379l48-58 21-119 31-20 13-120 28-8 7-27 157 3 19 28 40 14 14 139 25 38 17 84 67 60z" fill="url(#strata)"/>
+    <path d="M472 66l-6 94-16 31-5 75-25 47M504 81l-9 90 12 35-13 79-28 45M630 95l12 103 27 58 8 69M427 204l75-12M415 227l86-15M453 99l91-5M449 119l91-7M394 303l100-15M389 318l99-12" stroke="#d3974c" stroke-width="2" opacity=".65"/>
+    <path d="M569 73l39 5 6 70-16 39 22 80-7 77-37-1 4-68-17-51 13-41z" fill="url(#hatch)"/>
+    <path d="M364 366l31-40 17-95 13-20 12-72 16-18 6-57 16-5-8 80-19 26-5 62-19 24-11 72-25 44z" fill="url(#fine-etch)"/>
+    <path d="M640 87l7 61-9 16 18 35 3 47 23 46-3 44 28 32M596 53l6 29-10 25 14 37-7 44 12 43-6 28 17 65M459 54l10 32-9 20 5 22-10 56-20 17 3 47-19 37" stroke="#30291f" stroke-width="2"/>
+    <!-- A separate column makes the scale legible. -->
+    <path d="M762 388l28-50 13-74 13-17 3-111 10-29 34-3 15 27-4 95 19 39 7 73 32 48z" fill="#956035"/>
+    <path d="M852 110l-6 99 16 60-2 74 26 43h46l-32-48-7-73-19-39 4-95-15-27z" fill="#69472e"/>
+    <path d="M815 154h55M814 170h56M808 268l80-3M802 294l90-5M797 321l99-4" stroke="#c08b4b" stroke-width="2"/>
+    <!-- Right-hand mass and a distant destination: an empty receiver ring. -->
+    <path d="M1112 389l49-56 25-10 9-111 22-17 6-127 24-14 14-74h339v452l-141-2-68-28-72 8-56-19z" fill="#81522e"/>
+    <path d="M1195 212l22-17 6-127 24-14 14-74h75l-22 111-22 37q-1 49 11 84l-36 25-12 83-40 23-54 46-49 1 49-57 25-10z" fill="#b67b3a"/>
+    <path d="M1195 212l22-17 6-127 24-14 14-74h75l-22 111-22 37q-1 49 11 84l-36 25-12 83-40 23-54 46-49 1 49-57 25-10z" fill="url(#interface-strata)" opacity=".46"/>
+    <path d="M1422-10l-21 103 20 55-31 68-7 97 38 51-15 32 54 31 140 2V-10z" fill="#563b29"/>
+    <path d="M1112 389l49-56 25-10 9-111 22-17 6-127 24-14 14-74h339v452l-141-2-68-28-72 8-56-19z" fill="url(#strata)"/>
+    <path d="M1238 90l59-7M1229 111l66-6M1217 215l79-16M1205 239l67-15M1194 291l62-16M1393 206l180-21M1401 233l200-18M1390 292l210-11" stroke="#d19546" stroke-width="3" opacity=".5"/>
+    <path d="M1397 24l-18 64 11 37-27 68 3 94 28 29-9 39 39 41 176 28V-20h-137l-21 69-16 10 4 37-22 32z" fill="url(#shadow-ink)"/>
+    <!-- Far away, the apparatus continues depositing precisely the same empty slab. -->
+    <g stroke="#7c6845" stroke-width="2">
+      <path d="M941 371l8-57 9-5 3-61 11-9 17 4 3 67 11 7 8 54M949 314h43m-38 24h41m-38 21h42"/>
+      <path d="M965 245l-2 58h8l5-60m5 4 2 56h6" fill="#7c6845" stroke-width="1"/>
+      <path d="M974 239v-16m-10 8 14-3m1 82q17 28 10 44"/>
+      <path d="M953 330l-22 9v34l-8 6m21-25h-10m29-48 8 8v12m-9 21h30"/>
+      <path d="M922 379l15-4 5 4-16 5z" fill="#8d7347" stroke-width="1"/>
+    </g>
+    <!-- Heat separates the distant structures from the foreground. -->
+    <path d="M208 371c265-21 442 17 675-4s441-7 717 11v24c-258-12-454-5-690 8S463 383 208 401z" fill="#d5a365" opacity=".25"/>
+    <path d="M307 382c292-9 423 10 641-2s370-5 527 2" stroke="#e0b375" stroke-width="2" opacity=".4"/>
+    <!-- Sand moves across all the things that once seemed permanent. -->
+    <path d="M0 442c213-90 318-43 461-19s239-8 347-5 158 41 283 21 317-56 509-26v207H0z" fill="#bd793d"/>
+    <use href="#discarded-slab" transform="translate(913 391) scale(.58)"/>
+    <use href="#discarded-slab" transform="translate(895 395) scale(.63)"/>
+    <use href="#discarded-slab" transform="translate(875 399) scale(.69)"/>
+    <use href="#discarded-slab" transform="translate(852 404) scale(.76)"/>
+    <use href="#discarded-slab" transform="translate(825 410) scale(.84)"/>
+    <use href="#discarded-slab" transform="translate(795 417) scale(.94)"/>
+    <use href="#discarded-slab" transform="translate(760 425) scale(1.05)"/>
+    <path d="M-20 480c198-53 314-20 441-20 251 0 310-51 494-17 181 34 243-10 371-10 127 0 231 39 334 23v164H-20z" fill="#ce9550"/>
+    <path d="M1600 475c-222-21-382 11-537 29-112 13-219 14-320 24-142 14-244 45-371 92h1228z" fill="#a45c32"/>
+    <path d="M1600 542c-199-22-408-16-555 0-203 22-304 64-376 78h931z" fill="#6d4029"/>
+    <path d="M0 574c187-53 331-22 464-42 176-27 314-44 538-30-244 11-435 49-555 118H0z" fill="#dfac62"/>
+    <g stroke="#80502f" opacity=".6">
+      <path d="M30 477c164-35 243-21 346-15M62 486c113-17 197-16 265-11M455 484c111-16 231-36 359-31M479 490c102-17 182-27 262-26M1102 464c129-24 235-30 355-15M1184 471c118-18 242-10 339 8M12 597c107-25 186-27 285-29M19 606c100-23 164-24 207-23"/>
+      <path d="M1199 558l171-4m-142 11 217-3m-136 12 232-2m-150 14 165 2" stroke-width="2"/>
+    </g>
+    <!-- Infrastructure has become a second root system beneath the dunes. -->
+    <g stroke="#443522" stroke-linecap="round">
+      <path d="M-10 456q94 60 159 43t122 15 121-8M-10 464q96 61 163 42t123 16 121-9M-10 472q94 60 166 42t125 14 117-8" stroke-width="3"/>
+      <path d="M82 504q-24 27 12 31t60-26M102 510q-21 16 2 18t36-17M234 513q-17-27-47-28t-25-53M243 515q-17-31-48-38t-24-48" stroke-width="2"/>
+      <path d="M-5 454l10 22m6-13 10 21m13-14 10 20m13-15 9 20m15-14 8 22m16-14 5 21M164 432l16-2m-15 7 16-2m-14 7 15-2" stroke="#987244" stroke-width="1"/>
+    </g>
+    <path d="M248 523q99 5 167-13M149 453q24-8 37-5" stroke="#dfac62" stroke-width="8"/>
+    <g stroke="#503b25" stroke-width="2">
+      <path d="M1374 355q-18 37-2 67t-4 58 29 47m-17-169q-17 35-2 64t-3 57 26 48m-14-167q-18 33-3 62t-1 58 26 47"/>
+      <path d="M1367 469q-38 14-31 35t-21 24m62-37q32-3 48 18t50 13"/>
+    </g>
+    <path d="M1330 516q63-21 102 5M1362 448l26 1" stroke="#a45c32" stroke-width="10"/>
+    <!-- Three rat engineers in a loose caravan, each loaded for a different task. -->
+    <!-- Rear scout: low to the ground, long tail, carrying a salvaged receiver dish. -->
+    <g transform="translate(755 526) scale(.65)" stroke="#30271c" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M-31 20C-61 22-69 53-96 46S-120 45-128 52" fill="none" stroke="#60432e" stroke-width="4"/>
+      <path d="M-57 29l3 4m-11 5 3 4m-11 3 2 4m-12-2 1 4" stroke="#b28a57" stroke-width="1"/>
+      <path d="M-20-16l-18 8-4 17 9 10 4 19 9-1 6-15 11 14 9-4-4-18 10-8-8-21-15-8z" fill="#302b20" stroke-width="2"/>
+      <path d="M-17-5l-7 18 8 9m7-31-4 19 8 13m-25-15 10-5 5 6-9 7" fill="none" stroke="#9d8050" stroke-width="1.6"/>
+      <path d="M-28 31l-7 16-11 7 3 4 20-4 8-17m6-4 8 17 12 2 3 5-19 3-16-21" fill="#211f18" stroke-width="2"/>
+      <path d="M-48-5l-18-9 7-14 17 8z" fill="#57452e" stroke-width="2"/>
+      <path d="M-67-36q-9-18 7-27l35-4 21 12-5 12-24 7-13-5-10 12z" fill="#80643d" stroke-width="2"/>
+      <path d="M-66-42l30-12m-27 17 27-12m-14 18 10-8m9-17 9 25" fill="none" stroke="#b0925e" stroke-width="1"/>
+      <path d="M-45-61l-4-32 2-14m-1 13-11-6m11 10 9-8" fill="none" stroke-width="2"/>
+      <path d="M18-3l13 11 4 19m-6-27 13-13m-1-4 15-22 19 5-11 22-23 6-10 7m18-38 14-13 17 2-5 17-17 5" fill="#765a36" stroke-width="2"/>
+      <path d="M49-27l22 1m-17 7 13 1m-1-24 12-11" fill="none" stroke="#b6935d" stroke-width="1.2"/>
+      <!-- Uncovered rat head above the low shoulder, clear of the dish and pack. -->
+      <path d="M-27-13Q-37-28-25-40Q-15-50-3-40L10-30 34-19Q40-14 30-10L9-7-7-13-17-6Z" fill="#8c6844" stroke-width="2.5"/>
+      <path d="M-23-34C-42-38-43-59-29-61C-14-64-10-48-17-36M-4-40C-9-56 3-61 9-54Q15-46 6-36" fill="#775237" stroke-width="2.5"/>
+      <path d="M-26-40Q-36-45-30-54Q-23-56-21-44M0-43Q-3-51 4-52" fill="none" stroke="#bd9160" stroke-width="2"/>
+      <path d="M-8-28l8 2" stroke="#29251d" stroke-width="3"/>
+      <path d="M29-19l8 4-7 4" fill="#25251d" stroke-width="2"/>
+      <path d="M21-14l25-9M22-11l26 1M18-8l21 10M6-19l6 4m-28-8 7 5m-17 2 8 4" fill="none" stroke-width="1.1"/>
+      <path d="M-24-8l-9 11 20 7 13-15" fill="#373025" stroke-width="2"/>
+      <!-- Patched cowl leaves the muzzle and round ears exposed. -->
+      <path d="M-32-39l-10 12 7 14-7 13 11 12 8-5 9 7 8-12-10-6-7-15 3-13Z" fill="#353025" stroke-width="2"/>
+      <path d="M-35-26l8 15-3 14m-6-3 7-4m-10-1 7-4M-23-9l8 8" fill="none" stroke="#9a7d4c" stroke-width="1"/>
+      <path d="M-4-28l8 2 2 6-10-2Z" fill="none" stroke="#c19d62" stroke-width="1.6"/>
+      <path d="M-4-27l-12-4" stroke="#b29360" stroke-width="1"/>
+      <path d="M-24 7l10 19 10-3" fill="none" stroke="#a78a55" stroke-width="2"/>
+    </g>
+    <!-- Wire hauler: taller, stooped beneath a rack of coiled cable and glass insulators. -->
+    <g transform="translate(870 511) scale(.73)" stroke="#30271c" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M-24 34C-47 34-51 64-80 63Q-98 62-103 48" fill="none" stroke="#66472f" stroke-width="4.5"/>
+      <path d="M-46 47l4 3m-12 6 3 3m-12 2 1 4m-12-4-1 4" stroke="#b18a55" stroke-width="1"/>
+      <path d="M-17-26l-16 8-6 27 12 14 3 22 13 6 9-14 10 17 12-4-1-17 13-12-5-27-17-18-13 5z" fill="#373025" stroke-width="2.5"/>
+      <path d="M-27-12l-4 20 11 16m7-39-4 24 10 22m-21-18 13-8 6 6-11 11m17-36 3 20 11 14" fill="none" stroke="#a88b56" stroke-width="1.4"/>
+      <path d="M-27 34l-9 22-12 9 3 5 22-5 8-25m12-4 9 22 14 3 4 5-22 4-17-25" fill="#211f18" stroke-width="2.5"/>
+      <!-- Tall crooked frame: actual bundled cable, not another generic backpack. -->
+      <path d="M-39-31l-15-23 5-37 8-3 14 30-2 35m-14-50 15-5m-19 17 19-7m-18 17 19-7m-18 16 19-8" fill="#55452f" stroke-width="2.2"/>
+      <path d="M-47-78l-5-15m8 13 8-18m-14 37q-29-17-25 4t28 15m-27-18q-13-7-14 6t15 13m-13-8q-5 12 9 14" fill="none" stroke-width="2"/>
+      <path d="M-52-84l12-8m-17 20 20-8" fill="none" stroke="#ae8c55" stroke-width="1"/>
+      <path d="M-6-21l19 14m-3-3 15 3m-24-2 3 17" fill="none" stroke-width="3"/>
+      <path d="M22-12l9-8 7 2 1 15-10 5zM34-14l3-14m0 15 9-12" fill="#a47e49" stroke-width="1.8"/>
+      <path d="M25-9l10-3m-9 7 10-3" fill="none" stroke="#d0a766" stroke-width="1"/>
+      <!-- Narrow older face with a torn round ear and a drooping whiskered muzzle. -->
+      <path d="M-17-24Q-24-42-13-52Q-1-59 9-45L19-32 40-17 35-11 16-13 2-21-9-15Z" fill="#a07a4c" stroke-width="2.5"/>
+      <path d="M-13-45C-30-49-32-67-21-72L-14-69-11-73Q3-69-2-49M8-45Q4-64 15-64Q27-61 20-46" fill="#775039" stroke-width="2.5"/>
+      <path d="M-16-52Q-25-59-19-65L-14-61M14-49Q10-57 17-58" fill="none" stroke="#c09562" stroke-width="1.8"/>
+      <path d="M4-35l7 4" stroke="#29261d" stroke-width="3"/>
+      <path d="M36-20l6 3-5 6-4-3Z" fill="#23241b" stroke-width="1"/>
+      <path d="M30-20l24-5M29-16l26 7M25-14l19 15M-8-35l7 4m-9 1 6 4m16-1 6 5" fill="none" stroke-width="1.1"/>
+      <path d="M-17-25l-9 12 20 12 10-19" fill="#383025" stroke-width="2"/>
+      <path d="M-18-49l-11 8-3 19-10 12 15 9 7-5 9 6 7-6-11-16-2-14Z" fill="#322d22" stroke-width="2"/>
+      <path d="M-25-37l-2 17 11 13m-13-4 6-3m-11-2 7-3" fill="none" stroke="#a48551" stroke-width="1.1"/>
+      <!-- A battered inspection lens, with its wire clipped back to the pack. -->
+      <path d="M2-40l12 3 1 10-12-4Z" fill="#53472e" stroke="#bb995d" stroke-width="1.4"/>
+      <path d="M5-37l6 2m-8-3-18-5-14 6" fill="none" stroke="#d0ae70" stroke-width="1"/>
+    </g>
+    <!-- Lead engineer: one faint green status light on the carefully repaired instrument. -->
+    <g transform="translate(1038 476) scale(1)">
+      <path d="M-10 50l-108 31 67-8 67-20z" fill="#473422" opacity=".8"/>
+      <path d="M-21 29q-28 20-49 18l-16 6-15-1" stroke="#30291e" stroke-width="2.4"/>
+      <path d="M-17 21l-12 29-11 7 2 4 23-3 10-24M1 25l8 23 16 3 3 5-22 3-13-24" fill="#201f18" stroke="#201f18" stroke-width="2"/>
+      <path d="M-39-28l13-13 19 3L9-26l1 20 12 29-8 3-6 13-9-5-6 8-7-8-12 2-3-12-13 4-1-16-7-4 4-10z" fill="#302b20" stroke="#211f18" stroke-width="2.5"/>
+      <path d="M-27-27l-3 28-7 19 8 5M-18-23l-4 26 7 22-4 10M-6-14l-2 15 10 25M-40 5l9-9m2 29 9-1M4 17l10 7" stroke="#8a7046" stroke-width="1.2"/>
+      <path d="M-26 11l10-2 2 11-11 3z" fill="#7f6540" stroke="#231f18" stroke-width="1"/>
+      <path d="M-25 12l9 6m-8-9 4 14M-33 28l4 8m11-9 1 10M6 27l3 7" stroke="#b9985f" stroke-width=".8"/>
+      <!-- A low ragged hood and long narrow muzzle; the face stays in shadow. -->
+      <path d="M-15-34l-4-11 7-10 14 1 13 15 4 11-9 9-15-1-13-6z" fill="#29271d" stroke="#201e17" stroke-width="2.5"/>
+      <path d="M-11-51l-6-13 5-3 9 13M0-53l2-14 6 4 3 13" fill="#604a30" stroke="#242219" stroke-width="2"/>
+      <path d="M7-36l22 17-13 2-9-9-6 1z" fill="#8e7146"/>
+      <path d="M9-35l3 2m13 14 4 1M16-17l9 5m-12-6 7 8" stroke="#1d2018" stroke-width="1.6"/>
+      <path d="M-14-47l9-4 9 6M-16-35l9 5 9-1M-10-42l7 4" stroke="#9e8050" stroke-width=".8"/>
+      <!-- Uneven crates, a pressure vessel, broken aerial and externally strapped coils. -->
+      <path d="M-48-54l27-7 9 35-29 5z" fill="#594b32" stroke="#211f18" stroke-width="2.5"/>
+      <path d="M-52-28l30-9 8 25-31 6z" fill="#79603b" stroke="#211f18" stroke-width="2"/>
+      <path d="M-57-55l5-20 10 2 1 24-9 4z" fill="#76603d" stroke="#232219" stroke-width="2"/>
+      <path d="M-54-67l9 2m-10 5 10 3M-46-48l18-5-2 18-12 4z" stroke="#b69a62" stroke-width="1"/>
+      <path d="M-52-23l25-8m-23 14 25-7m-20 12 21-5M-30-58l10 30M-43-57l10 45" stroke="#29281d" stroke-width="1.8"/>
+      <path d="M-32-59l-8-19 4-8-10-16 3-15m-2 10-10-5m11 9 12-7M-40-82l9-2" stroke="#29281e" stroke-width="2"/>
+      <path d="M-48-30q-22-12-19 6t25 15m-8-18q-15-7-13 4t19 10m-9-5q-10 0-8 7t14 5" stroke="#28271d" stroke-width="1.4"/>
+      <path d="M-58-36l-13-4-6 25 15 6z" fill="#413b28" stroke="#242319" stroke-width="1.8"/>
+      <path d="M-70-34l6 3m-8 4 7 2m-8 5 7 2" stroke="#a58d57" stroke-width=".8"/>
+      <path d="M-21-52l15 24 5 32M-24-51l10 28" stroke="#b59157" stroke-width="2.4"/>
+      <path d="M-4-8l16 2 3 18-19 2z" fill="#20251b" stroke="#a68d53" stroke-width="1.4"/>
+      <path d="M2-2l5 1 1 8-6 1z" fill="#a1af5b"/>
+      <path d="M-7-7l-8 11 8 11 13 2 6-6-5-3-9 2-3-7 4-8" fill="#8b7146" stroke="#2a261c" stroke-width="1.4"/>
+      <path d="M-10-1l-3 5m3 4 3 4M0 11l5 1M-7 17l-3 12" stroke="#c1a16a" stroke-width=".8"/>
+      <path d="M15-10l9 14 15 6M42-21l-6 38 1 34 5 4" stroke="#27261c" stroke-width="2.4"/>
+      <path d="M37 11l8-2-1 7-8 1M-40-63l11-7 13 7" stroke="#9d824e" stroke-width="1"/>
+      <path d="M-46-9l-3 13m-5-15-3 11m19-10-2 12M-11-59l3 5M-2-60l3 5" stroke="#2b291e" stroke-width="1.3"/>
+    </g>
+    <!-- Foreground ink: broken conduit, scree and deep, unlit rock. -->
+    <path d="M0 547l34 10 17-7 26 13 31-3 25 10 41-5 18 9 37-4 23 15 38-2 29 14 43-3 37 15 45-1 31 12H0z" fill="#28261d"/>
+    <path d="M1600 464l-34 25-22-2-13 20-38 8-12 21-34 8-16 21-51 11-29 17-44 1-36 26h429z" fill="#30291e"/>
+    <path d="M1600 506l-44 17-17 25-38 8-31 32-53 13-22 19h205z" fill="#22221a"/>
+    <path d="M27 558l18 6-6 4m26-5 14 7 15-1m49 6 12 5 21-4m46 8 15 9m-23-7-12 5M1515 537l30-16 12 1m-67 38 31-10-3 10m-49 20 19-12m-69 31 17-5" stroke="#85613b" stroke-width="1"/>
+    <path d="M122 582l5-35 18-3 4 43m-23-38 17-4m-14 11 16-4m-17 12 17-3m-16 11 16-2" stroke="#27271d" stroke-width="3"/>
+    <path d="M0 619h1600" stroke="#35291e" stroke-width="4"/>
+    </g>
+    <path fill="url(#flecks)" d="M0 0h1600v620H0z" opacity=".48"/>
+    <path fill="#b78c53" d="M0 0h1600v620H0z" filter="url(#grain)" style="mix-blend-mode:multiply"/>
+  </g>
+</svg>

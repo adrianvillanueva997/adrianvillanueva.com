@@ -11,6 +11,7 @@ import {
 	SITE_URL,
 } from "@/consts";
 import "@/styles/global.css";
+import "@/styles/desert-home.css";
 
 interface Props {
 	title: string;
@@ -23,9 +24,13 @@ interface Props {
 		author?: string;
 		tags?: string[];
 	};
+	noindex?: boolean;
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const pathname = Astro.url.pathname;
+const normalizedPath =
+	pathname === "/" ? "/" : `${pathname.replace(/\/$/, "")}/`;
+const canonicalURL = new URL(normalizedPath, Astro.site);
 
 const {
 	title,
@@ -33,6 +38,7 @@ const {
 	image = FallbackImage,
 	keywords = SITE_KEYWORDS,
 	article,
+	noindex = false,
 } = Astro.props;
 
 const fullTitle = title;
@@ -45,21 +51,24 @@ const PAGE_OG_MAP: Record<string, string> = {
 	"/now/": "now",
 	"/projects/": "projects",
 	"/resume/": "resume",
+	"/writing/": "writing",
+	"/blog/": "writing",
+	"/music/": "music",
+	"/uses/": "uses",
 };
-const ogSlug = PAGE_OG_MAP[Astro.url.pathname];
+const ogSlug = PAGE_OG_MAP[normalizedPath];
 const ogImage = ogSlug
-	? new URL(`/og/${ogSlug}.png`, Astro.url)
-	: new URL(image.src, Astro.url);
+	? new URL(`/og/${ogSlug}.png`, Astro.site)
+	: new URL(image.src, Astro.site);
 ---
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<meta name="theme-color" content="#000000" />
+<meta name="theme-color" content="#1b1915" />
 
-<!-- Google Fonts preconnect -->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preload" href="/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
 
 <!-- Favicons -->
 <link rel="icon" type="image/svg+xml" href="/static/favicons/favicon.svg" />
@@ -90,8 +99,8 @@ const ogImage = ogSlug
 <meta name="keywords" content={keywords.join(', ')} />
 
 <!-- Robots -->
-<meta name="robots" content="index, follow" />
-<meta name="googlebot" content="index, follow" />
+<meta name="robots" content={noindex ? "noindex, follow" : "index, follow"} />
+<meta name="googlebot" content={noindex ? "noindex, follow" : "index, follow"} />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={article ? 'article' : 'website'} />

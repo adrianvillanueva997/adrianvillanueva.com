@@ -1,5 +1,4 @@
 ---
-import mePhoto from "@/assets/me/me.jpg";
 import BaseHead from "@/components/BaseHead.astro";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
@@ -15,17 +14,8 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
 	<body>
 		<Header />
 
-		<HomePage mePhoto={mePhoto} />
+		<HomePage />
 
 		<Footer />
-
-		<style>
-			.container {
-				max-width: var(--content-width);
-				margin: 0 auto;
-				padding: 0 1rem;
-				animation: fadeInUp 0.6s ease-out;
-			}
-		</style>
 	</body>
 </html>

@@ -7,12 +7,6 @@ linkedin: https://linkedin.com/in/adrian-villanueva-martinez
 github: https://github.com/adrianvillanueva997
 ---
 
-I am a software engineer interested in the systems beneath the surface: data
-platforms, infrastructure, developer experience, and the small details that
-make technology feel alive.
-
----
-
 ## HOW I WORK
 
 I like systems that are resilient, understandable, and a little boring in

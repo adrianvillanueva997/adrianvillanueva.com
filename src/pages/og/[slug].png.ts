@@ -1,85 +1,50 @@
-import { existsSync } from "node:fs";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import path from "node:path";
+import { readFile } from "node:fs/promises";
 import { Resvg } from "@resvg/resvg-js";
 import type { APIRoute, GetStaticPaths } from "astro";
-import type { ReactNode } from "react";
 import satori from "satori";
 
-interface OGSettings {
-	title: string;
-	description?: string;
-}
-
-const OG_PAGES: Record<string, OGSettings> = {
+const pages: Record<string, { title: string; description: string }> = {
 	index: {
 		title: "Adrian Villanueva Martinez",
-		description: "Senior Software Engineer",
+		description: "Software engineer · Data infrastructure & systems · Tokyo",
 	},
 	about: {
 		title: "About",
-		description: "Adrian Villanueva Martinez",
+		description: "Adrian Villanueva Martinez · Software engineer",
 	},
 	contact: {
 		title: "Contact",
-		description: "Get in touch",
+		description: "Get in touch with Adrian Villanueva Martinez",
 	},
 	now: {
 		title: "Now",
-		description: "What I'm doing right now",
+		description: "What I’m learning, reading, and building",
 	},
-	projects: {
-		title: "Projects",
-		description: "Things I've built",
+	projects: { title: "Work", description: "Systems, tools, and experiments" },
+	resume: { title: "Résumé", description: "Experience, skills, and education" },
+	writing: {
+		title: "MetalOps",
+		description: "Technical writing by Adrian Villanueva",
 	},
-	resume: {
-		title: "Resume",
-		description: "Download my CV",
+	music: {
+		title: "Music",
+		description: "Albums, artists, and listening notes",
 	},
+	uses: { title: "Uses", description: "Hardware, software, and tools" },
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-	return Object.keys(OG_PAGES).map((slug) => ({ params: { slug } }));
-};
+export const getStaticPaths: GetStaticPaths = () =>
+	Object.keys(pages).map((slug) => ({ params: { slug } }));
 
-const FONT_CACHE = path.join(process.cwd(), "node_modules", ".og-font-cache");
-
-async function loadFont(name: string, weight: number): Promise<ArrayBuffer> {
-	const cacheKey = name.replace(/\s+/g, "_") + "-" + weight;
-	const cacheFile = path.join(FONT_CACHE, cacheKey);
-
-	if (existsSync(cacheFile)) {
-		return readFile(cacheFile);
-	}
-
-	const family = name.replace(/\s+/g, "+");
-	const url = `https://fonts.googleapis.com/css2?family=${family}:wght@${weight}&display=swap`;
-	const css = await fetch(url).then((r) => r.text());
-	const match = css.match(/url\(([^)]+)\)/);
-	if (!match) throw new Error(`Could not resolve font URL for ${name}`);
-	const data = await fetch(match[1]).then((r) => r.arrayBuffer());
-
-	await mkdir(FONT_CACHE, { recursive: true });
-	await writeFile(cacheFile, Buffer.from(data));
-
-	return data;
-}
-
-async function getFonts() {
-	const [jetBrainsMono, cinzel] = await Promise.all([
-		loadFont("JetBrains Mono", 700),
-		loadFont("Cinzel", 700),
-	]);
-	return { jetBrainsMono, cinzel };
-}
+const fonts = Promise.all([
+	readFile("src/assets/fonts/anton.ttf"),
+	readFile("src/assets/fonts/ibm-plex-mono.ttf"),
+]);
 
 export const GET: APIRoute = async ({ params }) => {
-	const { slug } = params;
-	const page = OG_PAGES[slug ?? ""];
-	if (!page) return new Response("Not Found", { status: 404 });
-
-	const fonts = await getFonts();
-
+	const page = pages[params.slug ?? ""];
+	if (!page) return new Response("Not found", { status: 404 });
+	const [display, mono] = await fonts;
 	const svg = await satori(
 		{
 			type: "div",
@@ -87,111 +52,81 @@ export const GET: APIRoute = async ({ params }) => {
 				style: {
 					width: 1200,
 					height: 630,
-					background: "#08090a",
 					display: "flex",
-					flexDirection: "column" as const,
-					padding: "60px 80px",
-					position: "relative" as const,
-					overflow: "hidden",
+					flexDirection: "column",
+					padding: "50px 65px",
+					background: "#1b1915",
+					color: "#eee1c4",
+					borderBottom: "14px solid #a54e2e",
 				},
 				children: [
-					// Top gradient bar
 					{
 						type: "div",
 						props: {
 							style: {
-								position: "absolute" as const,
-								top: 0,
-								left: 0,
-								right: 0,
-								height: 4,
-								background: "linear-gradient(90deg, #00e68a, #00b8d4, #00e68a)",
-							},
-						},
-					},
-					// AVM/ monogram
-					{
-						type: "div",
-						props: {
-							style: {
-								fontFamily: '"JetBrains Mono"',
-								fontSize: 24,
-								fontWeight: 700,
-								color: "#00e68a",
+								fontFamily: "Mono",
+								fontSize: 21,
+								color: "#d4a463",
 								marginBottom: "auto",
 							},
-							children: "AVM/",
+							children: "AVM / TOKYO, JAPAN",
 						},
 					},
-					// Page title
 					{
 						type: "div",
 						props: {
 							style: {
-								fontFamily: '"Cinzel"',
-								fontSize: 72,
-								fontWeight: 700,
-								color: "#ffffff",
-								lineHeight: 1.1,
-								marginBottom: 16,
+								fontFamily: "Display",
+								textTransform: "uppercase",
+								fontSize: 105,
+								lineHeight: 1.12,
+								marginBottom: 22,
 							},
 							children: page.title,
 						},
 					},
-					// Description
-					page.description
-						? {
-								type: "div",
-								props: {
-									style: {
-										fontFamily: '"JetBrains Mono"',
-										fontSize: 28,
-										color: "#8892a4",
-									},
-									children: page.description,
-								},
-							}
-						: null,
-					// Bottom: domain
 					{
 						type: "div",
 						props: {
 							style: {
-								fontFamily: '"JetBrains Mono"',
-								fontSize: 18,
-								color: "#4a5568",
-								marginTop: "auto",
+								fontFamily: "Mono",
+								fontSize: 22,
+								color: "#c1b69f",
+								marginBottom: "auto",
+								lineHeight: 1.6,
+							},
+							children: page.description,
+						},
+					},
+					{
+						type: "div",
+						props: {
+							style: {
+								fontFamily: "Mono",
+								fontSize: 17,
+								color: "#ad9e85",
+								paddingTop: 25,
+								borderTop: "1px solid #685740",
 							},
 							children: "adrianvillanueva.com",
 						},
 					},
-				].filter(Boolean),
+				],
 			},
-		} as unknown as ReactNode,
+		},
 		{
 			width: 1200,
 			height: 630,
 			fonts: [
-				{
-					name: "JetBrains Mono",
-					data: fonts.jetBrainsMono,
-					weight: 700,
-					style: "normal",
-				},
-				{ name: "Cinzel", data: fonts.cinzel, weight: 700, style: "normal" },
+				{ name: "Display", data: display, weight: 400, style: "normal" },
+				{ name: "Mono", data: mono, weight: 400, style: "normal" },
 			],
 		},
 	);
-
-	const resvg = new Resvg(svg, {
-		fitTo: { mode: "width", value: 1200 },
-	});
-	const png = resvg.render().asPng();
-
-	return new Response(png, {
+	const png = new Resvg(svg).render().asPng();
+	return new Response(new Uint8Array(png), {
 		headers: {
 			"Content-Type": "image/png",
-			"Content-Length": png.length.toString(),
 			"Cache-Control": "public, max-age=31536000, immutable",
 		},
 	});

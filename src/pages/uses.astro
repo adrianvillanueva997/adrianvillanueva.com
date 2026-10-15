@@ -7,7 +7,12 @@ import { SITE_TITLE } from "@/consts";
 import * as uses from "@/content/uses.md";
 
 const { Content, frontmatter } = uses;
-const { hardware, peripherals, software } = frontmatter;
+type UsesData = {
+	hardware: { name: string; icon: string; desc: string; specs: string; tags?: string[] }[];
+	peripherals: { name: string; icon: string }[];
+	software: { name: string; category: string; icon: string; note?: string }[];
+};
+const { hardware, peripherals, software } = frontmatter as UsesData;
 ---
 
 <!doctype html>
@@ -17,7 +22,7 @@ const { hardware, peripherals, software } = frontmatter;
 	</head>
 	<body>
 		<Header />
-		<main class="uses-page">
+		<main id="main-content" class="uses-page">
 			<header class="page-intro">
 				<p class="eyebrow"><span>USES / 01</span> TOOLS & ENVIRONMENT</p>
 				<h1>Things I<br /><em>use.</em></h1>
@@ -52,20 +57,20 @@ const { hardware, peripherals, software } = frontmatter;
 
 <style>
 	.uses-page { max-width: 960px; margin: 0 auto; padding: 3rem 2rem 1rem; }
-	.eyebrow, .section-kicker > span, .use-item small, .use-item .tags, .software-item small { font-family: "JetBrains Mono", monospace; font-size: 0.68rem; letter-spacing: 0.12em; }
+	.eyebrow, .section-kicker > span, .use-item small, .use-item .tags, .software-item small { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.12em; }
 	.eyebrow { color: var(--text-muted); }
 	.eyebrow span, .section-kicker > span { color: var(--accent-blog); }
 	.page-intro { max-width: 700px; padding: 3rem 0 8rem; }
-	.page-intro h1 { margin: 1.5rem 0; font-size: clamp(4rem, 10vw, 8rem); line-height: 0.88; letter-spacing: -0.07em; }
+	.page-intro h1 { margin: 1.5rem 0; font-size: clamp(4rem, 10vw, 8rem); line-height: 0.88; letter-spacing: -0.035em; }
 	.page-intro h1 em { font-style: normal; color: var(--accent-blog); }
 	.intro-copy { max-width: 520px; color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7; }
 	.uses-section + .uses-section { margin-top: 7rem; }
 	.section-kicker { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2rem; border-top: 1px solid var(--border-color); padding-top: 1rem; }
-	.section-kicker h2 { margin: 0; font-family: "JetBrains Mono", monospace; font-size: 0.9rem; letter-spacing: 0.04em; text-transform: uppercase; }
+	.section-kicker h2 { margin: 0; font-family: var(--font-mono); font-size: 0.9rem; letter-spacing: 0.04em; text-transform: uppercase; }
 	.uses-list, .software-list { border-top: 1px solid var(--border-color); }
 	.use-item, .software-item { display: grid; grid-template-columns: 2rem 1fr; gap: 1rem; padding: 1.25rem 0; border-bottom: 1px solid var(--border-color); }
 	.use-item > :global(svg), .software-item > :global(svg) { color: var(--accent-blog); margin-top: 0.25rem; }
-	.use-item h3, .software-item h3 { margin: 0; font-family: "Cinzel", serif; font-size: 1.25rem; font-weight: 600; }
+	.use-item h3, .software-item h3 { margin: 0; font-family: var(--font-body); font-size: 1.25rem; font-weight: 600; }
 	.use-item p, .software-item p { margin: 0.35rem 0 0; color: var(--text-secondary); line-height: 1.6; }
 	.use-item small, .software-item small { display: block; margin-top: 0.5rem; color: var(--text-muted); letter-spacing: 0; line-height: 1.5; }
 	.tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; color: var(--accent-blog); letter-spacing: 0.04em; }
@@ -74,7 +79,7 @@ const { hardware, peripherals, software } = frontmatter;
 	.peripherals-list span { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); }
 	.peripherals-list :global(svg) { color: var(--accent-blog); }
 	.uses-notes { max-width: 620px; margin: 7rem 0 0 auto; color: var(--text-secondary); font-size: 1rem; line-height: 1.8; }
-	.uses-notes :global(h2), .uses-notes :global(h3) { margin: 3rem 0 1rem; font-family: "Cinzel", serif; color: var(--text-primary); }
+	.uses-notes :global(h2), .uses-notes :global(h3) { margin: 3rem 0 1rem; font-family: var(--font-body); color: var(--text-primary); }
 	.uses-notes :global(h2:first-child) { margin-top: 0; }
 	.uses-footer { margin: 7rem 0 2rem; border-top: 1px solid var(--border-color); padding-top: 1rem; color: var(--text-muted); font-size: 0.85rem; }
 	.uses-footer a { color: var(--accent-blog); }

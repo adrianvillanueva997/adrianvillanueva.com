@@ -49,7 +49,7 @@ const archiveGroups = [...new Set(archive.map((project) => project.group))];
 	</head>
 	<body>
 		<Header />
-		<main class="projects-page">
+		<main id="main-content" class="projects-page">
 			<header class="page-intro">
 				<p class="eyebrow"><span>PROJECTS / 01</span> WORKING ARCHIVE</p>
 				<h1>Things I’ve<br /><em>built.</em></h1>
@@ -138,7 +138,7 @@ const archiveGroups = [...new Set(archive.map((project) => project.group))];
 	.project-tags,
 	.archive-index,
 	.media-label {
-		font-family: "JetBrains Mono", monospace;
+		font-family: var(--font-mono);
 		font-size: 0.68rem;
 		letter-spacing: 0.12em;
 	}
@@ -162,7 +162,7 @@ const archiveGroups = [...new Set(archive.map((project) => project.group))];
 		margin: 1.5rem 0;
 		font-size: clamp(4rem, 10vw, 8rem);
 		line-height: 0.88;
-		letter-spacing: -0.07em;
+		letter-spacing: -0.035em;
 	}
 
 	.page-intro h1 em {
@@ -188,7 +188,7 @@ const archiveGroups = [...new Set(archive.map((project) => project.group))];
 
 	.section-kicker h2 {
 		margin: 0;
-		font-family: "JetBrains Mono", monospace;
+		font-family: var(--font-mono);
 		font-size: 0.9rem;
 		letter-spacing: 0.04em;
 		text-transform: uppercase;
@@ -213,7 +213,7 @@ const archiveGroups = [...new Set(archive.map((project) => project.group))];
 		height: 100%;
 		min-height: 360px;
 		object-fit: cover;
-		filter: saturate(0.7);
+		filter: grayscale(0.75) sepia(0.35) saturate(0.85);
 	}
 
 	.media-label {
@@ -227,7 +227,7 @@ const archiveGroups = [...new Set(archive.map((project) => project.group))];
 
 	.featured-copy h2 {
 		margin: 0.75rem 0 1rem;
-		font-family: "Cinzel", serif;
+		font-family: var(--font-body);
 		font-size: clamp(2rem, 5vw, 4rem);
 		font-weight: 600;
 	}
@@ -271,7 +271,7 @@ const archiveGroups = [...new Set(archive.map((project) => project.group))];
 		gap: 0.5rem;
 		border: 1px solid var(--accent-blog);
 		padding: 0.65rem 0.8rem;
-		font-family: "JetBrains Mono", monospace;
+		font-family: var(--font-mono);
 		font-size: 0.75rem;
 		color: var(--accent-blog);
 	}
@@ -290,7 +290,7 @@ const archiveGroups = [...new Set(archive.map((project) => project.group))];
 		display: inline-block;
 		margin-top: 1.25rem;
 		padding: 0.35rem 0.55rem;
-		font-family: "JetBrains Mono", monospace;
+		font-family: var(--font-mono);
 		font-size: 0.65rem;
 		font-weight: 700;
 		letter-spacing: 0.08em;
@@ -342,7 +342,7 @@ const archiveGroups = [...new Set(archive.map((project) => project.group))];
 
 	.archive-heading h3 {
 		margin: 0;
-		font-family: "Cinzel", serif;
+		font-family: var(--font-body);
 		font-size: clamp(1.3rem, 3vw, 2rem);
 		font-weight: 600;
 	}
@@ -371,7 +371,7 @@ const archiveGroups = [...new Set(archive.map((project) => project.group))];
 
 	.project-note > p:nth-child(2) {
 		margin: 1.5rem 0;
-		font-family: "Cinzel", serif;
+		font-family: var(--font-display);
 		font-size: clamp(1.5rem, 3vw, 2.4rem);
 		line-height: 1.25;
 	}

@@ -1,6 +1,8 @@
 FROM ghcr.io/typst/typst:0.14.2 AS resume-builder
 WORKDIR /resume
 COPY resume/ .
+# shortcut: let fontconfig follow the builder image; pin when the image digest is locked.
+# hadolint ignore=DL3018
 RUN apk add --no-cache fontconfig
 # Install custom fonts to system fonts directory
 RUN mkdir -p /usr/share/fonts/truetype/custom && \
@@ -25,9 +27,8 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN corepack enable && corepack install --global pnpm@11.23.0 && pnpm install --frozen-lockfile
 COPY . .
 COPY --from=resume-builder /resume/cv.pdf public/resume.pdf
-RUN pnpm run build
-
-RUN find /app/dist -type f -name "*.svg" -exec chmod 644 {} \;
+RUN pnpm run build && \
+  find /app/dist -type f -name "*.svg" -exec chmod 644 {} \;
 
 FROM nginx:1.29-bookworm AS production
 

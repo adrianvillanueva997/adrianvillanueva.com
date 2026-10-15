@@ -36,52 +36,51 @@ const timeline = [
 	</head>
 	<body>
 		<Header />
-		<main class="about-page">
+		<main id="main-content" class="about-page">
 			<header class="about-intro">
+				<div class="intro-title">
+					<p class="eyebrow"><span>FIELD REPORT / 01</span> PERSONAL DOSSIER</p>
+					<h1>Adrian<br /><em>Villanueva Martinez.</em></h1>
+				</div>
 				<div class="intro-copy">
-					<p class="eyebrow"><span>ABOUT / 01</span> PERSONAL DOSSIER</p>
-					<h1>Adrian<br /><em>Villanueva.</em></h1>
-					<p class="intro-lede">
-						Software engineer interested in the systems beneath the surface:
-						data platforms, infrastructure, developer experience, and the small
-						details that make technology feel alive.
-					</p>
+					<p class="intro-lede">I work on the systems beneath the surface: data platforms, infrastructure, developer experience, and the small details that make technology feel alive.</p>
+					<div class="coordinates"><span>LAST KNOWN COORDINATES</span><strong>Tokyo, Japan</strong></div>
 					<div class="intro-links">
-						<a href={`mailto:${frontmatter.email}`}>Email <span>-></span></a>
-						<a href={frontmatter.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn <span>-></span></a>
-						<a href={frontmatter.github} target="_blank" rel="noopener noreferrer">GitHub <span>-></span></a>
+						<a href={`mailto:${frontmatter.email}`}>Email <span aria-hidden="true">↗</span></a>
+						<a href={frontmatter.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+						<a href={frontmatter.github} target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
 					</div>
 				</div>
 			</header>
 
-			<section class="signal-path" aria-labelledby="signal-title">
-				<div class="section-kicker"><span>02</span><h2 id="signal-title">The signal path</h2></div>
-				<div class="timeline">
+			<section class="route-log" aria-labelledby="route-title">
+				<div class="section-kicker"><span>02 / ROUTE LOG</span><h2 id="route-title">Three places, one long signal.</h2></div>
+				<ol class="timeline">
 					{timeline.map((entry, index) => (
-						<div class="timeline-entry">
-							<div class="timeline-index">0{index + 1}</div>
+						<li class="timeline-entry">
+							<div class="timeline-index">0{index + 1}<span class="route-node" aria-hidden="true"></span></div>
 							<div class="timeline-copy">
 								<h3>{entry.country}</h3>
 								<p>{entry.period}</p>
 								<span>{entry.note}</span>
 							</div>
-						</div>
+						</li>
 					))}
-				</div>
+				</ol>
 			</section>
 
-			<section class="about-essay" aria-labelledby="essay-title">
+			<section class="field-notes" aria-labelledby="essay-title">
 				<aside class="essay-aside">
-					<span>03</span>
-					<h2 id="essay-title">Notes from<br />the stack</h2>
+					<p class="eyebrow"><span>03 / FIELD NOTES</span></p>
+					<h2 id="essay-title">How I work,<br />what I follow.</h2>
 				</aside>
 				<article class="essay-content"><Content /></article>
 			</section>
 
 			<section class="closing-note" aria-label="Contact invitation">
-				<p class="eyebrow"><span>04</span> OPEN CHANNEL</p>
+				<p class="eyebrow"><span>04 / OPEN CHANNEL</span></p>
 				<p class="closing-copy">Difficult infrastructure, interesting data problems, or something slightly weird?</p>
-				<a class="closing-link" href={`mailto:${frontmatter.email}`}>Say hello <span>-></span></a>
+				<a class="closing-link" href={`mailto:${frontmatter.email}`}>Say hello <span aria-hidden="true">↗</span></a>
 			</section>
 		</main>
 		<Footer />
@@ -90,18 +89,16 @@ const timeline = [
 
 <style>
 	.about-page {
-		max-width: 1120px;
+		max-width: 1240px;
 		margin: 0 auto;
-		padding: 3rem 2rem 1rem;
+		padding: 0 48px 1rem;
 	}
 
 	.eyebrow,
 	.section-kicker > span,
 	.timeline-index,
-	.timeline-copy p,
-	.timeline-copy span,
-	.essay-aside > span {
-		font-family: "JetBrains Mono", monospace;
+	.timeline-copy p {
+		font-family: var(--font-mono);
 		font-size: 0.68rem;
 		letter-spacing: 0.12em;
 	}
@@ -111,48 +108,60 @@ const timeline = [
 	}
 
 	.eyebrow span,
-	.section-kicker > span,
-	.timeline-index,
-	.essay-aside > span {
+	.section-kicker > span {
 		color: var(--accent-blog);
 	}
 
 	.about-intro {
-		max-width: 760px;
-		padding: 3rem 0 8rem;
+		display: grid;
+		grid-template-columns: 1.15fr 0.85fr;
+		gap: clamp(3rem, 8vw, 8rem);
+		align-items: end;
+		padding: 72px 0 76px;
+		border-bottom: 1px solid var(--border-color);
 	}
 
 	.about-intro h1 {
-		margin: 1.5rem 0;
-		font-size: clamp(3rem, 7vw, 5.5rem);
-		line-height: 0.88;
-		letter-spacing: -0.07em;
+		margin: 30px 0 0;
+		font-size: clamp(4rem, 9vw, 8rem);
+		line-height: 0.9;
+		letter-spacing: -0.045em;
+		text-transform: uppercase;
 	}
 
 	.about-intro h1 em {
 		font-style: normal;
-		color: var(--accent-blog);
+		color: var(--sand);
 	}
 
+	.intro-copy { padding-bottom: 8px; }
+
 	.intro-lede {
-		max-width: 500px;
+		max-width: 440px;
 		color: var(--text-secondary);
-		font-size: 1.05rem;
-		line-height: 1.75;
+		font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+		line-height: 1.55;
 	}
+
+	.coordinates { display: grid; gap: 4px; border-top: 1px solid var(--border-color); padding-top: 14px; margin-top: 34px; }
+	.coordinates span { color: var(--text-muted); font: 0.62rem/1.5 var(--font-mono); letter-spacing: .1em; }
+	.coordinates strong { color: var(--text-primary); font: 400 1rem/1.5 var(--font-body); }
 
 	.intro-links {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 1rem 1.5rem;
-		margin-top: 2rem;
+		gap: 1rem 1.75rem;
+		margin-top: 1.5rem;
 	}
 
 	.intro-links a,
 	.closing-link {
-		font-family: "JetBrains Mono", monospace;
+		font-family: var(--font-mono);
 		font-size: 0.75rem;
-		color: var(--text-secondary);
+		color: var(--text-primary);
+		text-decoration: underline;
+		text-decoration-color: var(--border-light);
+		text-underline-offset: 5px;
 	}
 
 	.intro-links a span,
@@ -163,82 +172,81 @@ const timeline = [
 
 	.section-kicker {
 		display: flex;
-		align-items: baseline;
+		align-items: end;
+		justify-content: space-between;
 		gap: 1rem;
-		margin-bottom: 2rem;
-		border-top: 1px solid var(--border-color);
-		padding-top: 1rem;
+		margin-bottom: 24px;
 	}
 
 	.section-kicker h2,
 	.essay-aside h2 {
 		margin: 0;
-		font-family: "JetBrains Mono", monospace;
-		font-size: 0.9rem;
-		letter-spacing: 0.04em;
-		text-transform: uppercase;
+		font-family: var(--font-mono);
+		font: 400 clamp(1.4rem, 3vw, 2.4rem)/1.1 var(--font-display);
+		letter-spacing: -.02em;
 	}
 
-	.timeline {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		border-bottom: 1px solid var(--border-color);
-	}
+	.route-log { padding: 38px 0 78px; }
+	.route-log .section-kicker > span { font: 0.65rem/1.5 var(--font-mono); letter-spacing: .12em; }
+	.timeline { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: none; padding: 0; margin: 0; }
 
 	.timeline-entry {
-		display: grid;
-		grid-template-columns: auto 1fr;
-		gap: 1rem;
-		min-height: 180px;
-		padding: 0 1.5rem 1.5rem 0;
-		border-right: 1px solid var(--border-color);
+		position: relative;
+		min-height: 146px;
+		padding: 0 24px 20px 0;
+		border-top: 1px solid var(--border-light);
 	}
 
 	.timeline-entry + .timeline-entry {
-		padding-left: 1.5rem;
+		padding-left: 24px;
 	}
-
-	.timeline-entry:last-child {
-		border-right: 0;
-	}
+	.timeline-entry:not(:last-child)::after { content: ""; position: absolute; width: 7px; height: 7px; right: -4px; top: -4px; background: var(--sand); }
+	.timeline-index { display: flex; align-items: center; gap: 10px; padding-top: 12px; color: var(--sand); font: 0.62rem/1.5 var(--font-mono); letter-spacing: .12em; }
+	.route-node { display: none; }
 
 	.timeline-copy h3 {
-		margin: 0 0 0.5rem;
-		font-family: "Cinzel", serif;
-		font-size: clamp(1.3rem, 3vw, 2rem);
-		font-weight: 600;
+		margin: 12px 0 2px;
+		font-family: var(--font-display);
+		font-size: clamp(1.8rem, 3.3vw, 3rem);
+		font-weight: 400;
+		line-height: 1;
 	}
 
 	.timeline-copy p,
 	.timeline-copy span {
 		display: block;
-		margin: 0;
+		margin: 8px 0 0;
 		color: var(--text-muted);
 	}
 
 	.timeline-copy span {
-		margin-top: 0.7rem;
-		font-family: "Inter", sans-serif;
+		margin-top: 10px;
+		font-family: var(--font-body);
 		font-size: 0.82rem;
 		letter-spacing: 0;
 		line-height: 1.5;
 	}
 
-	.about-essay {
+	.field-notes {
 		display: grid;
-		grid-template-columns: 0.8fr 1.2fr;
-		gap: clamp(2rem, 10vw, 10rem);
-		margin-top: 8rem;
+		grid-template-columns: .7fr 1.3fr;
+		gap: clamp(2rem, 8vw, 8rem);
+		margin-inline: -48px;
+		padding: 64px 48px 70px;
+		background: var(--bg-secondary);
+		color: var(--text-secondary);
+		border-block: 1px solid var(--border-color);
 	}
 
-	.essay-aside > span {
-		display: block;
-		margin-bottom: 1rem;
-	}
+	.essay-aside .eyebrow { color: var(--text-muted); }
+	.essay-aside .eyebrow span { color: var(--sand); }
 
 	.essay-aside h2 {
-		font-size: clamp(1rem, 2vw, 1.4rem);
-		line-height: 1.4;
+		max-width: 10ch;
+		margin-top: 24px;
+		color: var(--text-primary);
+		font: 400 clamp(2.2rem, 4vw, 4rem)/1 var(--font-display);
+		letter-spacing: -.025em;
 	}
 
 	.essay-content {
@@ -249,11 +257,12 @@ const timeline = [
 	}
 
 	.essay-content :global(h2) {
-		margin: 3rem 0 1rem;
-		font-family: "Cinzel", serif;
-		font-size: 1.5rem;
-		font-weight: 600;
+		margin: 3.5rem 0 1rem;
+		font-family: var(--font-display);
+		font-size: clamp(1.8rem, 3vw, 2.5rem);
+		font-weight: 400;
 		color: var(--text-primary);
+		text-transform: uppercase;
 	}
 
 	.essay-content :global(h2:first-child) {
@@ -261,29 +270,39 @@ const timeline = [
 	}
 
 	.essay-content :global(strong) {
-		color: var(--text-primary);
+		color: var(--ink);
 	}
 
 	.essay-content :global(ul) {
-		padding-left: 1.2rem;
+		padding: 0;
+		list-style: none;
 	}
 
 	.essay-content :global(li) {
-		margin: 0.5rem 0;
+		position: relative;
+		margin: 0;
+		padding: 12px 0 12px 20px;
+		border-bottom: 1px solid var(--border-color);
+		color: var(--text-primary);
 	}
+	.essay-content :global(li) :global(p) { margin: 0; color: inherit; }
+	.essay-content :global(li) :global(strong) { color: inherit; }
+	.essay-content :global(li::before) { content: "→"; position: absolute; left: 0; color: var(--sand); }
+	.essay-content :global(hr) { border-color: var(--border-color); margin: 2rem 0; }
+	.essay-content :global(p) { color: var(--text-secondary); }
 
 	.closing-note {
-		max-width: 620px;
-		margin: 8rem 0 2rem auto;
+		max-width: 740px;
+		margin: 0 0 2rem auto;
 		border-top: 1px solid var(--border-color);
-		padding-top: 1rem;
+		padding: 36px 0 0;
 	}
 
 	.closing-copy {
 		margin: 1.5rem 0;
-		font-family: "Cinzel", serif;
-		font-size: clamp(1.5rem, 3vw, 2.4rem);
-		line-height: 1.25;
+		font-family: var(--font-display);
+		font-size: clamp(1.8rem, 4vw, 3.2rem);
+		line-height: 1.1;
 	}
 
 	.closing-link {
@@ -292,41 +311,45 @@ const timeline = [
 
 	@media (max-width: 700px) {
 		.about-page {
-			padding: 1.5rem 1rem 0;
+			padding: 0 20px 1rem;
 		}
 
 		.about-intro {
-			padding: 2rem 0 5rem;
+			grid-template-columns: 1fr;
+			gap: 32px;
+			padding: 42px 0 48px;
 		}
 
 		.about-intro h1 {
-			font-size: clamp(3.5rem, 18vw, 6rem);
+			font-size: clamp(3.8rem, 13vw, 6rem);
 		}
 
 		.timeline {
 			grid-template-columns: 1fr;
+			margin-left: 7px;
+			border-left: 1px solid var(--border-light);
 		}
 
 		.timeline-entry,
 		.timeline-entry + .timeline-entry {
 			min-height: 0;
-			padding: 1rem 0;
-			border-right: 0;
-			border-bottom: 1px solid var(--border-color);
+			padding: 0 0 24px 22px;
+			border: 0;
 		}
 
-		.timeline-entry:last-child {
-			border-bottom: 0;
-		}
+		.timeline-entry:not(:last-child)::after { right: auto; left: -4px; top: 17px; }
+		.timeline-index { padding-top: 5px; }
+		.timeline-copy h3 { margin-top: 4px; }
 
-		.about-essay {
+		.field-notes {
 			grid-template-columns: 1fr;
-			gap: 2rem;
-			margin-top: 5rem;
+			gap: 16px;
+			margin-inline: -20px;
+			padding: 42px 20px 48px;
 		}
 
 		.closing-note {
-			margin-top: 5rem;
+			margin-top: 0;
 		}
 	}
 

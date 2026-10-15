@@ -1,0 +1,26 @@
+[
+	{
+		"title": "Securing PostgreSQL with TLS via Traefik",
+		"link": "https://metalops.dev/blog/securing-postgresql-with-tls-via-traefik/",
+		"description": "How to terminate TLS for PostgreSQL connections at Traefik using Let's Encrypt, without managing certificates inside your PostgreSQL container.",
+		"date": "2026-09-14T00:00:00.000Z"
+	},
+	{
+		"title": "Building a Fail2Ban log parser with rust",
+		"link": "https://metalops.dev/blog/fail2ban-log-parser-intro/",
+		"description": "Build a high-performance Fail2Ban log parser in Rust. Parse structured data from log files with winnow parser combinators. Includes Python bindings guide.",
+		"date": "2026-04-01T00:00:00.000Z"
+	},
+	{
+		"title": "Applying data engineering for image editing",
+		"link": "https://metalops.dev/blog/data-engineering-for-photo-editing/",
+		"description": "Build an automated Python CLI pipeline for RAW photo processing. Generate AVIF variants, extract EXIF metadata, and create YAML catalogs for Astro portfolios.",
+		"date": "2026-03-01T00:00:00.000Z"
+	},
+	{
+		"title": "Welcome to Metalops",
+		"link": "https://metalops.dev/blog/metalops/",
+		"description": "A technical blog about software, systems, infrastructure and DevOps. Deep dives on Rust, infrastructure automation, and building resilient production systems.",
+		"date": "2026-02-11T00:00:00.000Z"
+	}
+]
