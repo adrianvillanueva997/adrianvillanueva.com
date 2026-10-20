@@ -1,37 +1,45 @@
 ---
 title: "NOW"
-lastUpdated: "22-09-2026"
+lastUpdated: "20-10-2026"
 preview:
-  learning: Japanese grammar and kanji
-  reading: Practical monitoring and breakneck china's quest to engineer the future
+  learning: Japanese language
+  reading: Breakneck china's quest to engineer the future
   building: ESP32 ink-screen with rust
   focus: Myself
   training: boxing + weights
 ---
 
-## PRIMARY FOCUS
+## Work and engineering
 
-The other day I had issues in a store and i was able to solve everything myself in Japanese without having to translate
-anything from my head. After leaving the store I was shocked at how natural everything felt.
+I have a whole lot of books to read and process. Currently I am finishing Designing Data Intensive Applications and at the same time I will try to start Structure and Interpretation of Computer Programs.
 
-Got a small e-reader that fits in my pocket and thanks to it im reading way more than before. A good friend recommended me `breakneck china's quest to engineer the future` and so far it is very interesting. As a history lover its fun to see these kind of patterns in past empires.
+Revisiting fundamentals with a future focus on distributed systems, MLOPS and ML Systems will possibly pay off, I hope.
 
-### PHYSICAL TRAINING
+At least until the all-knowing-slop machine replaces us.
 
-Thought it would take me longer to get there but i am back
+Working on hardware problems feels refreshing.
 
-### LEARNING OBJECTIVES
+## On my mind
 
-Having a cozy place to read and study makes everything easier and nicer. My persona library is growing and im sort of keeping up with my reading goals
+throwaway of software engineering, industry and some bullshit.
 
-Need to be more consistent with Japanese and balance it with my IT and music stuff
+In these days of AI driven development where no-one reads what the slop machine generates, the fundamentals of software and computing engineering are becoming more important than ever.
+On the other side, one of my favourite things in this field was putting my headphones, write code and get in the mind flow state focused for hours writing and solving complicated problems.
+Unfortunately it seems that those times are over, however, these tools are useful for experimentation, understanding hard topics and handle repetitive tasks that cannot be fully automated.
 
-### CURRENT THOUGHTS
+Is this the future? Is this some sort of [technofeudalism](https://www.goodreads.com/book/show/75560037-techno-feudalism) where a minority has access to all the knowledge while the
+rest of the world is distracted with online AI generated content, fake news, political polarization and the enshitification of the day to day life?
 
-A physical and mental break was really needed and im glad i took such a long one.
+Another thing that crosses my mind is the freedom of compute, with consumer hardware getting more expensive thanks to companies burying money into data centers to push for more AI content and engagement, what will happen to the daily-life devices?
+Are we heading into a future where computers just act as a frontend with a complete propietary/corporate backend where it is mandatory to pay a subscription even to do basic things?
+Some PC manufacturers are already turning into yet-another-subscription-model where you never own the device and if you stop paying, you lose access to everything.
+There was this quote at the World Economic Forum in 2016 [You'll own nothing and be happy](https://en.wikipedia.org/wiki/You%27ll_own_nothing_and_be_happy) slowly I am starting to believe about what once was dystopian and impossible, its becoming a reality.
 
-Baldurs Gate 3 is such a nice game 笑
+The world is diverging dangerously into something scary that no one knows where we will be in the next years. If you compare the state of the world now to what it was 5-8 years ago it feels like
+a whole new planet. People are not ready for such fast-paced changes, specially in the tech world.
 
-I have also been thinking about how important good friendships with other men are. The kind where you can be honest, support each other, and leave a conversation feeling more grounded than before. Having people around who want you to grow without needing you to perform is something I appreciate more than I used to. Especially where they leave you thinking about what direction to go next in life.
+What will happen to the internet? Once a tool to share creative solutions and collaborate with people, now a tool to ask you to pay for breathing and reduce your attention span.
 
-There are still things I do not have answers for, and maybe that’s okay for now. Let's see what the next few months bring.
+I have no idea, but it sucks.
+
+On the more personal side, reflecting gave me the answers I was looking for and found peace with myself.
