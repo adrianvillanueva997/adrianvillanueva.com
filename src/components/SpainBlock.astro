@@ -1,6 +1,4 @@
 ---
-import { Image } from "astro:assets";
-
 const { imageEs, imageEn } = Astro.props;
 const URL = "https://x.com/Manz/status/1893709639125987637";
 
@@ -11,7 +9,6 @@ const srcEn = imageEn?.src ?? imageEn;
 
 <div class="spain-block-wrapper" id="spain-block-wrapper">
   <div class="spain-block">
-    <button class="close-btn" aria-label="Close banner">✕</button>
     <a href={URL} target="_blank" rel="noopener noreferrer" class="image-link">
       <img id="spain-block-img" src={srcEn} alt="This website is blocked in Spain when there is football." />
     </a>
@@ -19,8 +16,6 @@ const srcEn = imageEn?.src ?? imageEn;
 </div>
 
 <script define:vars={{ srcEs, srcEn }}>
-  const wrapper = document.getElementById('spain-block-wrapper');
-  const closeBtn = wrapper?.querySelector('.close-btn');
   const img = document.getElementById('spain-block-img');
 
   // Language detection
@@ -29,19 +24,6 @@ const srcEn = imageEn?.src ?? imageEn;
     img.src = srcEs;
     img.alt = "Este sitio web es bloqueado en España cuando hay fútbol";
   }
-
-  // Use a new key to reset visibility for the new design
-  const STORAGE_KEY = "spain_block_footer_dismissed_v3";
-  const isClosed = localStorage.getItem(STORAGE_KEY) === "true";
-
-  if (isClosed && wrapper) {
-    wrapper.style.display = 'none';
-  }
-
-  closeBtn?.addEventListener('click', () => {
-    localStorage.setItem(STORAGE_KEY, "true");
-    if (wrapper) wrapper.style.display = 'none';
-  });
 </script>
 
 <style>
@@ -89,27 +71,4 @@ const srcEn = imageEn?.src ?? imageEn;
     transform: scale(1.02);
   }
 
-  .close-btn {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: var(--bg-primary);
-    border: 1px solid var(--border-color);
-    color: var(--text-secondary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 12px;
-    z-index: 10;
-    transition: all 0.2s ease;
-  }
-
-  .close-btn:hover {
-    color: var(--accent-error);
-    border-color: var(--accent-error);
-  }
 </style>

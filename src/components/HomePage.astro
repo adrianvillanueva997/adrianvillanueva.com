@@ -7,6 +7,15 @@ import { SOCIAL_LINKS } from "@/consts";
 import { formatPostDate, loadWriting } from "@/utils/writing";
 
 const latest = (await loadWriting())[0];
+const selectedWork = load(readFileSync("src/data/selected-work.yaml", "utf8")) as {
+	skip: boolean;
+	title: string;
+	context: string;
+	problem: string;
+	contribution: string;
+	design: string;
+	outcome: string;
+};
 const { skills } = load(readFileSync("src/data/resume.yaml", "utf8")) as {
 	skills: Record<string, string[]>;
 };
@@ -29,8 +38,7 @@ const stack = [
         <h1 id="hero-title"><span class="given-name">Adrian</span><span class="family-name">Villanueva Martinez</span></h1>
       </div>
       <div class="opening-copy">
-        <p>I’m a software engineer specializing in data infrastructure and systems. Always interested in a good problem to solve.</p>
-        <a class="text-link" href="/about">Spain → Netherlands → Tokyo <span aria-hidden="true">↗</span></a>
+        <p>I build data infrastructure and tools for other engineers. Always interested in a good problem to solve.</p>
       </div>
     </div>
     <figure class="landscape">
@@ -39,8 +47,26 @@ const stack = [
     </figure>
   </section>
 
+  {!selectedWork.skip && <section class="work-section shell" aria-labelledby="work-title">
+    <div class="section-topline"><p class="eyebrow">01 / Field reports</p><a class="text-link" href="/projects">All projects <span aria-hidden="true">↗</span></a></div>
+    <div class="work-grid">
+      <div class="work-intro"><h2 id="work-title">Selected engineering work.</h2><p>Data infrastructure and the tools that make it useful to other teams.</p></div>
+      <article class="work-report" aria-labelledby="selected-work-title">
+        <p class="eyebrow">{selectedWork.context}</p>
+        <h3 id="selected-work-title">{selectedWork.title}</h3>
+        <dl>
+          <div><dt>Problem</dt><dd>{selectedWork.problem}</dd></div>
+          <div><dt>My contribution</dt><dd>{selectedWork.contribution}</dd></div>
+          <div><dt>Technical design</dt><dd>{selectedWork.design}</dd></div>
+          <div><dt>Outcome</dt><dd>{selectedWork.outcome}</dd></div>
+        </dl>
+        <a class="text-link" href="/resume">More about my work <span aria-hidden="true">↗</span></a>
+      </article>
+    </div>
+  </section>}
+
   <section class="stack-section shell" aria-labelledby="stack-title">
-    <div class="section-topline"><p class="eyebrow">01 / Tech stack</p><a class="text-link" href="/resume">Experience & résumé <span aria-hidden="true">↗</span></a></div>
+    <div class="section-topline"><p class="eyebrow">02 / Tech stack</p><a class="text-link" href="/resume">Experience & résumé <span aria-hidden="true">↗</span></a></div>
     <div class="stack-grid">
       <div class="stack-intro"><h2 id="stack-title">Tech stack.</h2><p>The languages, platforms, and tools I work with.</p></div>
       <dl class="stack-inventory">{stack.map(({ label, tools }) => <div><dt>{label}</dt><dd><ul>{tools.map((tool) => <li>{tool}</li>)}</ul></dd></div>)}</dl>
@@ -49,14 +75,14 @@ const stack = [
 
   <section class="journal" aria-labelledby="writing-title">
     <div class="shell journal-grid">
-      <div class="journal-heading"><p class="eyebrow">02 / Writing</p><h2 id="writing-title">MetalOps<span aria-hidden="true">.</span></h2><p>Technical writing by Adrian Villanueva.</p><p class="journal-description">Systems, experiments, and explanations of the machinery.</p><a class="text-link" href="/writing">All writing <span aria-hidden="true">↗</span></a></div>
+      <div class="journal-heading"><p class="eyebrow">03 / Field notes</p><h2 id="writing-title">MetalOps<span aria-hidden="true">.</span></h2><p>Technical writing by Adrian Villanueva.</p><p class="journal-description">Systems, experiments, and explanations of the machinery.</p><a class="text-link" href="/writing">All writing <span aria-hidden="true">↗</span></a></div>
       {latest && <article class="latest-article"><p class="eyebrow">Latest entry <span aria-hidden="true">/</span> <time datetime={latest.date}>{formatPostDate(latest.date)}</time></p><h3><a href={latest.link}>{latest.title}<span aria-hidden="true"> ↗</span></a></h3><p>{latest.description}</p><a class="text-link" href={latest.link}>Read on MetalOps <span aria-hidden="true">↗</span></a></article>}
     </div>
     <div class="shell garden-line"><span class="eyebrow">Still taking shape</span><p>Unfinished thoughts live in the <a href="https://brain.adrianvillanueva.com">digital garden ↗</a>, separate from published articles.</p></div>
   </section>
 
   <section class="home-contact shell" id="contact" aria-labelledby="contact-title">
-    <p class="eyebrow">03 / Contact</p>
+    <p class="eyebrow">04 / Contact</p>
     <h2 id="contact-title">Get in touch.</h2>
     <div class="contact-row"><a class="email-link" href={`mailto:${SOCIAL_LINKS.email}`}>{SOCIAL_LINKS.email} <span aria-hidden="true">↗</span></a><div class="contact-social"><a href={SOCIAL_LINKS.github}>GitHub ↗</a><a href={SOCIAL_LINKS.linkedin}>LinkedIn ↗</a></div></div>
   </section>

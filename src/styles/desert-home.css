@@ -3,7 +3,7 @@
 	margin-inline: auto;
 }
 .eyebrow {
-	font: 400 11px / 1.6 var(--font-mono);
+	font: 400 12px / 1.6 var(--font-mono);
 	text-transform: uppercase;
 	letter-spacing: 0.12em;
 	color: var(--text-muted);
@@ -62,10 +62,6 @@
 	line-height: 1.45;
 	margin-bottom: 16px;
 }
-.opening-copy .text-link {
-	color: var(--text-muted);
-	font: 11px / 1.5 var(--font-mono);
-}
 .landscape {
 	margin: 0;
 	position: relative;
@@ -86,7 +82,7 @@
 	gap: 20px;
 	padding-block: 12px;
 	color: var(--text-muted);
-	font: 10px / 1.5 var(--font-mono);
+	font: 12px / 1.5 var(--font-mono);
 	letter-spacing: 0.06em;
 	text-transform: uppercase;
 	border-bottom: 1px solid var(--border-color);
@@ -102,11 +98,38 @@
 .section-topline p {
 	margin: 0;
 }
+.work-grid,
 .stack-grid {
 	display: grid;
 	grid-template-columns: 0.9fr 1.1fr;
 	gap: clamp(32px, 6vw, 100px);
-	padding-block: 48px 70px;
+	padding-block: 40px 48px;
+}
+.work-intro > p {
+	max-width: 30ch;
+	font-size: 15px;
+}
+.work-report h3 {
+	font: 500 clamp(28px, 3vw, 40px) / 1.2 var(--font-body);
+	letter-spacing: -0.035em;
+	margin-bottom: 28px;
+}
+.work-report dl {
+	margin: 0 0 24px;
+}
+.work-report dl > div {
+	border-top: 1px solid var(--border-color);
+	padding-block: 14px;
+}
+.work-report dt {
+	font: 12px / 1.5 var(--font-mono);
+	color: var(--sand);
+	margin-bottom: 6px;
+}
+.work-report dd {
+	margin: 0;
+	font-size: 15px;
+	color: var(--text-secondary);
 }
 .stack-intro h2 {
 	font-size: clamp(36px, 4vw, 56px);
@@ -132,7 +155,7 @@
 	border: 0;
 }
 .stack-inventory dt {
-	font: 10px / 1.5 var(--font-mono);
+	font: 12px / 1.5 var(--font-mono);
 	color: var(--sand);
 	text-transform: uppercase;
 	letter-spacing: 0.08em;
@@ -281,14 +304,11 @@
 	.opening-copy > p {
 		font-size: 16px;
 	}
-	.opening-copy .text-link {
-		font-size: 9px;
-		gap: 5px;
-	}
 	.landscape > img {
 		height: 440px;
 		object-position: 63% center;
 	}
+	.work-grid,
 	.stack-grid,
 	.journal-grid {
 		gap: 32px;
@@ -317,7 +337,6 @@
 		font-size: clamp(27px, 7.9vw, 42px);
 	}
 	.name-block .eyebrow {
-		font-size: 10px;
 		margin-bottom: 13px;
 	}
 	.opening-copy {
@@ -331,15 +350,11 @@
 	.opening-copy > p br {
 		display: none;
 	}
-	.opening-copy .text-link {
-		font-size: 10px;
-	}
 	.landscape > img {
 		height: 380px;
 		object-position: 66% center;
 	}
 	.landscape figcaption {
-		font-size: 8px;
 		padding-block: 10px;
 		gap: 14px;
 	}
@@ -350,17 +365,16 @@
 	.section-topline {
 		padding-top: 25px;
 	}
-	.section-topline .eyebrow {
-		font-size: 9px;
-	}
 	.section-topline .text-link {
-		font-size: 11px;
+		font-size: 12px;
 		gap: 8px;
 	}
+	.work-grid,
 	.stack-grid,
 	.journal-grid {
 		grid-template-columns: 1fr;
 	}
+	.work-grid,
 	.stack-grid {
 		padding-block: 30px 48px;
 	}
