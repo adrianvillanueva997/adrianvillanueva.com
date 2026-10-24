@@ -2,31 +2,38 @@
 import blockedPhoto from "@/assets/files/blocked.png";
 import bloqueoPhoto from "@/assets/files/bloqueo.png";
 import SpainBlock from "@/components/SpainBlock.astro";
-import { SITE_TITLE, SOCIAL_LINKS } from "@/consts";
+import { SOCIAL_LINKS } from "@/consts";
 ---
 <footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-heading"><a class="footer-name" href="/">{SITE_TITLE}</a><span>Software engineer · Tokyo, Japan</span></div>
-    <nav aria-label="Personal pages and elsewhere">
-      <a href="/now">Now</a><a href="/uses">Uses</a><a href="/music">Music</a><a href="/resume">Résumé</a><a href="https://avm.photography">Photography ↗</a><a href="https://brain.adrianvillanueva.com">Digital garden ↗</a>
-    </nav>
-    <div class="footer-bottom"><small>© {new Date().getFullYear()} Adrian Villanueva Martinez</small><div><a href={`mailto:${SOCIAL_LINKS.email}`}>Email</a><a href={SOCIAL_LINKS.github}>GitHub ↗</a><a href={SOCIAL_LINKS.linkedin}>LinkedIn ↗</a><a href="/rss.xml">RSS</a><a href="https://github.com/adrianvillanueva997/adrianvillanueva.com">Source ↗</a></div></div>
-    <p class="disclaimer">Opinions here are my own, not my employers’.</p>
-    <section class="access-note" aria-label="About access from Spain"><p>About access from Spain</p><SpainBlock imageEs={bloqueoPhoto} imageEn={blockedPhoto} /></section>
-  </div>
+	<div class="site-footer-inner">
+		<div class="footer-links">
+			<p>© {new Date().getFullYear()} Adrian Villanueva Martinez</p>
+			<nav aria-label="Elsewhere">
+				<a href={`mailto:${SOCIAL_LINKS.email}`}>Email</a>
+				<a href={SOCIAL_LINKS.github}>GitHub ↗</a>
+				<a href={SOCIAL_LINKS.linkedin}>LinkedIn ↗</a>
+				<a href="/rss.xml">RSS</a>
+			</nav>
+		</div>
+		<p class="disclaimer">Opinions here are my own, not my employers’.</p>
+		<section class="spain-note" aria-label="About access from Spain">
+			<p>Site status / Spain during football</p>
+			<SpainBlock imageEs={bloqueoPhoto} imageEn={blockedPhoto} />
+		</section>
+	</div>
 </footer>
 <style>
-  .site-footer { border-top: 1px solid var(--border-color); padding: 34px 0 25px; background: var(--bg-secondary); }
-  .footer-inner { width: min(1240px, calc(100% - 96px)); margin: auto; }
-  .footer-heading { display: flex; justify-content: space-between; gap: 20px; font-size: 13px; }
-  .footer-heading span { color: var(--text-muted); font-size: 11px; }
-  .footer-name { font-weight: 600; }
-  nav { display: flex; flex-wrap: wrap; gap: 12px 25px; padding-block: 22px; }
-  nav a { display: inline-flex; align-items: center; min-height: 32px; font-size: 12px; color: var(--text-secondary); }
-  .footer-bottom { padding-top: 22px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; gap: 20px; }
-  .footer-bottom small, .footer-bottom a { font-size: 10px; color: var(--text-muted); }
-  .footer-bottom > div { display: flex; flex-wrap: wrap; gap: 16px; }
-  .disclaimer { font-size: 10px; color: var(--text-muted); margin: 17px 0 0; }
-  .access-note { font-size: 12px; color: var(--text-muted); margin-top: 12px; }
-  @media (max-width: 768px) { .footer-inner { width: calc(100% - 40px); } .footer-heading, .footer-bottom { flex-direction: column; gap: 12px; } nav { gap: 8px 20px; } nav a { min-height: 44px; } .footer-bottom a { display: inline-flex; align-items: center; min-height: 44px; } }
+	.site-footer { border-top: 1px solid var(--border-color); }
+	.site-footer-inner { width: min(1120px, calc(100% - 48px)); margin: auto; padding-block: 22px 32px; }
+	.footer-links { display: flex; justify-content: space-between; gap: 24px; }
+	.site-footer p, .site-footer a { margin: 0; color: var(--text-muted); font: 400 10px/1.5 "Silkscreen", var(--font-mono); letter-spacing: .04em; text-transform: uppercase; }
+	.site-footer nav { display: flex; flex-wrap: wrap; gap: 18px; }
+	.site-footer a:hover { color: var(--text-primary); }
+	.disclaimer { margin-top: 14px !important; }
+	.spain-note { margin-top: 38px; }
+	.spain-note > p { color: var(--sand); }
+	.spain-note :global(.spain-block-wrapper) { justify-content: flex-start; margin-top: 14px; padding-top: 14px; }
+	.spain-note :global(.spain-block) { padding: 5px; border-color: var(--border-color); background: var(--bg-primary); }
+	.spain-note :global(.spain-block img) { max-width: 230px; }
+	@media (max-width: 640px) { .site-footer-inner { width: calc(100% - 32px); } .footer-links { flex-direction: column; } }
 </style>

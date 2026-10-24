@@ -2,355 +2,63 @@
 import BaseHead from "@/components/BaseHead.astro";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
-import { SITE_TITLE } from "@/consts";
-import * as about from "@/content/about.md";
-
-const { Content, frontmatter } = about;
-
-const timeline = [
-	{
-		country: "Spain",
-		period: "1997 - 2021",
-		note: "Origin, education, early career",
-	},
-	{
-		country: "Netherlands",
-		period: "2021 - 2024",
-		note: "Amsterdam, data engineering",
-	},
-	{
-		country: "Japan",
-		period: "2024 - now",
-		note: "Tokyo, data platform engineering",
-	},
-];
+import { SITE_TITLE, SOCIAL_LINKS } from "@/consts";
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead
-			title={`About - ${SITE_TITLE}`}
-			description="About Adrian Villanueva Martinez, a software engineer building cloud-native data platforms from Tokyo."
-		/>
+		<BaseHead title={`About — ${SITE_TITLE}`} description="Software engineer building reliable data infrastructure, systems, and tools." />
 	</head>
 	<body>
 		<Header />
-		<main id="main-content" class="about-page">
-			<header class="about-intro">
-				<div class="intro-title">
-					<p class="eyebrow"><span>FIELD REPORT / 01</span> PERSONAL DOSSIER</p>
-					<h1>Adrian<br /><em>Villanueva Martinez.</em></h1>
-				</div>
-				<div class="intro-copy">
-					<p class="intro-lede">I work on the systems beneath the surface: data platforms, infrastructure, developer experience, and the small details that make technology feel alive.</p>
-					<div class="coordinates"><span>LAST KNOWN COORDINATES</span><strong>Tokyo, Japan</strong></div>
-					<div class="intro-links">
-						<a href={`mailto:${frontmatter.email}`}>Email <span aria-hidden="true">↗</span></a>
-						<a href={frontmatter.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
-						<a href={frontmatter.github} target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
-					</div>
-				</div>
+		<main id="main-content" class="focused-page about-page">
+			<header class="page-intro">
+				<p class="page-label">01 / About</p>
+				<h1>Build carefully.<br />Keep it useful.</h1>
+				<p>I’m a software engineer working on data infrastructure, systems, and developer tools. I care about the hard parts beneath a product: reliability, clarity, and making complex platforms easier to use.</p>
 			</header>
 
-			<section class="route-log" aria-labelledby="route-title">
-				<div class="section-kicker"><span>02 / ROUTE LOG</span><h2 id="route-title">Three places, one long signal.</h2></div>
-				<ol class="timeline">
-					{timeline.map((entry, index) => (
-						<li class="timeline-entry">
-							<div class="timeline-index">0{index + 1}<span class="route-node" aria-hidden="true"></span></div>
-							<div class="timeline-copy">
-								<h3>{entry.country}</h3>
-								<p>{entry.period}</p>
-								<span>{entry.note}</span>
-							</div>
-						</li>
-					))}
+			<section class="principles" aria-labelledby="principles-title">
+				<h2 id="principles-title">How I work</h2>
+				<ol>
+					<li><strong>Understand the problem first.</strong> Good implementation starts with the real constraint, not the first available tool.</li>
+					<li><strong>Prefer simple systems.</strong> The right amount of boring in production is usually more valuable than cleverness.</li>
+					<li><strong>Make platforms pleasant to use.</strong> Developer experience, documentation, and self-service are part of the system.</li>
+					<li><strong>Leave a useful signal behind.</strong> Decisions should be understandable long after the implementation is done.</li>
 				</ol>
 			</section>
 
-			<section class="field-notes" aria-labelledby="essay-title">
-				<aside class="essay-aside">
-					<p class="eyebrow"><span>03 / FIELD NOTES</span></p>
-					<h2 id="essay-title">How I work,<br />what I follow.</h2>
-				</aside>
-				<article class="essay-content"><Content /></article>
+			<section class="outside-work" aria-labelledby="outside-title">
+				<h2 id="outside-title">Outside work</h2>
+				<p>I <a href="/music">listen to a lot of music</a>, take photos, train, and keep an unreasonable number of books around. Those interests tend to return to the same things I value in software: structure, rhythm, and attention to detail.</p>
 			</section>
 
-			<section class="closing-note" aria-label="Contact invitation">
-				<p class="eyebrow"><span>04 / OPEN CHANNEL</span></p>
-				<p class="closing-copy">Difficult infrastructure, interesting data problems, or something slightly weird?</p>
-				<a class="closing-link" href={`mailto:${frontmatter.email}`}>Say hello <span aria-hidden="true">↗</span></a>
-			</section>
+			<nav class="contact-links" aria-label="Contact and profiles">
+				<a href={`mailto:${SOCIAL_LINKS.email}`}>Email ↗</a>
+				<a href={SOCIAL_LINKS.github}>GitHub ↗</a>
+				<a href={SOCIAL_LINKS.linkedin}>LinkedIn ↗</a>
+			</nav>
 		</main>
 		<Footer />
 	</body>
 </html>
 
 <style>
-	.about-page {
-		max-width: 1240px;
-		margin: 0 auto;
-		padding: 0 48px 1rem;
-	}
-
-	.eyebrow,
-	.section-kicker > span,
-	.timeline-index,
-	.timeline-copy p {
-		font-family: var(--font-mono);
-		font-size: 0.68rem;
-		letter-spacing: 0.12em;
-	}
-
-	.eyebrow {
-		color: var(--text-muted);
-	}
-
-	.eyebrow span,
-	.section-kicker > span {
-		color: var(--accent-blog);
-	}
-
-	.about-intro {
-		display: grid;
-		grid-template-columns: 1.15fr 0.85fr;
-		gap: clamp(3rem, 8vw, 8rem);
-		align-items: end;
-		padding: 72px 0 76px;
-		border-bottom: 1px solid var(--border-color);
-	}
-
-	.about-intro h1 {
-		margin: 30px 0 0;
-		font-size: clamp(4rem, 9vw, 8rem);
-		line-height: 0.9;
-		letter-spacing: -0.045em;
-		text-transform: uppercase;
-	}
-
-	.about-intro h1 em {
-		font-style: normal;
-		color: var(--sand);
-	}
-
-	.intro-copy { padding-bottom: 8px; }
-
-	.intro-lede {
-		max-width: 440px;
-		color: var(--text-secondary);
-		font-size: clamp(1.1rem, 1.8vw, 1.5rem);
-		line-height: 1.55;
-	}
-
-	.coordinates { display: grid; gap: 4px; border-top: 1px solid var(--border-color); padding-top: 14px; margin-top: 34px; }
-	.coordinates span { color: var(--text-muted); font: 0.62rem/1.5 var(--font-mono); letter-spacing: .1em; }
-	.coordinates strong { color: var(--text-primary); font: 400 1rem/1.5 var(--font-body); }
-
-	.intro-links {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 1rem 1.75rem;
-		margin-top: 1.5rem;
-	}
-
-	.intro-links a,
-	.closing-link {
-		font-family: var(--font-mono);
-		font-size: 0.75rem;
-		color: var(--text-primary);
-		text-decoration: underline;
-		text-decoration-color: var(--border-light);
-		text-underline-offset: 5px;
-	}
-
-	.intro-links a span,
-	.closing-link span {
-		margin-left: 0.4rem;
-		color: var(--accent-blog);
-	}
-
-	.section-kicker {
-		display: flex;
-		align-items: end;
-		justify-content: space-between;
-		gap: 1rem;
-		margin-bottom: 24px;
-	}
-
-	.section-kicker h2,
-	.essay-aside h2 {
-		margin: 0;
-		font-family: var(--font-mono);
-		font: 400 clamp(1.4rem, 3vw, 2.4rem)/1.1 var(--font-display);
-		letter-spacing: -.02em;
-	}
-
-	.route-log { padding: 38px 0 78px; }
-	.route-log .section-kicker > span { font: 0.65rem/1.5 var(--font-mono); letter-spacing: .12em; }
-	.timeline { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: none; padding: 0; margin: 0; }
-
-	.timeline-entry {
-		position: relative;
-		min-height: 146px;
-		padding: 0 24px 20px 0;
-		border-top: 1px solid var(--border-light);
-	}
-
-	.timeline-entry + .timeline-entry {
-		padding-left: 24px;
-	}
-	.timeline-entry:not(:last-child)::after { content: ""; position: absolute; width: 7px; height: 7px; right: -4px; top: -4px; background: var(--sand); }
-	.timeline-index { display: flex; align-items: center; gap: 10px; padding-top: 12px; color: var(--sand); font: 0.62rem/1.5 var(--font-mono); letter-spacing: .12em; }
-	.route-node { display: none; }
-
-	.timeline-copy h3 {
-		margin: 12px 0 2px;
-		font-family: var(--font-display);
-		font-size: clamp(1.8rem, 3.3vw, 3rem);
-		font-weight: 400;
-		line-height: 1;
-	}
-
-	.timeline-copy p,
-	.timeline-copy span {
-		display: block;
-		margin: 8px 0 0;
-		color: var(--text-muted);
-	}
-
-	.timeline-copy span {
-		margin-top: 10px;
-		font-family: var(--font-body);
-		font-size: 0.82rem;
-		letter-spacing: 0;
-		line-height: 1.5;
-	}
-
-	.field-notes {
-		display: grid;
-		grid-template-columns: .7fr 1.3fr;
-		gap: clamp(2rem, 8vw, 8rem);
-		margin-inline: -48px;
-		padding: 64px 48px 70px;
-		background: var(--bg-secondary);
-		color: var(--text-secondary);
-		border-block: 1px solid var(--border-color);
-	}
-
-	.essay-aside .eyebrow { color: var(--text-muted); }
-	.essay-aside .eyebrow span { color: var(--sand); }
-
-	.essay-aside h2 {
-		max-width: 10ch;
-		margin-top: 24px;
-		color: var(--text-primary);
-		font: 400 clamp(2.2rem, 4vw, 4rem)/1 var(--font-display);
-		letter-spacing: -.025em;
-	}
-
-	.essay-content {
-		max-width: 620px;
-		color: var(--text-secondary);
-		font-size: 1rem;
-		line-height: 1.8;
-	}
-
-	.essay-content :global(h2) {
-		margin: 3.5rem 0 1rem;
-		font-family: var(--font-display);
-		font-size: clamp(1.8rem, 3vw, 2.5rem);
-		font-weight: 400;
-		color: var(--text-primary);
-		text-transform: uppercase;
-	}
-
-	.essay-content :global(h2:first-child) {
-		margin-top: 0;
-	}
-
-	.essay-content :global(strong) {
-		color: var(--ink);
-	}
-
-	.essay-content :global(ul) {
-		padding: 0;
-		list-style: none;
-	}
-
-	.essay-content :global(li) {
-		position: relative;
-		margin: 0;
-		padding: 12px 0 12px 20px;
-		border-bottom: 1px solid var(--border-color);
-		color: var(--text-primary);
-	}
-	.essay-content :global(li) :global(p) { margin: 0; color: inherit; }
-	.essay-content :global(li) :global(strong) { color: inherit; }
-	.essay-content :global(li::before) { content: "→"; position: absolute; left: 0; color: var(--sand); }
-	.essay-content :global(hr) { border-color: var(--border-color); margin: 2rem 0; }
-	.essay-content :global(p) { color: var(--text-secondary); }
-
-	.closing-note {
-		max-width: 740px;
-		margin: 0 0 2rem auto;
-		border-top: 1px solid var(--border-color);
-		padding: 36px 0 0;
-	}
-
-	.closing-copy {
-		margin: 1.5rem 0;
-		font-family: var(--font-display);
-		font-size: clamp(1.8rem, 4vw, 3.2rem);
-		line-height: 1.1;
-	}
-
-	.closing-link {
-		color: var(--accent-blog);
-	}
-
-	@media (max-width: 700px) {
-		.about-page {
-			padding: 0 20px 1rem;
-		}
-
-		.about-intro {
-			grid-template-columns: 1fr;
-			gap: 32px;
-			padding: 42px 0 48px;
-		}
-
-		.about-intro h1 {
-			font-size: clamp(3.8rem, 13vw, 6rem);
-		}
-
-		.timeline {
-			grid-template-columns: 1fr;
-			margin-left: 7px;
-			border-left: 1px solid var(--border-light);
-		}
-
-		.timeline-entry,
-		.timeline-entry + .timeline-entry {
-			min-height: 0;
-			padding: 0 0 24px 22px;
-			border: 0;
-		}
-
-		.timeline-entry:not(:last-child)::after { right: auto; left: -4px; top: 17px; }
-		.timeline-index { padding-top: 5px; }
-		.timeline-copy h3 { margin-top: 4px; }
-
-		.field-notes {
-			grid-template-columns: 1fr;
-			gap: 16px;
-			margin-inline: -20px;
-			padding: 42px 20px 48px;
-		}
-
-		.closing-note {
-			margin-top: 0;
-		}
-	}
-
+	.focused-page { width: min(850px, calc(100% - 48px)); margin: auto; }
+	.page-intro { padding: clamp(60px, 11vw, 140px) 0 clamp(64px, 10vw, 120px); }
+	.page-label, .principles h2, .outside-work h2 { margin: 0; color: var(--sand); font: 400 10px/1.5 "Silkscreen", var(--font-mono); letter-spacing: .05em; text-transform: uppercase; }
+	.page-intro h1 { max-width: 10ch; margin: 28px 0; font: 400 clamp(48px, 7.8vw, 92px)/.96 "Silkscreen", var(--font-mono); letter-spacing: -.06em; text-transform: uppercase; }
+	.page-intro > p:last-child { max-width: 54ch; margin: 0; color: var(--text-secondary); font-size: clamp(17px, 2vw, 21px); line-height: 1.65; }
+	.principles, .outside-work { padding-top: 22px; border-top: 1px solid var(--border-color); }
+	.principles ol { padding: 0; margin: 30px 0 0; list-style: none; }
+	.principles li { padding: 18px 0; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); }
+	.principles strong { color: var(--text-primary); }
+	.outside-work { margin-top: 76px; }
+	.outside-work p { max-width: 60ch; margin: 28px 0 0; }
+	.outside-work a { color: var(--text-primary); text-decoration: underline; text-decoration-color: var(--border-light); text-underline-offset: 4px; }
+	.contact-links { display: flex; flex-wrap: wrap; gap: 20px; margin: 76px 0 0; padding: 20px 0; border-top: 1px solid var(--border-color); }
+	.contact-links a { color: var(--text-primary); font: 400 10px/1.5 "Silkscreen", var(--font-mono); letter-spacing: .04em; text-transform: uppercase; }
+	.contact-links a:hover { color: var(--sand); }
+	@media (max-width: 640px) { .focused-page { width: calc(100% - 32px); } .page-intro { padding-block: 65px; } .page-intro h1 { font-size: clamp(36px, 10vw, 58px); } .outside-work { margin-top: 56px; } .contact-links { margin-top: 56px; } }
 </style>

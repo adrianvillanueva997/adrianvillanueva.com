@@ -22,22 +22,22 @@
 
 :root {
 	color-scheme: dark;
-	--ink: #201b16;
-	--bone: #ded0af;
-	--sand: #d4a463;
-	--rust: #a54e2e;
-	--bg-primary: #1b1915;
-	--bg-secondary: #211e18;
-	--bg-tertiary: #29251e;
-	--bg-elevated: #302a21;
-	--text-primary: #eee1c4;
-	--text-secondary: #c1b69f;
-	--text-muted: #ad9e85;
-	--border-color: #423a2e;
-	--border-light: #685740;
+	--ink: #10110f;
+	--bone: #e8e5da;
+	--sand: #cc5a3d;
+	--rust: #cc5a3d;
+	--bg-primary: #10110f;
+	--bg-secondary: #151613;
+	--bg-tertiary: #1b1c18;
+	--bg-elevated: #23251f;
+	--text-primary: #e8e5da;
+	--text-secondary: #bbb9b0;
+	--text-muted: #96958c;
+	--border-color: #494b43;
+	--border-light: #65665d;
 	--border-glow: #a9814c;
-	--font-display: "Anton", Impact, sans-serif;
-	--font-body: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+	--font-display: "Silkscreen", "IBM Plex Mono", monospace;
+	--font-body: "IBM Plex Mono", monospace;
 	--font-mono: "IBM Plex Mono", monospace;
 	/* Compatibility tokens for existing personal pages; green belongs only to the illustration. */
 	--accent-active: var(--sand);
@@ -214,35 +214,35 @@ main {
 	min-height: 45vh;
 }
 /* Personal pages retain their content and layouts, with the same quiet material palette. */
-body > main:not(.desert-home) {
+body > main:not(.masthead-home) {
 	padding-top: 60px;
 	padding-bottom: 70px;
 }
-body > main:not(.desert-home) h1 {
+body > main:not(.masthead-home) h1 {
 	font-family: var(--font-display);
 	font-weight: 400;
 	text-shadow: none;
 	background: none;
 	-webkit-text-fill-color: currentColor;
 }
-body > main:not(.desert-home) h1 em {
+body > main:not(.masthead-home) h1 em {
 	font-family: inherit;
 	font-style: normal;
 	font-weight: 400;
 	color: var(--sand);
 }
-body > main:not(.desert-home) :is(h2, h3) {
+body > main:not(.masthead-home) :is(h2, h3) {
 	font-family: var(--font-body);
 	font-weight: 600;
 	text-shadow: none;
 }
-body > main:not(.desert-home) :is(p, li, dd) {
+body > main:not(.masthead-home) :is(p, li, dd) {
 	line-height: 1.8;
 }
-body > main:not(.desert-home) article {
+body > main:not(.masthead-home) article {
 	max-width: 72ch;
 }
-body > main:not(.desert-home) article a {
+body > main:not(.masthead-home) article a {
 	text-decoration: underline;
 }
 .grid-container {
@@ -253,7 +253,7 @@ body > main:not(.desert-home) article a {
 	grid-column: 2;
 }
 @media (max-width: 768px) {
-	body > main:not(.desert-home) {
+	body > main:not(.masthead-home) {
 		padding-top: 35px;
 		padding-bottom: 45px;
 	}

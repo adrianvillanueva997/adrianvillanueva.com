@@ -12,68 +12,44 @@ const preview = frontmatter.preview;
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={`Now - ${SITE_TITLE}`} description="What Adrian Villanueva Martinez is learning, reading, and building right now." />
+		<BaseHead title={`Now — ${SITE_TITLE}`} description="What Adrian Villanueva Martinez is learning, reading, building, and thinking about now." />
 	</head>
 	<body>
 		<Header />
 		<main id="main-content" class="now-page">
-			<header class="page-intro">
-				<p class="eyebrow"><span>NOW / 01</span> CURRENT FREQUENCIES</p>
-				<h1>What’s<br /><em>happening.</em></h1>
-				<p class="intro-copy">A snapshot of what I’m learning, reading, building, and thinking about at this point in time.</p>
-				<p class="updated">Last updated: {frontmatter.lastUpdated}</p>
+			<header class="now-intro">
+				<p>01 / Now</p>
+				<h1>Current focus.</h1>
+				<p>A short record of what I’m working through and returning to.</p>
+				<small>Updated {frontmatter.lastUpdated}</small>
 			</header>
 
-			<section class="current-section" aria-labelledby="current-title">
-				<div class="section-kicker"><span>02</span><h2 id="current-title">Currently</h2></div>
-				<div class="current-list">
-					<p><span>LEARNING</span><strong>{preview.learning}</strong></p>
-					<p><span>READING</span><strong>{preview.reading}</strong></p>
-					<p><span>BUILDING</span><strong>{preview.building}</strong></p>
-					<p><span>FOCUS</span><strong>{preview.focus}</strong></p>
-					<p><span>TRAINING</span><strong>{preview.training}</strong></p>
-				</div>
+			<section class="now-list" aria-label="Current interests">
+				<p><span>Learning</span><strong>{preview.learning}</strong></p>
+				<p><span>Reading</span><strong>{preview.reading}</strong></p>
+				<p><span>Building</span><strong>{preview.building}</strong></p>
+				<p><span>Focus</span><strong>{preview.focus}</strong></p>
+				<p><span>Training</span><strong>{preview.training}</strong></p>
 			</section>
 
-			<section class="now-essay" aria-labelledby="essay-title">
-				<aside><span>03</span><h2 id="essay-title">Field notes</h2></aside>
-				<article><Content /></article>
-			</section>
-
-			<p class="now-footer">Part of the <a href="https://nownownow.com/about" target="_blank" rel="noopener noreferrer">/now movement</a> — sharing what I’m focused on at this point in my life.</p>
+			<article class="now-notes"><Content /></article>
 		</main>
 		<Footer />
 	</body>
 </html>
 
 <style>
-	.now-page { max-width: 960px; margin: 0 auto; padding: 3rem 2rem 1rem; }
-	.eyebrow, .section-kicker > span, .updated, .current-list span, .now-essay aside > span { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.12em; }
-	.eyebrow { color: var(--text-muted); }
-	.eyebrow span, .section-kicker > span, .now-essay aside > span { color: var(--accent-blog); }
-	.page-intro { max-width: 700px; padding: 3rem 0 8rem; }
-	.page-intro h1 { margin: 1.5rem 0; font-size: clamp(4rem, 10vw, 8rem); line-height: 0.88; letter-spacing: -0.035em; }
-	.page-intro h1 em { font-style: normal; color: var(--accent-blog); }
-	.intro-copy { max-width: 520px; color: var(--text-secondary); font-size: 1.05rem; line-height: 1.7; }
-	.updated { margin-top: 2rem; color: var(--text-muted); }
-	.section-kicker { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2rem; border-top: 1px solid var(--border-color); padding-top: 1rem; }
-	.section-kicker h2, .now-essay aside h2 { margin: 0; font-family: var(--font-mono); font-size: 0.9rem; letter-spacing: 0.04em; text-transform: uppercase; }
-	.current-list { border-top: 1px solid var(--border-color); }
-	.current-list p { display: grid; grid-template-columns: 7rem 1fr; gap: 1rem; margin: 0; padding: 1rem 0; border-bottom: 1px solid var(--border-color); }
-	.current-list span { color: var(--text-muted); }
-	.current-list strong { color: var(--text-primary); font-size: 1rem; font-weight: 400; }
-	.now-essay { display: grid; grid-template-columns: 0.7fr 1.3fr; gap: clamp(2rem, 10vw, 8rem); margin-top: 8rem; }
-	.now-essay aside > span { display: block; margin-bottom: 1rem; }
-	.now-essay article { max-width: 620px; color: var(--text-secondary); font-size: 1rem; line-height: 1.8; }
-	.now-essay article :global(h2), .now-essay article :global(h3) { margin: 3rem 0 1rem; font-family: var(--font-body); color: var(--text-primary); }
-	.now-essay article :global(h2:first-child) { margin-top: 0; }
-	.now-essay article :global(strong) { color: var(--text-primary); }
-	.now-footer { margin: 8rem 0 2rem; border-top: 1px solid var(--border-color); padding-top: 1rem; color: var(--text-muted); font-size: 0.85rem; }
-	.now-footer a { color: var(--accent-blog); }
-	@media (max-width: 700px) {
-		.now-page { padding: 1.5rem 1rem 0; }
-		.page-intro { padding: 2rem 0 5rem; }
-		.page-intro h1 { font-size: clamp(3.5rem, 18vw, 6rem); }
-		.now-essay { grid-template-columns: 1fr; gap: 2rem; margin-top: 5rem; }
-	}
+	.now-page { width: min(850px, calc(100% - 48px)); margin: auto; }
+	.now-intro { padding: clamp(60px, 11vw, 140px) 0 76px; }
+	.now-intro > p:first-child, .now-intro small, .now-list span { margin: 0; color: var(--sand); font: 400 10px/1.5 "Silkscreen", var(--font-mono); letter-spacing: .05em; text-transform: uppercase; }
+	.now-intro h1 { margin: 28px 0; font: 400 clamp(48px, 7.8vw, 92px)/.96 "Silkscreen", var(--font-mono); letter-spacing: -.06em; text-transform: uppercase; }
+	.now-intro > p:nth-child(3) { max-width: 48ch; margin: 0 0 24px; color: var(--text-secondary); font-size: clamp(17px, 2vw, 21px); }
+	.now-list { border-top: 1px solid var(--border-color); }
+	.now-list p { display: grid; grid-template-columns: 130px 1fr; gap: 20px; padding: 17px 0; margin: 0; border-bottom: 1px solid var(--border-color); }
+	.now-list strong { color: var(--text-primary); font-size: 15px; font-weight: 400; }
+	.now-notes { max-width: 65ch; margin: 80px 0 0; }
+	.now-notes :global(h2) { margin: 48px 0 14px; color: var(--text-primary); font: 400 clamp(23px, 3vw, 34px)/1.15 var(--font-body); }
+	.now-notes :global(p) { color: var(--text-secondary); }
+	.now-notes :global(a) { text-decoration: underline; text-decoration-color: var(--border-light); text-underline-offset: 4px; }
+	@media (max-width: 640px) { .now-page { width: calc(100% - 32px); } .now-intro { padding-block: 65px; } .now-intro h1 { font-size: clamp(36px, 10vw, 58px); } .now-list p { grid-template-columns: 1fr; gap: 4px; } .now-notes { margin-top: 56px; } }
 </style>
