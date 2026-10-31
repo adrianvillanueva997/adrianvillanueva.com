@@ -1,6 +1,6 @@
 pre-commit 4.6.2
 typos      latest
-nodejs     24.21.0
+nodejs     26.13.0
 pnpm       12.11.1
 typst      0.14.2
 prek       latest
