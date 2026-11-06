@@ -10,7 +10,7 @@ RUN mkdir -p /usr/share/fonts/truetype/custom && \
   fc-cache -fv
 RUN typst compile cv.typ cv.pdf
 
-FROM node:24.21.0-bookworm-slim AS base
+FROM node:24.22.1-bookworm-slim AS base
 
 FROM base as builder
 RUN apt-get update && apt-get install --no-install-recommends curl make ca-certificates -y
