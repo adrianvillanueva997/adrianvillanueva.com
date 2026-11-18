@@ -63,8 +63,9 @@ const formatDate = (date: string) => date === "Present" ? date : new Intl.DateTi
 
 <style>
 	.resume-page { width: min(1000px, calc(100% - 48px)); margin: auto; }
-	.resume-intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(250px, .55fr); gap: 42px; padding: clamp(60px, 11vw, 140px) 0 100px; }
-	.resume-intro > p, .resume-page h2, .date, .capabilities dt { margin: 0; color: var(--sand); font: 400 10px/1.5 "Silkscreen", var(--font-mono); letter-spacing: .05em; text-transform: uppercase; }
+	.resume-intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(250px, .55fr); gap: 42px; padding: clamp(60px, 8vw, 100px) 0 64px; }
+	.resume-intro > p, .resume-page h2, .capabilities dt { margin: 0; color: var(--sand); font: 400 10px/1.5 "Silkscreen", var(--font-mono); letter-spacing: .05em; text-transform: uppercase; }
+	.date { margin: 0; color: var(--sand); font: 400 13px/1.5 var(--font-mono); }
 	.resume-intro h1 { grid-column: 1 / -1; max-width: 11ch; margin: 0; font: 400 clamp(45px, 7.5vw, 90px)/.98 "Silkscreen", var(--font-mono); letter-spacing: -.06em; text-transform: uppercase; }
 	.resume-intro > div { grid-column: 2; }
 	.resume-intro > div p { margin: 0 0 24px; color: var(--text-secondary); }

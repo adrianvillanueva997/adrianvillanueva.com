@@ -8,7 +8,9 @@ import { SOCIAL_LINKS } from "@/consts";
 	<div class="site-footer-inner">
 		<div class="footer-links">
 			<p>© {new Date().getFullYear()} Adrian Villanueva Martinez</p>
-			<nav aria-label="Elsewhere">
+			<nav aria-label="More links">
+				<a href="/music">Music</a>
+				<a href="/uses">Uses</a>
 				<a href={`mailto:${SOCIAL_LINKS.email}`}>Email</a>
 				<a href={SOCIAL_LINKS.github}>GitHub ↗</a>
 				<a href={SOCIAL_LINKS.linkedin}>LinkedIn ↗</a>
@@ -26,10 +28,11 @@ import { SOCIAL_LINKS } from "@/consts";
 	.site-footer { border-top: 1px solid var(--border-color); }
 	.site-footer-inner { width: min(1120px, calc(100% - 48px)); margin: auto; padding-block: 22px 32px; }
 	.footer-links { display: flex; justify-content: space-between; gap: 24px; }
-	.site-footer p, .site-footer a { margin: 0; color: var(--text-muted); font: 400 10px/1.5 "Silkscreen", var(--font-mono); letter-spacing: .04em; text-transform: uppercase; }
-	.site-footer nav { display: flex; flex-wrap: wrap; gap: 18px; }
+	.site-footer p, .site-footer a { margin: 0; color: var(--text-muted); font: 400 12px/1.5 "Silkscreen", var(--font-mono); letter-spacing: .04em; text-transform: uppercase; }
+	.site-footer nav { display: flex; flex-wrap: wrap; gap: 0 18px; }
+	.site-footer nav a { display: inline-flex; align-items: center; min-width: 44px; min-height: 44px; }
 	.site-footer a:hover { color: var(--text-primary); }
-	.disclaimer { margin-top: 14px !important; }
+	.site-footer .disclaimer { margin-top: 14px; font: 400 14px/1.5 var(--font-mono); letter-spacing: normal; text-transform: none; }
 	.spain-note { margin-top: 38px; }
 	.spain-note > p { color: var(--sand); }
 	.spain-note :global(.spain-block-wrapper) { justify-content: flex-start; margin-top: 14px; padding-top: 14px; }

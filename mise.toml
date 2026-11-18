@@ -1,0 +1,5 @@
+[tools]
+node = "24.22.2"
+pnpm = "12.18.0"
+typst = "0.14.2"
+prek = "latest"

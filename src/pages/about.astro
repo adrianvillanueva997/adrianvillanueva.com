@@ -46,7 +46,7 @@ import { SITE_TITLE, SOCIAL_LINKS } from "@/consts";
 
 <style>
 	.focused-page { width: min(850px, calc(100% - 48px)); margin: auto; }
-	.page-intro { padding: clamp(60px, 11vw, 140px) 0 clamp(64px, 10vw, 120px); }
+	.page-intro { padding: clamp(60px, 8vw, 100px) 0 clamp(64px, 8vw, 90px); }
 	.page-label, .principles h2, .outside-work h2 { margin: 0; color: var(--sand); font: 400 10px/1.5 "Silkscreen", var(--font-mono); letter-spacing: .05em; text-transform: uppercase; }
 	.page-intro h1 { max-width: 10ch; margin: 28px 0; font: 400 clamp(48px, 7.8vw, 92px)/.96 "Silkscreen", var(--font-mono); letter-spacing: -.06em; text-transform: uppercase; }
 	.page-intro > p:last-child { max-width: 54ch; margin: 0; color: var(--text-secondary); font-size: clamp(17px, 2vw, 21px); line-height: 1.65; }
@@ -54,10 +54,10 @@ import { SITE_TITLE, SOCIAL_LINKS } from "@/consts";
 	.principles ol { padding: 0; margin: 30px 0 0; list-style: none; }
 	.principles li { padding: 18px 0; border-bottom: 1px solid var(--border-color); color: var(--text-secondary); }
 	.principles strong { color: var(--text-primary); }
-	.outside-work { margin-top: 76px; }
+	.outside-work { margin-top: 64px; }
 	.outside-work p { max-width: 60ch; margin: 28px 0 0; }
 	.outside-work a { color: var(--text-primary); text-decoration: underline; text-decoration-color: var(--border-light); text-underline-offset: 4px; }
-	.contact-links { display: flex; flex-wrap: wrap; gap: 20px; margin: 76px 0 0; padding: 20px 0; border-top: 1px solid var(--border-color); }
+	.contact-links { display: flex; flex-wrap: wrap; gap: 20px; margin: 64px 0 0; padding: 20px 0; border-top: 1px solid var(--border-color); }
 	.contact-links a { color: var(--text-primary); font: 400 10px/1.5 "Silkscreen", var(--font-mono); letter-spacing: .04em; text-transform: uppercase; }
 	.contact-links a:hover { color: var(--sand); }
 	@media (max-width: 640px) { .focused-page { width: calc(100% - 32px); } .page-intro { padding-block: 65px; } .page-intro h1 { font-size: clamp(36px, 10vw, 58px); } .outside-work { margin-top: 56px; } .contact-links { margin-top: 56px; } }

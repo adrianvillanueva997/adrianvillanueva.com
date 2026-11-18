@@ -81,6 +81,7 @@
 	border-left: 1px solid #494b43;
 }
 .retro-nav a {
+	font-size: 12px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
