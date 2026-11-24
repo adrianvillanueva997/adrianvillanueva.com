@@ -30,7 +30,7 @@ COPY --from=resume-builder /resume/cv.pdf public/resume.pdf
 RUN pnpm run build && \
   find /app/dist -type f -name "*.svg" -exec chmod 644 {} \;
 
-FROM nginx:1.29-bookworm AS production
+FROM nginx:1.31.10-trixie AS production
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY --from=builder /app/dist /usr/share/nginx/html
